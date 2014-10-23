@@ -1,0 +1,59 @@
+<% content_for :title, "#{@airport.iata_code} #{@airport.name}" %>
+
+<style type="text/css">
+  #map-canvas { width: 100%; height: 500px; }
+  /* Fix bootstrap interference */
+  #map-canvas img { max-width: none; }
+</style>
+
+<div class="row">
+  <div class="col-sm-8">
+    <h1><%= "#{@airport.name} - #{@airport.city}, #{@airport.country}" %></h1>
+  </div>
+  <div class="col-sm-4">
+    <div class="airport-badge">
+      <%= flag_img @airport.country, "64" %>
+      <span class="code"><%= @airport.iata_code%></span>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <div id="map-canvas"></div>
+  </div>
+</div>
+
+<p>
+  <strong>Local time:</strong>
+  <%= l @airport.current_time, :format => :short %>
+</p>
+
+<%= link_to 'Edit', edit_airport_path(@airport) %> |
+<%= link_to 'Back', airports_path %>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7XoHytMWFuh--1T-F0u2bf0QtNWcHBqI&amp;sensor=false"></script>
+<script type="text/javascript">
+  var airport = <%= @airport.to_json.html_safe %>;
+  var map;
+
+  function initialize() {
+    var mapOptions = {
+      zoom: 4,
+      center: new google.maps.LatLng(airport.latitude, airport.longitude),
+      mapTypeId: google.maps.MapTypeId.TERRAIN
+    };
+
+    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    addAirport(airport);
+  }
+
+  function addAirport(airport) {
+    new google.maps.Marker({
+      position: new google.maps.LatLng(airport.latitude, airport.longitude),
+      map: map,
+      title: airport.iata_code + " - " + airport.name + " - " + airport.city + ', ' + airport.country
+    });
+  }
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+</script>

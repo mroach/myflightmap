@@ -1,0 +1,14 @@
+<h1>Airlines</h1>
+
+<div class="airline-list">
+  <% @airlines.each do |airline| %>
+    <div class="airline">
+      <%= image_tag airline.logo.url(:icon) %>
+      <%= link_to "#{airline.iata_code} #{airline.name}", airline %></td>
+    </div>
+  <% end %>
+</div>
+
+<br>
+
+<%= link_to 'New Airline', new_airline_path %>

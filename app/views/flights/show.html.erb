@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<div class="flight-detail">
+  <div class="top">
+    <div class="airline_logo">
+      <%= image_tag @flight.airline.logo.url(:medium) %>
+    </div>
+    <div class="airline_name"><%= @flight.airline_name %></div>
+    <div class="seat_class"><%= @flight.seat_class %></div>
+  </div>
+</div>
+
+<div class="flight_code">
+  <span class="airline_code"><%= @flight.airline_code %></span>
+  <span class="flight_number"><%= @flight.flight_number %></span>
+</div>
+<div class="depart_date">
+  <%= @flight.depart_date.strftime('%d %b %Y') %>
+</div>
+<div class="cities">
+  <%= @flight.depart_city %> &mdash; <%= @flight.arrive_city %>
+</div>
+<div class="times">
+  <%= format_time(@flight.depart_time) %> &mdash; <%= format_time(@flight.arrive_time) %><span class="arrival_offset"><%= @flight.arrive_time_offset %>
+</div>
+</span>
+<div class="duration"><%= format_flight_duration(@flight.duration) %></div>
+<div class="airline_and_aircraft">
+   &middot; <%= @flight.aircraft_type %>
+</div>
+<div class="seat_class <%= (@flight.seat_class || "").downcase.underscore %>"></div>
+<div class="seat"><%= @flight.seat %> <%= @flight.seat_location %></div>
+<%= link_to 'Edit', edit_flight_path(@flight) %> |
+<%= link_to 'Back', flights_path %> |
+<%= link_to 'Destroy', flight_path(@flight), :confirm => 'Are you sure?', :method => :delete %>

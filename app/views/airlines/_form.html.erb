@@ -1,0 +1,16 @@
+<%= simple_form_for(@airline) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :iata_code %>
+    <%= f.input :icao_code %>
+    <%= f.input :name %>
+    <%= f.input :alliance, collection: [ ["None", nil], ["Star Alliance", "staralliance"], ["oneworld", "oneworld"], ["Sky Team", "skyteam"] ] %>
+
+    <%= f.input :logo %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

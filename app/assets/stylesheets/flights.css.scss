@@ -1,0 +1,77 @@
+.flight-board > tbody {
+
+  /* dark theme
+  color: white;
+  background-color: #252525;
+  & > tr:nth-child(odd) > td { background-color: #333 }
+  */
+
+  /* light theme */
+  color: black;
+  & > tr:nth-child(odd) > td { background-color: #fff }
+
+  & > tr { height: 50px }
+  & > tr > th{ padding: .1em .3em }
+  & > tr > td { padding: .3em}
+
+  .flight_code {
+    img { display: inline-block }
+    .airline_code { padding-right: .5em; }
+    > * { vertical-align: middle }
+  }
+
+  .duplicate { color: #888; }
+
+  .distance { text-align: right }
+  .duration { text-align: right }
+}
+
+.dot-separated > span:not(:last-child):after { content: " · " }
+
+.flight-list {
+  .flight {
+    padding: .5em 0;
+    border-bottom: solid 1px #ccc;
+    width: 600px;
+
+    &[data-url] { cursor: pointer }
+
+    .col1, .col2, .col3 { display: inline-block; vertical-align: top }
+    .col1 { width: 150px }
+    .col2 { width: 350px }
+
+    .fa-plane { font-size: .8em }
+
+    .flight_code { font-size: 1.3em; }
+    .airline_logo { display: inline-block; margin-right: .8em; }
+    .flight_code_and_date { display: inline-block }
+    .departure, .arrival {
+      & > img { display: inline-block }
+      & > * { vertical-align: middle }
+    }
+    .depart_airport, .arrive_airport {
+      font-size: 1.1em;
+    }
+    .cities { margin-right: 5px; font-size: 1.3em; }
+    .airports { margin-left: 5px; opacity: .9; }
+    .seat_class {
+      border-radius: 3px;
+      padding: .2em .3em;
+      font-weight: lighter;
+      color: white;
+      display: inline-block;
+
+      &.economy     { background-color: #247932; }
+      &.economyplus { background-color: #0b3897; }
+      &.business    { background-color: #c48b26; }
+      &.first       { background-color: #420906; }
+      &.suites      { background-color: #420906; }
+    }
+    .times { font-weight: bold; font-size: 1.1em; }
+    .duration { margin-left: .5em; opacity: .9; }
+    .time_change { margin-left: .5em; color: #900; }
+    .arrival_offset { vertical-align: super; font-size: .8em; color: blue }
+    .airline_and_aircraft { opacity: .9 }
+    .seat { margin-top: .3em }
+  }
+}

@@ -1,0 +1,27 @@
+<h1><%= @airports.length %> Airports</h1>
+
+<table class="airports table table-condensed">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Location</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @airports.each do |airport| %>
+      <tr>
+        <td>
+          <a href="<%= url_for airport %>">
+            <span class="code"><%= airport.iata_code %></span><%= airport.name %>
+          </a>
+        </td>
+        <td><%= airport.city %>, <%= airport.country %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Airport', new_airport_path %>

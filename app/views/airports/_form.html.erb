@@ -1,0 +1,19 @@
+<%= simple_form_for(@airport) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :iata_code %>
+    <%= f.input :icao_code %>
+    <%= f.input :name %>
+    <%= f.input :city %>
+    <%= f.input :country, as: :text %>
+    <%= f.input :latitude %>
+    <%= f.input :longitude %>
+    <%= f.input :timezone %>
+    <%= f.input :description %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

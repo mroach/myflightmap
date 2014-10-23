@@ -1,0 +1,59 @@
+sv:
+  date:
+    abbr_month_names:
+      -
+      - jan
+      - feb
+      - mar
+      - apr
+      - maj
+      - jun
+      - jul
+      - aug
+      - sep
+      - okt
+      - nov
+      - dec
+    formats:
+      medium: "%d %b %Y"
+  ruby_duration:
+    second: "sekund"
+    seconds: "sekunder"
+    minute: "minut"
+    minutes: "minuter"
+    hour: "timme"
+    hours: "timmer"
+    day: "dag"
+    days: "dagar"
+    week: "vecka"
+    weeks: "veckor"
+  simple_form:
+    labels:
+      flight:
+        airline_name: "Flygbolag"
+  duration:
+    formats:
+      minutes:
+        short: '%tmm'
+        long: '%tm %~m'
+      hours:
+        short: '%thh'
+        long: '%thu'
+      hours_minutes:
+        short: '%thh%mm'
+        long: '%thu %m %~m'
+  time_ahead: "%{destination} är %{time} framför %{origin}"
+  time_behind: "%{destination} är %{time} bakom %{origin}"
+  actions:
+    import_flights: "Importera flygdata"
+  map:
+    show:
+      flights: "Flyg"
+      countries: "Länder"
+      airports: "Flygplatser"
+      airlines: "Flygbolag"
+      distance: "Sträcka"
+      duration: "Tid"
+  navigation_links:
+    my_flights: "Mina flyg"
+    my_map: "Min karta"

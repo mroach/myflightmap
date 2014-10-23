@@ -1,0 +1,23 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+*= require font-awesome
+ *= require select2
+ *= require select2-bootstrap
+ *= require pickadate/default
+ *= require pickadate/default.date
+ *= require pickadate/default.time
+ *= require_tree .
+ */
+
+.nav.navbar-profile > li > a { padding: 9px 10px }
+.navbar-profile img { display: inline-block; vertical-align: middle; margin-right: .5em; max-height: 32px }
+.navbar-profile span { padding-top: .1em }

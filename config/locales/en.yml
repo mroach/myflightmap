@@ -1,0 +1,34 @@
+en:
+  date:
+    formats:
+      medium: "%d %b %Y"
+  simple_form:
+    labels:
+      flight:
+        airline_name: "Airline"
+  duration:
+    formats:
+      minutes:
+        short: '%tmm'
+        long: '%tm %~m'
+      hours:
+        short: '%thh'
+        long: '%thu'
+      hours_minutes:
+        short: '%thh%mm'
+        long: '%thu %m %~m'
+  time_ahead: "%{destination} is %{time} ahead of %{origin}"
+  time_behind: "%{destination} is %{time} behind %{origin}"
+  actions:
+    import_flights: "Import Flights"
+  map:
+    show:
+      flights: "Flights"
+      countries: "Countries"
+      airports: "Airports"
+      airlines: "Airlines"
+      distance: "Distance"
+      duration: "Duration"
+  navigation_links:
+    my_flights: "My Flights"
+    my_map: "My Map"

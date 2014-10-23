@@ -1,0 +1,49 @@
+<% if @flights_created > 0 %>
+  <p class="alert alert-success"><%= @flights_created %> <%= "flight".pluralize(@flights_created) %> imported!</p>
+<% end %>
+
+<% if @duplicates_skipped > 0 %>
+  <p class="alert alert-danger"><%= @duplicates_skipped %> duplicate <%= "flight".pluralize(@duplicates_skipped) %> detected and not imported.</p>
+<% end %>
+
+<%= link_to "Import another Flight Memory export", import_flight_memory_root_path %>
+<%= link_to "View all of my flights", flights_path %>
+
+<table class="flight-board">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Time</th>
+      <th>From</th>
+      <th>To</th>
+      <th>Flight</th>
+      <th>Airline</th>
+      <th>Aircraft</th>
+      <th>Distance</th>
+      <th>Duration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @flights.each do |f| %>
+      <tr class="flight <%= f.is_duplicate ? 'duplicate' : '' %>">
+        <td class="depart_date"><%= f.depart_date.strftime('%d %b %Y') %></td>
+        <td>
+          <% if !f.depart_time.nil? %>
+            <%= f.depart_time.strftime('%H:%M') %><% if !f.arrive_time.nil? %> - <%= f.arrive_time.strftime('%H:%M') %> <%= f.arrive_time_offset %><% end %>
+          <% end %>
+        </td>
+        <td class="depart_airport"><%= f.depart_airport %></td>
+        <td class="arrive_airport"><%= f.arrive_airport %></td>
+        <td class="flight_code">
+          <span class="airline_code"><%= f.airline_code %></span><span class="flight_number"><%= f.flight_number %></span>
+        </td>
+        <td class="airline_name"><%= f.airline_name %></td>
+        <td class="aircraft_description"><%= f.aircraft_description %></td>
+        <td class="distance"><%= f.distance %></td>
+        <td class="duration"><%= f.duration_formatted %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<pre><%= @debug %></pre>
