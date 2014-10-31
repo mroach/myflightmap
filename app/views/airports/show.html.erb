@@ -31,5 +31,14 @@
   <%= l @airport.current_time, :format => :short %>
 </p>
 
+<div class="audits-container">
+  <div class="show-audits-button-container">
+    <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#audits" aria-expanded="false" aria-controls="audits">Show Changelog</button>
+  </div>
+  <div id="audits" class="collapse">
+    <%= render partial: "shared/audits", object: @airport.audits %>
+  </div>
+</div>
+
 <%= link_to 'Edit', edit_airport_path(@airport) %> |
 <%= link_to 'Back', airports_path %>

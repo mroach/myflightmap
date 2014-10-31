@@ -22,6 +22,7 @@
 
   # GET /airports/1/edit
   def edit
+    @timezones = TZInfo::Timezone.all_identifiers
   end
 
   # POST /airports

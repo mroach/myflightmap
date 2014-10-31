@@ -71,6 +71,8 @@ GEM
     columnize (0.8.9)
     countries (0.9.3)
       currencies (~> 0.4.2)
+    country_select (2.1.0)
+      countries (~> 0.9, >= 0.9.3)
     currencies (0.4.2)
     debugger-linecache (1.2.0)
     devise (3.4.1)
@@ -232,6 +234,7 @@ DEPENDENCIES
   capistrano-rbenv (~> 2.0)
   coffee-rails (~> 4.0.0)
   countries
+  country_select
   devise
   font-awesome-rails (~> 4.0.0)
   httparty

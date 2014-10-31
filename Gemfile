@@ -6,6 +6,9 @@ gem 'rails', '4.1'
 # Need >= 3.1 for bootstrap 3 support
 gem 'simple_form', '3.1.0.rc1'
 
+# Country drop-down
+gem 'country_select'
+
 # Dropdown replacement with AJAX support
 gem "select2-rails"
 

@@ -50,7 +50,7 @@ SimpleForm.setup do |config|
   config.wrappers :horizontal_form, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
     b.use :html5
     b.use :placeholder
-    b.use :label, class: 'col-sm-3 control-label'
+    b.use :label, class: 'col-sm-2 control-label'
 
     b.wrapper tag: 'div', class: 'col-sm-9' do |ba|
       ba.use :input, class: 'form-control'
@@ -62,7 +62,7 @@ SimpleForm.setup do |config|
   config.wrappers :horizontal_file_input, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
     b.use :html5
     b.use :placeholder
-    b.use :label, class: 'col-sm-3 control-label'
+    b.use :label, class: 'col-sm-2 control-label'
 
     b.wrapper tag: 'div', class: 'col-sm-9' do |ba|
       ba.use :input
@@ -102,5 +102,5 @@ SimpleForm.setup do |config|
   # Check the Bootstrap docs (http://getbootstrap.com)
   # to learn about the different styles for forms and inputs,
   # buttons and other elements.
-  config.default_wrapper = :vertical_form
+  config.default_wrapper = :horizontal_form
 end

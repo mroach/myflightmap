@@ -10,6 +10,10 @@ en:
     labels:
       flight:
         airline_name: "Airline"
+      airport:
+        iata_code: "IATA Code"
+      airline:
+        iata_code: "IATA Code"
   duration:
     formats:
       minutes:

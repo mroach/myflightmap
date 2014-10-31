@@ -20,3 +20,6 @@ $ ->
         title: airport.iata_code + " - " + airport.name + " - " + airport.city + ', ' + airport.country
 
     google.maps.event.addDomListener(window, 'load', initialize_map)
+
+  $('#airport_country').select2()
+  $('#airport_timezone').select2()
