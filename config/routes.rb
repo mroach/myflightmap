@@ -12,67 +12,30 @@ Myflightmap::Application.routes.draw do
     end
   end
 
-  get 'map/(:id)' => 'map#show'
-  get 'airports/search' => 'airports#search'
-  get 'airports/distance_between' => 'airports#distance_between'
-  get 'flights/duration' => 'flights#duration'
+  get 'airports/search', to: 'airports#search'
+  get 'airports/distance_between', to: 'airports#distance_between'
+  get 'flights/duration', to: 'flights#duration'
+  get 'audits/:type/:id', to: 'audits#index', as: 'audits'
 
-  resources :flights, :trips, :airlines
+  resources :flights, except: [:index]
+  resources :trips, except: [:index]
+  resources :airlines
   resources :airports, constraint: { id: /[A-Z]{3}/ }
 
-  devise_for :users, controllers: { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, controllers: {
+    sessions: "users/sessions",
+    registrations: "users/registrations",
+    omniauth_callbacks: "users/omniauth_callbacks"
+  }
 
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
+  # Routes that are prefixed with the username
+  # Ex) /mroach/map, /mroach/trips, /mroach/flights
+  scope ':username' do
+    get 'map', to: 'map#show'
+    get 'flights(-:style)', to: 'flights#index', as: 'flightlist'
+    patch 'flights/batch_update', to: 'flights#batch_update', as: 'flight_batch_update'
+    get 'trips', to: 'trips#index', as: 'triplist'
+    get 'trips/:id', to: 'trips#show', as: 'usertrip'
+  end
 
-
-
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
 end

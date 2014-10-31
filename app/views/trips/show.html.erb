@@ -1,24 +1,21 @@
-<p id="notice"><%= notice %></p>
+<%= javascript_include_tag 'heatmap' %>
 
-<p>
-  <strong>User:</strong>
-  <%= @trip.user_id %>
-</p>
+<script type="text/javascript">
+  window.routes = <%= @stats[:routes].to_json.html_safe %>;
+  window.airports = <%= @stats[:airports].to_json.html_safe %>;
+</script>
 
-<p>
-  <strong>Name:</strong>
-  <%= @trip.name %>
-</p>
+<h1 class="trip-name"><%= @trip.name %> <span class="dates"><%= format_date @trip.begin_date %> - <%= format_date @trip.end_date %></span></h1>
 
-<p>
-  <strong>Purpose:</strong>
-  <%= @trip.purpose %>
-</p>
+<%= render partial: "shared/stat_boxes", locals: { stats: @stats[:totals] } %>
 
-<p>
-  <strong>Flights:</strong>
-  <%= @trip.flights %>
-</p>
+<div class="row">
+  <div class="col-lg-10 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12">
+    <div id="map-canvas" class="routes-map"></div>
+  </div>
+</div>
+
+<%= render partial: "shared/flights_large", locals: { flights: @trip.flights } %>
 
 <%= link_to 'Edit', edit_trip_path(@trip) %> |
 <%= link_to 'Back', trips_path %>

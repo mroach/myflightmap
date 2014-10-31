@@ -1,0 +1,38 @@
+<div class="row" id="top-stats">
+  <div class="col-xs-4 col-sm-2 col-md-2">
+    <div class="big-stat flights">
+      <div class="number"><%= stats[:flights] %></div>
+      <div class="descriptor"><%= t '.flights' %></div>
+    </div>
+  </div>
+  <div class="col-xs-4 col-sm-2 col-md-2">
+    <div class="big-stat airports">
+      <div class="number"><%= stats[:airports] %></div>
+      <div class="descriptor"><%= t '.airports' %></div>
+    </div>
+  </div>
+  <div class="col-xs-4 col-sm-2 col-md-2">
+    <div class="big-stat countries">
+      <div class="number"><%= stats[:countries] %></div>
+      <div class="descriptor"><%= t '.countries' %></div>
+    </div>
+  </div>
+  <div class="col-xs-4 col-sm-2 col-md-2">
+    <div class="big-stat airlines">
+      <div class="number"><%= stats[:airlines] %></div>
+      <div class="descriptor"><%= t '.airlines' %></div>
+    </div>
+  </div>
+  <div class="col-xs-4 col-sm-2 col-md-2">
+    <div class="big-stat distance">
+      <div class="number"><%= format_distance stats[:distance], :short %></div>
+      <div class="descriptor"><%= t '.distance' %></div>
+    </div>
+  </div>
+  <div class="col-xs-4 col-sm-2 col-md-2">
+    <div class="big-stat duration">
+      <div class="number"><%= format_duration stats[:duration] %></div>
+      <div class="descriptor"><%= t '.duration' %></div>
+    </div>
+  </div>
+</div>

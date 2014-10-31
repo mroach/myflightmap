@@ -1,4 +1,5 @@
 class Airport < ActiveRecord::Base
+  audited
 
   def current_time
     tz = TZInfo::Timezone.get(timezone)

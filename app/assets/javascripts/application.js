@@ -12,6 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap
+//= require bootstrap/collapse
+//= require bootstrap/dropdown
 //= require select2
 //= require pickadate/picker
 //= require pickadate/picker.date

@@ -1,33 +1,12 @@
-<h1>Listing trips</h1>
+<h1><%= current_user.name %>'s trips</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Name</th>
-      <th>Purpose</th>
-      <th>Flights</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @trips.each do |trip| %>
-      <tr>
-        <td><%= trip.user_id %></td>
-        <td><%= trip.name %></td>
-        <td><%= trip.purpose %></td>
-        <td><%= trip.flights %></td>
-        <td><%= link_to 'Show', trip %></td>
-        <td><%= link_to 'Edit', edit_trip_path(trip) %></td>
-        <td><%= link_to 'Destroy', trip, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+<div class="trip-list">
+  <% @trips.each do |trip| %>
+    <div class="trip">
+      <h2 class="name"><%= trip.name %> <span class="dates"><%= format_date trip.begin_date %> - <%= format_date trip.end_date %></span></h2>
+      <%= render partial: "shared/flights_large", locals: { flights: trip.flights } %>
+    </div>
+  <% end %>
+</div>
 
 <%= link_to 'New Trip', new_trip_path %>

@@ -1,7 +1,7 @@
 namespace :data do
   namespace :cleanup do
 
-    task :all => [:groom_flight_code, :standardise_airline_names, :set_missing_flight_airline]
+    task :all => [:groom_flight_code, :standardise_airline_names, :set_missing_flight_airline, :refresh_trip_dates]
 
     # desc "When flight numbers are missing the airline code, add it"
     # task :prepend_airline_code => :environment do
@@ -78,6 +78,24 @@ namespace :data do
         :skyteam => %w(SU AR AF AM UX CI MU CZ OK DL GA KQ KL KE ME SV RO VN MF)
       }
       alliances.each { |k,v| Airline.where("iata_code IN (?) AND alliance <> ?", v, k).update_all(alliance: k) }
+    end
+
+    desc "Refresh trip begin/end dates"
+    task :refresh_trip_dates => :environment do
+      Trip.all.each { |e| e.refresh_dates! }
+    end
+
+    desc "Refresh flight UTC times"
+    task :refresh_flight_utc_times => :environment do
+      Flight.all.each do |e|
+        depart_utc = TZInfo::Timezone.get(e.depart_airport_info.timezone).local_to_utc(e.depart_date_time)
+        e.depart_time_utc = depart_utc
+
+        arrive_utc = TZInfo::Timezone.get(e.arrive_airport_info.timezone).local_to_utc(e.arrive_date_time)
+        e.arrive_time_utc = arrive_utc
+
+        e.save!
+      end
     end
   end
 end

@@ -1,17 +1,44 @@
 class Flight < ActiveRecord::Base
+  audited
 
   attr_accessor :is_duplicate
 
   belongs_to :depart_airport_info, :class_name => 'Airport', :foreign_key => 'depart_airport', :primary_key => 'iata_code'
   belongs_to :arrive_airport_info, :class_name => 'Airport', :foreign_key => 'arrive_airport', :primary_key => 'iata_code'
-  belongs_to :trip
+  belongs_to :trip, :class_name => 'Trip', :foreign_key => 'trip_id', :primary_key => 'id'
   belongs_to :airline
+
+  before_save :refresh_utc_times!
+  after_save :update_related_trip!
+
+  default_scope { order('depart_time_utc DESC') }
 
   self.skip_time_zone_conversion_for_attributes = [:depart_time, :arrive_time]
 
-  # conform to bool convention
+  # conform to bool conventions
   def is_duplicate?
-    @is_duplicate
+    self.is_duplicate
+  end
+
+  def is_public?
+    self.is_public
+  end
+
+  # See if the flight is visible to the current user
+  def is_visible_to?(user_id)
+    self.user_id == user_id || self.is_public?
+  end
+
+  def self.belonging_to(user_id)
+    where("user_id = ?", user_id)
+  end
+
+  def self.visible_to(user_id)
+    where("user_id = ? OR is_public = ?", user_id, true)
+  end
+
+  def self.visible
+    where("is_public = ?", true)
   end
 
   # Just the airline code from the flight number
@@ -40,14 +67,16 @@ class Flight < ActiveRecord::Base
 
   # Combine the depature date and time
   def depart_date_time
-    return nil if [depart_date, depart_time].any? { |e| e.nil? }
-    Time.new(depart_date.year, depart_date.month, depart_date.day, depart_time.hour, depart_time.min)
+    return nil if depart_date.nil?
+    h, m, s = depart_time.nil? ? [0, 0] : [depart_time.hour, depart_time.min]
+    Time.new(depart_date.year, depart_date.month, depart_date.day, h, m)
   end
 
   # Combine the arrival date and time
   def arrive_date_time
-    return nil if [arrive_date, arrive_time].any? { |e| e.nil? }
-    Time.new(arrive_date.year, arrive_date.month, arrive_date.day, arrive_time.hour, arrive_time.min)
+    return nil if arrive_date.nil?
+    h, m, s = arrive_time.nil? ? [0, 0] : [arrive_time.hour, arrive_time.min]
+    Time.new(arrive_date.year, arrive_date.month, arrive_date.day, h, m)
   end
 
   # Return the time change in minutes between the origin and destination
@@ -65,17 +94,10 @@ class Flight < ActiveRecord::Base
 
   def in_the_air?(refdate = nil)
     # Require all the depart date/time fields and airports
-    return false if [depart_date, depart_time, arrive_date, arrive_time, depart_airport, arrive_airport].any? { |e| e.nil? }
+    return false if depart_time_utc.empty? || arrive_time_utc.empty?
     # Use UTC now as a ref if one wasn't specified
     refdate = Time.now.utc if refdate.nil?
-    # return false immediately if the departure datetime is over 48 hours away
-    # to make this method perform well over large data sets
-    return false if (refdate - depart_date_time).abs > (48 * 60 * 60)
-    # Convert local depart/arrive times to UTC
-    depart_time_utc = TZInfo::Timezone.get(depart_airport_info.timezone).local_to_utc(depart_date_time)
-    arrive_time_utc = TZInfo::Timezone.get(arrive_airport_info.timezone).local_to_utc(arrive_date_time)
-    # And see if the flight is in the air
-    refdate > depart_date_time && refdate < arrive_date_time
+    refdate >= depart_time_utc && refdate < arrive_time_utc
   end
 
   # Determine if the flight code contains the airline code
@@ -130,6 +152,23 @@ class Flight < ActiveRecord::Base
 
   def self.detect_duplicates(flights)
     flights.each { |f| f.is_duplicate = f.has_duplicate? }
+  end
+
+  private
+
+  def update_related_trip!
+    if !trip.nil? && (trip_id_changed? || depart_date_changed? || arrive_date_changed?)
+      trip.refresh_dates!
+    end
+  end
+
+  def refresh_utc_times!
+    return if depart_time_utc_changed? || arrive_time_utc_changed?
+    depart_utc = TZInfo::Timezone.get(depart_airport_info.timezone).local_to_utc(depart_date_time)
+    self.depart_time_utc = depart_utc
+
+    arrive_utc = TZInfo::Timezone.get(arrive_airport_info.timezone).local_to_utc(arrive_date_time)
+    self.arrive_time_utc = arrive_utc
   end
 
 end

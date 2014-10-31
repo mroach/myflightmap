@@ -1,0 +1,3 @@
+<h1>Revision history for <%= params[:type].humanize %> #<%= params[:id] %></h1>
+
+<%= render partial: "shared/audits", object: @audits, locals: { include_object_id: true } %>

@@ -1,7 +1,11 @@
 en:
   date:
     formats:
-      medium: "%d %b %Y"
+      medium: "%e %b %Y"
+  time:
+    formats:
+      long: "%d %b %y %H:%M"
+      system: "%Y-%m-%d %H:%M:%S"
   simple_form:
     labels:
       flight:
@@ -21,6 +25,7 @@ en:
   time_behind: "%{destination} is %{time} behind %{origin}"
   actions:
     import_flights: "Import Flights"
+    add_flight: "Add flight"
   map:
     show:
       flights: "Flights"
@@ -32,3 +37,4 @@ en:
   navigation_links:
     my_flights: "My Flights"
     my_map: "My Map"
+    my_trips: "My Trips"

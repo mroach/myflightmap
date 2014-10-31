@@ -4,12 +4,30 @@ class TripsController < ApplicationController
   # GET /trips
   # GET /trips.json
   def index
-    @trips = Trip.all
+    user = User.find_by_username(params[:username])
+    if current_user.nil?
+      @trips = Trip.belonging_to(user.id).visible
+      @show_controls = false
+    else
+      @trips = Trip.belonging_to(user.id).visible_to(current_user.id)
+      @show_controls = user.id == current_user.id
+    end
   end
 
   # GET /trips/1
   # GET /trips/1.json
   def show
+    if !@trip.is_visible_to?((current_user.id rescue -1))
+      raise ActiveRecord::RecordNotFound
+    end
+
+    if current_user.nil?
+      flights = @trip.flights.published
+    else
+      flights = @trip.flights.visible_to(current_user)
+    end
+
+    @stats = FlightsHelper.generate_statistics(flights)
   end
 
   # GET /trips/new
@@ -25,6 +43,7 @@ class TripsController < ApplicationController
   # POST /trips.json
   def create
     @trip = Trip.new(trip_params)
+    @trip.user_id = current_user.id
 
     respond_to do |format|
       if @trip.save
@@ -69,6 +88,6 @@ class TripsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def trip_params
-      params.require(:trip).permit(:user_id, :name, :purpose, :flights)
+      params.require(:trip).permit(:user_id, :name, :purpose, :is_public)
     end
 end

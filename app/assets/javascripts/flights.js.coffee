@@ -1,12 +1,12 @@
-$ ->
+ $ ->
   # setup the date picker for flight departure and arrival
-  $('#flight_depart_date, #flight_arrive_date').pickadate
-    editable: true
-    selectYears: true
-    selectMonths: true
-    firstDay: 1 # Monday
-    formatSubmit: "yyyy-mm-dd" # Format used on submit
-    hiddenName: true
+  # $('#flight_depart_date, #flight_arrive_date').pickadate
+  #   editable: true
+  #   selectYears: true
+  #   selectMonths: true
+  #   firstDay: 1 # Monday
+  #   formatSubmit: "yyyy-mm-dd" # Format used on submit
+  #   hiddenName: true
 
   # when flight code is set, lookup the airline
   $('#flight_flight_code').bind 'change', () ->
@@ -24,7 +24,7 @@ $ ->
   $('#flight_depart_airport, #flight_arrive_airport').select2
     minimumInputLength: 3
     ajax:
-      url: $(this).attr('data-source')
+      url: '/airports/search'
       dataType: "json"
       data: (term) ->
         q: term
@@ -44,6 +44,18 @@ $ ->
             callback
               id: data.iata_code
               text: "#{data.iata_code} - #{data.description}"
+
+  # Create a selector/creator for trips
+  if window.trips
+    $('#flight_trip_id').select2
+      data: $.map window.trips, (t) -> { id: t.id, text: t.name }
+      # Allow an item that doesn't exist to be "created" on the fly
+      # Previx the value with "-1:" to indicate to the controller that it needs
+      # to create the trip
+      createSearchChoice: (term, data) ->
+        if $(data).filter(() -> this.text.localeCompare(term)==0).length == 0
+          id: "-1:#{term}"
+          text: term
 
   # once the arrive airport is set, calculate the distance between
   $('#flight_arrive_airport').bind 'change', () ->
@@ -72,7 +84,15 @@ $ ->
       success: (data) ->
         $('#flight_duration').val(data.duration)
 
-  # make flights clickable
-  $('.flight[data-url]').bind 'click', () ->
-    url = $(this).attr('data-url')
-    window.location.href = url
+  $('.batch-edit-mark').bind 'change', () ->
+    checked_total = $('.batch-edit-mark:checked').length
+    $editor = $('.batch-editor')
+    console.debug "#{checked_total} records marked for updating"
+    if checked_total == 0
+      $editor.collapse('hide')
+    else
+      $editor.collapse('show')
+      $('.title > span', $editor).text(checked_total)
+
+      values = $('.batch-edit-mark:checked').map(() -> $(this).val()).get().join()
+      $('input[name="records_to_update"]').val(values)

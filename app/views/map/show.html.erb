@@ -1,47 +1,15 @@
 <%= javascript_include_tag 'heatmap' %>
-<%= javascript_include_tag 'gmaps-heatmap' %>
-<div class="row" id="top-stats">
-  <div class="col-xs-4 col-sm-2 col-md-2">
-    <div class="big-stat flights">
-      <div class="number"><%= @stats[:flights] %></div>
-      <div class="descriptor"><%= t '.flights' %></div>
-    </div>
-  </div>
-  <div class="col-xs-4 col-sm-2 col-md-2">
-    <div class="big-stat airports">
-      <div class="number"><%= @stats[:airports] %></div>
-      <div class="descriptor"><%= t '.airports' %></div>
-    </div>
-  </div>
-  <div class="col-xs-4 col-sm-2 col-md-2">
-    <div class="big-stat countries">
-      <div class="number"><%= @stats[:countries] %></div>
-      <div class="descriptor"><%= t '.countries' %></div>
-    </div>
-  </div>
-  <div class="col-xs-4 col-sm-2 col-md-2">
-    <div class="big-stat airlines">
-      <div class="number"><%= @stats[:airlines] %></div>
-      <div class="descriptor"><%= t '.airlines' %></div>
-    </div>
-  </div>
-  <div class="col-xs-4 col-sm-2 col-md-2">
-    <div class="big-stat distance">
-      <div class="number"><%= format_distance @stats[:distance] %></div>
-      <div class="descriptor"><%= t '.distance' %></div>
-    </div>
-  </div>
-  <div class="col-xs-4 col-sm-2 col-md-2">
-    <div class="big-stat duration">
-      <div class="number"><%= format_duration @stats[:duration] %></div>
-      <div class="descriptor"><%= t '.duration' %></div>
-    </div>
-  </div>
-</div>
+
+<script type="text/javascript">
+  window.routes = <%= @stats[:routes].to_json.html_safe %>;
+  window.airports = <%= @stats[:airports].to_json.html_safe %>;
+</script>
+
+<%= render partial: "shared/stat_boxes", locals: { stats: @stats[:totals] } %>
 
 <div class="row">
   <div class="col-lg-10 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12">
-    <div id="map-canvas"></div>
+    <div id="map-canvas" class="routes-map"></div>
   </div>
 </div>
 
@@ -49,7 +17,7 @@
   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-offset-1">
     <h3><%= t '.airports' %></h3>
     <table class="stats airports">
-      <% @top_airports.each do |a| %>
+      <% @stats[:top_airports].each do |a| %>
         <tr>
           <td><%= flag_img a[:airport].country, "16" %></td>
           <td class="airport"><%= a[:airport].iata_code %></td>
@@ -62,7 +30,7 @@
   <div class="col-xs-12 col-sm-6 col-md-4">
     <h3><%= t '.airlines' %></h3>
     <table class="stats airlines">
-      <% @top_airlines.each do |a| %>
+      <% @stats[:top_airlines].each do |a| %>
         <tr>
           <td><%= image_tag a[:airline].logo.url(:icon) %></td>
           <td><%= image_tag("alliances/icon/#{a[:airline].alliance}.png") if a[:airline].in_alliance? %></td>
@@ -76,7 +44,7 @@
   <div class="col-xs-12 col-sm-6 col-md-4">
     <h3><%= t '.countries' %></h3>
     <table class="stats countries">
-      <% @top_countries.each do |c| %>
+      <% @stats[:top_countries].each do |c| %>
         <tr>
           <td><%= flag_img c[:country].alpha2, "16" %></td>
           <td><%= c[:country].name %></td>

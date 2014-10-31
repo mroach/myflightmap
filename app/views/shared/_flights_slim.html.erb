@@ -1,0 +1,38 @@
+<table class="flight-board">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Flight</th>
+      <th>Times</th>
+      <th>Trip</th>
+      <th>From/To</th>
+      <th>Airline</th>
+      <th>Aircraft</th>
+      <th>Distance</th>
+      <th>Duration</th>
+      <th>Seat</th>
+      <% if @batch_editing %>
+        <td>Edit</td>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @flights.each do |f| %>
+      <tr data-click-url="<%= edit_flight_path(f) %>">
+        <td><%= l f.depart_date, format: :medium %></td>
+        <td class="flight_code"><%= image_tag f.airline.logo.url(:icon) %> <%= f.airline_code %> <%= f.flight_number %></td>
+        <td><%= f.trip_id ? f.trip.name : "" %></td>
+        <td><%= format_time(f.depart_time) %> - <%= format_time(f.arrive_time) %><span class="arrival_offset"><%= f.arrive_time_offset %></span></td>
+        <td><%= f.depart_airport %>-<%= f.arrive_airport %></td>
+        <td><%= f.airline_name %></td>
+        <td><%= f.aircraft_type %></td>
+        <td><%= format_distance f.distance %></td>
+        <td><%= format_flight_duration(f.duration) %></td>
+        <td><%= f.seat %> <%= f.seat_location %> <%= f.seat_class %></td>
+        <% if @batch_editing %>
+          <td><input type="checkbox" name="flight[update]" class="batch-edit-mark" value="<%= f.id %>" /></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

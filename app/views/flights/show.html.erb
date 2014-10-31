@@ -1,35 +1,91 @@
-<p id="notice"><%= notice %></p>
-
 <div class="flight-detail">
-  <div class="top">
-    <div class="airline_logo">
-      <%= image_tag @flight.airline.logo.url(:medium) %>
+  <div class="row">
+    <div class="col-md-1">
+      <div class="airline_logo">
+        <%= image_tag @flight.airline.logo.url %>
+      </div>
     </div>
-    <div class="airline_name"><%= @flight.airline_name %></div>
-    <div class="seat_class"><%= @flight.seat_class %></div>
+    <div class="col-md-4">
+      <div class="airline_name"><%= @flight.airline_name %></div>
+    </div>
+  </div>
+
+  <div class="row city-row">
+    <div class="col-md-3 col-md-offset-1">
+      <div class="depart_city"><%= @flight.depart_city %> <span class="depart_airport">(<%= @flight.depart_airport %>)</span></div>
+    </div>
+    <div class="col-md-3 col-md-offset-1">
+      <div class="arrive_city"><%= @flight.arrive_city %> <span class="arrive_airport">(<%= @flight.arrive_airport %>)</span></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3 col-md-offset-1">
+      <div class="depart_time">
+        <%= format_time(@flight.depart_time) %>
+      </div>
+    </div>
+    <div class="col-md-3 col-md-offset-1">
+      <div class="arrive_time">
+        <%= format_time(@flight.arrive_time) %><%= @flight.arrive_time_offset %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row labels data-row-1">
+    <div class="col-md-2 col-md-offset-1">Flight</div>
+    <div class="col-md-2">Date</div>
+    <div class="col-md-2">Class</div>
+    <div class="col-md-1">Seat</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2 col-md-offset-1">
+      <div class="flight_code">
+        <span class="airline_code"><%= @flight.airline_code %></span>
+        <span class="flight_number"><%= @flight.flight_number %></span>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="depart_date">
+        <%= @flight.depart_date.strftime('%d %b %Y') %>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="seat_class"><%= @flight.seat_class %></div>
+    </div>
+    <div class="col-md-1">
+      <div class="seat"><%= @flight.seat %> <%= @flight.seat_location %></div>
+    </div>
+  </div>
+
+  <div class="row labels data-row-2">
+    <div class="col-md-2 col-md-offset-1">Aircraft</div>
+    <div class="col-md-2">Duration</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2 col-md-offset-1"><%= @flight.aircraft_type %></div>
+    <div class="col-md-2">
+      <span class="duration"><%= format_flight_duration(@flight.duration) %></span>
+      <% if @flight.time_change != 0 %>
+        <span class="time_change" title="<%= time_change_desc @flight %>"><i class="fa fa-clock-o"></i> <%= time_change_desc @flight, "short" %></span>
+      <% end %>
+    </div>
   </div>
 </div>
 
-<div class="flight_code">
-  <span class="airline_code"><%= @flight.airline_code %></span>
-  <span class="flight_number"><%= @flight.flight_number %></span>
+<div class="audits-container">
+  <div class="show-audits-button-container">
+    <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#audits" aria-expanded="false" aria-controls="audits">Show Changelog</button>
+  </div>
+  <div id="audits" class="collapse">
+    <%= render partial: "shared/audits", object: @flight.audits %>
+  </div>
 </div>
-<div class="depart_date">
-  <%= @flight.depart_date.strftime('%d %b %Y') %>
+
+<div class="control-links">
+  <%= link_to 'Edit', edit_flight_path(@flight) %> |
+  <%= link_to 'Back', flights_path %> |
+  <%= link_to 'Destroy', flight_path(@flight), :confirm => 'Are you sure?', :method => :delete %>
 </div>
-<div class="cities">
-  <%= @flight.depart_city %> &mdash; <%= @flight.arrive_city %>
-</div>
-<div class="times">
-  <%= format_time(@flight.depart_time) %> &mdash; <%= format_time(@flight.arrive_time) %><span class="arrival_offset"><%= @flight.arrive_time_offset %>
-</div>
-</span>
-<div class="duration"><%= format_flight_duration(@flight.duration) %></div>
-<div class="airline_and_aircraft">
-   &middot; <%= @flight.aircraft_type %>
-</div>
-<div class="seat_class <%= (@flight.seat_class || "").downcase.underscore %>"></div>
-<div class="seat"><%= @flight.seat %> <%= @flight.seat_location %></div>
-<%= link_to 'Edit', edit_flight_path(@flight) %> |
-<%= link_to 'Back', flights_path %> |
-<%= link_to 'Destroy', flight_path(@flight), :confirm => 'Are you sure?', :method => :delete %>

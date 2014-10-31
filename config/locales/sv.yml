@@ -46,6 +46,7 @@ sv:
   time_behind: "%{destination} är %{time} bakom %{origin}"
   actions:
     import_flights: "Importera flygdata"
+    add_flight: "Lägg till flyg"
   map:
     show:
       flights: "Flyg"
@@ -57,3 +58,4 @@ sv:
   navigation_links:
     my_flights: "Mina flyg"
     my_map: "Min karta"
+    my_trips: "Mina resor"

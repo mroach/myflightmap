@@ -1,0 +1,47 @@
+<div class="flight-list">
+  <% flights.each do |f| %>
+    <div class="flight" data-click-url="<%= edit_flight_path(f) %>">
+      <div class="col1">
+        <div class="airline_logo"><%= image_tag f.airline.logo.url(:medium) %></div>
+        <div class="flight_code_and_date">
+          <div class="flight_code">
+            <span class="airline_code"><%= f.airline_code %></span>
+            <span class="flight_number"><%= f.flight_number %></span>
+          </div>
+          <div class="depart_date"><%= l f.depart_date, format: :medium %></div>
+        </div>
+      </div>
+      <div class="col2">
+        <div>
+          <span class="cities"><%= f.depart_city %> <i class="fa fa-plane"></i> <%= f.arrive_city %></span>
+          &middot;
+          <span class="airports"><%= f.depart_airport %>-<%= f.arrive_airport %></span>
+        </div>
+        <div>
+          <span class="times">
+            <%= format_time(f.depart_time) %> - <%= format_time(f.arrive_time) %><span class="arrival_offset"><%= f.arrive_time_offset %></span>
+          </span>
+          <span class="duration"><%= format_flight_duration(f.duration) %></span>
+          <% if f.time_change != 0 %>
+            <span class="time_change" title="<%= time_change_desc f %>"><i class="fa fa-clock-o"></i> <%= time_change_desc f, "short" %></span>
+          <% end %>
+        </div>
+        <div class="airline_and_aircraft dot-separated">
+          <% unless f.airline_name.blank? %>
+            <span><%= f.airline_name %></span>
+          <% end %>
+          <% unless f.aircraft_type.blank? %>
+            <span><%= f.aircraft_type %></span>
+          <% end %>
+          <% unless f.distance.nil? %>
+            <span><%= format_distance f.distance %></span>
+          <% end %>
+        </div>
+      </div>
+      <div class="col3">
+        <span class="seat_class <%= (f.seat_class || "").downcase.underscore %>"><%= f.seat_class %></span>
+        <div class="seat"><%= f.seat %> <%= f.seat_location %></div>
+      </div>
+    </div>
+  <% end %>
+</div>

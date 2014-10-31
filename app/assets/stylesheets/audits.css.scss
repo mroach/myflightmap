@@ -1,0 +1,8 @@
+table.audited-changes td { vertical-align: top }
+.audited-change {
+  .field { font-weight: bold; width: 12em; }
+  .old-value span { background-color: #f99; text-decoration: line-through; }
+  .new-value span { background-color: #9f9 }
+}
+.audits-container { margin-top: 10px }
+#audits { margin-top: 10px }

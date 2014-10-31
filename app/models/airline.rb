@@ -1,4 +1,6 @@
 class Airline < ActiveRecord::Base
+  audited
+
   ALLIANCES = { :staralliance => "Star Alliance", :oneworld => "oneworld", :skyteam => "Sky Team" }
 
   has_attached_file :logo,

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140626144550) do
+ActiveRecord::Schema.define(version: 20141031075706) do
 
   create_table "airlines", force: true do |t|
     t.string   "iata_code"
@@ -45,14 +45,37 @@ ActiveRecord::Schema.define(version: 20140626144550) do
 
   add_index "airports", ["iata_code"], name: "index_airports_on_iata_code", unique: true
 
+  create_table "audits", force: true do |t|
+    t.integer  "auditable_id"
+    t.string   "auditable_type"
+    t.integer  "associated_id"
+    t.string   "associated_type"
+    t.integer  "user_id"
+    t.string   "user_type"
+    t.string   "username"
+    t.string   "action"
+    t.text     "audited_changes"
+    t.integer  "version",         default: 0
+    t.string   "comment"
+    t.string   "remote_address"
+    t.string   "request_uuid"
+    t.datetime "created_at"
+  end
+
+  add_index "audits", ["associated_id", "associated_type"], name: "associated_index"
+  add_index "audits", ["auditable_id", "auditable_type"], name: "auditable_index"
+  add_index "audits", ["created_at"], name: "index_audits_on_created_at"
+  add_index "audits", ["request_uuid"], name: "index_audits_on_request_uuid"
+  add_index "audits", ["user_id", "user_type"], name: "user_index"
+
   create_table "flights", force: true do |t|
     t.integer  "user_id"
     t.integer  "trip_id"
     t.string   "flight_code"
-    t.string   "depart_airport",        null: false
-    t.date     "depart_date",           null: false
+    t.string   "depart_airport",                       null: false
+    t.date     "depart_date",                          null: false
     t.time     "depart_time"
-    t.string   "arrive_airport",        null: false
+    t.string   "arrive_airport",                       null: false
     t.date     "arrive_date"
     t.time     "arrive_time"
     t.integer  "distance"
@@ -69,11 +92,17 @@ ActiveRecord::Schema.define(version: 20140626144550) do
     t.string   "aircraft_registration"
     t.string   "flight_role"
     t.string   "purpose"
+    t.boolean  "is_public",             default: true
+    t.datetime "depart_time_utc"
+    t.datetime "arrive_time_utc"
   end
 
   add_index "flights", ["airline_name"], name: "index_flights_on_airline_name"
   add_index "flights", ["arrive_airport"], name: "index_flights_on_arrive_airport"
+  add_index "flights", ["arrive_time_utc"], name: "index_flights_on_arrive_date_utc_and_arrive_time_utc"
+  add_index "flights", ["arrive_time_utc"], name: "index_flights_on_arrive_time_utc"
   add_index "flights", ["depart_airport"], name: "index_flights_on_depart_airport"
+  add_index "flights", ["depart_time_utc"], name: "index_flights_on_depart_time_utc"
   add_index "flights", ["trip_id"], name: "index_flights_on_trip_id"
   add_index "flights", ["user_id"], name: "index_flights_on_user_id"
 
@@ -86,6 +115,7 @@ ActiveRecord::Schema.define(version: 20140626144550) do
     t.date     "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_public",    default: true
   end
 
   add_index "trips", ["user_id"], name: "index_trips_on_user_id"
@@ -107,9 +137,11 @@ ActiveRecord::Schema.define(version: 20140626144550) do
     t.string   "uid"
     t.string   "name"
     t.string   "image"
+    t.string   "username"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["username"], name: "index_users_on_username"
 
 end

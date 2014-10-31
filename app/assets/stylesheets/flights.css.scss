@@ -21,20 +21,32 @@
   }
 
   .duplicate { color: #888; }
-
   .distance { text-align: right }
   .duration { text-align: right }
 }
 
+.flight-buttons { padding: 8px 0 }
 .dot-separated > span:not(:last-child):after { content: " · " }
+
+.flight-detail {
+  .labels { font-weight: bold }
+  .airline_logo { text-align: center }
+  .airline_name { font-size: 2em; }
+  .depart_city, .arrive_city { font-size: 1.5em; text-transform: uppercase }
+  .plane-icon { font-size: 2em }
+  .data-row-1 { margin-top: 20px; }
+  .data-row-2 { margin-top: 10px; }
+  .city-row { margin-top: 20px; }
+  .depart_time, .arrive_time { font-size: 1.2em; font-weight: bold }
+}
+
+.control-links { margin-top: 20px }
 
 .flight-list {
   .flight {
     padding: .5em 0;
     border-bottom: solid 1px #ccc;
     width: 600px;
-
-    &[data-url] { cursor: pointer }
 
     .col1, .col2, .col3 { display: inline-block; vertical-align: top }
     .col1 { width: 150px }
@@ -45,6 +57,7 @@
     .flight_code { font-size: 1.3em; }
     .airline_logo { display: inline-block; margin-right: .8em; }
     .flight_code_and_date { display: inline-block }
+    .depart_date { font-size: 1.1em; }
     .departure, .arrival {
       & > img { display: inline-block }
       & > * { vertical-align: middle }
@@ -56,7 +69,7 @@
     .airports { margin-left: 5px; opacity: .9; }
     .seat_class {
       border-radius: 3px;
-      padding: .2em .3em;
+      padding: .1em .2em;
       font-weight: lighter;
       color: white;
       display: inline-block;
@@ -73,5 +86,17 @@
     .arrival_offset { vertical-align: super; font-size: .8em; color: blue }
     .airline_and_aircraft { opacity: .9 }
     .seat { margin-top: .3em }
+  }
+}
+
+@media (max-width: 767px) {
+  .flight-list {
+    .flight {
+      .airline_logo { max-width: 24px; }
+      .col1, .col2, .col3 { display: block; width: 100% }
+      .col3 > * { display: inline-block }
+      .flight_code_and_date > div { display: inline-block; }
+      .flight_code { width: 8em }
+    }
   }
 }
