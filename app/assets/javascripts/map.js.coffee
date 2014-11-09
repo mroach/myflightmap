@@ -32,8 +32,6 @@ $ ->
         addAirport(map, route.from)
         addAirport(map, route.to)
 
-      #addHeatmap()
-
     addAirport = (map, airport) ->
       new google.maps.Marker
         position: new google.maps.LatLng(airport.latitude, airport.longitude)
@@ -45,27 +43,3 @@ $ ->
           strokeWeight: 1
 
     google.maps.event.addDomListener(window, 'load', initialize_map);
-
-  ##
-  # Add heatmap
-  #
-  # addHeatmap = () ->
-  #   heatmapData = window.airports.map (a) ->
-  #     lat: a.airport.latitude
-  #     lng: a.airport.longitude
-  #     value: a.flights
-
-  #   heatmapData =
-  #     max: Math.max.apply(heatmapData, heatmapData.map (d) -> d.value)
-  #     data: heatmapData
-
-  #   heatmap = new HeatmapOverlay map,
-  #     radius: 4
-  #     maxOpacity: 1
-  #     scaleRadius: true
-  #     latField: 'lat'
-  #     lngField: 'lng'
-  #     valueField: 'value'
-  #     useLocalExtrema: true
-
-  #   heatmap.setData(heatmapData)
