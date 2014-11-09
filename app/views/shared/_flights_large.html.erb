@@ -21,7 +21,7 @@
           <span class="times">
             <%= format_time(f.depart_time) %> - <%= format_time(f.arrive_time) %><span class="arrival_offset"><%= f.arrive_time_offset %></span>
           </span>
-          <span class="duration"><%= format_flight_duration(f.duration) %></span>
+          <span class="duration"><%= format_duration f.duration %></span>
           <% if f.time_change != 0 %>
             <span class="time_change" title="<%= time_change_desc f %>"><i class="fa fa-clock-o"></i> <%= time_change_desc f, "short" %></span>
           <% end %>

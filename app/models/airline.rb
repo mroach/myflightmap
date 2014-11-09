@@ -18,6 +18,10 @@ class Airline < ActiveRecord::Base
     !alliance.blank?
   end
 
+  def has_logo?
+    !logo.nil?
+  end
+
   private
 
   Paperclip.interpolates :iata_code do |attachment, style|

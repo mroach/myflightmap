@@ -67,7 +67,7 @@
   <div class="row">
     <div class="col-md-2 col-md-offset-1"><%= @flight.aircraft_type %></div>
     <div class="col-md-2">
-      <span class="duration"><%= format_flight_duration(@flight.duration) %></span>
+      <span class="duration"><%= format_duration @flight.duration %></span>
       <% if @flight.time_change != 0 %>
         <span class="time_change" title="<%= time_change_desc @flight %>"><i class="fa fa-clock-o"></i> <%= time_change_desc @flight, "short" %></span>
       <% end %>

@@ -1,8 +1,12 @@
 module ApplicationHelper
-  def flag_img(country, size = 32)
+  def flag_image(country, size = 32)
     country = country.downcase # can't use downcase! when the strong is frozen
     country = "gb" if country == "uk"
     image_tag "flags/#{size}/#{country}.png"
+  end
+
+  def alliance_image(alliance, size = "icon")
+    image_tag("alliances/#{size}/#{alliance}.png") unless alliance.nil?
   end
 
   # Eventually maybe support locale formatting
@@ -30,10 +34,15 @@ module ApplicationHelper
     "#{s} km"
   end
 
-  # Format a duration with hours and minutes
-  # Ex) 16h 45m
-  def format_flight_duration(minutes)
-    Duration.new(:minutes => minutes).format('%thh %mm')
+  def format_duration(minutes, style = "short")
+    change = Duration.new(:minutes => minutes)
+    time_label = case
+      when change.total < 3600 then 'minutes'
+      when change.total % 3600 != 0 then'hours_minutes'
+      else 'hours'
+    end
+    time_label = "duration.formats.#{time_label}.#{style}"
+    change.format(I18n.t(time_label))
   end
 
   def icon_link(link_text, link_path, icon_name, link_options = {})
