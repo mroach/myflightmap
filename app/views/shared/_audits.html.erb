@@ -3,6 +3,7 @@
     <th>User</th>
     <th>Changed at</th>
     <th>Type</th>
+    <th>Comments</th>
     <th>Changes</th>
   </tr>
   <% audits.each do |a| %>
@@ -10,6 +11,7 @@
       <td><%= a.user.username rescue "" %>@<%= a.remote_address %></td>
       <td><%= l a.created_at, format: :long %></td>
       <td><%= a.action.humanize %></td>
+      <td><%= a.comment %></td>
       <td>
         <table class="audited-change">
         <% a.audited_changes.reject { |k,v| v.blank? }.each do |k,v| %>
