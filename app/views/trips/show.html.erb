@@ -1,4 +1,4 @@
-<%= javascript_include_tag 'heatmap' %>
+<% content_for :title, @trip.name %>
 
 <script type="text/javascript">
   window.routes = <%= @stats[:routes].to_json.html_safe %>;
@@ -15,7 +15,15 @@
   </div>
 </div>
 
-<%= render partial: "shared/flights_large", locals: { flights: @trip.flights } %>
+<div class="trip-flights">
+  <%= render partial: "shared/flights_slim", locals: { flights: @trip.flights } %>
+</div>
+
+<% if @show_controls %>
+  <div class="flight-buttons">
+    <%= link_to t('actions.add_flight'), new_flight_path('flight[trip_id]' => @trip.id), class: 'btn btn-success' %>
+  </div>
+<% end %>
 
 <%= link_to 'Edit', edit_trip_path(@trip) %> |
 <%= link_to 'Back', trips_path %>

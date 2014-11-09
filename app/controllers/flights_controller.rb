@@ -33,7 +33,7 @@ class FlightsController < ApplicationController
 
   # GET /flights/new
   def new
-    @flight = Flight.new
+    @flight = Flight.new(flight_params)
   end
 
   # GET /flights/1/edit
@@ -126,6 +126,7 @@ class FlightsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def flight_params
+      return {} if !params || !params[:flight]
       if params[:flight][:trip_id][0..2] == "-1:"
         logger.debug "Creating a new trip from #{params[:flight][:trip_id]}"
         trip_name = params[:flight][:trip_id][3..-1]

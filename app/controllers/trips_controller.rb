@@ -84,6 +84,7 @@ class TripsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_trip
       @trip = Trip.find(params[:id])
+      @show_controls = @trip.user_id == current_user.id
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
