@@ -1,4 +1,4 @@
-.flight-board > tbody {
+.flight-board {
 
   /* dark theme
   color: white;
@@ -14,17 +14,35 @@
   & > tr > th{ padding: .1em .3em }
   & > tr > td { padding: .3em}
 
-  .flight_code {
-    img { display: inline-block }
-    .airline_code { padding-right: .5em; }
-    > * { vertical-align: middle }
-  }
+  div[class^="col-"] { padding: 0 3px }
+
+  .row { margin-bottom: 5px }
+
+  .airline_logo, .flight_code_and_date, .batch_edit_mark_container { display: inline-block }
+  .airline_logo { margin-right: 6px }
+  .flight_code, .from_to { font-weight: bold }
 
   .duplicate { color: #888; }
-  .distance { text-align: right }
-  .duration { text-align: right }
-}
+  //.distance { text-align: right }
+  //.duration { text-align: right }
 
+  .aircraft { opacity: .8 }
+}
+.batch_editor {
+  border: solid 1px #900;
+  border-radius: 4px;
+  padding: 0 0 15px 0;
+  margin: 20px 0;
+
+  .title {
+    background-color: #900;
+    color: white;
+    font-size: 1.4em;
+    font-weight: bold;
+    padding: .2em;
+    margin-bottom: 8px;
+  }
+}
 .flight-buttons { padding: 8px 0 }
 .dot-separated > span:not(:last-child):after { content: " · " }
 

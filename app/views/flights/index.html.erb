@@ -2,37 +2,68 @@
   <div class="flight-buttons">
     <%= link_to t('actions.add_flight'), new_flight_path, class: 'btn btn-success' %>
     <%= link_to t('actions.import_flights'), import_root_path, class: 'btn btn-default' %>
-    <%= link_to t('actions.batch_update'), flightlist_path(style: 'slim', batch_editing: 1), class: 'btn btn-default' %>
+    <%= link_to t('actions.batch_update'), flights_path(style: 'slim', batch_editing: 1), class: 'btn btn-default' %>
   </div>
 <% end %>
 
 <% if @batch_editing %>
-<script type="text/javascript">
-  window.trips = <%= @trips.to_json.html_safe %>;
-</script>
+  <script type="text/javascript">
+    window.trips = <%= @trips.to_json.html_safe %>;
+  </script>
   <form accept-charset="UTF-8" action="<%= flight_batch_update_path %>" method="post" novalidate="novalidate">
     <input name="_method" type="hidden" value="patch" />
     <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
     <input name="records_to_update" type="hidden" value="" />
-    <div class="batch-editor collapse">
-      <div class="title">Update <span class="count"></span> flights</div>
-      <div>
-        <select name="field_to_update">
-          <option>Field to update</option>
-          <option value="trip">Trip</option>
-          <option value="airline">Airline</option>
-          <option value="aircraft">Aircraft</option>
-          <option value="seat_class">Seat Class</option>
-        </select>
-        <div id="batch-update-value">
-          <div id="flight_trip_id_container">
-            <input class="string optional form-control" id="flight_trip_id" name="flight[trip_id]" type="text" />
+
+    <div class="batch_editor">
+      <div class="title">Batch Update</div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-* text-info">
+            <p>
+              To batch edit, tick the box next to each flight you want to edit.
+              Then select the field you want to edit, enter a new value, and click <em>Update</em>.
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-2 col-xs-12">
+            <select name="field_to_update" class="form-control">
+              <option>Field to update</option>
+              <option value="trip_id">Trip</option>
+              <option value="airline_id">Airline</option>
+              <option value="aircraft_type">Aircraft</option>
+              <option value="seat_class">Seat Class</option>
+              <option value="is_public">Publicly Visible?</option>
+            </select>
+          </div>
+          <div class="col-md-3 col-xs-12">
+            <div class="batch_update_value trip_id collapse">
+              <%= text_field("flight", "trip_id", class: "string form-control") %>
+            </div>
+            <div class="batch_update_value airline_id collapse">
+              <input type="hidden" name="flight[airline_id]" />
+              <%= text_field("flight", "airline_name", class: "string form-control", placeholder: "Airline") %>
+            </div>
+            <div class="batch_update_value aircraft_type collapse">
+              <%= text_field("flight", "aircraft_type", class: "string form-control", placeholder: "Aircraft") %>
+            </div>
+            <div class="batch_update_value seat_class collapse">
+              <%= select("flight", "seat_class", Flight.seat_classes) %>
+            </div>
+            <div class="batch_update_value is_public collapse">
+              <input type="radio" name="flight[is_public]" id="flight_is_public_0" value="0" />
+              <label for="flight_is_public_0"><%= t('words.no') %></label>
+              <input type="radio" name="flight[is_public]" id="flight_is_public_1" value="1" />
+              <label for="flight_is_public_1"><%= t('words.yes') %></label>
+            </div>
+          </div>
+          <div class="col-md-1 form-actions">
+            <input class="btn btn-default" name="commit" type="submit" value="<%= t('words.update') %>" />
           </div>
         </div>
       </div>
-      <div class="form-actions">
-        <input class="btn btn-default" name="commit" type="submit" value="Update" />
-      </div>
+
     </div>
   </form>
 <% end %>

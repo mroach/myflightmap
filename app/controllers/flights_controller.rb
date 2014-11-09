@@ -74,15 +74,20 @@ class FlightsController < ApplicationController
 
   # PATCH /flights/batch_update
   def batch_update
+    # Get the name of the field to update and the list of records to update
     field_to_update = params[:field_to_update].to_sym
     records_to_update = params[:records_to_update].split(/,/)
-    flights = Flight.where("user_id = ? AND id IN (?)", current_user.id, records_to_update)
-    if field_to_update == :trip
-      trip_id = flight_params[:trip_id]
-      flights.each { |e| e.trip_id = trip_id; e.save! }
-    end
 
-    redirect_to flightlist_path(current_user.username),
+    # Restrict the updatable flights list to those owned by the current user
+    # AND those selected by the checkboxes on the batch update form
+    flights = Flight.where("user_id = ? AND id IN (?)", current_user.id, records_to_update)
+
+    # Use the flight_params strong parameters to allow any field
+    # to be batch updated
+    value = flight_params[field_to_update]
+    flights.each { |e| e[field_to_update] = value; e.save! }
+
+    redirect_to flights_path,
       notice: "Updated %s %s" % [records_to_update.length, "flights".pluralize(records_to_update.length)]
   end
 

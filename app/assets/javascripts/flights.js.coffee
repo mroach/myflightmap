@@ -84,15 +84,17 @@
       success: (data) ->
         $('#flight_duration').val(data.duration)
 
-  $('.batch-edit-mark').bind 'change', () ->
-    checked_total = $('.batch-edit-mark:checked').length
-    $editor = $('.batch-editor')
-    console.debug "#{checked_total} records marked for updating"
-    if checked_total == 0
-      $editor.collapse('hide')
-    else
-      $editor.collapse('show')
-      $('.title > span', $editor).text(checked_total)
+  $('.batch_edit_mark').bind 'change', () ->
+    checked_total = $('.batch_edit_mark:checked').length
 
-      values = $('.batch-edit-mark:checked').map(() -> $(this).val()).get().join()
-      $('input[name="records_to_update"]').val(values)
+    if checked_total > 0
+      $('.batch_editor .title > span').text(checked_total)
+
+    values = $('.batch_edit_mark:checked').map(() -> $(this).val()).get().join()
+    $('input[name="records_to_update"]').val(values)
+
+  $('[name="field_to_update"]').bind 'change', () ->
+    field_to_update = $(this).val();
+    console.debug "Showing .batch_update_value.#{field_to_update}"
+    $(".batch_update_value.#{field_to_update}").collapse('show');
+    $(".batch_update_value:not(.#{field_to_update})").collapse('hide');
