@@ -1,5 +1,5 @@
 <% if current_user %>
-  <li><%= link_to t('navigation_links.my_flights'), flightlist_path(current_user.username) %></li>
+  <li><%= link_to t('navigation_links.my_flights'), flights_path(current_user.username) %></li>
   <li><%= link_to t('navigation_links.my_map'), map_path(current_user.username) %></li>
-  <li><%= link_to t('navigation_links.my_trips'), triplist_path(current_user.username) %></li>
+  <li><%= link_to t('navigation_links.my_trips'), trips_path(current_user.username) %></li>
 <% end %>
