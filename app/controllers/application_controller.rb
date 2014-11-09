@@ -7,6 +7,14 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_action :set_locale
 
+  # TODO: Don't inject the username when it's not needed
+  def url_options
+    {
+      username: params[:username] || (current_user.username rescue nil)
+    }
+    .merge(super)
+  end
+
   protected
 
   # This allows ?locale=XX in the URL. Not really implemented yet...
