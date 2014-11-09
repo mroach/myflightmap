@@ -1,4 +1,4 @@
-<%= javascript_include_tag 'heatmap' %>
+<h1><%= current_user.name %>'s trips</h1>
 
 <script type="text/javascript">
   window.routes = <%= @stats[:routes].to_json.html_safe %>;
