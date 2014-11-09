@@ -88,6 +88,7 @@
       if @airport.nil?
         @airport = Gcmap.new.get_airport(iata_code)
         if @airport
+          @airport.audit_comment = "Created by GCMap"
           @airport.save
         end
       end
