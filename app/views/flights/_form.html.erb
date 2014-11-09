@@ -26,8 +26,8 @@
     </div>
     <div class="row">
       <div class="col-md-1"><%= f.input :seat %></div>
-      <div class="col-md-2"><%= f.input :seat_class, collection: ["Economy", "Economy Plus", "Business", "First", "Suite"] %></div>
-      <div class="col-md-2"><%= f.input :seat_location, collection: ["Window", "Middle", "Aisle"] %></div>
+      <div class="col-md-2"><%= f.input :seat_class, collection: Flight.seat_classes %></div>
+      <div class="col-md-2"><%= f.input :seat_location, collection: Flight.seat_locations %></div>
     </div>
     <div class="row">
       <div class="col-md-2"><%= f.input :aircraft_type %></div>
@@ -35,8 +35,8 @@
       <div class="col-md-2"><%= f.input :aircraft_name %></div>
     </div>
     <div class="row">
-      <div class="col-md-2"><%= f.input :flight_role, collection: ["Passenger", "Crew"] %></div>
-      <div class="col-md-2"><%= f.input :purpose, collection: ["Pleasure", "Business", "Crew"] %></div>
+      <div class="col-md-2"><%= f.input :flight_role, collection: Flight.flight_roles %></div>
+      <div class="col-md-2"><%= f.input :purpose, collection: Flight.flight_purposes %></div>
       <div class="col-md-2"><%= f.input :is_public %></div>
     </div>
 

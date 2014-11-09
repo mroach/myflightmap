@@ -1,5 +1,3 @@
-require 'countries'
-
 class MapController < ApplicationController
 
   before_action :set_user

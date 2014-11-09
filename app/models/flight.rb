@@ -15,6 +15,23 @@ class Flight < ActiveRecord::Base
 
   self.skip_time_zone_conversion_for_attributes = [:depart_time, :arrive_time]
 
+  def self.seat_classes
+    ["Economy", "Economy Plus", "Business", "First", "Suite"]
+  end
+
+  # TODO: Move to i18n file so these can be localise
+  def self.seat_locations
+    ["Window", "Middle", "Aisle"]
+  end
+
+  def self.flight_roles
+    ["Passenger", "Crew"]
+  end
+
+  def self.flight_purposes
+    ["Pleasure", "Business", "Crew"]
+  end
+
   # conform to bool conventions
   def is_duplicate?
     self.is_duplicate
