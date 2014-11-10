@@ -1,15 +1,7 @@
-// Place all the styles related to the Trips controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.trip_list {
+  .trip_name {
+    .dates { font-size: .6em; }
+  }
 
-.trip {
-
+  .trip_flights { margin-top: 10px }
 }
-
-.trip-name {
-  .dates { font-size: .8em; padding-left: 2em }
-}
-
-h2.trip-name { border-bottom: solid 1px #444; }
-
-.trip-flights { margin-top: 10px }
