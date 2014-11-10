@@ -49,7 +49,7 @@ gem "ruby-duration"
 gem 'sass-rails', '~> 4.0.0'
 
 # Use Bootstrap for general site layouts
-gem 'bootstrap-sass', '~> 3.0.3.0'
+gem 'bootstrap-sass', '~> 3.3.0'
 
 # Add Font Awesome support (icons as font glyphs)
 gem 'font-awesome-rails', '~> 4.0.0'
