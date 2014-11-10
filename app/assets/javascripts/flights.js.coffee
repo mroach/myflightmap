@@ -1,12 +1,12 @@
  $ ->
   # setup the date picker for flight departure and arrival
-  # $('#flight_depart_date, #flight_arrive_date').pickadate
-  #   editable: true
-  #   selectYears: true
-  #   selectMonths: true
-  #   firstDay: 1 # Monday
-  #   formatSubmit: "yyyy-mm-dd" # Format used on submit
-  #   hiddenName: true
+  $('#flight_depart_date, #flight_arrive_date').pickadate
+    editable: true
+    selectYears: true
+    selectMonths: true
+    firstDay: 1 # Monday
+    formatSubmit: "yyyy-mm-dd" # Format used on submit
+    hiddenName: true
 
   # when flight code is set, lookup the airline
   $('#flight_flight_code').bind 'change', () ->
