@@ -11,7 +11,7 @@ class Flight < ActiveRecord::Base
   before_save :refresh_utc_times!
   after_save :update_related_trip!
 
-  default_scope { order('depart_time_utc DESC') }
+  default_scope { order('depart_time_utc ASC') }
 
   self.skip_time_zone_conversion_for_attributes = [:depart_time, :arrive_time]
 

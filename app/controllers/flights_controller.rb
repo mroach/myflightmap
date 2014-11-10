@@ -11,10 +11,10 @@ class FlightsController < ApplicationController
     user = User.find_by_username(params[:username])
 
     if current_user.nil?
-      @flights = Flight.belonging_to(user.id).visible
+      @flights = Flight.belonging_to(user.id).visible.reverse
       @show_controls = false
     else
-      @flights = Flight.belonging_to(user.id).visible_to(current_user.id)
+      @flights = Flight.belonging_to(user.id).visible_to(current_user.id).reverse
       @show_controls = user.id == current_user.id
     end
 
