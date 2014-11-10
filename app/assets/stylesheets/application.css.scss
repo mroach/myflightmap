@@ -9,7 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
-*= require font-awesome
+ *= require font-awesome
  *= require select2
  *= require select2-bootstrap
  *= require pickadate/default
@@ -18,13 +18,22 @@
  *= require_tree .
  */
 
+// "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+@import url(http://fonts.googleapis.com/css?family=Abel:300,400,500,700);
+$font-family-base: "Abel",sans-serif;
+@import "bootstrap";
+
 .nav.navbar-profile > li > a { padding: 9px 10px }
 .navbar-profile img { display: inline-block; vertical-align: middle; margin-right: .5em; max-height: 32px }
 .navbar-profile span { padding-top: .1em }
+
 main { padding-top: 8px }
 [data-click-url] { cursor: pointer }
+
 .truncate {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+body { padding: 50px 0 }
