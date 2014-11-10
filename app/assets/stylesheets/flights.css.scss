@@ -60,6 +60,8 @@
 
 .control-links { margin-top: 20px }
 
+.arrival_offset { vertical-align: super; font-size: .8em; color: blue }
+
 .flight-list {
   .flight {
     padding: .5em 0;
@@ -101,7 +103,6 @@
     .times { font-weight: bold; font-size: 1.1em; }
     .duration { margin-left: .5em; opacity: .9; }
     .time_change { margin-left: .5em; color: #900; }
-    .arrival_offset { vertical-align: super; font-size: .8em; color: blue }
     .airline_and_aircraft { opacity: .9 }
     .seat { margin-top: .3em }
   }
