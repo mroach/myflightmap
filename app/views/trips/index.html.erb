@@ -1,4 +1,4 @@
-<h1><%= current_user.name %>'s trips</h1>
+<h1><%= @user.name %>'s trips</h1>
 
 <% if @show_controls %>
   <%= link_to t('actions.add_trip'), new_trip_path, class: 'btn btn-success' %>
