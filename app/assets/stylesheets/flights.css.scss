@@ -108,6 +108,30 @@
   }
 }
 
+.tiny_flights {
+  .flight {
+    width: 180px;
+    border: solid 1px #bbb;
+    border-radius: 4x;
+    display: inline-block;
+    margin: 0 5px 10px 0;
+
+    /* title bar effectively */
+    .from_to { background-color: #bbb; text-align: center; font-weight: bold; font-size: 1.1em }
+
+    .airline_logo { display: inline-block; margin: 0 5px; vertical-align: middle; }
+    .flight_code { font-weight: bold }
+    .flight_code_and_date { display: inline-block; vertical-align: middle; line-height: 1.2 }
+
+    .misc_description { opacity: .9 }
+
+    .row1, .row2 { text-align: center }
+    .row1 { padding: 4px }
+    .row2 { margin: 0 4px 4px 4px; }
+    .row2 > div { line-height: 1.2 }
+  }
+}
+
 @media (max-width: 767px) {
   .flight-list {
     .flight {
