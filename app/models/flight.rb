@@ -58,6 +58,11 @@ class Flight < ActiveRecord::Base
     where("is_public = ?", true)
   end
 
+  # Remove non word chars from the flight code when setting
+  def flight_code=(value)
+    write_attribute(:flight_code, value.sub(/\W/, ''))
+  end
+
   # Just the airline code from the flight number
   # ex) in "NH263", "NH" is the airline code
   def airline_code
