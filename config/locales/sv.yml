@@ -16,6 +16,10 @@ sv:
       - dec
     formats:
       medium: "%d %b %Y"
+  time:
+    formats:
+      long: "%d %b %y %H:%M"
+      system: "%Y-%m-%d %H:%M:%S"
   ruby_duration:
     second: "sekund"
     seconds: "sekunder"
@@ -31,6 +35,13 @@ sv:
     labels:
       flight:
         airline_name: "Flygbolag"
+        is_public: "Publicly visible?"
+      trip:
+        is_public: "Publicly visible?"
+      airport:
+        iata_code: "IATA-Kod"
+      airline:
+        iata_code: "IATA-Kod"
   duration:
     formats:
       minutes:
@@ -59,3 +70,6 @@ sv:
     my_flights: "Mina flyg"
     my_map: "Min karta"
     my_trips: "Mina resor"
+  words:
+    no: 'Nej'
+    yes: 'Ja'

@@ -10,6 +10,9 @@ en:
     labels:
       flight:
         airline_name: "Airline"
+        is_public: "Publicly visible?"
+      trip:
+        is_public: "Publicly visible?"
       airport:
         iata_code: "IATA Code"
       airline:
@@ -30,6 +33,8 @@ en:
   actions:
     import_flights: "Import Flights"
     add_flight: "Add flight"
+    sign_in: "Sign In"
+    sign_out: "Sign Out"
   map:
     show:
       flights: "Flights"
@@ -42,3 +47,7 @@ en:
     my_flights: "My Flights"
     my_map: "My Map"
     my_trips: "My Trips"
+  words:
+    no: 'No'
+    yes: 'Yes'
+    update: 'Update'
