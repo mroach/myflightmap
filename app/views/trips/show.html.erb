@@ -5,7 +5,7 @@
   window.airports = <%= @stats[:airports].to_json.html_safe %>;
 </script>
 
-<h1 class="trip-name"><%= @trip.name %> <span class="dates"><%= format_date @trip.begin_date %> - <%= format_date @trip.end_date %></span></h1>
+<h1 class="trip_name"><%= @trip.name %> <div class="dates"><%= format_date @trip.begin_date %> - <%= format_date @trip.end_date %></div></h1>
 
 <%= render partial: "shared/stat_boxes", locals: { stats: @stats[:totals] } %>
 

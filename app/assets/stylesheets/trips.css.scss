@@ -1,7 +1,9 @@
 .trip_list {
-  .trip_name {
-    .dates { font-size: .6em; }
-  }
-
   .trip_flights { margin-top: 10px }
 }
+
+.trip_name {
+  .dates { font-size: .5em; margin-top: .2em; opacity: .8; }
+}
+
+.trip_flights { margin-top: 10px }

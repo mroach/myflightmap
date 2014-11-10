@@ -14,8 +14,10 @@
         </div>
       </div>
       <div class="col-md-2 col-sm-2 col-xs-6">
-        <div class="from_to"><%= f.depart_airport %> - <%= f.arrive_airport %></div>
-        <div class="times"><%= format_time(f.depart_time) %> - <%= format_time(f.arrive_time) %><span class="arrival_offset"><%= f.arrive_time_offset %></span></div>
+        <div class="from_to"><%= f.depart_airport %> &#x2708; <%= f.arrive_airport %></div>
+        <div class="times">
+          <%= format_time(f.depart_time) %> - <%= format_time(f.arrive_time) %><span class="arrival_offset"><%= f.arrive_time_offset %></span>
+        </div>
       </div>
       <div class="col-md-1 col-sm-2 col-xs-6">
         <div class="distance"><%= format_distance f.distance %></div>

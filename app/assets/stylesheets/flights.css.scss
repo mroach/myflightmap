@@ -18,7 +18,7 @@
 
   .row { margin-bottom: 5px }
 
-  .airline_logo, .flight_code_and_date, .batch_edit_mark_container { display: inline-block }
+  .airline_logo, .flight_code_and_date, .batch_edit_mark_container { display: inline-block; vertical-align: middle }
   .airline_logo { margin-right: 6px }
   .flight_code, .from_to { font-weight: bold }
 
@@ -61,7 +61,7 @@
 .control-links { margin-top: 20px }
 
 .arrival_offset { vertical-align: super; font-size: .8em; color: blue }
-.time_change { margin-left: .5em; color: #900; font-size: .9em; }
+.time_change { margin-left: .5em; color: #900; }
 
 .flight-list {
   .flight {
@@ -108,7 +108,7 @@
   }
 }
 
-.tiny_flights {
+.tiny-flights {
   .flight {
     width: 150px;
     border: solid 1px #bbb;
@@ -124,11 +124,12 @@
     .flight_code_and_date { display: inline-block; vertical-align: middle; line-height: 1.2 }
 
     .misc_description { opacity: .9; font-size: .9em; }
+    .time_change { font-size: .8em }
 
     .row1, .row2 { text-align: center }
     .row1 { padding: 4px }
     .row2 { margin: 0 4px 4px 4px; }
-    .row2 > div { line-height: 1.2 }
+    .row2 > div { line-height: 1.4 }
   }
 }
 

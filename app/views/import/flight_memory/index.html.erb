@@ -2,7 +2,7 @@
 
 <p>Login to Flight Memory and click the <strong>FLIGHTDATA</strong> link. In your browser, do <em>File > Save Page As...</em> and choose <em>Webpage, HTML only</em>. Upload the file using this form and your data will be imported</p>
 
-<%= simple_form_for :import, url: import_flight_memory_upload_path do |f| %>
+<%= simple_form_for(:import, url: import_flight_memory_upload_path, wrapper: :vertical_form) do |f| %>
 
   <%= f.input :html, as: :file, label: 'HTML File' %>
 
