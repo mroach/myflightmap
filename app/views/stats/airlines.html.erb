@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="stats airlines compact">
+        <% @airline_stats.each do |a| %>
+          <div class="airline">
+            <div class="logo">
+              <%= image_tag a[:airline].logo.url(:medium), title: "#{a[:airline].iata_code} #{a[:airline].name} last used #{a[:last_used]}" %>
+            </div>
+            <div class="caption">
+              <span class="code"><%= a[:airline].iata_code %></span> &middot; <span class="flights"><%= a[:flights] %></span>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="stats airlines large">
+        <% @airline_stats.each do |a| %>
+          <div class="airline">
+            <div class="col1">
+              <div class="logo">
+                <%= image_tag a[:airline].logo.url(:medium) %>
+              </div>
+            </div>
+            <div class="col2">
+              <div class="title">
+                <span class="iata_code"><%= a[:airline].iata_code %></span>
+                <%= a[:airline].name %>
+                <%= alliance_image a[:airline].alliance %>
+              </div>
+              <div class="stat-line-1">
+                <label>Flights:</label> <span><%= a[:flights] %></span>
+                &middot;
+                <label>Last flown:</label> <span><%= format_date a[:last_used] %></span>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

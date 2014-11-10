@@ -27,6 +27,20 @@ module FlightsHelper
       time: formatted)
   end
 
+  def self.airline_stats(flights)
+    flights
+      .group_by { |f| f[:airline_id] }
+      .map do |k,v|
+        {
+          airline: v.first.airline,
+          flights: v.length,
+          last_used: v.map(&:depart_date).max
+        }
+      end
+      .sort_by { |x| [x[:flights], x[:last_used]] }
+      .reverse
+  end
+
   def self.generate_statistics(flights, limit = 10)
     # create a list of unique flight routes
     # for the purpose of creating a map, we have no use for return routes
@@ -50,8 +64,6 @@ module FlightsHelper
         .map { |f| [f.depart_airport_info, f.arrive_airport_info] }
         .flatten
 
-    airlines = flights.map { |e| e.airline }
-
     top_airports = airports
         .group_by { |f| f }
         .map { |k,v| { airport: k, flights: v.length } }
@@ -64,11 +76,7 @@ module FlightsHelper
         .sort_by { |x| x[:flights] }
         .reverse
 
-    top_airlines = airlines
-        .group_by { |a| a }
-        .map { |k,v| { airline: k, flights: v.length } }
-        .sort_by { |x| x[:flights] }
-        .reverse
+    top_airlines = airline_stats(flights)
 
     {
       routes: routes,

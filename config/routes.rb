@@ -36,6 +36,8 @@ Myflightmap::Application.routes.draw do
 
     resources :flights
     resources :trips
+
+    get 'stats/airlines', to: 'stats#airlines'
   end
 
 end
