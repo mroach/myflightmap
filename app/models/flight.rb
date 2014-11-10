@@ -19,7 +19,7 @@ class Flight < ActiveRecord::Base
     ["Economy", "Economy Plus", "Business", "First", "Suite"]
   end
 
-  # TODO: Move to i18n file so these can be localise
+  # TODO: Move to i18n file so these can be localised
   def self.seat_locations
     ["Window", "Middle", "Aisle"]
   end
