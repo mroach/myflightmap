@@ -23,3 +23,8 @@
 .navbar-profile span { padding-top: .1em }
 main { padding-top: 8px }
 [data-click-url] { cursor: pointer }
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
