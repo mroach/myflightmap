@@ -27,7 +27,6 @@
       </div>
       <div class="col-md-2 col-sm-2 col-xs-6">
         <div class="seat_info"><%= f.seat %> <%= f.seat_class %></div>
-        <div class="trip <%= "danger" if f.trip_id == 0 %>">Trip: <%= f.trip_id ? f.trip.name : tag(:i, class: "fa fa-exclamation-circle") %></div>
       </div>
     </div>
   <% end %>
