@@ -1,3 +1,5 @@
+require 'digest/md5'
+
 class User < ActiveRecord::Base
   audited
 
@@ -31,6 +33,20 @@ class User < ActiveRecord::Base
   # Password is not changeable when using OAuth
   def is_password_changeable?
     self.provider.blank?
+  end
+
+  # If they don't have an image URL stored, try gravatar
+  def image
+    read_attribute(:image) || gravatar_url
+  end
+
+  def display_name
+    name || username
+  end
+
+  def gravatar_url
+    hash = Digest::MD5.hexdigest(email.downcase)
+    "http://www.gravatar.com/avatar/#{hash}"
   end
 
   # Take an OmniAuth::AuthHash::InfoHash and generate a username
