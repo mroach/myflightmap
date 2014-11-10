@@ -1,0 +1,29 @@
+/* Since the navbar is stuck, need to pad the body */
+body { padding: 50px 0 }
+
+/* Make the image in the profile look ok */
+.navbar-profile {
+  & > li > a { padding: 9px 10px }
+  img {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: .5em;
+    max-height: 32px
+  }
+  span { padding-top: .1em }
+}
+
+main { padding-top: 8px }
+
+/* Animate transitions on links */
+a { transition: color .2s, background-color .2s; }
+
+/* Show a cursor for items that have a click URL */
+[data-click-url] { cursor: pointer }
+
+/* Standard class for truncating overflowing text */
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
