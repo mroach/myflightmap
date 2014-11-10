@@ -4,8 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= content_for?(:title) ? yield(:title) : "#{params[:controller].titlecase} #{params[:id]}" %> - My Flight Map</title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Myflightmap" %>" />
-    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= stylesheet_link_tag "application", media: "all" %>
+    <%= javascript_include_tag "application" %>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7XoHytMWFuh--1T-F0u2bf0QtNWcHBqI&amp;sensor=false"></script>
     <%= csrf_meta_tags %>
   </head>
