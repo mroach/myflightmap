@@ -1,3 +1,5 @@
-server 'myflightmap.com',
+set :stage, :production
+
+server 'kaya.mroach.com',
   user: 'deploy',
   roles: :all
