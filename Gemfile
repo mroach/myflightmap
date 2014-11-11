@@ -75,7 +75,7 @@ end
 # gem 'unicorn'
 
 group :development do
-  gem 'capistrano', '~> 3.1.0'
+  gem 'capistrano', '~> 3.2.1'
   gem 'sqlite3'
 
   # needed for CSV parsing
