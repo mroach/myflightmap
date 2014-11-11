@@ -97,8 +97,8 @@ gem 'capistrano-rails', '~> 1.1.1'
 
 gem 'capistrano-rbenv', '~> 2.0'
 
-# use PostgreSQL in testing and development modes
-gem 'pg', group: [:development, :test]
+# use PostgreSQL in staging and production
+gem 'pg', group: [:staging, :production]
 
 # Use byebug for debugging
 gem 'byebug', group: [:development, :test]
