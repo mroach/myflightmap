@@ -4,6 +4,8 @@ class Trip < ActiveRecord::Base
   has_many :flights
   belongs_to :user
 
+  default_scope { order('begin_date ASC') }
+
   def is_duplicate?
     self.is_duplicate
   end

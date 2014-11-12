@@ -7,10 +7,10 @@ class TripsController < ApplicationController
   def index
     @user = User.find_by_username(params[:username])
     if current_user.present?
-      @trips = Trip.belonging_to(@user.id).visible_to(current_user.id)
+      @trips = Trip.belonging_to(@user.id).visible_to(current_user.id).reverse
       @show_controls = @user.id == current_user.id
     else
-      @trips = Trip.belonging_to(@user.id).visible
+      @trips = Trip.belonging_to(@user.id).visible.reverse
       @show_controls = false
     end
   end
