@@ -8,7 +8,7 @@
 <div class="trip-list">
   <% @trips.each do |trip| %>
     <div class="trip">
-      <h2 class="trip_name" data-click-url="<%= trip_path(trip) %>">
+      <h2 class="trip-name" data-click-url="<%= trip_path(trip) %>">
         <%= trip.name %>
         <div class="dates"><%= format_date trip.begin_date %> - <%= format_date trip.end_date %></div>
       </h2>
