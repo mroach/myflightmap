@@ -25,6 +25,8 @@ table.stats {
   height: 100%;
 
   .big-stat {
+    overflow: hidden;
+    .arrowbox { height: 40px; width: 40px; float: left; margin-left: 7.3em; transform: rotate(45deg); }
     .number { padding-right: .5em; text-align: right; }
     .descriptor {
       position: absolute;
@@ -54,15 +56,14 @@ table.stats {
   text-align: center;
   position: relative;
 
-  &.flights .descriptor   { background-color: #D93446 }
-  &.countries .descriptor { background-color: #027072 }
-  &.airports .descriptor  { background-color: #732336 }
-  &.airlines .descriptor  { background-color: #BE4800 }
-  &.distance .descriptor  { background-color: #722C02 }
-  &.duration .descriptor  { background-color: #7F0F5D }
+  &.flights   { .descriptor, .arrowbox { background-color: #D93446 } }
+  &.countries { .descriptor, .arrowbox { background-color: #027072 } }
+  &.airports  { .descriptor, .arrowbox { background-color: #732336 } }
+  &.airlines  { .descriptor, .arrowbox { background-color: #BE4800 } }
+  &.distance  { .descriptor, .arrowbox { background-color: #722C02 } }
+  &.duration  { .descriptor, .arrowbox { background-color: #7F0F5D } }
 
   .number {
-    background-color: #fff;
     line-height: 1.7em;
     font-size: 1.6em;
   }
