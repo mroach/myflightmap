@@ -14,7 +14,6 @@ set :rbenv_roles, :all # default value
 
 set :deploy_to, '/home/deploy/apps/myflightmap'
 set :scm, :git
-set :deploy_via, :remote_cache
 
 # Default value for :format is :pretty
 # set :format, :pretty
@@ -52,7 +51,7 @@ namespace :deploy do
     end
   end
 
-  after :publishing, :restart
+  after :publishing, 'deploy:compile_assets', :restart
   after :finishing, 'deploy:cleanup'
 
 end

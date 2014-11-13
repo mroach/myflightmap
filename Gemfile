@@ -76,6 +76,10 @@ end
 
 group :development do
   gem 'capistrano', '~> 3.2.1'
+  gem 'capistrano-bundler', '~> 1.1.2', require: false
+  gem 'capistrano-rails', '~> 1.1.1', require: false
+  gem 'capistrano-rbenv', '~> 2.0', require: false
+
   gem 'sqlite3'
 
   # needed for CSV parsing
@@ -90,12 +94,6 @@ group :development do
   # Hush the asset pipeline logging
   gem 'quiet_assets'
 end
-
-gem 'capistrano-bundler', '~> 1.1.2'
-
-gem 'capistrano-rails', '~> 1.1.1'
-
-gem 'capistrano-rbenv', '~> 2.0'
 
 # use PostgreSQL in staging and production
 gem 'pg', group: [:staging, :production]
