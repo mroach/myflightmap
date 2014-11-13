@@ -28,7 +28,7 @@ set :scm, :git
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 # Default value for default_env is {}
-set :default_env, { path: "~/.rbenv/shims:~/.rbenv/bin:$PATH" }
+#set :default_env, { path: "~/.rbenv/shims:~/.rbenv/bin:$PATH" }
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
@@ -51,7 +51,7 @@ namespace :deploy do
     end
   end
 
-  after :publishing, 'deploy:compile_assets', :restart
-  after :finishing, 'deploy:cleanup'
-
 end
+
+after 'deploy:publishing', 'deploy:restart'
+after 'deploy:finishing', 'deploy:cleanup'
