@@ -7,7 +7,7 @@ $ ->
 
     initialize_map = () ->
       mapOptions =
-        zoom: 2
+        zoom: 1
         center: new google.maps.LatLng(25, 20)
         mapTypeId: google.maps.MapTypeId.TERRAIN
 

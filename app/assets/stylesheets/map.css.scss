@@ -8,22 +8,26 @@ table.stats {
     .iata_code { font-weight: bold }
   }
 }
-#map-canvas { width: 100%; height: 500px; border: solid 2px #d0d4d9 }
+#map-canvas { width: 100%; height: 100%; border: solid 1px #d0d4d9 }
 /* Fix bootstrap interference */
 #map-canvas img { max-width: none; }
 
-.big-stats {
-  margin: 10px 0;
-  display: flex;
-  justify-content: space-between;
-}
-
 #top-stats > div[class^="col-"] { padding: 0 10px; margin: 10px 0 }
+
+.row.stats > div { height: 300px; padding-bottom: 10px; }
+
+.big-stats.flex.vertical {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
 
 .big-stat {
   border: solid 1px #d0d4d9;
   text-align: center;
-  .descriptor { color: white }
+  position: relative;
+
   &.flights .descriptor   { background-color: #D93446 }
   &.countries .descriptor { background-color: #027072 }
   &.airports .descriptor  { background-color: #732336 }
@@ -31,15 +35,24 @@ table.stats {
   &.distance .descriptor  { background-color: #722C02 }
   &.duration .descriptor  { background-color: #7F0F5D }
 
+
   .number {
     background-color: #fff;
-    line-height: 2em;
-    text-align: center;
+    line-height: 1.7em;
+    text-align: right;
     font-size: 1.6em;
+    padding-right: .5em;
   }
   .descriptor {
+    color: white;
     text-transform: uppercase;
     letter-spacing: 1px;
+    float: left;
+    top: 0; left: 0;
+    height: 100%;
+    width: 10em;
+    position: absolute;
+    div { position: relative; top: 50%; transform: translateY(-50%); }
   }
 }
 

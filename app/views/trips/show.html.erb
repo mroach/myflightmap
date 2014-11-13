@@ -5,12 +5,13 @@
   window.airports = <%= @stats[:airports].to_json.html_safe %>;
 </script>
 
-<h1 class="trip-name"><%= @trip.name %> <div class="dates"><%= format_date @trip.begin_date %> - <%= format_date @trip.end_date %></div></h1>
+<div class="h1 trip-name"><%= @trip.name %> <div class="dates"><%= format_date @trip.begin_date %> - <%= format_date @trip.end_date %></div></div>
 
-<%= render partial: "shared/stat_boxes", locals: { stats: @stats[:totals] } %>
-
-<div class="row">
-  <div class="col-lg-10 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12">
+<div class="row stats">
+  <div class="col-md-4">
+    <%= render partial: "shared/stat_boxes", locals: { stats: @stats[:totals] } %>
+  </div>
+  <div class="col-md-8">
     <div id="map-canvas" class="routes-map"></div>
   </div>
 </div>

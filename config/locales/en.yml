@@ -35,8 +35,8 @@ en:
     add_flight: "Add flight"
     sign_in: "Sign In"
     sign_out: "Sign Out"
-  map:
-    show:
+  shared:
+    stat_boxes:
       flights: "Flights"
       countries: "Countries"
       airports: "Airports"
