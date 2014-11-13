@@ -19,5 +19,7 @@ production:
   encoding: unicode
   database: myflightmap
   host: localhost
+  username: rails_myflightmap_user
+  password: Ldp3j4nR
   pool: 5
   timeout: 5000
