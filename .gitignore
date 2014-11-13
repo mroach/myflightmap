@@ -7,6 +7,9 @@
 # Ignore bundler config.
 /.bundle
 
+# Ignore system directory. It gets symlinked in production
+/public/system
+
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
