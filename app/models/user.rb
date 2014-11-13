@@ -3,6 +3,9 @@ require 'digest/md5'
 class User < ActiveRecord::Base
   audited
 
+  has_many :trips
+  has_many :flights
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

@@ -1,4 +1,5 @@
 class Flight < ActiveRecord::Base
+  extend FriendlyId
   audited
 
   attr_accessor :is_duplicate
@@ -7,11 +8,14 @@ class Flight < ActiveRecord::Base
   belongs_to :arrive_airport_info, :class_name => 'Airport', :foreign_key => 'arrive_airport', :primary_key => 'iata_code'
   belongs_to :trip, :class_name => 'Trip', :foreign_key => 'trip_id', :primary_key => 'id'
   belongs_to :airline
+  belongs_to :user
 
   before_save :refresh_utc_times!
   after_save :update_related_trip!
 
   default_scope { order('depart_time_utc ASC') }
+
+  friendly_id :description, use: [:slugged, :scoped], scope: :user
 
   self.skip_time_zone_conversion_for_attributes = [:depart_time, :arrive_time]
 
@@ -153,6 +157,10 @@ class Flight < ActiveRecord::Base
     s
   end
 
+  def description
+    "#{flight_code} #{depart_airport}-#{arrive_airport} #{depart_date.strftime('%Y-%m-%d')}"
+  end
+
   def duration_formatted
     hours = duration / 60
     minutes = duration - (hours * 60)
@@ -174,6 +182,10 @@ class Flight < ActiveRecord::Base
 
   def self.detect_duplicates(flights)
     flights.each { |f| f.is_duplicate = f.has_duplicate? }
+  end
+
+  def should_generate_new_friendly_id?
+    flight_code_changed? || depart_airport_changed? || arrive_airport_changed? || depart_date_changed? || super
   end
 
   private

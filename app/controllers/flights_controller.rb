@@ -117,7 +117,7 @@ class FlightsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_flight
-      @flight = Flight.find_by(id: params[:id], user_id: current_user.id)
+      @flight = User.find_by_username(params[:username]).flights.friendly.find(params[:id])
     end
 
     def load_helper_data

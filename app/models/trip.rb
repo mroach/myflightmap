@@ -1,10 +1,13 @@
 class Trip < ActiveRecord::Base
+  extend FriendlyId
   audited
 
   has_many :flights
   belongs_to :user
 
   default_scope { order('begin_date ASC') }
+
+  friendly_id :name, use: [:slugged, :scoped], scope: :user
 
   def is_duplicate?
     self.is_duplicate
@@ -36,5 +39,9 @@ class Trip < ActiveRecord::Base
     end_date = flights.maximum(:arrive_date)
     logger.debug "Trip #{name} (#{user.username}) is #{begin_date} to #{end_date}"
     update(begin_date: begin_date, end_date: end_date)
+  end
+
+  def should_generate_new_friendly_id?
+    name_changed? || super
   end
 end
