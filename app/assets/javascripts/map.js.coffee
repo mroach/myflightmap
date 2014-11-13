@@ -6,12 +6,13 @@ $ ->
     map = null
 
     initialize_map = () ->
+      $mapElement = $('#map-canvas')
       mapOptions =
-        zoom: 1
+        zoom: if $mapElement.height() > 350 then 2 else 1
         center: new google.maps.LatLng(25, 20)
         mapTypeId: google.maps.MapTypeId.TERRAIN
 
-      map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions)
+      map = new google.maps.Map($mapElement[0], mapOptions)
 
       for route in window.routes
 

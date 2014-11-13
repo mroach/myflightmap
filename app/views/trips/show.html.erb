@@ -7,7 +7,7 @@
 
 <div class="h1 trip-name"><%= @trip.name %> <div class="dates"><%= format_date @trip.begin_date %> - <%= format_date @trip.end_date %></div></div>
 
-<div class="row stats">
+<div class="row stats vertical">
   <div class="col-md-4">
     <%= render partial: "shared/stat_boxes", locals: { stats: @stats[:totals] } %>
   </div>
