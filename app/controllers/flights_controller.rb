@@ -87,7 +87,7 @@ class FlightsController < ApplicationController
     value = flight_params[field_to_update]
     flights.each { |e| e[field_to_update] = value; e.save! }
 
-    redirect_to user_flights_path,
+    redirect_to flights_path,
       notice: "Updated %s %s" % [records_to_update.length, "flights".pluralize(records_to_update.length)]
   end
 

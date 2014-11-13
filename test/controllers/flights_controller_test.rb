@@ -21,7 +21,7 @@ class FlightsControllerTest < ActionController::TestCase
       post :create, flight: { aircraft_name: @flight.aircraft_name, airine_name: @flight.airine_name, airline_id: @flight.airline_id, arrive_airport_id: @flight.arrive_airport_id, arrive_date: @flight.arrive_date, arrive_time: @flight.arrive_time, depart_airport_id: @flight.depart_airport_id, depart_date: @flight.depart_date, depart_time: @flight.depart_time, distance: @flight.distance, duration: @flight.duration, number: @flight.number, seat: @flight.seat, seat_class: @flight.seat_class, seat_location: @flight.seat_location, trip_id: @flight.trip_id, user_id: @flight.user_id }
     end
 
-    assert_redirected_to user_flight_path(assigns(:flight))
+    assert_redirected_to flight_path(assigns(:flight))
   end
 
   test "should show flight" do
@@ -36,7 +36,7 @@ class FlightsControllerTest < ActionController::TestCase
 
   test "should update flight" do
     patch :update, id: @flight, flight: { aircraft_name: @flight.aircraft_name, airine_name: @flight.airine_name, airline_id: @flight.airline_id, arrive_airport_id: @flight.arrive_airport_id, arrive_date: @flight.arrive_date, arrive_time: @flight.arrive_time, depart_airport_id: @flight.depart_airport_id, depart_date: @flight.depart_date, depart_time: @flight.depart_time, distance: @flight.distance, duration: @flight.duration, number: @flight.number, seat: @flight.seat, seat_class: @flight.seat_class, seat_location: @flight.seat_location, trip_id: @flight.trip_id, user_id: @flight.user_id }
-    assert_redirected_to user_flight_path(assigns(:flight))
+    assert_redirected_to flight_path(assigns(:flight))
   end
 
   test "should destroy flight" do
@@ -44,6 +44,6 @@ class FlightsControllerTest < ActionController::TestCase
       delete :destroy, id: @flight
     end
 
-    assert_redirected_to user_flights_path
+    assert_redirected_to flights_path
   end
 end

@@ -2,13 +2,13 @@
 <h1><%= @user.display_name %>'s Trips</h1>
 
 <% if @show_controls %>
-  <%= link_to t('actions.add_trip'), new_user_trip_path, class: 'btn btn-success' %>
+  <%= link_to t('actions.add_trip'), new_trip_path, class: 'btn btn-success' %>
 <% end %>
 
 <div class="trip-list">
   <% @trips.each do |trip| %>
     <div class="trip">
-      <h2 class="trip-name" data-click-url="<%= user_trip_path(trip) %>">
+      <h2 class="trip-name" data-click-url="<%= trip_path(trip) %>">
         <%= trip.name %>
         <div class="dates"><%= format_date trip.begin_date %> - <%= format_date trip.end_date %></div>
       </h2>
@@ -18,5 +18,5 @@
 </div>
 
 <% if @show_controls %>
-  <%= link_to 'New Trip', new_user_trip_path %>
+  <%= link_to 'New Trip', new_trip_path %>
 <% end %>
