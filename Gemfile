@@ -106,3 +106,6 @@ gem 'pg', group: [:staging, :production]
 
 # Use byebug for debugging
 gem 'byebug', group: [:development, :test]
+
+# Error reporting
+gem 'rollbar', '~> 1.2.6'
