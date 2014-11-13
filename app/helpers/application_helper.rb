@@ -2,11 +2,11 @@ module ApplicationHelper
   def flag_image(country, size = 32)
     country = country.downcase # can't use downcase! when the strong is frozen
     country = "gb" if country == "uk"
-    image_tag "flags/#{size}/#{country}.png"
+    image_tag "flags/#{size}/#{country.downcase}.png"
   end
 
   def alliance_image(alliance, size = "icon")
-    image_tag("alliances/#{size}/#{alliance}.png") unless alliance.nil?
+    image_tag("alliances/#{size}/#{alliance.downcase}.png") unless alliance.nil?
   end
 
   # Eventually maybe support locale formatting

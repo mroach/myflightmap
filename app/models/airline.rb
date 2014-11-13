@@ -25,6 +25,6 @@ class Airline < ActiveRecord::Base
   private
 
   Paperclip.interpolates :iata_code do |attachment, style|
-    attachment.instance.iata_code
+    attachment.instance.iata_code.downcase
   end
 end
