@@ -188,6 +188,10 @@ class Flight < ActiveRecord::Base
     flight_code_changed? || depart_airport_changed? || arrive_airport_changed? || depart_date_changed? || super
   end
 
+  def normalize_friendly_id(string)
+    super.upcase
+  end
+
   private
 
   def update_related_trip!

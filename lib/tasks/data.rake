@@ -97,5 +97,10 @@ namespace :data do
         e.save!
       end
     end
+
+    desc "Regenerate flight slugs"
+    task :regenerate_flight_slugs => :environment do
+      Flight.all.each { |e| e.slug = nil; e.save! }
+    end
   end
 end
