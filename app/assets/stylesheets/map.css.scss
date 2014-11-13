@@ -76,6 +76,7 @@ table.stats {
 
 @media (max-width: 767px) {
   #map-canvas { height: 200px; }
-  #top-stats > div[class^="col-"] { padding: 0 5px; margin: 5px 0 }
+  .row.stats > div { padding: 0 5px; margin: 5px 0 }
+  .row.stats.vertical > div { height: inherit; }
   .big-stat .number { font-size: 1.4em; }
 }
