@@ -1,6 +1,6 @@
 <div class="tiny-flights">
   <% flights.each do |f| %>
-    <div class="flight" data-click-url="<%= flight_path(f) %>">
+    <div class="flight" data-click-url="<%= user_flight_path(f) %>">
 
       <div class="from_to"><%= f.depart_airport %> &#x2708; <%= f.arrive_airport %></div>
 

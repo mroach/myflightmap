@@ -21,7 +21,7 @@ class TripsControllerTest < ActionController::TestCase
       post :create, trip: { flights: @trip.flights, name: @trip.name, purpose: @trip.purpose, user_id: @trip.user_id }
     end
 
-    assert_redirected_to trip_path(assigns(:trip))
+    assert_redirected_to user_trip_path(assigns(:trip))
   end
 
   test "should show trip" do
@@ -36,7 +36,7 @@ class TripsControllerTest < ActionController::TestCase
 
   test "should update trip" do
     patch :update, id: @trip, trip: { flights: @trip.flights, name: @trip.name, purpose: @trip.purpose, user_id: @trip.user_id }
-    assert_redirected_to trip_path(assigns(:trip))
+    assert_redirected_to user_trip_path(assigns(:trip))
   end
 
   test "should destroy trip" do
@@ -44,6 +44,6 @@ class TripsControllerTest < ActionController::TestCase
       delete :destroy, id: @trip
     end
 
-    assert_redirected_to trips_path
+    assert_redirected_to user_trips_path
   end
 end

@@ -1,6 +1,6 @@
 <div class="container flight-board">
   <% flights.each do |f| %>
-    <div class="row" data-click-url="<%= flight_path(f) %>">
+    <div class="row" data-click-url="<%= user_flight_path(f) %>">
       <div class="col-md-2 col-sm-3 col-xs-6">
         <% if @batch_editing %>
           <div class="batch_edit_mark_container">

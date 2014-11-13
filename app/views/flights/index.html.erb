@@ -1,8 +1,8 @@
 <% if @show_controls %>
   <div class="flight-buttons">
-    <%= link_to t('actions.add_flight'), new_flight_path, class: 'btn btn-success' %>
+    <%= link_to t('actions.add_flight'), new_user_flight_path, class: 'btn btn-success' %>
     <%= link_to t('actions.import_flights'), import_root_path, class: 'btn btn-default' %>
-    <%= link_to t('actions.batch_update'), flights_path(style: 'slim', batch_editing: 1), class: 'btn btn-danger' %>
+    <%= link_to t('actions.batch_update'), user_flights_path(style: 'slim', batch_editing: 1), class: 'btn btn-danger' %>
   </div>
 <% end %>
 

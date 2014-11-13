@@ -1,6 +1,6 @@
 <div class="flight-list">
   <% flights.each do |f| %>
-    <div class="flight" data-click-url="<%= flight_path(f) %>">
+    <div class="flight" data-click-url="<%= user_flight_path(f) %>">
       <div class="col1">
         <div class="airline_logo"><%= image_tag f.airline.logo.url(:medium) %></div>
         <div class="flight_code_and_date">
