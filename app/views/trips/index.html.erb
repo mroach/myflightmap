@@ -17,4 +17,6 @@
   <% end %>
 </div>
 
-<%= link_to 'New Trip', new_trip_path %>
+<% if @show_controls %>
+  <%= link_to 'New Trip', new_trip_path %>
+<% end %>
