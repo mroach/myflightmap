@@ -33,10 +33,9 @@ class Gcmap
 
     # Use the Google Time Zone API to figure out what time zone the
     # airport is in based on its coordinates
-    google_api_key = "AIzaSyAs0irP54qTlcbYlYaBVzlfcBNKdr6TFtI"
-    google_url = "https://maps.googleapis.com/maps/api/timezone/json?location=#{lat},#{lon}&timestamp=1331161200&key=#{google_api_key}"
-    logger.debug "Finding timezone at #{google_url}"
-    google_response = HTTParty.get(google_url)
+    query = { location: "#{lat},#{lon}", timestamp: "1331161200", key: Rails.application.secrets.google }
+    logger.debug "Finding timezone using Google Timezone API. Params: #{query}"
+    google_response = HTTParty.get("https://maps.googleapis.com/maps/api/timezone/json", query: query)
     time_zone = google_response["timeZoneId"]
 
     data = {

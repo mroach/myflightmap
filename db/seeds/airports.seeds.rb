@@ -6,10 +6,9 @@ require 'json'
 require 'countries'
 require 'logging'
 
-KEY = '3f12387b4d323062e72373b75c9f6102'
 logger ||= Logger.new(STDOUT)
 
-airport_url = "https://airport.api.aero/airport?user_key=#{KEY}"
+airport_url = "https://airport.api.aero/airport?user_key=#{Rails.application.secrets.sita}"
 
 puts "Fetching airports from #{airport_url}"
 
