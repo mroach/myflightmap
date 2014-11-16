@@ -28,7 +28,7 @@ Myflightmap::Application.routes.draw do
   # Routes that are prefixed with the username
   # Ex) /mroach/map, /mroach/trips, /mroach/flights
   scope ':username' do
-    get '/', to: 'map#show', as: 'map'
+    root to: 'map#show', as: 'map'
     get 'map', to: 'map#show'
 
     #get 'flights(-:style)', to: 'flights#index', as: 'user_flights'
