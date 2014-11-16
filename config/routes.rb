@@ -15,7 +15,6 @@ Myflightmap::Application.routes.draw do
   get 'airports/search', to: 'airports#search'
   get 'airports/distance_between', to: 'airports#distance_between'
   get 'flights/duration', to: 'flights#duration'
-  get 'audits/:type/:id', to: 'audits#index', as: 'audits'
 
   resources :airlines
   resources :airports, constraint: { id: /[A-Z]{3}/ }
@@ -37,6 +36,10 @@ Myflightmap::Application.routes.draw do
 
     resources :flights
     resources :trips
+  end
+
+  namespace :admin do
+    get 'audits/:type/:id', to: 'audits#index', as: 'audits'
   end
 
 end
