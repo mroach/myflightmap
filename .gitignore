@@ -10,6 +10,9 @@
 # Ignore system directory. It gets symlinked in production
 /public/system
 
+# Ignore config/secrets.yml which can't be part of the public code
+/config/secrets.yml
+
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
