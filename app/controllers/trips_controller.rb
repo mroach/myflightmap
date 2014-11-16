@@ -1,11 +1,11 @@
 class TripsController < ApplicationController
+  before_action :set_user
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
   skip_before_filter :authenticate_user!, only: [:index, :show]
 
   # GET /trips
   # GET /trips.json
   def index
-    @user = User.find_by_username(params[:username])
     if current_user.present?
       @trips = Trip.belonging_to(@user.id).visible_to(current_user.id).reverse
       @show_controls = @user.id == current_user.id
@@ -82,9 +82,12 @@ class TripsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    def set_user
+      @user = User.find_by_username!(params[:username])
+    end
+
     def set_trip
-      @trip = User.find_by_username(params[:username]).trips.friendly.find(params[:id])
+      @trip = @user.trips.friendly.find!(params[:id])
       @show_controls = current_user.present? && @trip.user_id == current_user.id
     end
 

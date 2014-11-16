@@ -2,20 +2,19 @@ require "time"
 
 class FlightsController < ApplicationController
   skip_before_filter :authenticate_user!, only: [:index]
+  before_action :set_user
   before_action :set_flight, only: [:show, :edit, :update, :destroy]
   before_action :load_helper_data, only: [:new, :edit]
 
   # GET /flights
   # GET /flights.json
   def index
-    user = User.find_by_username(params[:username])
-
     if current_user.nil?
-      @flights = Flight.belonging_to(user.id).visible.reverse
+      @flights = Flight.belonging_to(@user.id).visible.reverse
       @show_controls = false
     else
-      @flights = Flight.belonging_to(user.id).visible_to(current_user.id).reverse
-      @show_controls = user.id == current_user.id
+      @flights = Flight.belonging_to(@user.id).visible_to(current_user.id).reverse
+      @show_controls = @user.id == current_user.id
     end
 
     @list_style = params[:style] || "large"
@@ -115,9 +114,12 @@ class FlightsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    def set_user
+      @user = User.find_by_username!(params[:username])
+    end
+
     def set_flight
-      @flight = User.find_by_username(params[:username]).flights.friendly.find(params[:id])
+      @flight = @user.flights.friendly.find(params[:id])
     end
 
     def load_helper_data
