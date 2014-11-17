@@ -6,7 +6,10 @@ gem 'rails', '4.1'
 # Need >= 3.1 for bootstrap 3 support
 gem 'simple_form', '3.1.0.rc1'
 
-# Country drop-down
+# Nice country helper. Among other things, parse names into ISO codes
+gem 'countries'
+
+# Country drop-down (uses data from countries gem)
 gem 'country_select'
 
 # Dropdown replacement with AJAX support
@@ -15,7 +18,7 @@ gem "select2-rails"
 # Date picker
 gem "pickadate-rails"
 
-# Use devise for the auth and registration framework https://github.com/plataformatec/devise
+# Use devise for the auth and registration framework
 gem 'devise'
 
 # Allow Facebook auth in devise
@@ -35,9 +38,6 @@ gem 'nokogiri'
 
 # HTTParty for consuming JSON APIs
 gem 'httparty'
-
-# Nice country helper. Among other things, parse names into ISO codes
-gem 'countries'
 
 # Attaching files to records
 gem 'paperclip'
@@ -72,14 +72,6 @@ gem "audited-activerecord", "~> 4.0"
 # Easily slugged URLs
 gem 'friendly_id', '~> 5.0.0'
 
-group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
-end
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
 group :development do
   gem 'capistrano', '~> 3.2.1'
   gem 'capistrano-bundler', '~> 1.1.2', require: false
@@ -105,7 +97,7 @@ end
 gem 'pg', group: [:staging, :production]
 
 # Use byebug for debugging
-gem 'byebug', group: [:development, :test]
+gem 'byebug', group: [:staging, :production]
 
 # Error reporting
 gem 'rollbar', '~> 1.2.6'
