@@ -21,8 +21,8 @@ module Admin
     end
 
     def audited_types
-      # rails won't load all the files outside production mode, so do it if necessary
-      Rails.application.eager_load! unless Rails.env.to_sym == :production
+      # Load all files unless the app is configured to do so already (as in production)
+      Rails.application.eager_load! unless Rails.application.config.eager_load
 
       # find audited types by looking for the audited methods in ActiveRecord classes
       ActiveRecord::Base.descendants.select do |d|
