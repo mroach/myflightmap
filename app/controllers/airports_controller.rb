@@ -92,7 +92,7 @@
           @airport.save
         end
       end
-      throw ActiveRecord::RecordNotFound if @airport.nil?
+      raise ActiveRecord::RecordNotFound if @airport.nil?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
