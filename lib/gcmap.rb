@@ -14,10 +14,11 @@ class Gcmap
     # Airport name
     gcmap_url = "http://www.gcmap.com/airport/#{iata_code}"
     logger.debug "Grabbing HTML from #{gcmap_url}"
-    gcmap_result = HTTParty.get(gcmap_url)
 
-    if gcmap_result.code != 200
-      logger.warn "Failed to lookup '#{iata_code}': #{gcmap_result.message}"
+    begin
+      gcmap_result = HTTParty.get(gcmap_url, no_follow: true)
+    rescue HTTParty::RedirectionTooDeep
+      logger.info "GCMap couldn't find airport #{iata_code}"
       return nil
     end
 
