@@ -36,15 +36,6 @@ class Flight < ActiveRecord::Base
     ["Pleasure", "Business", "Crew"]
   end
 
-  # conform to bool conventions
-  def is_duplicate?
-    self.is_duplicate
-  end
-
-  def is_public?
-    self.is_public
-  end
-
   # See if the flight is visible to the current user
   def is_visible_to?(user_id)
     self.user_id == user_id || self.is_public?
