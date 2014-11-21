@@ -1,4 +1,4 @@
- $ ->
+$ ->
   # setup the date picker for flight departure and arrival
   $('#flight_depart_date, #flight_arrive_date').pickadate
     editable: true
