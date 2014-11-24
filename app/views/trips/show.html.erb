@@ -5,6 +5,12 @@
   window.airports = <%= @stats[:airports].to_json.html_safe %>;
 </script>
 
+<ol class="breadcrumb">
+  <li><%= link_to @user.display_name, map_path %></li>
+  <li><%= link_to "Trips", trips_path %></li>
+  <li><%= @trip.name %></li>
+</ol>
+
 <div class="h1 trip-name"><%= @trip.name %> <div class="dates"><%= format_date @trip.begin_date %> - <%= format_date @trip.end_date %></div></div>
 
 <div class="row stats vertical">

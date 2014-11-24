@@ -1,4 +1,10 @@
 <% content_for :title, "#{@user.display_name}'s Trips" %>
+
+<ol class="breadcrumb">
+  <li><%= link_to @user.display_name, map_path %></li>
+  <li>Trips</li>
+</ol>
+
 <h1><%= @user.display_name %>'s Trips</h1>
 
 <% if @show_controls %>
