@@ -1,5 +1,8 @@
-<h1><%= @flight.depart_airport %> &#x2708; <%= @flight.arrive_airport %> &mdash; <%= l @flight.depart_date, format: :long %> </h1>
+%h1
+  = @flight.depart_airport
+  &#x2708;
+  = @flight.arrive_airport
+  &mdash;
+  = l @flight.depart_date, format: :long
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @flight %> | <%= link_to 'Back', flights_path %>
+= render 'form'

@@ -1,59 +1,42 @@
-<% content_for :title, "#{@user.display_name}'s Stats" %>
-<h1><%= @user.display_name %>'s Stats</h1>
+- content_for :title, "#{@user.display_name}'s Stats"
+%h1 #{@user.display_name}'s Stats
 
-<script type="text/javascript">
-  window.routes = <%= @stats[:routes].to_json.html_safe %>;
-  window.airports = <%= @stats[:airports].to_json.html_safe %>;
-</script>
+:javascript
+  window.routes = #{@stats[:routes].to_json.html_safe};
+  window.airports = #{@stats[:airports].to_json.html_safe};
 
-<div class="row stats horizontal">
-  <div class="col-md-12">
-    <%= render partial: "shared/stat_boxes", locals: { stats: @stats[:totals] } %>
-  </div>
-  <div class="col-md-12">
-    <div id="map-canvas" class="routes-map"></div>
-  </div>
-</div>
+%div.row.stats.horizontal
+  %div.col-md-12
+    = render partial: "shared/stat_boxes", locals: { stats: @stats[:totals] }
+  %div.col-md-12
+    %div#map-canvas.routes-map
 
-<div class="row">
-  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-lg-offset-1">
-    <h3><%= t '.airports' %></h3>
-    <table class="stats airports">
-      <% @stats[:top_airports].each do |a| %>
-        <tr>
-          <td><%= flag_image a[:airport].country, "16" %></td>
-          <td class="airport"><%= a[:airport].iata_code %></td>
-          <td class="city"><%= a[:airport].city %></td>
-          <td class="flights number"><%= a[:flights] %></td>
-        </tr>
-      <% end %>
-    </table>
-  </div>
-  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-    <h3><%= t '.airlines' %></h3>
-    <table class="stats airlines">
-      <% @stats[:top_airlines].each do |a| %>
-        <tr>
-          <td><%= image_tag a[:airline].logo.url(:icon) %></td>
-          <td><%= alliance_image a[:airline].alliance %></td>
-          <td class="iata_code"><%= a[:airline].iata_code %></td>
-          <td><%= a[:airline].name %></td>
-          <td class="number"><%= a[:flights] %></td>
-        </tr>
-      <% end %>
-    </table>
-  </div>
-  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-    <h3><%= t '.countries' %></h3>
-    <table class="stats countries">
-      <% @stats[:top_countries].each do |c| %>
-        <tr>
-          <td><%= flag_image c[:country].alpha2, "16" %></td>
-          <td><%= c[:country].name %></td>
-          <td class="number"><%= c[:flights] %></td>
-        </tr>
-      <% end %>
-    </table>
-  </div>
-</div>
+%div.row
+  %div.col-xs-12.col-sm-6.col-md-4.col-lg-3.col-lg-offset-1
+    %h3= t '.airports'
+    %table.stats.airports
+      - @stats[:top_airports].each do |a|
+        %tr
+          %td= flag_image a[:airport].country, "16"
+          %td.airport= a[:airport].iata_code
+          %td.city= a[:airport].city
+          %td.flights number a[:flights]
+  %div.col-xs-12.col-sm-6.col-md-4.col-lg-3
+    %h3= t '.airlines'
+    %table.stats.airlines
+      - @stats[:top_airlines].each do |a|
+        %tr
+          %td= image_tag a[:airline].logo.url(:icon)
+          %td= alliance_image a[:airline].alliance
+          %td.iata_code= a[:airline].iata_code
+          %td= a[:airline].name
+          %td.number= a[:flights]
+  %div.col-xs-12.col-sm-6.col-md-4.col-lg-3
+    %h3= t '.countries'
+    %table.stats.countries
+      - @stats[:top_countries].each do |c|
+        %tr
+          %td= flag_image c[:country].alpha2, "16"
+          %td= c[:country].name
+          %td.number= c[:flights]
 

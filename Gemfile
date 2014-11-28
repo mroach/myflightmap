@@ -39,6 +39,9 @@ gem 'tzinfo'
 # XML parser, handy for parsing HTML for scraping
 gem 'nokogiri'
 
+# Markdown
+gem 'redcarpet'
+
 # HTTParty for consuming JSON APIs
 gem 'httparty'
 

@@ -1,7 +1,9 @@
 en:
   date:
     formats:
+      short: "%d %b %y"
       medium: "%e %b %Y"
+      long: "%d %B %Y"
   time:
     formats:
       long: "%d %b %y %H:%M"

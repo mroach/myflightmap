@@ -1,20 +1,16 @@
-<div class="container">
-  <%= simple_form_for(@airport, html: { class: 'form-horizontal' }) do |f| %>
-    <%= f.error_notification %>
+%div.container
+  = simple_form_for(@airport, html: { class: 'form-horizontal' }) do |f|
+    = f.error_notification
 
-    <div class="form-inputs">
-      <%= f.input :iata_code %>
-      <%= f.input :name %>
-      <%= f.input :city %>
-      <%= f.input :country %>
-      <%= f.input :latitude %>
-      <%= f.input :longitude %>
-      <%= f.input :timezone, collection: @timezones %>
-      <%= f.input :description %>
-    </div>
+    %div.form-inputs
+      = f.input :iata_code
+      = f.input :name
+      = f.input :city
+      = f.input :country
+      = f.input :latitude
+      = f.input :longitude
+      = f.input :timezone, collection: @timezones
+      = f.input :description
 
-    <div class="form-actions">
-      <%= f.button :submit %>
-    </div>
-  <% end %>
-</div>
+    %div.form-actions
+      = f.button :submit

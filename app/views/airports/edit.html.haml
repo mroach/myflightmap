@@ -1,6 +1,3 @@
-<h1>Airport: <%= @airport.name %></h1>
+%h1= @airport.name
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @airport %> |
-<%= link_to 'Back', airports_path %>
+= render 'form'

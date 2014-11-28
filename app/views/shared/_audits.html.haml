@@ -1,32 +1,8 @@
-<table class="table table-striped table-condensed table-bordered audited-changes">
-  <tr>
-    <th>User</th>
-    <th>Changed at</th>
-    <th>Type</th>
-    <th>Comments</th>
-    <th>Changes</th>
-  </tr>
-  <% audits.each do |a| %>
-    <tr data-id="<%= a.id %>">
-      <td><%= a.user.username rescue "" %>@<%= a.remote_address %></td>
-      <td><%= l a.created_at, format: :long %></td>
-      <td><%= a.action.humanize %></td>
-      <td><%= a.comment %></td>
-      <td>
-        <table class="audited-change">
-        <% a.audited_changes.reject { |k,v| v.blank? }.each do |k,v| %>
-          <tr>
-            <td class="field"><%= k %></td>
-            <% if a.action == "update" %>
-              <td class="old-value"><span><%= v[0].blank? ? "<i>null</i>".html_safe : v[0] %></span></td>
-              <td class="new-value"><span><%= v[1].blank? ? "<i>null</i>".html_safe : v[1] %></span></td>
-            <% else %>
-              <td class="created-value"><span><%= v %></span></td>
-            <% end %>
-          </tr>
-        <% end %>
-        </table>
-      </td>
-    </tr>
-  <% end %>
-</table>
+- if collapsed
+  %div.audits-container
+    %div.show-audits-button-container
+      %button.btn.btn-default{:type => "button", :class => "btn btn-default", :'data-toggle' => "collapse", :'data-target' => "#audits", :'aria-expanded' => false, :'aria-controls' => "audits"} Show Changelog
+    %div#audits.collapse
+      = render partial: "shared/audits_table", object: audits, as: 'audits'
+- else
+  = render partial: "shared/audits_table", object: audits, as: 'audits'

@@ -1,12 +1,9 @@
-<%= simple_form_for(@trip, html: { class: "form-horizontal" }) do |f| %>
-  <%= f.error_notification %>
+= simple_form_for(@trip, html: { class: "form-horizontal" }) do |f|
+  = f.error_notification
 
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :purpose %>
-  </div>
+  %div.form-inputs
+    = f.input :name
+    = f.input :purpose
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+  %div.form-actions
+    = f.button :submit, class: 'btn btn-success'

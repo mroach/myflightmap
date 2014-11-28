@@ -1,46 +1,39 @@
-<script type="text/javascript">
-  window.trips = <%= @trips.to_json.html_safe %>;
-</script>
-<%= simple_form_for(@flight, wrapper: :vertical_form) do |f| %>
-  <%= f.error_notification %>
+:javascript
+  window.trips = #{@trips.to_json.html_safe};
 
-  <div class="form-inputs">
-    <div class="row">
-      <div class="col-md-4"><%= f.input :trip_id, as: :string %></div>
-    </div>
-    <div class="row">
-      <div class="col-md-2"><%= f.input :flight_code, placeholder: "Ex) SQ305" %></div>
-      <div class="col-md-3"><%= f.input :airline_id, as: :hidden %><%= f.input :airline_name %></div>
-    </div>
-    <div class="row">
-      <div class="col-md-3"><%= f.input :depart_airport, as: :string %></div>
-      <div class="col-md-3 col-md-offset-1"><%= f.input :arrive_airport, as: :string %></div>
-      <div class="col-md-2 col-md-offset-1"><%= f.input :distance %></div>
-    </div>
-    <div class="row">
-      <div class="col-md-2"><%= f.input :depart_date %></div>
-      <div class="col-md-1"><%= f.input :depart_time, placeholder: "HH:MM", label: "Time" %></div>
-      <div class="col-md-2 col-md-offset-1"><%= f.input :arrive_date %></div>
-      <div class="col-md-1"><%= f.input :arrive_time, placeholder: "HH:MM", label: "Time" %></div>
-      <div class="col-md-2 col-md-offset-1"><%= f.input :duration %></div>
-    </div>
-    <div class="row">
-      <div class="col-md-1"><%= f.input :seat %></div>
-      <div class="col-md-2"><%= f.input :seat_class, collection: Flight.seat_classes %></div>
-      <div class="col-md-2"><%= f.input :seat_location, collection: Flight.seat_locations %></div>
-    </div>
-    <div class="row">
-      <div class="col-md-2"><%= f.input :aircraft_type %></div>
-      <div class="col-md-2"><%= f.input :aircraft_registration %></div>
-      <div class="col-md-2"><%= f.input :aircraft_name %></div>
-    </div>
-    <div class="row">
-      <div class="col-md-2"><%= f.input :flight_role, collection: Flight.flight_roles %></div>
-      <div class="col-md-2"><%= f.input :purpose, collection: Flight.flight_purposes %></div>
-      <div class="col-md-2"><%= f.input :is_public %></div>
-    </div>
+= simple_form_for(@flight, wrapper: :vertical_form) do |f|
+  = f.error_notification
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+  %div.form-inputs
+    %div.row
+      %div.col-md-4= f.input :trip_id, as: :string
+    %div.row
+      %div.col-md-2= f.input :flight_code, placeholder: "Ex) SQ305"
+      %div.col-md-3
+        = f.input :airline_id, as: :hidden
+        = f.input :airline_name
+    %div.row
+      %div.col-md-3= f.input :depart_airport, as: :string
+      %div.col-md-3.col-md-offset-1= f.input :arrive_airport, as: :string
+      %div.col-md-2.col-md-offset-1= f.input :distance
+    %div.row
+      %div.col-md-2= f.input :depart_date
+      %div.col-md-1= f.input :depart_time, placeholder: "HH:MM", label: "Time"
+      %div.col-md-2.col-md-offset-1= f.input :arrive_date
+      %div.col-md-1= f.input :arrive_time, placeholder: "HH:MM", label: "Time"
+      %div.col-md-2.col-md-offset-1= f.input :duration
+    %div.row
+      %div.col-md-1= f.input :seat
+      %div.col-md-2= f.input :seat_class, collection: Flight.seat_classes
+      %div.col-md-2= f.input :seat_location, collection: Flight.seat_locations
+    %div.row
+      %div.col-md-2= f.input :aircraft_type
+      %div.col-md-2= f.input :aircraft_registration
+      %div.col-md-2= f.input :aircraft_name
+    %div.row
+      %div.col-md-2= f.input :flight_role, collection: Flight.flight_roles
+      %div.col-md-2= f.input :purpose, collection: Flight.flight_purposes
+      %div.col-md-2= f.input :is_public
+
+  %div.form-actions
+    = f.button :submit, class: "btn btn-success"

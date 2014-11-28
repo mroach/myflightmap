@@ -1,6 +1,3 @@
-<h1>Airline: <%= @airline.name %></h1>
+%h1= link_to @airline.name, airline_path(@airline)
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @airline %> |
-<%= link_to 'Back', airlines_path %>
+= render 'form'

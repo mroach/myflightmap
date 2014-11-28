@@ -1,37 +1,29 @@
-<% content_for :title, @trip.name %>
+- content_for :title, @trip.name
 
-<script type="text/javascript">
-  window.routes = <%= @stats[:routes].to_json.html_safe %>;
-  window.airports = <%= @stats[:airports].to_json.html_safe %>;
-</script>
+:javascript
+  window.routes = #{@stats[:routes].to_json.html_safe}:
+  window.airports = #{@stats[:airports].to_json.html_safe};
 
-<ol class="breadcrumb">
-  <li><%= link_to @user.display_name, map_path %></li>
-  <li><%= link_to "Trips", trips_path %></li>
-  <li><%= @trip.name %></li>
-</ol>
+%ol.breadcrumb
+  %li= link_to @user.display_name, map_path
+  %li= link_to "Trips", trips_path
+  %li= @trip.name
 
-<div class="h1 trip-name"><%= @trip.name %> <div class="dates"><%= format_date @trip.begin_date %> - <%= format_date @trip.end_date %></div></div>
+%div.h1.trip-name
+  = @trip.name
+  %div.dates
+    #{format_date @trip.begin_date} - #{format_date @trip.end_date}
 
-<div class="row stats vertical">
-  <div class="col-xs-12 col-md-4">
-    <%= render partial: "shared/stat_boxes", locals: { stats: @stats[:totals] } %>
-  </div>
-  <div class="col-xs-12 col-md-8">
-    <div id="map-canvas" class="routes-map"></div>
-  </div>
-</div>
+%div.row.stats.vertical
+  %div.col-xs-12.col-md-4
+    = render partial: "shared/stat_boxes", locals: { stats: @stats[:totals] }
+  %div.col-xs-12.col-md-8
+    %div#map-canvas.routes-map
 
-<div class="trip-flights">
-  <%= render partial: "shared/flights_slim", locals: { flights: @trip.flights } %>
-</div>
+%div.trip-flights
+  = render partial: "shared/flights_slim", locals: { flights: @trip.flights }
 
-<% if @show_controls %>
-  <div class="flight-buttons">
-    <%= link_to t('actions.add_flight'), new_flight_path('flight[trip_id]' => @trip.id), class: 'btn btn-success' %>
-  </div>
-<% end %>
-
-<% if @show_controls %>
-  <%= link_to 'Edit', edit_trip_path(@trip) %>
-<% end %>
+- if @show_controls
+  %div.flight-buttons
+    = link_to t('actions.add_flight'), new_flight_path('flight[trip_id]' => @trip.id), class: 'btn btn-success'
+    = link_to 'Edit Trip Details', edit_trip_path(@trip), class: 'btn btn-primary'

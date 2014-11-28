@@ -1,6 +1,5 @@
-<h1>Trip: <%= @trip.name %></h1>
+%h1= @trip.name
 
-<%= render 'form' %>
+= render 'form'
 
-<%= link_to 'Show', @trip %> |
-<%= link_to 'Back', trips_path %>
+= link_to 'Back', trips_path

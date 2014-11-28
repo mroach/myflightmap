@@ -1,35 +1,24 @@
-<div class="container flight-board">
-  <% flights.each do |f| %>
-    <div class="row" data-click-url="<%= flight_path(f) %>">
-      <div class="col-md-2 col-sm-3 col-xs-6">
-        <% if @batch_editing %>
-          <div class="batch_edit_mark_container">
-            <input type="checkbox" name="flight[update]" class="batch_edit_mark" value="<%= f.id %>" />
-          </div>
-        <% end %>
-        <div class="airline_logo"><%= image_tag f.airline.logo.url(:medium) %></div>
-        <div class="flight_code_and_date">
-          <div class="flight_code"><%= f.airline_code %> <%= f.flight_number %></div>
-          <div class="depart_date"><%= l f.depart_date, format: :medium %></div>
-        </div>
-      </div>
-      <div class="col-md-2 col-sm-2 col-xs-6">
-        <div class="from_to"><%= f.depart_airport %> &#x2708; <%= f.arrive_airport %></div>
-        <div class="times">
-          <%= format_time(f.depart_time) %> - <%= format_time(f.arrive_time) %><span class="arrival_offset"><%= f.arrive_time_offset %></span>
-        </div>
-      </div>
-      <div class="col-md-1 col-sm-2 col-xs-6">
-        <div class="distance"><%= format_distance f.distance %></div>
-        <div class="duration"><%= format_duration f.duration %></div>
-      </div>
-      <div class="col-md-2 col-sm-2 col-xs-6 truncate">
-        <div class="airline"><%= f.airline_name %></div>
-        <div class="aircraft"><%= f.aircraft_type %></div>
-      </div>
-      <div class="col-md-2 col-sm-2 col-xs-6">
-        <div class="seat_info"><%= f.seat %> <%= f.seat_class %></div>
-      </div>
-    </div>
-  <% end %>
-</div>
+%div.container.flight-board
+  - flights.each do |f|
+    %div.row{:'data-click-url' => flight_path(f)}
+      %div.col-md-2.col-sm-3.col-xs-6
+        - if @batch_editing
+          %div.batch_edit_mark_container
+            %input.batch_edit_mark{type: "checkbox", name: "flight[update]", value: f.id}
+        %div.airline_logo= image_tag f.airline.logo.url(:medium)
+        %div.flight_code_and_date
+          %div.flight_code #{f.airline_code} #{f.flight_number}
+          %div.depart_date= l f.depart_date, format: :medium
+      %div.col-md-2.col-sm-2.col-xs-6
+        %div.from_to #{f.depart_airport} &#x2708; #{f.arrive_airport}
+        %div.times
+          #{format_time(f.depart_time)} - #{format_time(f.arrive_time)}
+          %span.arrival_offset= f.arrive_time_offset
+      %div.col-md-1.col-sm-2.col-xs-6
+        %div.distance= format_distance f.distance
+        %div.duration= format_duration f.duration
+      %div.col-md-2.col-sm-2.col-xs-6.truncate
+        %div.airline= f.airline_name
+        %div.aircraft= f.aircraft_type
+      %div.col-md-2.col-sm-2.col-xs-6
+        %div.seat_info #{f.seat} #{f.seat_class}

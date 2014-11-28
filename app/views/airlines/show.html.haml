@@ -1,19 +1,14 @@
-<% content_for :title, "#{@airline.iata_code} #{@airline.name}" %>
+- content_for :title, "#{@airline.iata_code} #{@airline.name}"
 
-<div class="row">
-  <div class="col-sm-8">
-    <h1>
-      <%= image_tag @airline.logo.url(:medium) %>
-      <span><%= @airline.name %></span>
-      <%= image_tag("alliances/medium/#{@airline.alliance}.png") if @airline.in_alliance? %>
-    </h1>
-  </div>
-  <div class="col-sm-4">
-    <div class="airline-badge">
-      <%= flag_image @airline.country, "64" %>
-      <span class="code"><%= @airline.iata_code%></span>
-    </div>
-  </div>
-</div>
+%div.row
+  %div.col-sm-8
+    %h1
+      = image_tag @airline.logo.url(:medium)
+      %span= @airline.name
+      = image_tag("alliances/medium/#{@airline.alliance}.png") if @airline.in_alliance?
+  %div.col-sm-4
+    %div.airline-badge
+      = flag_image @airline.country, "64"
+      %span.code= @airline.iata_code
 
-<%= link_to 'Edit', edit_airline_path(@airline) %>
+= render partial: "shared/audits", object: @airport.audits, locals: { collapsed: true }

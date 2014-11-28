@@ -9,6 +9,13 @@
   img { margin-right: .5em; }
 }
 
+#map-canvas.airport-location-map {
+  width: 100%;
+  height: 500px;
+
+  img { max-width: none; }
+}
+
 table.airports {
   td .code { width: 3em; display: inline-block; }
 }

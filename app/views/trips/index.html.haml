@@ -1,28 +1,21 @@
-<% content_for :title, "#{@user.display_name}'s Trips" %>
+- content_for :title, "#{@user.display_name}'s Trips"
 
-<ol class="breadcrumb">
-  <li><%= link_to @user.display_name, map_path %></li>
-  <li>Trips</li>
-</ol>
+%ol.breadcrumb
+  %li= link_to @user.display_name, map_path
+  %li Trips
 
-<h1><%= @user.display_name %>'s Trips</h1>
+%h1 #{@user.display_name}'s Trips
 
-<% if @show_controls %>
-  <%= link_to t('actions.add_trip'), new_trip_path, class: 'btn btn-success' %>
-<% end %>
+- if @show_controls
+  = link_to t('actions.add_trip'), new_trip_path, class: 'btn btn-primary'
 
-<div class="trip-list">
-  <% @trips.each do |trip| %>
-    <div class="trip">
-      <h2 class="trip-name" data-click-url="<%= trip_path(trip) %>">
-        <%= trip.name %>
-        <div class="dates"><%= format_date trip.begin_date %> - <%= format_date trip.end_date %></div>
-      </h2>
-      <%= render partial: "shared/flights_tiny", locals: { flights: trip.flights } %>
-    </div>
-  <% end %>
-</div>
+%div.trip-list
+  - @trips.each do |trip|
+    %div.trip
+      %h2.trip-name{:'data-click-url' => trip_path(trip)}
+        = trip.name
+        %div.dates #{format_date trip.begin_date} - #{format_date trip.end_date}
+      = render partial: "shared/flights_tiny", locals: { flights: trip.flights }
 
-<% if @show_controls %>
-  <%= link_to 'New Trip', new_trip_path %>
-<% end %>
+- if @show_controls
+  = link_to 'New Trip', new_trip_path
