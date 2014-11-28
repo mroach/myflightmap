@@ -20,4 +20,9 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore OS X junk
 .DS_Store
+
+# Ignore Sublime Text workspace file
+*.sublime-workspace
