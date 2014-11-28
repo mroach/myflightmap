@@ -97,4 +97,4 @@ $ ->
     field_to_update = $(this).val();
     console.debug "Showing .batch_update_value.#{field_to_update}"
     $(".batch_update_value.#{field_to_update}").collapse('show');
-    $(".batch_update_value:not(.#{field_to_update})").collapse('hide');
+    $(".batch_update_value.in:not(.#{field_to_update})").collapse('hide');
