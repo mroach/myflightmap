@@ -12,6 +12,9 @@ gem 'countries'
 # Country drop-down (uses data from countries gem)
 gem 'country_select'
 
+# Support HAML view engine
+gem 'haml'
+
 # Dropdown replacement with AJAX support
 gem "select2-rails"
 
