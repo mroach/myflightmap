@@ -1,6 +1,7 @@
 require 'digest/md5'
 
 class User < ActiveRecord::Base
+  include Formattable
   audited
 
   has_many :trips
@@ -21,6 +22,8 @@ class User < ActiveRecord::Base
     )},
     length: { minimum: 3 },
     format: { with: /\A ( [[:alnum:]] (\.|_*|\-) )* \z/ix }
+
+  formattable "%{username}"
 
   def self.from_omniauth(auth)
     logger.debug auth.info

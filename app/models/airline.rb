@@ -1,4 +1,5 @@
 class Airline < ActiveRecord::Base
+  include Formattable
   audited
 
   ALLIANCES = { :staralliance => "Star Alliance", :oneworld => "oneworld", :skyteam => "Sky Team" }
@@ -9,6 +10,8 @@ class Airline < ActiveRecord::Base
     :path => ":rails_root/public/system/:class/:attachment/:style/:iata_code.png",
     :url => "/system/:class/:attachment/:style/:iata_code.png"
   validates_attachment_content_type :logo, :content_type => ["image/jpeg", "image/gif", "image/png"]
+
+  formattable "%{iata_code}: %{name}"
 
   def to_param
     iata_code

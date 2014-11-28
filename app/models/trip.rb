@@ -1,5 +1,6 @@
 class Trip < ActiveRecord::Base
   extend FriendlyId
+  include Formattable
   audited
 
   has_many :flights
@@ -8,6 +9,8 @@ class Trip < ActiveRecord::Base
   default_scope { order('begin_date ASC') }
 
   friendly_id :name, use: [:slugged, :scoped], scope: :user
+
+  formattable "%{name}: %{begin_date} - %{end_date}"
 
   # See if the flight is visible to the current user
   def is_visible_to?(user_id)

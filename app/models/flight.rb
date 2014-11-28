@@ -1,5 +1,6 @@
 class Flight < ActiveRecord::Base
   extend FriendlyId
+  include Formattable
   audited
 
   attr_accessor :is_duplicate
@@ -16,6 +17,8 @@ class Flight < ActiveRecord::Base
   default_scope { order('depart_time_utc ASC') }
 
   friendly_id :description, use: [:slugged, :scoped], scope: :user
+
+  formattable "%{flight_code} %{depart_airport}-%{arrive_airport} %{depart_date}"
 
   self.skip_time_zone_conversion_for_attributes = [:depart_time, :arrive_time]
 
