@@ -64,6 +64,10 @@ class User < ActiveRecord::Base
     "http://www.gravatar.com/avatar/#{hash}?s=#{sizes[size]}"
   end
 
+  def last_flight
+    self.flights.recent.completed.first
+  end
+
   # Take an OmniAuth::AuthHash::InfoHash and generate a username
   def self.generate_username(auth_info)
     # Preferably use the nick name on the account. @ name on GitHub or Twitter, FB nickname, etc.
