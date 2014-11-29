@@ -1,9 +1,9 @@
 en:
   date:
     formats:
-      short: "%d %b %y"
+      short: "%e %b %y"
       medium: "%e %b %Y"
-      long: "%d %B %Y"
+      long: "%e %B %Y"
   time:
     formats:
       long: "%d %b %y %H:%M"
@@ -32,19 +32,18 @@ en:
         long: '%thu %m %~m'
   time_ahead: "%{destination} is %{time} ahead of %{origin}"
   time_behind: "%{destination} is %{time} behind %{origin}"
+  profiles:
+    show:
+      member_since: "Member Since"
+      near: "Last seen at"
+      recent_trips: "Recent Trips"
+      recent_flights: "Recent Flights"
   actions:
     import_flights: "Import Flights"
     add_flight: "Add flight"
     sign_in: "Sign In"
     sign_out: "Sign Out"
-  shared:
-    stat_boxes:
-      flights: "Flights"
-      countries: "Countries"
-      airports: "Airports"
-      airlines: "Airlines"
-      distance: "Distance"
-      duration: "Duration"
+    edit_account: "Edit Account"
   navigation_links:
     my_flights: "My Flights"
     my_map: "My Map"
@@ -53,3 +52,10 @@ en:
     no: 'No'
     yes: 'Yes'
     update: 'Update'
+    flights: "Flights"
+    countries: "Countries"
+    airports: "Airports"
+    airlines: "Airlines"
+    distance: "Distance"
+    duration: "Duration"
+    view_all: "View All"
