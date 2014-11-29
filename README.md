@@ -30,12 +30,18 @@ echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bash_profil
 
 Restart your shell.
 
-### Step 2. Installing Ruby 2.1.3
+### Step 2. Installing Ruby
 
-This app was build on 2.1.3, so install that
+This app was build on 2.1.5, so install that
 
 ```bash
-rbenv install 2.1.3
+rbenv install 2.1.5
+```
+
+Then you'll want to set it as the default ruby version
+```bash
+rbenv global 2.1.5
+ruby -v # Should output 2.1.5
 ```
 
 ### Step 3. Cloning
