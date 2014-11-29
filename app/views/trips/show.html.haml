@@ -1,7 +1,7 @@
 - content_for :title, @trip.name
 
 :javascript
-  window.routes = #{@stats[:routes].to_json.html_safe}:
+  window.routes = #{@stats[:routes].to_json.html_safe};
   window.airports = #{@stats[:airports].to_json.html_safe};
 
 %ol.breadcrumb
