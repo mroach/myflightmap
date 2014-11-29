@@ -42,17 +42,26 @@ class User < ActiveRecord::Base
   end
 
   # If they don't have an image URL stored, try gravatar
-  def image
-    read_attribute(:image) || gravatar_url
+  def image(size = :normal)
+    image_url = read_attribute(:image)
+
+    if image_url.blank?
+      image_url = gravatar_url(size)
+    else
+      if self.provider == "facebook"
+        image_url = "#{image_url}?type=#{size}"
+      end
+    end
   end
 
   def display_name
     name || username
   end
 
-  def gravatar_url
+  def gravatar_url(size = :normal)
     hash = Digest::MD5.hexdigest(email.downcase)
-    "http://www.gravatar.com/avatar/#{hash}"
+    sizes = { small: 50, normal: 100, large: 200 }
+    "http://www.gravatar.com/avatar/#{hash}?s=#{sizes[size]}"
   end
 
   # Take an OmniAuth::AuthHash::InfoHash and generate a username

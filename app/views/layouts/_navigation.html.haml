@@ -14,7 +14,7 @@
         %ul.nav.navbar-nav.navbar-right.navbar-profile
           %li.dropdown
             %a.dropdown-toggle{:'data-toggle' => "dropdown", :href => '#'}
-              = image_tag current_user.image
+              = image_tag current_user.image(:small)
               %span= current_user.display_name
               %span.caret
             %ul.dropdown-menu{role: "menu"}
