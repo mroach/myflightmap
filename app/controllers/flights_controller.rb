@@ -2,7 +2,7 @@ require "time"
 
 class FlightsController < ApplicationController
   skip_before_filter :authenticate_user!, only: [:index]
-  before_action :set_user
+  before_action :set_user, except: [:duration]
   before_action :set_flight, only: [:show, :edit, :update, :destroy]
   before_action :load_helper_data, only: [:new, :edit]
 
