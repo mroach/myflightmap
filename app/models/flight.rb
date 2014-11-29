@@ -60,6 +60,14 @@ class Flight < ActiveRecord::Base
     reorder('depart_time_utc DESC')
   end
 
+  def self.completed
+    where("arrive_time_utc < ?", Time.now.utc)
+  end
+
+  def self.future
+    where("depart_time_utc > ?", Time.now.utc)
+  end
+
   # Remove non word chars from the flight code when setting
   def flight_code=(value)
     write_attribute(:flight_code, value.sub(/\W/, ''))

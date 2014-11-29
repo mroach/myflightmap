@@ -33,6 +33,14 @@ class Trip < ActiveRecord::Base
     reorder('begin_date DESC')
   end
 
+  def self.completed
+    where("end_dateb < ?", Time.now.utc)
+  end
+
+  def self.future
+    where("begin_date > ?", Time.now.utc)
+  end
+
   def refresh_dates!
     begin_date = flights.minimum(:depart_date)
     end_date = flights.maximum(:arrive_date)
