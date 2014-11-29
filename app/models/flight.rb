@@ -53,7 +53,11 @@ class Flight < ActiveRecord::Base
   end
 
   def self.visible
-    where("is_public = ?", true)
+    where(is_public: true)
+  end
+
+  def self.recent
+    reorder('depart_time_utc DESC')
   end
 
   # Remove non word chars from the flight code when setting

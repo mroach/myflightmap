@@ -26,7 +26,11 @@ class Trip < ActiveRecord::Base
   end
 
   def self.visible
-    where("is_public = ?", true)
+    where(is_public: true)
+  end
+
+  def self.recent
+    reorder('begin_date DESC')
   end
 
   def refresh_dates!
