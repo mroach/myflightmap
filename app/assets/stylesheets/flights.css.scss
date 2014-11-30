@@ -93,7 +93,7 @@
     .flight_code { font-size: 1.3em; }
     .airline_logo { display: inline-block; margin-right: .8em; }
     .flight_code_and_date { display: inline-block }
-    .depart_date { font-size: 1.1em; }
+    .depart_date { font-size: 1.1em; font-weight: bold }
     .departure, .arrival {
       & > img { display: inline-block }
       & > * { vertical-align: middle }
