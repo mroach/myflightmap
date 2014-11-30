@@ -18,10 +18,10 @@
       %div.col-md-2.col-md-offset-1= f.input :distance
     %div.row
       %div.col-md-2= f.input :depart_date
-      %div.col-md-1= f.input :depart_time, placeholder: "HH:MM", label: "Time"
-      %div.col-md-2.col-md-offset-1= f.input :arrive_date
-      %div.col-md-1= f.input :arrive_time, placeholder: "HH:MM", label: "Time"
-      %div.col-md-2.col-md-offset-1= f.input :duration
+      %div.col-md-2= f.input :depart_time, placeholder: "HH:MM", label: "Time"
+      %div.col-md-2= f.input :arrive_date
+      %div.col-md-2= f.input :arrive_time, placeholder: "HH:MM", label: "Time"
+      %div.col-md-2= f.input :duration
     %div.row
       %div.col-md-1= f.input :seat
       %div.col-md-2= f.input :seat_class, collection: Flight.seat_classes
