@@ -12,6 +12,3 @@
         = trip.name
         %div.dates #{format_date trip.begin_date} - #{format_date trip.end_date}
       = render partial: "shared/flights_tiny", locals: { flights: trip.flights }
-
-- if @show_controls
-  = link_to 'New Trip', new_trip_path
