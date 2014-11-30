@@ -1,8 +1,9 @@
-- if collapsed
-  %div.audits-container
-    %div.show-audits-button-container
-      %button.btn.btn-default{:type => "button", :class => "btn btn-default", :'data-toggle' => "collapse", :'data-target' => "#audits", :'aria-expanded' => false, :'aria-controls' => "audits"} Show Changelog
-    %div#audits.collapse
-      = render partial: "shared/audits_table", object: audits, as: 'audits'
-- else
-  = render partial: "shared/audits_table", object: audits, as: 'audits'
+- if current_user && current_user.admin?
+  - if collapsed
+    %div.audits-container
+      %div.show-audits-button-container
+        %button.btn.btn-default{:type => "button", :class => "btn btn-default", :'data-toggle' => "collapse", :'data-target' => "#audits", :'aria-expanded' => false, :'aria-controls' => "audits"} Show Changelog
+      %div#audits.collapse
+        = render partial: "shared/audits_table", object: audits, as: 'audits'
+  - else
+    = render partial: "shared/audits_table", object: audits, as: 'audits'
