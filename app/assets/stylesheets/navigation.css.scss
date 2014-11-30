@@ -1,0 +1,24 @@
+/* Style the aeroplane in the navbar */
+.navbar-brand {
+  i.fa {
+    font-size: 1.2em;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    vertical-align: middle;
+    margin-right: .3em;
+  }
+}
+
+/* The mini profile image and name in the navbar */
+li.dropdown a { padding-left: 2px; }
+li.profile {
+  a { padding: 9px 10px }
+  img {
+    display: inline-block;
+    box-shadow: 0 0 2px 2px rgba(255, 255, 255, 0.40);
+    border-radius: 30px;
+    vertical-align: middle;
+    margin-right: .5em;
+    max-height: 32px;
+  }
+  span.name { font-size: 1.3em; vertical-align: middle }
+}

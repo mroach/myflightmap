@@ -1,4 +1,4 @@
-%nav.navbar.navbar-default.navbar-fixed-top
+%nav.navbar.navbar-inverse.navbar-fixed-top
   %div.container
     %div.navbar-header
       %button.navbar-toggle{:type => "button", :'data-toggle' => "collapse", :'data-target' => ".navbar-collapse"}
@@ -13,11 +13,11 @@
       %ul.nav.navbar-nav
         = render 'layouts/navigation_links'
       - if user_signed_in?
-        %ul.nav.navbar-nav.navbar-right.navbar-profile
-          %li
+        %ul.nav.navbar-nav.navbar-right
+          %li.profile
             = link_to profile_path do
-              = image_tag current_user.image(:small)
-              %span= current_user.display_name
+              = image_tag current_user.image(:small), alt: current_user.display_name
+              %span.name= current_user.display_name
           %li.dropdown
             %a.dropdown-toggle{:'data-toggle' => "dropdown", :href => '#'}
               %span.caret
