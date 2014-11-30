@@ -1,5 +1,7 @@
 - content_for :title, "#{@flight.depart_airport}-#{@flight.arrive_airport} (#{l @flight.depart_date, format: :medium})"
 
+= render partial: "shared/profile_strip", object: @user, as: 'user'
+
 %div.flight-detail
   %div.row.row1
     %div.col-xs-2

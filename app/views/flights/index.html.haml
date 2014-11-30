@@ -1,5 +1,7 @@
+= render partial: "shared/profile_strip", object: @user, as: 'user'
+
 - if @show_controls
-  %div.flight-buttons
+  %div.btn-group
     = link_to t('actions.add_flight'), new_flight_path, class: 'btn btn-success'
     = link_to t('actions.import_flights'), import_root_path, class: 'btn btn-default'
     - if @batch_editing
