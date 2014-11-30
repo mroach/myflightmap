@@ -24,7 +24,7 @@ $ ->
         flightPath = new google.maps.Polyline
           path: flightPlanCoordinates
           geodesic: true
-          strokeColor: '#0000FF'
+          strokeColor: '#A73700'
           strokeOpacity: 1.0
           strokeWeight: 1
 
