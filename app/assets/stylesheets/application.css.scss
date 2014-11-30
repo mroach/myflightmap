@@ -14,10 +14,10 @@
 
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic,700italic);
+@import url(http://fonts.googleapis.com/css?family=Dosis:400,500,700);
 
-$font-family-sans-serif:  "Source Sans Pro", Helvetica, Arial, sans-serif;
 $navbar-inverse-bg: #3e3f3a;
+$font-family-sans-serif:  "Dosis", Helvetica, Arial, sans-serif;
 
 @import "bootstrap";
 @import "font-awesome";
