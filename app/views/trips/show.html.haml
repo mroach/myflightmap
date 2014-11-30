@@ -22,5 +22,7 @@
   %div.col-xs-12.col-md-8
     %div#map-canvas.routes-map
 
+%h3= t('words.flights')
+
 %div.trip-flights
   = render partial: "shared/flights_slim", locals: { flights: @trip.flights }
