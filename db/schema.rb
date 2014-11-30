@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141117020340) do
+ActiveRecord::Schema.define(version: 20141130073217) do
 
   create_table "airlines", force: true do |t|
     t.string   "iata_code"
@@ -121,6 +121,16 @@ ActiveRecord::Schema.define(version: 20141117020340) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
 
+  create_table "identities", force: true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "identities", ["user_id"], name: "index_identities_on_user_id"
+
   create_table "trips", force: true do |t|
     t.integer  "user_id"
     t.string   "name"
@@ -150,8 +160,6 @@ ActiveRecord::Schema.define(version: 20141117020340) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "provider"
-    t.string   "uid"
     t.string   "name"
     t.string   "image"
     t.string   "username"

@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :trips
   has_many :flights
+  has_many :identities # secret agent man!
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -25,33 +26,75 @@ class User < ActiveRecord::Base
 
   formattable "%{username}"
 
-  def self.from_omniauth(auth)
-    logger.debug auth.info
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
-      user.username = generate_username(auth.info)
-      user.name = auth.info.name   # assuming the user model has a name
-      user.image = auth.info.image # assuming the user model has an image
+  def self.find_for_oauth(auth, signed_in_resource = nil)
+    # Get the identity and the user if they exist
+    identity = Identity.find_for_oauth(auth)
+
+    # If a signed_in_resource is provided it always overrides the existing user
+    # to prevent the identity being locked with accidentally created accounts.
+    # Note that this may leave zombie accounts (with no associated identity) which
+    # can be cleaned up at a later date.
+    user = signed_in_resource ? signed_in_resource : identity.user
+
+    # Create a user if necessary
+    if user.nil?
+      email_is_verified = auth.info.email && (auth.info.verified || auth.info.verified_email)
+      email = auth.info.email if email_is_verified
+      user = User.where(email: email).first if email
+
+      # No user was found with the email address from auth. Create a new user.
+      if user.nil?
+        user = User.new(
+          email: email || "change@me-#{auth.uid}-#{auth.provider}.com",
+          password: Devise.friendly_token[0,20],
+          username: generate_username(auth.info),
+          name: auth.info.name,   # Might be blank
+          image: auth.info.image  # Might be blank
+        )
+        user.skip_confirmation!
+        user.save!
+      end
     end
+
+    # Associate the identity with the user, if necessary
+    if identity.user != user
+      identity.user = user
+      identity.save!
+    end
+
+    user
+  end
+
+  # See if the given OAuth provider is connected to this account
+  # Provider should be something like :facebook, :twitter, :linked_in
+  def oauth_provider_connected?(provider)
+    self.identities.any? { |e| e.provider.to_sym == provider.to_sym }
+  end
+
+  def email_verified?
+    self.email && !self.email.match(/\Achange@me-/)
   end
 
   # Password is not changeable when using OAuth
   def is_password_changeable?
-    self.provider.blank?
+    true || self.provider.blank?
   end
 
-  # If they don't have an image URL stored, try gravatar
+  # Return a URL for a user photo
   def image(size = :normal)
     image_url = read_attribute(:image)
 
+    # If they don't have an image URL, use gravatar
     if image_url.blank?
       image_url = gravatar_url(size)
     else
-      if self.provider == "facebook"
+      # For Facebook, we can ask for a specific size
+      if image_url =~ /graph\.facebook\.com/
         image_url = "#{image_url}?type=#{size}"
       end
     end
+
+    image_url
   end
 
   def display_name
