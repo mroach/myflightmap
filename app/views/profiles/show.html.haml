@@ -1,0 +1,48 @@
+- content_for :title, @user.username
+
+/ TODO
+/ Indicate if up in the air
+/ Future flights
+/ Most recent single flight?
+/ better flight display (new partial)
+/ Make the profile header not horribly ugly
+
+%div.row
+  %div.col-xs-12.col-md-4.profile
+
+    %div.profile-header
+      %div.photo= image_tag @user.image(:large)
+      %h1.user_name
+        = @user.display_name
+        %small= @user.username
+
+    %div.mini-info
+      %div.member_since
+        %label= t('.member_since')
+        %span= l @user.created_at.to_date, format: :long
+      - if @flights.first && @flights.first.arrive_airport_info
+        %div.near
+          %label= t('.near')
+          %span
+            = flag_image @flights.first.arrive_airport_info.country, 24
+            = @flights.first.arrive_airport_info.to_s("%{description}")
+
+  / Recent trips
+  %div.col-xs-12.col-md-4
+    %h3= t('.recent_trips')
+    %div.list-group
+      - @trips.each do |t|
+        = link_to trip_path(t), class: 'list-group-item' do
+          %span.badge= t.flights.length
+          = t.name
+    = link_to t('words.view_all'), trips_path
+
+  / Recent flights
+  %div.col-xs-12.col-md-4
+    %h3= t('.recent_flights')
+    %div.list-group
+      - @flights.each do |f|
+        = link_to flight_path(f), class: 'list-group-item' do
+          = image_tag f.airline.logo.url
+          = f
+    = link_to t('words.view_all'), flights_path

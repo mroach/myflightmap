@@ -44,6 +44,7 @@ en:
     sign_in: "Sign In"
     sign_out: "Sign Out"
     edit_account: "Edit Account"
+    edit_trip: "Edit Trip"
   navigation_links:
     my_flights: "My Flights"
     my_map: "My Map"
@@ -52,6 +53,8 @@ en:
     no: 'No'
     yes: 'Yes'
     update: 'Update'
+    trips: "Trips"
+    map: "Map"
     flights: "Flights"
     countries: "Countries"
     airports: "Airports"

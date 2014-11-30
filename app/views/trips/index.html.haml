@@ -1,13 +1,9 @@
 - content_for :title, "#{@user.display_name}'s Trips"
 
-%ol.breadcrumb
-  %li= link_to @user.display_name, map_path
-  %li Trips
-
-%h1 #{@user.display_name}'s Trips
+= render partial: "shared/profile_strip", object: @user, as: 'user'
 
 - if @show_controls
-  = link_to t('actions.add_trip'), new_trip_path, class: 'btn btn-primary'
+  = link_to t('actions.add_trip'), new_trip_path, class: 'btn btn-success btn-lg'
 
 %div.trip-list
   - @trips.each do |trip|

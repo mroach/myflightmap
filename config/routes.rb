@@ -15,6 +15,7 @@ Myflightmap::Application.routes.draw do
   get 'airports/search', to: 'airports#search'
   get 'airports/distance_between', to: 'airports#distance_between'
   get 'flights/duration', to: 'flights#duration'
+  get 'members', to: 'profiles#index'
 
   resources :airlines
   resources :airports, constraint: { id: /[A-Z]{3}/ }
@@ -28,8 +29,8 @@ Myflightmap::Application.routes.draw do
   # Routes that are prefixed with the username
   # Ex) /mroach/map, /mroach/trips, /mroach/flights
   scope ':username' do
-    root to: 'map#show', as: 'map'
-    get 'map', to: 'map#show'
+    root to: 'profiles#show', as: 'profile'
+    get 'map', to: 'map#show', as: 'map'
 
     #get 'flights(-:style)', to: 'flights#index', as: 'user_flights'
     patch 'flights/batch_update', to: 'flights#batch_update', as: 'flight_batch_update'

@@ -1,0 +1,17 @@
+- content_for :title, "Members"
+
+%h1 Members
+
+%div.users
+  - @users.each do |user|
+    %div.row.user
+      %div.col-xs-12.col-md-3
+        = link_to profile_path(user.username) do
+          = image_tag user.image(:small)
+          %span.name= user.display_name
+      %div.col-xs-3.col-md-3
+        %label Trips
+        %div.trips= link_to user.trips.length, trips_path(user)
+      %div.col-xs-3.col-md-3
+        %label Flights
+        %div.flights= link_to user.flights.length, flights_path(user)

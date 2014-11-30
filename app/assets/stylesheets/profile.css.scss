@@ -1,0 +1,57 @@
+.profile-header {
+  margin-bottom: 15px;
+  h1.user_name { padding-top: 0; margin-top: 0; small { display: block } }
+  .photo {
+    img {border: solid 5px #eee; width: 150px;}
+  }
+}
+
+.mini-info {
+  margin-top: 20px;
+  label {
+    font-weight: bold;
+    display: block;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-top: 10px;
+  }
+  span {
+    font-size: 1.3em;
+    & > * { vertical-align: middle }
+  }
+}
+
+.near img { margin-top: -3px }
+
+.profile-strip {
+  border-bottom: solid 2px #ddd;
+  margin-bottom: 15px;
+  padding: 5px;
+
+  & > div {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+  }
+
+  a { color: inherit }
+
+  h3 { margin: 4px 0}
+  .name { margin-left: 1em }
+
+  .links {
+    vertical-align: bottom;
+    .nav {
+      display: inline-block;
+      margin: 0 0 0 2em;
+    }
+    a { font-weight: bold };
+  }
+}
+
+.users {
+  .user {
+    margin-bottom: 10px;
+    border-bottom: solid 1px #eee;
+  }
+}

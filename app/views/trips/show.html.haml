@@ -4,15 +4,17 @@
   window.routes = #{@stats[:routes].to_json.html_safe};
   window.airports = #{@stats[:airports].to_json.html_safe};
 
-%ol.breadcrumb
-  %li= link_to @user.display_name, map_path
-  %li= link_to "Trips", trips_path
-  %li= @trip.name
+= render partial: "shared/profile_strip", object: @user, as: 'user'
 
-%div.h1.trip-name
-  = @trip.name
-  %div.dates
-    #{format_date @trip.begin_date} - #{format_date @trip.end_date}
+%div.row.trip-heading
+  %div.col-xs-12.col-md-8
+    %h1.trip-name
+      = @trip.name
+      %small #{format_date @trip.begin_date} - #{format_date @trip.end_date}
+  - if @show_controls
+    %div.col-xs-12.col-md-4.control-buttons
+      = link_to t('actions.add_flight'), new_flight_path('flight[trip_id]' => @trip.id), class: 'btn btn-success'
+      = link_to t('actions.edit_trip'), edit_trip_path(@trip), class: 'btn btn-primary'
 
 %div.row.stats.vertical
   %div.col-xs-12.col-md-4
@@ -22,8 +24,3 @@
 
 %div.trip-flights
   = render partial: "shared/flights_slim", locals: { flights: @trip.flights }
-
-- if @show_controls
-  %div.flight-buttons
-    = link_to t('actions.add_flight'), new_flight_path('flight[trip_id]' => @trip.id), class: 'btn btn-success'
-    = link_to 'Edit Trip Details', edit_trip_path(@trip), class: 'btn btn-primary'

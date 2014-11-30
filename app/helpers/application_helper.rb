@@ -50,4 +50,12 @@ module ApplicationHelper
       content_tag(:i, "", class: "fa fa-#{icon_name}") + " " + content_tag(:span, link_text)
     end
   end
+
+  def auto_active_nav_link(link_text, link_path, link_options = {})
+    classes = []
+    classes.push "active" if link_path == request.fullpath
+    content_tag(:li, class: classes.join(' ')) do
+      link_to(link_text, link_path, link_options)
+    end
+  end
 end

@@ -1,9 +1,10 @@
 - content_for :title, "#{@user.display_name}'s Stats"
-%h1 #{@user.display_name}'s Stats
 
 :javascript
   window.routes = #{@stats[:routes].to_json.html_safe};
   window.airports = #{@stats[:airports].to_json.html_safe};
+
+= render partial: "shared/profile_strip", object: @user, as: 'user'
 
 %div.row.stats.horizontal
   %div.col-md-12

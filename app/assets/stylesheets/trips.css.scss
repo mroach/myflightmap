@@ -2,8 +2,14 @@
   .trip_flights { margin-top: 10px }
 }
 
+.trip-heading {
+  h1 { margin: 0 }
+  h1 small { margin-left: 1em }
+  margin-bottom: 20px;
+}
 .trip-name {
   .dates { font-size: .5em; margin-top: .2em; opacity: .8; }
 }
 
 .trip-flights { margin-top: 10px; padding-top: 10px; border-top: solid 3px #d0d4d9 }
+.control-buttons { text-align: right }
