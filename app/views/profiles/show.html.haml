@@ -7,8 +7,8 @@
 / better flight display (new partial)
 / Make the profile header not horribly ugly
 
-%div.row
-  %div.col-xs-12.col-md-4.profile
+%div.row.profile
+  %div.col-xs-12.col-md-4
 
     %div.profile-header
       %div.photo= image_tag @user.image(:large)
@@ -44,5 +44,5 @@
       - @flights.each do |f|
         = link_to flight_path(f), class: 'list-group-item' do
           = image_tag f.airline.logo.url
-          = f
+          #{f.depart_airport} &#x2708; #{f.arrive_airport}  (#{l f.depart_date, format: :short})
     = link_to t('words.view_all'), flights_path
