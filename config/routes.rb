@@ -17,8 +17,8 @@ Myflightmap::Application.routes.draw do
   get 'flights/duration', to: 'flights#duration'
   get 'members', to: 'profiles#index'
 
-  resources :airlines
-  resources :airports, constraint: { id: /[A-Z]{3}/ }
+  resources :airlines, constraints: { id: /[A-Z]{2}/ }
+  resources :airports, constraints: { id: /[A-Z]{3}/ }
 
   devise_for :users, controllers: {
     sessions: "users/sessions",
