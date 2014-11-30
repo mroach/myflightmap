@@ -193,7 +193,11 @@ class Flight < ActiveRecord::Base
   end
 
   def should_generate_new_friendly_id?
-    flight_code_changed? || depart_airport_changed? || arrive_airport_changed? || depart_date_changed? || super
+    flight_code_changed? ||
+      depart_airport_changed? ||
+      arrive_airport_changed? ||
+      depart_date_changed? ||
+      super
   end
 
   def normalize_friendly_id(string)
