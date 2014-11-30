@@ -30,7 +30,7 @@ class Flight < ActiveRecord::Base
 
   # TODO: Move to i18n file so these can be localised
   def self.seat_locations
-    ["Window", "Middle", "Aisle"]
+    ["Window", "Middle", "Aisle", "Suite", "Other"]
   end
 
   def self.flight_roles
