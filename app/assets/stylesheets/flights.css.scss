@@ -42,6 +42,7 @@
     padding: .2em;
     margin-bottom: 8px;
   }
+  p { padding: .5em 1em }
 }
 .flight-buttons { padding: 8px 0 }
 .dot-separated > span:not(:last-child):after { content: " · " }

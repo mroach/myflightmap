@@ -2,7 +2,10 @@
   %div.flight-buttons
     = link_to t('actions.add_flight'), new_flight_path, class: 'btn btn-success'
     = link_to t('actions.import_flights'), import_root_path, class: 'btn btn-default'
-    = link_to t('actions.batch_update'), flights_path(style: 'slim', batch_editing: 1), class: 'btn btn-danger'
+    - if @batch_editing
+      = link_to t('actions.cancel'), flights_path, class: 'btn btn-danger'
+    - else
+      = link_to t('actions.batch_update'), flights_path(style: 'slim', batch_editing: 1), class: 'btn btn-danger'
 
 - if @batch_editing
   :javascript
@@ -15,12 +18,10 @@
 
     %div.batch_editor
       %div.title Batch Update
+      %p.text-info
+        To batch edit, tick the box next to each flight you want to edit.
+        Then select the field you want to edit, enter a new value, and click <em>Update</em>.
       %div.container
-        %div.row
-          %div.text-info
-            %p
-              To batch edit, tick the box next to each flight you want to edit.
-              Then select the field you want to edit, enter a new value, and click <em>Update</em>.
         %div.row
           %div.col-md-2.col-xs-12
             %select.form-control{name: "field_to_update"}
