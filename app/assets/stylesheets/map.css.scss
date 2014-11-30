@@ -1,6 +1,6 @@
 table.stats {
   td { padding: .1em .2em }
-  td.number { text-align: right }
+  td.number { text-align: right; min-width: 3em; }
   &.airports {
     .airport { font-weight: bold }
   }
@@ -62,6 +62,7 @@ table.stats {
   &.airlines  { .descriptor, .arrowbox { background-color: #BE4800 } }
   &.distance  { .descriptor, .arrowbox { background-color: #722C02 } }
   &.duration  { .descriptor, .arrowbox { background-color: #7F0F5D } }
+  &.trips     { .descriptor, .arrowbox { background-color: #213E66 } }
 
   .number {
     line-height: 1.7em;
