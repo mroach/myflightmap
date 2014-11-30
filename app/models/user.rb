@@ -135,6 +135,10 @@ class User < ActiveRecord::Base
     username
   end
 
+  def to_param
+    username
+  end
+
   def self.groom_username(name)
     name.downcase
         .sub(/\s/, '')    # strip spaces
