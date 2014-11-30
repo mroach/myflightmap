@@ -14,5 +14,6 @@
           = user.last_flight.arrive_airport_info.to_s("%{description}")
   %div.links
     %ul.nav.nav-pills
-      =auto_active_nav_link t("words.trips"), trips_path(user)
       =auto_active_nav_link t("words.map"), map_path(user)
+      =auto_active_nav_link t("words.trips"), trips_path(user)
+      =auto_active_nav_link t("words.flights"), flights_path(user)
