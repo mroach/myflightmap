@@ -45,9 +45,10 @@
       %label Aircraft
       %div= @flight.aircraft_type
 
-= render partial: "shared/audits", object: @flight.audits, locals: { collapsed: true }
+- if @show_controls
+  %div.btn-group
+    = link_to 'Edit', edit_flight_path(@flight), class: 'btn btn-primary'
+    = link_to 'Back', flights_path, class: 'btn btn-success'
+    = link_to 'Destroy', flight_path(@flight), :confirm => 'Are you sure?', :method => :delete, class: 'btn btn-danger'
 
-%ul.control-links
-  %li= link_to 'Edit', edit_flight_path(@flight)
-  %li= link_to 'Back', flights_path
-  %li= link_to 'Destroy', flight_path(@flight), :confirm => 'Are you sure?', :method => :delete
+= render partial: "shared/audits", object: @flight.audits, locals: { collapsed: true }
