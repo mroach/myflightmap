@@ -10,6 +10,13 @@
 
 /* The mini profile image and name in the navbar */
 li.dropdown a { padding-left: 2px; }
+
+/* give dropdown menu items some space */
+ul.dropdown-menu li {
+  padding-left: 15px;
+  i { margin-right: 5px; }
+}
+
 li.profile {
   a { padding: 9px 10px }
   img {
