@@ -8,7 +8,7 @@
 / Make the profile header not horribly ugly
 
 %div.row.profile
-  %div.col-xs-12.col-md-4
+  %div.col-xs-12.col-sm-4
 
     %div.profile-header
       %div.photo= image_tag @user.image(:large)
@@ -28,7 +28,7 @@
             = @flights.first.arrive_airport_info.to_s("%{description}")
 
   / Recent trips
-  %div.col-xs-12.col-md-4
+  %div.col-xs-12.col-sm-4
     %h3= t('.recent_trips')
     %div.list-group
       - @trips.each do |t|
@@ -38,7 +38,7 @@
     = link_to t('words.view_all'), trips_path
 
   / Recent flights
-  %div.col-xs-12.col-md-4
+  %div.col-xs-12.col-sm-4
     %h3= t('.recent_flights')
     %div.list-group
       - @flights.each do |f|
