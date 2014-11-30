@@ -11,6 +11,8 @@ class Flight < ActiveRecord::Base
   belongs_to :airline
   belongs_to :user
 
+  validates_presence_of :user_id, :depart_date
+
   before_save :refresh_utc_times!
   after_save :update_related_trip!
 

@@ -5,6 +5,7 @@ class Trip < ActiveRecord::Base
 
   has_many :flights
   belongs_to :user
+  validates_presence_of :user_id, :name
 
   default_scope { order('begin_date ASC') }
 
