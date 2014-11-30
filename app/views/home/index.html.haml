@@ -1,3 +1,26 @@
-%h1 My Flight Map 2.0
+:javascript
+  window.routes = #{@stats[:routes].to_json.html_safe};
+  window.airports = #{@stats[:airports].to_json.html_safe};
 
-%p Welcome to the future. Links up top.
+%div.row
+  %div.col-md-4
+    %div= image_tag "http://placehold.it/250x200&text=[My+Flight+Map]"
+  %div.col-md-6
+    %div.lead
+      Your site for keeping track of your flights.
+      Organise your flights into trips, see stats about your flying, share links
+      with your friends and family rather than forwarding itineraries.
+
+    %h4 For users of the old site
+    :markdown
+      If you were a user of the previous myflightmap.com, at the sign in screen
+      do a [Forgot Password](/users/password/new) to get a new password setup.
+
+    %p We hope you enjoy the new site which was recently written from the ground up.
+  %div.col-md-2
+    = link_to "Sign In", new_user_session_path, class: 'btn btn-success btn-lg'
+%div.row.stats.vertical
+  %div.col-xs-12.col-md-4
+    = render partial: "shared/stat_boxes", locals: { stats: @stats[:totals] }
+  %div.col-xs-12.col-md-8
+    %div#map-canvas.routes-map
