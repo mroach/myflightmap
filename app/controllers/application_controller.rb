@@ -15,6 +15,11 @@ class ApplicationController < ActionController::Base
     .merge(super)
   end
 
+  # Redirect to the user's profile at login unless there's something stored
+  def after_sign_in_path_for(resource)
+    stored_location_for(resource) || profile_path(current_user)
+  end
+
   protected
 
   # This allows ?locale=XX in the URL. Not really implemented yet...
