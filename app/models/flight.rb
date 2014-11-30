@@ -214,11 +214,22 @@ class Flight < ActiveRecord::Base
 
   def refresh_utc_times!
     return if depart_time_utc_changed? || arrive_time_utc_changed?
-    depart_utc = TZInfo::Timezone.get(depart_airport_info.timezone).local_to_utc(depart_date_time)
-    self.depart_time_utc = depart_utc
 
-    arrive_utc = TZInfo::Timezone.get(arrive_airport_info.timezone).local_to_utc(arrive_date_time)
-    self.arrive_time_utc = arrive_utc
+    if depart_airport_info.present?
+      self.depart_time_utc = time_to_utc(depart_airport_info.timezone, depart_date_time)
+    end
+
+    if arrive_airport_info.present?
+      self.arrive_time_utc = time_to_utc(arrive_airport_info.timezone, arrive_date_time)
+    end
+  end
+
+  def time_to_utc(timezone, time)
+    begin
+      TZInfo::Timezone.get(timezone).local_to_utc(time)
+    rescue TZInfo::PeriodNotFound
+      logger.error "Unable to convert '#{time}' in zone '#{timezone}'"
+    end
   end
 
 end
