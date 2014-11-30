@@ -8,7 +8,7 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @user = User.find_by_username(params[:username]).order(:created_at)
+    @user = User.find_by_username(params[:username])
     @trips = @user.trips.visible_to(current_user).recent.limit(5)
     @flights = @user.flights.visible_to(current_user).recent.completed.limit(5)
   end
