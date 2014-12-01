@@ -1,12 +1,26 @@
 namespace :data do
   namespace :cleanup do
 
-    task :all => [:groom_flight_code, :standardise_airline_names, :set_missing_flight_airline, :refresh_trip_dates]
+    task :all => [
+      :set_missing_arrive_date,
+      :groom_flight_code,
+      :standardise_airline_names,
+      :set_missing_flight_airline,
+      :refresh_flight_utc_times,
+      :refresh_trip_dates,
+      :prepend_airline_code
+    ]
 
     # desc "When flight numbers are missing the airline code, add it"
     # task :prepend_airline_code => :environment do
     #   Flights.where("airline_name is not null and flight_code is not null")
     # end
+
+    desc "Set missing arrival date"
+    task :set_missing_arrive_date => :environment do
+      Flight.where(arrive_date: nil).update_all('arrive_date = depart_date')
+    end
+
     desc "Set missing flight.airline_id when the airline is known by name or code"
     task :set_missing_flight_airline => :environment do
       names = Flight.where("airline_id IS NULL AND airline_name IS NOT NULL AND airline_name != ''")
@@ -65,9 +79,13 @@ namespace :data do
     desc "Prepend airline code to flight number"
     task :prepend_airline_code => :environment do
       flights = Flight.where("airline_id IS NOT NULL AND flight_code IS NOT NULL")
-      flights.reject!(&:flight_code_has_airline_code?)
-      flights.each { |f| f.flight_code = "#{f.airline.iata_code}#{f.flight_code}"; f.save! }
-      puts flights.map { |e| "#{e.depart_airport} => #{e.arrive_airport} FN: #{e.flight_code}" }
+      flights.each do |f|
+        unless f.flight_code_has_airline_code?
+          f.flight_code = "#{f.airline.iata_code}#{f.flight_code}"
+          f.save!
+          puts "#{e.depart_airport} => #{e.arrive_airport} FN: #{e.flight_code}"
+        end
+      end
     end
 
     desc "Set alliance on airlines"
@@ -88,11 +106,15 @@ namespace :data do
     desc "Refresh flight UTC times"
     task :refresh_flight_utc_times => :environment do
       Flight.all.each do |e|
-        depart_utc = TZInfo::Timezone.get(e.depart_airport_info.timezone).local_to_utc(e.depart_date_time)
-        e.depart_time_utc = depart_utc
+        if e.depart_airport_info
+          depart_utc = TZInfo::Timezone.get(e.depart_airport_info.timezone).local_to_utc(e.depart_date_time)
+          e.depart_time_utc = depart_utc
+        end
 
-        arrive_utc = TZInfo::Timezone.get(e.arrive_airport_info.timezone).local_to_utc(e.arrive_date_time)
-        e.arrive_time_utc = arrive_utc
+        if e.arrive_airport_info
+          arrive_utc = TZInfo::Timezone.get(e.arrive_airport_info.timezone).local_to_utc(e.arrive_date_time)
+          e.arrive_time_utc = arrive_utc
+        end
 
         e.save!
       end
