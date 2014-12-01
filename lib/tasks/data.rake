@@ -83,7 +83,7 @@ namespace :data do
         unless f.flight_code_has_airline_code?
           f.flight_code = "#{f.airline.iata_code}#{f.flight_code}"
           f.save!
-          puts "#{e.depart_airport} => #{e.arrive_airport} FN: #{e.flight_code}"
+          puts "#{f.depart_airport} => #{f.arrive_airport} FN: #{f.flight_code}"
         end
       end
     end
