@@ -11,4 +11,8 @@
       = flag_image @airline.country, "64"
       %span.code= @airline.iata_code
 
+- if user_signed_in? && current_user.admin?
+  %div.btn-group
+    = link_to 'Edit', edit_airline_path(@airline), class: 'btn btn-primary'
+
 = render partial: "shared/audits", object: @airline.audits, locals: { collapsed: true }
