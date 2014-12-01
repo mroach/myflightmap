@@ -20,6 +20,7 @@
 - if user_signed_in? && current_user.admin?
   %div.btn-group
     = link_to 'Edit', edit_airport_path(@airport), class: 'btn btn-primary'
-    = link_to 'Reload from GCMap', update_airport_from_external_path(@airport), class: 'btn btn-danger'
+    = link_to 'Reload from GCMap', update_airport_from_external_path(@airport), class: 'btn btn-danger',
+      title: "Re-scrapes the airport data from GCMap and overwrites current data"
 
 = render partial: "shared/audits", object: @airport.audits, locals: { collapsed: true }
