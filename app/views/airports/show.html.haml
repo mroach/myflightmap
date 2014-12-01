@@ -17,4 +17,9 @@
   %strong Local time:
   = l @airport.current_time, :format => :short
 
+- if user_signed_in? && current_user.admin?
+  %div.btn-group
+    = link_to 'Edit', edit_airport_path(@airport), class: 'btn btn-primary'
+    = link_to 'Reload from GCMap', update_airport_from_external_path(@airport), class: 'btn btn-danger'
+
 = render partial: "shared/audits", object: @airport.audits, locals: { collapsed: true }

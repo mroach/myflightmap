@@ -80,6 +80,35 @@
     render json: { distance: Geo.distance_between(from_airport.coordinates, to_airport.coordinates).to_i }
   end
 
+  # Update an airport's basic info from GCMap
+  # Refresh name, city, country, description, timezone
+  def update_from_external
+    render status: 404 unless current_user.admin?
+
+    iata_code = params[:id].to_s.upcase
+
+    # Load new data and existing airport
+    @new_data = Gcmap.new.get_airport(iata_code)
+    @airport = Airport.find_by(iata_code: iata_code)
+    fields_to_update = %w(name city country description timezone)
+
+    # Only permit updating certain fields and fields that changed value
+    attributes = @new_data.attributes.select do |attr, value|
+      fields_to_update.include?(attr.to_s) && @airport[attr] != value
+    end
+    logger.info "Updating airport #{@airport} with: #{attributes.inspect}"
+
+    # Set audit comment so we know from whence the changes hath come
+    attributes[:audit_comment] = 'Updated from GCMap'
+
+    # And save the changes
+    if @airport.update_attributes(attributes)
+      redirect_to @airport, notice: 'Updated successfully'
+    else
+      redirect_to @airport, alert: 'Update failed'
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_airport
