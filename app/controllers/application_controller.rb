@@ -3,8 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_filter :authenticate_user!
-  before_filter :configure_permitted_parameters, if: :devise_controller?
+  before_action :authenticate_user!
+  before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_locale
 
   # TODO: Don't inject the username when it's not needed
@@ -20,11 +20,22 @@ class ApplicationController < ActionController::Base
     stored_location_for(resource) || profile_path(current_user)
   end
 
+  def reject_non_admin!
+    unless current_user.admin?
+      logger.info "User #{current_user} tried to access a secure page!"
+      not_found
+    end
+  end
+
   protected
 
   # This allows ?locale=XX in the URL. Not really implemented yet...
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
+  end
+
+  def not_found
+    head 404, content_type: 'text/plan'
   end
 
   def configure_permitted_parameters

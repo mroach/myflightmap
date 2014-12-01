@@ -1,6 +1,7 @@
 class TripsController < ApplicationController
   before_action :set_user
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate!, except: [:index, :show]
   skip_before_filter :authenticate_user!, only: [:index, :show]
 
   # GET /trips
@@ -19,7 +20,7 @@ class TripsController < ApplicationController
   # GET /trips/1.json
   def show
     if !@trip.is_visible_to?((current_user.id rescue -1))
-      raise ActiveRecord::RecordNotFound
+      not_found
     end
 
     if current_user.present?
@@ -82,6 +83,10 @@ class TripsController < ApplicationController
   end
 
   private
+    def authenticate!
+      not_found unless current_user && (current_user.admin? || current_user == @trip.user)
+    end
+
     def set_user
       @user = User.find_by_username!(params[:username])
     end

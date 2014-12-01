@@ -1,10 +1,11 @@
 require "time"
 
 class FlightsController < ApplicationController
-  skip_before_filter :authenticate_user!, only: [:index, :show]
   before_action :set_user, except: [:duration]
   before_action :set_flight, only: [:show, :edit, :update, :destroy]
   before_action :load_helper_data, only: [:new, :edit]
+  before_action :authenticate!, except: [:index, :show]
+  skip_before_filter :authenticate_user!, only: [:index, :show]
 
   # GET /flights
   # GET /flights.json
@@ -115,6 +116,10 @@ class FlightsController < ApplicationController
   end
 
   private
+    def authenticate!
+      not_found unless current_user && (current_user.admin? || current_user == @flight.user)
+    end
+
     def set_user
       @user = User.find_by_username!(params[:username])
     end

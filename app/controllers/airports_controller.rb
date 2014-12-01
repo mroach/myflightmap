@@ -3,6 +3,7 @@
 
  class AirportsController < ApplicationController
   before_action :set_airport, only: [:show, :edit, :update, :destroy]
+  before_action :reject_non_admin!, except: [:show]
 
   # GET /airports
   # GET /airports.json

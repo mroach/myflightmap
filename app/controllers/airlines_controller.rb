@@ -1,5 +1,6 @@
 class AirlinesController < ApplicationController
   before_action :set_airline, only: [:show, :edit, :update, :destroy]
+  before_action :reject_non_admin!, except: [:show]
 
   # GET /airlines
   # GET /airlines.json

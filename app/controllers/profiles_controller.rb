@@ -1,9 +1,9 @@
 class ProfilesController < ApplicationController
   skip_before_filter :authenticate_user!, only: [:show]
   before_action :set_user, only: [:show, :map]
+  before_action :reject_non_admin!, only: [:index]
 
   def index
-    render status: 404 unless current_user.present? && current_user.admin?
     @users = User.all.order(:created_at)
   end
 
