@@ -67,6 +67,9 @@ Myflightmap::Application.configure do
 
   config.action_mailer.default_url_options = { host: 'www.myflightmap.com' }
 
+  # Use local server but don't use SSL. The self-generated certificate will fail validation.
+  config.action_mailer.smtp_settings = { host: 'localhost', enable_starttls_auto: false }
+
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found).
   config.i18n.fallbacks = true
