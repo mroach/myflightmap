@@ -58,4 +58,12 @@ module ApplicationHelper
       link_to(link_text, link_path, link_options)
     end
   end
+
+  def error_messages(model = nil)
+    model ||= resource
+    return nil if model.errors.empty?
+    content_tag(:ul, class: 'form-errors alert alert-danger') do
+      model.errors.full_messages.collect { |msg| concat(content_tag(:li, msg)) }
+    end
+  end
 end

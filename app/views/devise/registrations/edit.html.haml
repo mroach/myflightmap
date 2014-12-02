@@ -1,22 +1,48 @@
-%h2= resource_name.to_s.humanize
+= render partial: 'shared/profile_strip', object: @user, as: 'user'
 
-= simple_form_for(resource, as: resource_name, wrapper: :vertical_form, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = f.error_notification
+%div.col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2
+  %div.panel.panel-default
+    %div.panel-heading
+      %div.panel-title Your profile
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+      = error_messages
+      %div.panel-body
+        %div.form-group
+          %div.input-group
+            %span.input-group-addon
+              %i.fa.fa-envelope
+            = f.text_field :email, placeholder: "Email address", class: "form-control", autofocus: true, required: true
+        %div.form-group
+          %div.input-group
+            %span.input-group-addon
+              %i.fa.fa-user
+            = f.text_field :username, placeholder: "Username/nickname", class: "form-control"
+          %span.help-block Changing your username will change the URLs linking to your data
 
-  %div.form-inputs
-    = f.input :email, required: true, autofocus: true
+      - if devise_mapping.omniauthable?
+        - resource_class.omniauth_providers.each do |provider|
+          - unless @user.oauth_provider_connected?(provider)
+            %div.panel-body
+              = link_to t('actions.connect_with', provider: provider.to_s.titleize), omniauth_authorize_path(resource_name, provider), class: "btn btn-provider-#{provider}"
 
-    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-      %p Currently waiting confirmation for: #{resource.unconfirmed_email}
+      - if @user.password_changeable?
+        %div.panel-body
+          %div.form-group
+            %div.input-group
+              %span.input-group-addon
+                %i.fa.fa-lock
+              = f.password_field :password, placeholder: "Password", class: "form-control"
+          %div.form-group
+            %div.input-group
+              %span.input-group-addon
+                %i.fa.fa-lock
+              = f.password_field :password_confirmation, placeholder: "Password Confirmation", class: "form-control"
+          %div.form-group
+            %div.input-group
+              %span.input-group-addon
+                %i.fa.fa-lock
+              = f.password_field :current_password, placeholder: "Current Password", class: "form-control"
 
-    = f.input :username
-
-    - if @user.is_password_changeable?
-      = f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false
-      = f.input :password_confirmation, required: false
-      = f.input :current_password, hint: "we need your current password to confirm your changes"
-
-  %div.form-actions
-    = f.button :submit, "Update"
-
-= link_to "Back", :back
+      %div.panel-body
+        %div.form-group{style: "margin-top:10px"}
+          = f.submit "Update", class: "btn btn-success"
