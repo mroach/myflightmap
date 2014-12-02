@@ -2,7 +2,7 @@
   %div.col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2
     %div.panel.panel-default
       %div.panel-heading
-        %div.panel-title Log In
+        %div.panel-title= t('actions.sign_in')
       %div.panel-body
         = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
           %div.form-group
@@ -25,12 +25,12 @@
             = f.submit "Log in", class: "btn btn-success"
             - if devise_mapping.omniauthable?
               - resource_class.omniauth_providers.each do |provider|
-                = link_to "Log in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider), class: "btn btn-provider-#{provider}"
+                = link_to t('actions.sign_in_with', provider: provider.to_s.titleize), omniauth_authorize_path(resource_name, provider), class: "btn btn-provider-#{provider}"
                 %br
 
           %div.form-group
             - if devise_mapping.registerable? && controller_name != 'registrations'
-              = link_to "Sign up", new_registration_path(resource_name)
+              = link_to t('actions.sign_up'), new_registration_path(resource_name)
               %br
 
             - if devise_mapping.recoverable?
