@@ -88,7 +88,9 @@ class User < ActiveRecord::Base
     image_url = read_attribute(:image)
 
     # this isn't the right way to do this. the image should be copied to user.image
-    image_url.blank? and image_url = self.identities.where('image IS NOT NULL').first.image
+    image_url.blank? and
+      identity_with_image = self.identities.where('image IS NOT NULL').first and
+        image_url = identity_with_image.image
 
     # If they don't have an image URL, use gravatar
     if image_url.blank?
