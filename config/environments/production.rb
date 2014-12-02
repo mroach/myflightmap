@@ -68,7 +68,13 @@ Myflightmap::Application.configure do
   config.action_mailer.default_url_options = { host: 'www.myflightmap.com' }
 
   # Use local server but don't use SSL. The self-generated certificate will fail validation.
-  config.action_mailer.smtp_settings = { host: 'localhost', enable_starttls_auto: false }
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.mailgun.org',
+    port: 587,
+    user_name: Rails.application.secrets.mailgun_smtp_username,
+    password: Rails.application.secrets.mailgun_smtp_password,
+    enable_starttls_auto: true
+  }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation can not be found).
