@@ -2,7 +2,7 @@ require 'digest/md5'
 
 class User < ActiveRecord::Base
   include Formattable
-  audited
+  audited except: [:current_sign_in_at, :last_sign_in_at, :current_sign_in_ip, :last_sign_in_ip]
 
   has_many :trips
   has_many :flights
