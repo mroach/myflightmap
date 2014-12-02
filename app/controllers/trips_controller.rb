@@ -1,7 +1,7 @@
 class TripsController < ApplicationController
   before_action :set_user
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate!, except: [:index, :show]
+  before_action :authenticate!, except: [:index, :show, :new, :create]
   skip_before_filter :authenticate_user!, only: [:index, :show]
 
   # GET /trips
