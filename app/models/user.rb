@@ -24,6 +24,8 @@ class User < ActiveRecord::Base
     length: { minimum: 3 },
     format: { with: /\A ( [[:alnum:]] (\.|_*|\-) )* \z/ix }
 
+  validates :email, uniqueness: true, presence: true
+
   formattable "%{username}"
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
@@ -76,8 +78,8 @@ class User < ActiveRecord::Base
   end
 
   # Password is not changeable when using OAuth
-  def is_password_changeable?
-    true || self.provider.blank?
+  def password_changeable?
+    self.identities.none?
   end
 
   # Return a URL for a user photo

@@ -82,7 +82,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # ie if password or email was changed
   # Do not require password changes for users who are auth'd against an external service
   def needs_password?(user, params)
-    return false if !user.provider.blank?
+    return false unless user.password_changeable?
     user.email != params[:user][:email] ||
       params[:user][:password].present? ||
       params[:user][:password_confirmation].present?

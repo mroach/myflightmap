@@ -1,4 +1,4 @@
-%div.container.signup
+%div.signup
   %div.col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2
     %div.panel.panel-default
       %div.panel-heading
@@ -9,6 +9,7 @@
             = link_to "Sign up with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider), class: "btn btn-provider-#{provider}"
       %div.panel-body
         = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+          = error_messages
           %div.form-group
             %div.input-group
               %span.input-group-addon

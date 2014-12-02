@@ -4,7 +4,7 @@ class FlightsController < ApplicationController
   before_action :set_user, except: [:duration]
   before_action :set_flight, only: [:show, :edit, :update, :destroy]
   before_action :load_helper_data, only: [:new, :edit]
-  before_action :authenticate!, except: [:index, :show]
+  before_action :authenticate!, except: [:index, :show, :new, :create, :duration]
   skip_before_filter :authenticate_user!, only: [:index, :show]
 
   # GET /flights

@@ -16,13 +16,19 @@
       = link_to t('actions.add_flight'), new_flight_path('flight[trip_id]' => @trip.id), class: 'btn btn-success'
       = link_to t('actions.edit_trip'), edit_trip_path(@trip), class: 'btn btn-primary'
 
-%div.row.stats.vertical
-  %div.col-xs-12.col-md-4
-    = render partial: "shared/stat_boxes", locals: { stats: @stats[:totals] }
-  %div.col-xs-12.col-md-8
-    %div#map-canvas.routes-map
+- if @trip.flights.none?
+  %div.callout.callout-warning
+    %h4 No flights yet!
+    %p This is a sad trip. It has no flights.
+    %div= link_to t('actions.add_flight'), new_flight_path('flight[trip_id]' => @trip.id), class: 'btn btn-success btn-lg'
+- else
+  %div.row.stats.vertical
+    %div.col-xs-12.col-md-4
+      = render partial: "shared/stat_boxes", locals: { stats: @stats[:totals] }
+    %div.col-xs-12.col-md-8
+      %div#map-canvas.routes-map
 
-%h3= t('words.flights')
+  %h3= t('words.flights')
 
-%div.trip-flights
-  = render partial: "shared/flights_slim", locals: { flights: @trip.flights }
+  %div.trip-flights
+    = render partial: "shared/flights_slim", locals: { flights: @trip.flights }

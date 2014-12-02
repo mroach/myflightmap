@@ -41,11 +41,16 @@ en:
       recent_flights: "Recent Flights"
   actions:
     import_flights: "Import Flights"
-    add_flight: "Add flight"
-    sign_in: "Sign In"
+    add_flight: "Add Flight"
+    sign_in: "Log In"
     sign_out: "Sign Out"
+    sign_up: "Sign Up"
     edit_account: "Edit Account"
+    add_trip: "Create New Trip"
     edit_trip: "Edit Trip"
+    sign_in_with: "Log in with %{provider}"
+    connect_with: "Connect with %{provider}"
+    my_profile: "My Profile"
   navigation_links:
     my_flights: "My Flights"
     my_map: "My Map"
