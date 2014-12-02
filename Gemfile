@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1'
+gem 'rails', '~> 4.1'
 
 # Need >= 3.1 for bootstrap 3 support
-gem 'simple_form', '3.1.0.rc1'
+gem 'simple_form', '~> 3.1'
 
 # Nice country helper. Among other things, parse names into ISO codes
 gem 'countries'
@@ -58,7 +58,7 @@ gem 'sass-rails', '~> 4.0.0'
 gem 'bootstrap-sass', '~> 3.3.0'
 
 # Add Font Awesome support (icons as font glyphs)
-gem 'font-awesome-rails', '~> 4.0.0'
+gem 'font-awesome-rails', '~> 4.2'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -67,7 +67,7 @@ gem 'uglifier', '>= 1.3.0'
 gem "autoprefixer-rails"
 
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 4.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
