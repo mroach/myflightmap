@@ -1,4 +1,12 @@
-%div.container.login
+%div.col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2
+  %div.callout.callout-info
+    %h4 For users of the old site
+    %p
+      If you were a user of the previous myflightmap.com, just do a
+      #{link_to t('action.forgot_password'), new_user_password_path} to get a new password set up.
+      Then if you like you can link your profile to Facebook and use that for future authentication.
+
+%div.login
   %div.col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2
     %div.panel.panel-default
       %div.panel-heading

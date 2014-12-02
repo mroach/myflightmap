@@ -17,3 +17,39 @@ a { transition: color .2s, background-color .2s; }
 }
 
 .centered { text-align: center }
+
+ul.form-errors {
+  li { list-style-type: none }
+}
+
+p { padding: 15px }
+
+/* Side notes for calling out things
+-------------------------------------------------- */
+.callout {
+  padding: 15px;
+  margin: 20px 0;
+  border: 1px solid #eee;
+  border-left-width: 5px;
+  border-radius: 3px;
+
+  h4 { margin-top:0; margin-bottom: 5px }
+  p:last-child { margin-bottom: 0 }
+  code { border-radius: 3px }
+  &+.callout { margin-top: -5px }
+
+  &.callout-danger {
+    h4 { color: #d9534f }
+    border-left-color: #d9534f
+  }
+
+  &.callout-warning {
+    border-left-color: #f0ad4e;
+    h4 { color: #f0ad4e }
+  }
+
+  &.callout-info {
+    border-left-color: #5bc0de;
+    h4 { color:#5bc0de }
+  }
+}
