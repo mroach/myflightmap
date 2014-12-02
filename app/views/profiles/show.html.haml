@@ -43,6 +43,6 @@
     %div.list-group
       - @flights.each do |f|
         = link_to flight_path(f), class: 'list-group-item' do
-          = image_tag f.airline.logo.url
+          = image_tag f.airline.logo.url(:medium)
           #{f.depart_airport} &#x2708; #{f.arrive_airport}  (#{l f.depart_date, format: :short})
     = link_to t('words.view_all'), flights_path
