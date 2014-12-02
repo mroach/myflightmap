@@ -22,8 +22,8 @@
       = link_to t('actions.my_profile'), profile_path(current_user), class: 'btn btn-success btn-lg'
     - else
       %div.btn-group
-        = link_to t('actions.sign_in'), new_user_session_path, class: 'btn btn-primary btn-medium'
-        = link_to t('actions.sign_up'), new_user_registration_path, class: 'btn btn-success btn-medium'
+        = link_to t('actions.sign_in'), new_user_session_path, class: 'btn btn-success btn-medium'
+        = link_to t('actions.sign_up'), new_user_registration_path, class: 'btn btn-primary btn-medium'
 %div.row.stats.vertical
   %div.col-xs-12.col-md-4
     = render partial: "shared/stat_boxes", locals: { stats: @stats[:totals] }
