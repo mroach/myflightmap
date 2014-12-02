@@ -83,8 +83,12 @@ class User < ActiveRecord::Base
   end
 
   # Return a URL for a user photo
+  # Should move to decorator
   def image(size = :normal)
     image_url = read_attribute(:image)
+
+    # this isn't the right way to do this. the image should be copied to user.image
+    image_url.blank? and image_url = self.identities.where('image IS NOT NULL').first.image
 
     # If they don't have an image URL, use gravatar
     if image_url.blank?

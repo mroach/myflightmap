@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 20141130073217) do
     t.string   "uid"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "image"
   end
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id"
