@@ -3,12 +3,15 @@
 = render partial: "shared/profile_strip", object: @user, as: 'user'
 
 - if @show_controls
+  %div.callout.callout-info
+    %h4 Creating new trips by email
+    %p.bg-info
+      You can automatically create trips or add to existing trips by forwarding
+      flight confirmation emails to <strong>#{mail_to "#{@user.id_hash}@trips.myflightmap.com"}</strong>.
+      <br />
+      The subject of the email will be used as the trip's title or to match to an existing
+      trip.
   = link_to t('actions.add_trip'), new_trip_path, class: 'btn btn-success btn-lg'
-  %p.bg-info
-    You can automatically create trips or add to existing trips by forwarding
-    flight confirmation emails to <strong>#{mail_to "#{@user.id_hash}@trips.myflightmap.com"}</strong>.
-    The subject of the email will be used as the trip's title or to match to an existing
-    trip.
 
 
 %div.trip-list
