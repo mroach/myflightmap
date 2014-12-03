@@ -76,8 +76,8 @@ module FlightsHelper
 
       totals: {
         flights: flights.length,
-        distance: flights.pluck(:distance).sum,
-        duration: flights.pluck(:duration).sum,
+        distance: flights.pluck(:distance).compact.sum,
+        duration: flights.pluck(:duration).compact.sum,
         countries: top_countries.length,
         airports: top_airports.length,
         airlines: top_airlines.length
