@@ -20,7 +20,9 @@ module Worldmate
         return false
       end
 
-      @trip = Trip.find_or_initialize_by(user_id: user.id, name: subject)
+      @trip = Trip.find_or_initialize_by(user_id: user.id, name: subject) do |t|
+        t.audit_comment = "Created by Worldmate"
+      end
 
       @trip.flights = xml_doc.css('items flight').map do |f|
         airline_code = f.css("details").attribute('airline-code').value
@@ -45,7 +47,7 @@ module Worldmate
           depart_time: depart_date,
           arrive_date: arrive_date,
           arrive_time: arrive_date
-        )
+        ) { |f| f.audit_comment = "Created by Worldmate" }
       end
 
     end

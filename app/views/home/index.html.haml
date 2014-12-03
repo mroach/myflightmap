@@ -3,27 +3,28 @@
   window.airports = #{@stats[:airports].to_json.html_safe};
 
 %div.row
-  %div.col-md-4
-    %div= image_tag "http://placehold.it/250x200&text=[My+Flight+Map]"
-  %div.col-md-6
+  %div.col-xs-4.brand-logo
+    %div= image_tag "logo.png", alt: "My Flight Map"
+  %div.col-xs-8
     %div.lead
       Your site for keeping track of your flights.
       Organise your flights into trips, see stats about your flying, share links
       with your friends and family rather than forwarding itineraries.
-
-    %div.callout.callout-info
-      %h4 For users of the old site
-      %p
-        If you were a user of the previous myflightmap.com, just do a
-        #{link_to t('action.forgot_password'), new_user_password_path} to get a new password set up.
-        Then if you like you can link your profile to Facebook and use that for future authentication.
-  %div.col-md-2.centered
     - if user_signed_in?
       = link_to t('actions.my_profile'), profile_path(current_user), class: 'btn btn-success btn-lg'
     - else
       %div.btn-group
         = link_to t('actions.sign_in'), new_user_session_path, class: 'btn btn-success btn-medium'
         = link_to t('actions.sign_up'), new_user_registration_path, class: 'btn btn-primary btn-medium'
+
+%div.callout.callout-info
+  %h4 For users of the old site
+  %p
+    If you were a user of the previous myflightmap.com, just do a
+    #{link_to t('action.forgot_password'), new_user_password_path} to get a new password set up.
+    Then if you like you can link your profile to Facebook and use that for future authentication.
+
+
 %div.row.stats.vertical
   %div.col-xs-12.col-md-4
     = render partial: "shared/stat_boxes", locals: { stats: @stats[:totals] }
