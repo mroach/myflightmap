@@ -53,3 +53,8 @@ p { padding: 15px }
     h4 { color:#5bc0de }
   }
 }
+
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small,
+.h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small {
+  white-space: nowrap;
+}
