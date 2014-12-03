@@ -1,3 +1,5 @@
+require 'geo'
+
 class Flight < ActiveRecord::Base
   extend FriendlyId
   include Formattable
@@ -13,7 +15,7 @@ class Flight < ActiveRecord::Base
 
   validates_presence_of :user_id, :depart_date
 
-  before_save :refresh_utc_times!
+  before_save :refresh_utc_times!, :update_duration!, :update_distance!
   after_save :update_related_trip!
 
   default_scope { order('depart_time_utc ASC') }
@@ -221,6 +223,23 @@ class Flight < ActiveRecord::Base
 
     if arrive_airport_info.present?
       self.arrive_time_utc = time_to_utc(arrive_airport_info.timezone, arrive_date_time)
+    end
+  end
+
+  def update_duration!
+    return if duration_changed?
+    if depart_time_utc.present? && arrive_time_utc.present?
+      self.duration = (arrive_time_utc - depart_time_utc) / 60
+    end
+  end
+
+  def update_distance!
+    return if distance_changed?
+    if depart_airport_info.present? && arrive_airport_info.present?
+      self.distance = Geo.distance_between(
+        depart_airport_info.coordinates,
+        arrive_airport_info.coordinates
+      ).to_i
     end
   end
 
