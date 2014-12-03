@@ -1,4 +1,12 @@
 module ApplicationHelper
+  def airline_logo(airline, size = :medium)
+    if airline.nil?
+      image_tag image_path "airlines/logos/#{size}/missing.png", alt: "No Airline"
+    else
+      image_tag airline.logo.url(size), alt: airline.name, title: airline.name
+    end
+  end
+
   def flag_image(country, size = 32)
     country = country.downcase # can't use downcase! when the strong is frozen
     country = "gb" if country == "uk"

@@ -3,7 +3,7 @@
 %div.row
   %div.col-sm-8
     %h1
-      = image_tag @airline.logo.url(:medium)
+      = airline_logo @airline, :medium
       %span= @airline.name
       = image_tag("alliances/medium/#{@airline.alliance}.png") if @airline.in_alliance?
   %div.col-sm-4

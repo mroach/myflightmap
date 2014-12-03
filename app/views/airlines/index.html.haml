@@ -3,7 +3,7 @@
 %div.airline-list
   - @airlines.each do |airline|
     %div.airline
-      = image_tag airline.logo.url(:icon)
+      = airline_logo airline, :icon
       = link_to "#{airline.iata_code} #{airline.name}", airline
 
 %br
