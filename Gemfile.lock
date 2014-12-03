@@ -94,6 +94,7 @@ GEM
       activerecord (>= 4.0.0)
     haml (4.0.6)
       tilt
+    hashids (1.0.1)
     hashie (3.3.2)
     hike (1.2.3)
     httparty (0.13.3)
@@ -239,6 +240,7 @@ DEPENDENCIES
   font-awesome-rails (~> 4.2)
   friendly_id (~> 5.0.0)
   haml
+  hashids
   httparty
   jbuilder (~> 1.2)
   jquery-rails

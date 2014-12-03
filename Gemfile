@@ -78,6 +78,9 @@ gem "audited-activerecord", "~> 4.0"
 # Easily slugged URLs
 gem 'friendly_id', '~> 5.0.0'
 
+# Generate unique, reversible IDs
+gem 'hashids'
+
 group :development do
   gem 'capistrano', '~> 3.2.1'
   gem 'capistrano-bundler', '~> 1.1.2', require: false

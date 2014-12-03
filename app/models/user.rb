@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :trips
   has_many :flights
   has_many :identities # secret agent man!
+  after_create :set_id_hash!
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -147,10 +148,29 @@ class User < ActiveRecord::Base
     username
   end
 
+  def self.hash_id(id)
+    hashids.encode(id)
+  end
+
+  def self.unhash_id(hashed_id)
+    hashids.decode(hashed_id)
+  end
+
   def self.groom_username(name)
     name.downcase
         .sub(/\s/, '')    # strip spaces
         .sub(/^+\W/, '')  # strip leading non-words
         .sub(/\W+$/, '')  # strip trailing non-words
+  end
+
+  private
+
+  def set_id_hash!
+    write_attribute(:id_hash, User.hash_id(self.id))
+    self.save
+  end
+
+  def self.hashids
+    Hashids.new(Rails.application.secrets.hashids_user_salt, 6, 'ABCDFGHKJLMNPQRSTXYZ123456789')
   end
 end
