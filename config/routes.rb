@@ -12,6 +12,10 @@ Myflightmap::Application.routes.draw do
     end
   end
 
+  namespace :callbacks do
+    post 'worldmate/receive', to: 'worldmate#receive'
+  end
+
   get 'airports/search', to: 'airports#search'
   get 'airports/distance_between', to: 'airports#distance_between'
   get 'airports/:id/update_from_external', to: 'airports#update_from_external',
