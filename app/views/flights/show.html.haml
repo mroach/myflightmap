@@ -48,7 +48,7 @@
       %div= @flight.aircraft_type
     %div.col-xs-4
       %label Trip
-      %div= @flight.trip.present? ? link_to(@flight.trip.name, trip_path(@flight.trip)) : '<em>None</em>'.html_safes
+      %div= @flight.trip.present? ? link_to(@flight.trip.name, trip_path(@flight.trip)) : '<em>None</em>'.html_safe
 
 - if @show_controls
   %div.btn-group
