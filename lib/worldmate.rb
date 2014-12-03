@@ -2,6 +2,7 @@ require 'nokogiri'
 
 module Worldmate
   class Parser
+    include Logging
 
     attr_reader :user, :trip, :flights
 
@@ -11,8 +12,14 @@ module Worldmate
       status = xml_doc.css('status').text
       subject = xml_doc.css('header[name="Subject"]').attribute('value').value
       recipient = xml_doc.css('end-user-emails user').attribute('email').value
+      user_id_hash = recipient.scan(/\A[^@]+/).first.to_s.upcase
+      @user = User.find_by_id_hash(user_id_hash)
 
-      @user = User.find_by_id_hash(recipient.scan(/\A[^@]+/).upcase)
+      if @user.nil?
+        logger.warn "No user found with ID hash #{user_id_hash}"
+        return false
+      end
+
       @trip = Trip.find_or_initialize_by(user_id: user.id, name: subject)
 
       @trip.flights = xml_doc.css('items flight').map do |f|
