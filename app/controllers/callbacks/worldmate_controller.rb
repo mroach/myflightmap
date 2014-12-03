@@ -5,7 +5,7 @@ class Callbacks::WorldmateController < ActionController::Base
     xml_string = request.body.read
     parser = Worldmate::Parser.new(xml_string)
 
-    parser.trip.save!
+    parser.trip.save! unless parser.trip.flights.none?
 
     render text: 'OK'
   end
