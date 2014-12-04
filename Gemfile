@@ -105,6 +105,9 @@ end
 # use PostgreSQL in staging and production
 gem 'pg', group: [:staging, :production]
 
+# Application performance monitoring
+gem 'newrelic_rpm', group: [:staging, :production]
+
 # Use byebug for debugging
 gem 'byebug', group: [:staging, :production]
 
