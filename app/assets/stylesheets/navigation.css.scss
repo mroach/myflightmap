@@ -29,3 +29,16 @@ li.profile {
   }
   span.name { font-size: 1.3em; vertical-align: middle }
 }
+
+.brand-logo {
+  img { max-width: 100px; }
+  background-color: white;
+  padding: 3px;
+  box-shadow: 0 0 3px 2px #999;
+  margin-top: -40px;
+  max-height: 100px;
+  max-width: 100px;
+  border-radius: 50px;
+}
+
+nav.navbar { margin: 30px 5px 40px 5px; border-radius: 40px; }

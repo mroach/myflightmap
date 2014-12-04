@@ -1,4 +1,4 @@
-%nav.navbar.navbar-inverse.navbar-fixed-top
+%nav.navbar.navbar-inverse
   %div.container
     %div.navbar-header
       %button.navbar-toggle{:type => "button", :'data-toggle' => "collapse", :'data-target' => ".navbar-collapse"}
@@ -7,8 +7,7 @@
         %span.icon-bar
         %span.icon-bar
       = link_to root_path, class: 'navbar-brand' do
-        %i.fa.fa-plane
-        My Flight Map
+        %div= image_tag "logo.png", alt: "My Flight Map", class: 'brand-logo'
     %div.collapse.navbar-collapse
       %ul.nav.navbar-nav
         = render 'layouts/navigation_links'
