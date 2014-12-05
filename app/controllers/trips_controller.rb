@@ -1,7 +1,7 @@
 class TripsController < ApplicationController
   before_action :set_user
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate!, except: [:index, :show, :new, :create]
+  before_action :authenticate!, except: [:index, :show]
   skip_before_filter :authenticate_user!, only: [:index, :show]
 
   # GET /trips
@@ -84,7 +84,7 @@ class TripsController < ApplicationController
 
   private
     def authenticate!
-      not_found unless current_user && (current_user.admin? || current_user == @trip.user)
+      not_found unless user_signed_in? && (current_user.admin? || current_user == @trip.user)
     end
 
     def set_user

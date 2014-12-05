@@ -4,7 +4,7 @@ class FlightsController < ApplicationController
   before_action :set_user, except: [:duration]
   before_action :set_flight, only: [:show, :edit, :update, :destroy]
   before_action :load_helper_data, only: [:new, :edit]
-  before_action :authenticate!, except: [:index, :show, :new, :create, :duration]
+  before_action :authenticate!, except: [:index, :show, :duration]
   skip_before_filter :authenticate_user!, only: [:index, :show]
 
   # GET /flights
@@ -117,7 +117,7 @@ class FlightsController < ApplicationController
 
   private
     def authenticate!
-      not_found unless current_user && (current_user.admin? || current_user == @flight.user)
+      not_found unless user_signed_in? && (current_user.admin? || current_user == @flight.user)
     end
 
     def set_user

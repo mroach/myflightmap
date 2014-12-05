@@ -27,7 +27,7 @@
             = flag_image @flights.first.arrive_airport_info.country, 24
             = @flights.first.arrive_airport_info.to_s("%{description}")
 
-  - if @trips.none? && @flights.none
+  - if @trips.none? && @flights.none && @show_controls
     %div.col-xs-12.col-sm-8
       %div.callout.callout-warning
         %h4 No trips yet!
