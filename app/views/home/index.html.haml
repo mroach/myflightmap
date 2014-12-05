@@ -3,7 +3,7 @@
   window.airports = #{@stats[:airports].to_json.html_safe};
 
 %div.row
-  %div.col-xs-8
+  %div.col-xs-12.col-md-6
     %div.lead
       Your site for keeping track of your flights.
       Organise your flights into trips, see stats about your flying, share links
@@ -14,7 +14,7 @@
       %div.btn-group
         = link_to t('actions.sign_in'), new_user_session_path, class: 'btn btn-success btn-medium'
         = link_to t('actions.sign_up'), new_user_registration_path, class: 'btn btn-primary btn-medium'
-  %div.col-xs-4
+  %div.col-xs-12.col-md-6
     %div.callout.callout-info
       %h4 Users of the old site:
       %p
