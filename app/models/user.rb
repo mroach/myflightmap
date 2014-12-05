@@ -84,7 +84,7 @@ class User < ActiveRecord::Base
 
   # Return a URL for a user photo
   # Should move to decorator
-  def image(size = :normal)
+  def image(size = :square)
     image_url = read_attribute(:image)
 
     # this isn't the right way to do this. the image should be copied to user.image
@@ -111,7 +111,7 @@ class User < ActiveRecord::Base
 
   def gravatar_url(size = :normal)
     hash = Digest::MD5.hexdigest(email.downcase)
-    sizes = { small: 50, normal: 100, large: 200 }
+    sizes = { square: 50, small: 50, normal: 100, large: 200 }
     "http://www.gravatar.com/avatar/#{hash}?s=#{sizes[size]}"
   end
 
