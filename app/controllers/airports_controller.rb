@@ -69,7 +69,7 @@
   # GET /airports/search?q=SEARCHTERM
   def search
     results = []
-    results += Airport.where("iata_code LIKE ?", params[:q])
+    results += Airport.where("iata_code LIKE ?", params[:q].upcase)
     results += Airport.where("description LIKE ?", "%#{params[:q]}%")
     render json: results
   end
