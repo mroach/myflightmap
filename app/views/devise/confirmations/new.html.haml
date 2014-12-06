@@ -1,13 +1,15 @@
-%h2 Resend confirmation instructions
+%div.col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2
+  %div.panel.panel-default
+    %div.panel-heading
+      %div.panel-title Resend confirmation instructions
+    %div.panel-body
+      = error_messages
+      = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+        %div.form-group
+          %div.input-group
+            %span.input-group-addon
+              %i.fa.fa-envelope
+            = f.text_field :email, placeholder: "Email Address", class: "form-control", autofocus: true
 
-= simple_form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
-  = f.error_notification
-  = f.full_error :confirmation_token
-
-  %div.form-inputs
-    = f.input :email, required: true, autofocus: true
-
-  %div.form-actions
-    = f.button :submit, "Resend confirmation instructions"
-
-= render "devise/shared/links"
+        %div.form-group{style: "margin-top:10px"}
+          = f.submit "Resend confirmation instructions", class: "btn btn-success"

@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
 
@@ -54,6 +54,7 @@ class User < ActiveRecord::Base
           name: auth.info.name,   # Might be blank
           image: auth.info.image  # Might be blank
         )
+        user.skip_confirmation!
         user.save!
       end
     end
