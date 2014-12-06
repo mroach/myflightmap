@@ -7,7 +7,7 @@
     %div.row.user
       %div.col-xs-12.col-md-3
         = link_to profile_path(user.username) do
-          = image_tag user.image(:small)
+          = image_tag user.image(:square)
           %span.name= user.display_name
       %div.col-xs-12.col-md-2
         %div
