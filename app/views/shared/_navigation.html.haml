@@ -10,7 +10,7 @@
         %div= image_tag "logo.png", alt: "My Flight Map", class: 'brand-logo'
     %div.collapse.navbar-collapse
       %ul.nav.navbar-nav
-        = render 'layouts/navigation_links'
+        = render 'shared/navigation_links'
       - if user_signed_in?
         %ul.nav.navbar-nav.navbar-right
           %li.profile

@@ -12,7 +12,7 @@
     = csrf_meta_tags
   %body
     %header
-      = render 'layouts/navigation'
+      = render 'shared/navigation'
     %main.container{role: "main"}
-      = render 'layouts/messages'
+      = render 'shared/messages'
       = yield
