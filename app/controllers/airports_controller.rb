@@ -70,7 +70,7 @@
   def search
     results = []
     results += Airport.where("iata_code LIKE ?", params[:q].upcase)
-    results += Airport.where("description LIKE ?", "%#{params[:q]}%")
+    results += Airport.where("LOWER(description) LIKE ?", "%#{params[:q].downcase}%")
     render json: results
   end
 
