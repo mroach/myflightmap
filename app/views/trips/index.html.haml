@@ -16,6 +16,7 @@
 
 %div.trip-list
   - @trips.each do |trip|
+    - next if trip.flights.none? && !@show_controls
     %div.trip
       %h2.trip-name{:'data-click-url' => trip_path(trip)}
         = trip.name
