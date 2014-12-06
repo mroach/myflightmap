@@ -33,8 +33,9 @@
             = f.submit "Log in", class: "btn btn-success"
             - if devise_mapping.omniauthable?
               - resource_class.omniauth_providers.each do |provider|
-                = link_to t('actions.sign_in_with', provider: provider.to_s.titleize), omniauth_authorize_path(resource_name, provider), class: "btn btn-provider-#{provider}"
-                %br
+                = link_to t('actions.sign_in_with', provider: provider.to_s.titleize),
+                  omniauth_authorize_path(resource_name, provider),
+                  class: "btn btn-provider-#{provider}"
 
           %div.form-group
             - if devise_mapping.registerable? && controller_name != 'registrations'
