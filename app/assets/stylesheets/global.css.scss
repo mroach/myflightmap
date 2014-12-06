@@ -1,3 +1,9 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body { margin-bottom: 60px; }
 
 /* Animate transitions on links */
 a { transition: color .2s, background-color .2s; }

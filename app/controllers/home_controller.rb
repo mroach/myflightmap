@@ -4,4 +4,7 @@ class HomeController < ApplicationController
   def index
     @stats = FlightsHelper.generate_statistics(Flight.all.visible)
   end
+
+  def about
+  end
 end

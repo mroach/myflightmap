@@ -3,6 +3,8 @@ Myflightmap::Application.routes.draw do
   # Indicate what action responds to "/" requests
   root 'home#index'
 
+  get 'about', to: 'home#about'
+
   # The import namespace uses non-standard routes. Set them up.
   namespace :import do
     root to: :index
