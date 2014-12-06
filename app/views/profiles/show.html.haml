@@ -26,6 +26,11 @@
           %span
             = flag_image @flights.first.arrive_airport_info.country, 24
             = @flights.first.arrive_airport_info.to_s("%{description}")
+      - if @flights.any?
+        %div.map-link
+          = link_to map_path, class: "btn btn-primary btn-lg" do
+            %i.fa.fa-map-marker
+            Flight Map
 
   - if @trips.none? && @flights.none && @show_controls
     %div.col-xs-12.col-sm-8
