@@ -8,6 +8,17 @@ $ ->
     formatSubmit: "yyyy-mm-dd" # Format used on submit
     hiddenName: true
 
+  $('#flight_depart_date').on 'change', () ->
+    # Read the current depart date
+    depart_date = $(this).pickadate('picker').get('select')
+
+    # Get a handle for the arrive date
+    arrive_date_dp = $('#flight_arrive_date').pickadate('picker')
+
+    # If arrive date isn't set, set it (and forget it m i rite)
+    if !arrive_date_dp.get('select')
+      arrive_date_dp.set('select', depart_date)
+
   # when flight code is set, lookup the airline
   $('#flight_flight_code').bind 'change', () ->
     airline_code = $('#flight_flight_code').val().substr(0,2)
@@ -35,7 +46,7 @@ $ ->
     # if there's already an airport selected (edit mode) then
     # lookup the airport and populate the list with the one option
     initSelection: (element, callback) ->
-      currentValue = element.val();
+      currentValue = element.val()
       if currentValue
         $.ajax
           url: "/airports/#{currentValue}.json"

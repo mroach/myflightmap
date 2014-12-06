@@ -13,9 +13,9 @@ class Flight < ActiveRecord::Base
   belongs_to :airline
   belongs_to :user
 
-  validates_presence_of :user_id, :depart_date
+  validates_presence_of :user_id, :depart_date, :depart_airport, :arrive_airport
 
-  before_save :refresh_utc_times!, :update_duration!, :update_distance!
+  before_save :set_arrive_date!, :refresh_utc_times!, :update_duration!, :update_distance!
   after_save :update_related_trip!
 
   default_scope { order('depart_time_utc ASC') }
@@ -207,6 +207,12 @@ class Flight < ActiveRecord::Base
   end
 
   private
+
+  # If no arrival date was set, copy it from the departure date
+  def set_arrive_date!
+    return unless arrive_date.nil?
+    self.arrive_date = self.depart_date
+  end
 
   def update_related_trip!
     if !trip.nil? && (trip_id_changed? || depart_date_changed? || arrive_date_changed?)
