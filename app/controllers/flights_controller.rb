@@ -117,7 +117,10 @@ class FlightsController < ApplicationController
 
   private
     def authenticate!
-      not_found unless user_signed_in? && (current_user.admin? || current_user == @flight.user)
+      not_found unless user_signed_in? && (
+          @flight.nil? ||
+          (current_user.admin? || current_user == @flight.user)
+        )
     end
 
     def set_user

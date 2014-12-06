@@ -84,7 +84,10 @@ class TripsController < ApplicationController
 
   private
     def authenticate!
-      not_found unless user_signed_in? && (current_user.admin? || current_user == @trip.user)
+      not_found unless user_signed_in? && (
+          @trip.nil? ||
+          (current_user.admin? || current_user == @trip.user)
+        )
     end
 
     def set_user
