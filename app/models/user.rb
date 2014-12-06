@@ -4,9 +4,9 @@ class User < ActiveRecord::Base
   include Formattable
   audited except: [:current_sign_in_at, :last_sign_in_at, :current_sign_in_ip, :last_sign_in_ip]
 
-  has_many :trips
-  has_many :flights
-  has_many :identities # secret agent man!
+  has_many :trips, dependent: :destroy
+  has_many :flights, dependent: :destroy
+  has_many :identities, dependent: :destroy
   after_create :set_id_hash!
 
   # Include default devise modules. Others available are:
