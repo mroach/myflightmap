@@ -24,8 +24,9 @@ gem "pickadate-rails"
 # Use devise for the auth and registration framework
 gem 'devise'
 
-# Allow Facebook auth in devise
+# Allow Facebook and Google auth in devise
 gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.1.2'

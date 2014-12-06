@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, :omniauth_providers => [:facebook]
+         :omniauthable, :omniauth_providers => [:facebook, :google]
 
   validates :username,
     uniqueness: true,
@@ -100,6 +100,11 @@ class User < ActiveRecord::Base
       # For Facebook, we can ask for a specific size
       if image_url =~ /graph\.facebook\.com/
         image_url = "#{image_url}?type=#{size}"
+      end
+
+      if image_url =~ /googleusercontent\.com/
+        sizes = { square: 50, small: 50, normal: 100, large: 200 }
+        image_url.sub!(/sz=\d+/, "sz=#{sizes[:size]}")
       end
     end
 
