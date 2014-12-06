@@ -4,4 +4,8 @@ footer {
   width: 100%;
   min-height: 50px;
   background-color: #E2E2E2;
+  .links {
+    margin-top: 15px;
+    span { display: inline-block; margin-right: 15px }
+  }
 }
