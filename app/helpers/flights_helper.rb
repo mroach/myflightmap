@@ -1,5 +1,29 @@
 module FlightsHelper
 
+  def static_map(flight, width: 500, height: 300)
+    return if flight.depart_airport_info.nil? || flight.arrive_airport_info.nil?
+
+    url = "https://maps.googleapis.com/maps/api/staticmap"
+    query = {
+      size: "#{width}x#{height}",
+      key: Rails.application.secrets.google
+    }
+
+    depart_latlon = "#{flight.depart_airport_info.latitude},#{flight.depart_airport_info.longitude}"
+    arrive_latlon = "#{flight.arrive_airport_info.latitude},#{flight.arrive_airport_info.longitude}"
+
+    paths = [depart_latlon, arrive_latlon].join('|')
+    query[:path] = "color:0x0000ff|weight:5|#{paths}"
+
+    markers = [
+      { icon: "http://myflightmap.com/images/departing.png", point: depart_latlon },
+      { icon: "http://myflightmap.com/images/arriving.png", point: arrive_latlon },
+    ].map do |m|
+      "markers=size:mid|icon:#{m[:icon]}|shadow:true|#{m[:point]}"
+    end
+
+    image_tag "#{url}?#{query.to_query}&#{markers.join('&')}"
+  end
   # Get a description of the time change between airports
   # nil when there is none
   # Examples with style = "long":

@@ -49,7 +49,7 @@
 
 .flight-detail {
   max-width: 500px;
-  margin: 0 auto;
+  margin-bottom: 20px;
 
   .row1 { margin-bottom: 10px; }
   .row2 { background-color: #eee; border-radius: 4px; padding: 10px 0 }
@@ -71,6 +71,11 @@
     margin-top: 1em;
     label { font-weight: bold; text-transform: uppercase; line-height: 1; }
   }
+}
+
+.flight-map {
+  margin-bottom: 20px;
+  img { max-width: 100% }
 }
 
 .control-links { margin-top: 20px }
