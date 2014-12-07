@@ -21,7 +21,15 @@ $ ->
 
   # when flight code is set, lookup the airline
   $('#flight_flight_code').bind 'change', () ->
-    airline_code = $('#flight_flight_code').val().substr(0,2)
+    $flightCode = $('#flight_flight_code')
+
+    # strip invalid flight code chars and uppercase
+    $flightCode.val () ->
+      this.value.toUpperCase().replace(/\W/, '');
+
+    airline_code = $flightCode.val().substr(0,2)
+
+    # Lookup the airline by IATA code
     $.ajax
       url: "/airlines/#{airline_code}.json"
       success: (data) ->
