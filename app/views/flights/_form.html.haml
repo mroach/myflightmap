@@ -7,6 +7,7 @@
   %div.form-inputs
     %div.row
       %div.col-md-4= f.input :trip_id, as: :string
+    %hr
     %div.row
       %div.col-md-2= f.input :flight_code, placeholder: "Ex) SQ305"
       %div.col-md-3
@@ -16,10 +17,11 @@
       %div.col-md-3= f.input :depart_airport, as: :string
       %div.col-md-3.col-md-offset-1= f.input :arrive_airport, as: :string
     %div.row
-      %div.col-md-2= f.input :depart_date
-      %div.col-md-2= f.input :depart_time, placeholder: "HH:MM", label: "Time"
-      %div.col-md-2= f.input :arrive_date
-      %div.col-md-2= f.input :arrive_time, placeholder: "HH:MM", label: "Time"
+      %div.col-md-2= f.input :depart_date, label: "Departure date"
+      %div.col-md-2= f.input :depart_time, placeholder: "HH:MM", label: "Time (24hr)"
+      %div.col-md-2= f.input :arrive_date, label: "Arrival date"
+      %div.col-md-2= f.input :arrive_time, placeholder: "HH:MM", label: "Time (24hr)"
+    %hr
     %div.row
       %div.col-md-1= f.input :seat
       %div.col-md-2= f.input :seat_class, collection: Flight.seat_classes
