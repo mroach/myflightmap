@@ -8,9 +8,12 @@ module ApplicationHelper
   end
 
   def flag_image(country, size = 32)
-    country = country.downcase # can't use downcase! when the strong is frozen
+    country = country.downcase # can't use downcase! when the string is frozen
     country = "gb" if country == "uk"
-    image_tag "flags/#{size}/#{country.downcase}.png"
+    c = Country.new(country.upcase)
+    image_tag "flags/#{size}/#{country.downcase}.png",
+      alt: c ? c.name : country.upcase,
+      title: c ? c.name : country.upcase
   end
 
   def alliance_image(alliance, size = "icon")
