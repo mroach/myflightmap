@@ -1,6 +1,7 @@
 :javascript
   window.routes = #{@stats[:routes].to_json.html_safe};
   window.airports = #{@stats[:airports].to_json.html_safe};
+  window.top_airports = #{@stats[:top_airports].to_json.html_safe};
 
 %div.row
   %div.col-xs-12.col-md-6

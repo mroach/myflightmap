@@ -3,6 +3,7 @@
 :javascript
   window.routes = #{@stats[:routes].to_json.html_safe};
   window.airports = #{@stats[:airports].to_json.html_safe};
+  window.top_airports = #{@stats[:top_airports].to_json.html_safe};
 
 = render partial: "shared/profile_strip", object: @user, as: 'user'
 

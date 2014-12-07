@@ -106,9 +106,9 @@ module FlightsHelper
         airports: top_airports.length,
         airlines: top_airlines.length
       },
-      top_countries: top_countries.take(10),
-      top_airports: top_airports.take(10),
-      top_airlines: top_airlines.take(10)
+      top_countries: top_countries,
+      top_airports: top_airports,
+      top_airlines: top_airlines
     }
   end
 

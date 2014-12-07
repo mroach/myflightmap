@@ -4,6 +4,7 @@ $ ->
   #
   if $('.routes-map').length
     map = null
+    infoWindow = null
 
     initialize_map = () ->
       $mapElement = $('#map-canvas')
@@ -31,20 +32,23 @@ $ ->
 
         flightPath.setMap(map)
 
-        addAirport(map, markerBounds, route.from)
-        addAirport(map, markerBounds, route.to)
+      # Add markers on the map for the airports
+      for airport in window.top_airports
+        addAirport(map, markerBounds, airport)
 
       # autozoom map to the airports of the trip
       map.fitBounds(markerBounds)
 
     addAirport = (map, markerBounds, airport) ->
+      flights = airport.flights
+      airport = airport.airport
       latLng = new google.maps.LatLng(airport.latitude, airport.longitude)
 
       # Add the airport to the collection of lat/lng pairs for autozoom
       markerBounds.extend(latLng)
 
       # Create the marker
-      new google.maps.Marker
+      marker = new google.maps.Marker
         position: latLng
         map: map
         title: airport.iata_code + " - " + airport.name + " - " + airport.city + ', ' + airport.country
@@ -52,6 +56,18 @@ $ ->
           path: google.maps.SymbolPath.CIRCLE
           scale: 3
           strokeWeight: 1
+
+      google.maps.event.addListener marker, 'click', () ->
+        infoWindow.close() if infoWindow
+        flightWord = if flights == 1 then 'flight' else 'flights'
+        infoWindow = new google.maps.InfoWindow
+          content: "
+            <div style='font-size: 1.3em'>
+              <img src='/images/flags/24/#{airport.country.toLowerCase()}.png' style='display: inline-block; vertical-align: middle' />
+              <span style='vertical-align: middle'><strong>#{airport.iata_code}</strong> - #{airport.name}</span>
+            </div>
+            <div><strong>#{flights}</strong> #{flightWord}</div>"
+        infoWindow.open(map, marker)
 
     google.maps.event.addDomListener(window, 'load', initialize_map);
 
