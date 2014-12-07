@@ -2,8 +2,9 @@ require 'open-uri'
 require 'digest/md5'
 require 'base64'
 require 'tempfile'
+require 'httparty'
 
-def download_airline_logo(code)
+def download_airline_logo_google(code)
   # %s: IATA code in uppercase
   url = "http://www.gstatic.com/flights/airline_logos/35px/#{code}.png"
   airline = Airline.find_by iata_code: code
@@ -44,7 +45,21 @@ namespace :assets do
     )
 
     codes.each do |c|
-      download_airline_logo(c)
+      download_airline_logo_google(c)
+    end
+  end
+
+  desc "Try downloading missing airline logos from Momondo"
+  task :get_airline_logos_momondo => :environment do
+    Airline.all.each do |airline|
+      r = HTTParty.get("http://cdn1.momondo.net/logos/airlines/#{airline.iata_code.downcase}@2x.png")
+      if r.code == 200
+        puts "Adding logo to #{airline}"
+        airline.logo = StringIO.new(r.body)
+        airline.save!
+      else
+        puts "Couldn't find a logo for #{airline}"
+      end
     end
   end
 

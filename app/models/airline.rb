@@ -5,7 +5,7 @@ class Airline < ActiveRecord::Base
   ALLIANCES = { :staralliance => "Star Alliance", :oneworld => "oneworld", :skyteam => "Sky Team" }
 
   has_attached_file :logo,
-    :styles => { :medium => "35x35>", :icon => "16x16>" },
+    :styles => { large: "96x96>", medium: "48x48>", icon: "16x16>" },
     :default_url => "/images/:class/:attachment/:style/missing.png",
     :path => ":rails_root/public/system/:class/:attachment/:style/:iata_code.png",
     :url => "/system/:class/:attachment/:style/:iata_code.png"
