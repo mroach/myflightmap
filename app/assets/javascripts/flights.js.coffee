@@ -76,33 +76,6 @@ $ ->
           id: "-1:#{term}"
           text: term
 
-  # once the arrive airport is set, calculate the distance between
-  $('#flight_arrive_airport').bind 'change', () ->
-    $.ajax
-      url: "/airports/distance_between"
-      data:
-        from: $('#flight_depart_airport').val()
-        to: $('#flight_arrive_airport').val()
-      success: (data) ->
-        $('#flight_distance').val(data.distance)
-
-  # when flight arrival time is set, calculate the duration
-  $('#flight_arrive_time').bind 'change', () ->
-    origin = $('#flight_depart_airport').val()
-    destination = $('#flight_arrive_airport').val()
-    departs = $('#flight_depart_date').val() + 'T' + $('#flight_depart_time').val()
-    arrives = $('#flight_arrive_date').val() + 'T' + $('#flight_arrive_time').val()
-    $.ajax
-      url: "/flights/duration"
-      data:
-        from: origin,
-        to: destination
-        departs: departs
-        arrives: arrives
-      dataType: 'json'
-      success: (data) ->
-        $('#flight_duration').val(data.duration)
-
   $('.batch_edit_mark').bind 'change', () ->
     checked_total = $('.batch_edit_mark:checked').length
 

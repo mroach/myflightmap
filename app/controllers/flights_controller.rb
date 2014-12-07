@@ -1,10 +1,10 @@
 require "time"
 
 class FlightsController < ApplicationController
-  before_action :set_user, except: [:duration]
+  before_action :set_user
   before_action :set_flight, only: [:show, :edit, :update, :destroy]
   before_action :load_helper_data, only: [:new, :edit]
-  before_action :authenticate!, except: [:index, :show, :duration]
+  before_action :authenticate!, except: [:index, :show]
   skip_before_filter :authenticate_user!, only: [:index, :show]
 
   # GET /flights
@@ -100,19 +100,6 @@ class FlightsController < ApplicationController
       format.html { redirect_to flights_url }
       format.json { head :no_content }
     end
-  end
-
-  # GET /flights/duration?from=SIN&departs=2014-01-01T14:45&to=CPH&arrives=2014-01-01T07:30
-  def duration
-    from_airport = Airport.find_by iata_code: params[:from]
-    to_airport = Airport.find_by iata_code: params[:to]
-    depart_time = parse_time_with_zone(params[:departs], from_airport.timezone)
-    arrive_time = parse_time_with_zone(params[:arrives], to_airport.timezone)
-    render json: {
-      departs_utc: depart_time,
-      arrives_utc: arrive_time,
-      duration: (arrive_time - depart_time) / 60
-    }
   end
 
   private

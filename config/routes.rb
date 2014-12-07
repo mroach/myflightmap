@@ -19,11 +19,9 @@ Myflightmap::Application.routes.draw do
   end
 
   get 'airports/search', to: 'airports#search'
-  get 'airports/distance_between', to: 'airports#distance_between'
   get 'airports/:id/update_from_external', to: 'airports#update_from_external',
     as: 'update_airport_from_external'
 
-  get 'flights/duration', to: 'flights#duration'
   get 'members', to: 'profiles#index'
 
   resources :airlines, constraints: { id: /[A-Z]{2}/ }

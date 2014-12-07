@@ -3,7 +3,7 @@
 
  class AirportsController < ApplicationController
   before_action :set_airport, only: [:show, :edit, :update, :destroy]
-  before_action :reject_non_admin!, except: [:show, :search, :distance_between]
+  before_action :reject_non_admin!, except: [:show, :search]
 
   # GET /airports
   # GET /airports.json
@@ -72,13 +72,6 @@
     results += Airport.where("iata_code LIKE ?", params[:q].upcase)
     results += Airport.where("LOWER(description) LIKE ?", "%#{params[:q].downcase}%")
     render json: results
-  end
-
-  # GET /airports/distance_between?from=CPH&to=LHR
-  def distance_between
-    from_airport = Airport.find_by iata_code: params[:from]
-    to_airport = Airport.find_by iata_code: params[:to]
-    render json: { distance: Geo.distance_between(from_airport.coordinates, to_airport.coordinates).to_i }
   end
 
   # Update an airport's basic info from GCMap
