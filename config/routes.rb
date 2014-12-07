@@ -24,7 +24,7 @@ Myflightmap::Application.routes.draw do
 
   get 'members', to: 'profiles#index'
 
-  resources :airlines, constraints: { id: /[A-Z]{2}/ }
+  resources :airlines, constraints: { id: /\w{2}/ }
   resources :airports, constraints: { id: /[A-Z]{3}/ }
 
   devise_for :users, controllers: {
