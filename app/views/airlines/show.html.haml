@@ -5,7 +5,7 @@
     %h1
       = airline_logo @airline, :medium
       %span= @airline.name
-      = image_tag("alliances/medium/#{@airline.alliance}.png") if @airline.in_alliance?
+      = alliance_logo @airline.alliance, :medium
   %div.col-sm-4
     %div.airline-badge
       = flag_image @airline.country, "64"

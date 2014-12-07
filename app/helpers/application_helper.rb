@@ -16,8 +16,11 @@ module ApplicationHelper
       title: c ? c.name : country.upcase
   end
 
-  def alliance_image(alliance, size = "icon")
-    image_tag("alliances/#{size}/#{alliance.downcase}.png") unless alliance.nil?
+  def alliance_logo(alliance, size = "icon")
+    return nil if alliance.nil?
+    name = (Airline::ALLIANCES[alliance.to_sym] rescue alliance.titleize)
+    image_tag "alliances/#{size}/#{alliance.downcase}.png",
+      alt: name, title: name
   end
 
   # Eventually maybe support locale formatting

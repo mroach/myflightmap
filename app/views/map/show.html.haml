@@ -28,7 +28,7 @@
       - @stats[:top_airlines].each do |a|
         %tr
           %td= image_tag a[:airline].logo.url(:icon) if a[:airline]
-          %td= alliance_image a[:airline].alliance if a[:airline]
+          %td= alliance_logo a[:airline].alliance if a[:airline]
           %td.iata_code= a[:airline].iata_code if a[:airline]
           %td= a[:airline].name if a[:airline]
           %td.number= a[:flights]
