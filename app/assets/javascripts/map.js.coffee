@@ -13,6 +13,7 @@ $ ->
         mapTypeId: google.maps.MapTypeId.TERRAIN
 
       map = new google.maps.Map($mapElement[0], mapOptions)
+      markerBounds = new google.maps.LatLngBounds()
 
       for route in window.routes
 
@@ -30,12 +31,21 @@ $ ->
 
         flightPath.setMap(map)
 
-        addAirport(map, route.from)
-        addAirport(map, route.to)
+        addAirport(map, markerBounds, route.from)
+        addAirport(map, markerBounds, route.to)
 
-    addAirport = (map, airport) ->
+      # autozoom map to the airports of the trip
+      map.fitBounds(markerBounds)
+
+    addAirport = (map, markerBounds, airport) ->
+      latLng = new google.maps.LatLng(airport.latitude, airport.longitude)
+
+      # Add the airport to the collection of lat/lng pairs for autozoom
+      markerBounds.extend(latLng)
+
+      # Create the marker
       new google.maps.Marker
-        position: new google.maps.LatLng(airport.latitude, airport.longitude)
+        position: latLng
         map: map
         title: airport.iata_code + " - " + airport.name + " - " + airport.city + ', ' + airport.country
         icon:
