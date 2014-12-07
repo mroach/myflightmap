@@ -104,7 +104,7 @@ class User < ActiveRecord::Base
 
       if image_url =~ /googleusercontent\.com/
         sizes = { square: 50, small: 50, normal: 100, large: 200 }
-        image_url.sub!(/sz=\d+/, "sz=#{sizes[:size]}")
+        image_url.sub!(/sz=\d+/, "sz=#{sizes[size]}")
       end
     end
 
