@@ -10,6 +10,6 @@
   = link_to "Import another Flight Memory export", import_flight_memory_root_path, class: 'btn btn-success'
   = link_to "View all of my flights", flights_path, class: 'btn btn-primary'
 
-<br />
+%hr
 
 = render partial: "shared/flights_slim", locals: { flights: @flights }
