@@ -1,4 +1,6 @@
 table.stats {
+  img.flag { height: 24px }
+
   td { padding: .1em .2em }
   td.number { text-align: right; min-width: 3em; }
   &.airports {
@@ -6,6 +8,8 @@ table.stats {
   }
   &.airlines {
     .iata_code { font-weight: bold }
+    img.airline-logo { height: 24px }
+    img.alliance-logo { height: 20px }
   }
 }
 #map-canvas { width: 100%; height: 100%; border: solid 1px #d0d4d9 }

@@ -10,7 +10,7 @@
     - if user.last_flight && user.last_flight.arrive_airport_info
       %div.near
         %span
-          = flag_image user.last_flight.arrive_airport_info.country, 16
+          = flag_image user.last_flight.arrive_airport_info.country
           = user.last_flight.arrive_airport_info.to_s("%{description}")
   %div.links
     %ul.nav.nav-pills

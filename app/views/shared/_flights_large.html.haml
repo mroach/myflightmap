@@ -2,7 +2,7 @@
   - flights.each do |f|
     %div.flight{:'data-click-url' => flight_path(f)}
       %div.col1
-        %div.airline_logo= airline_logo f.airline, :medium
+        %div.airline_logo= airline_logo f.airline
         %div.flight_code_and_date
           %div.flight_code
             %span.airline_code= f.airline_code

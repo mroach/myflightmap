@@ -8,7 +8,7 @@
     %h1= "#{@airport.name} - #{@airport.city}, #{@airport.country}"
   %div.col-sm-4
     %div.airport-badge
-      = flag_image @airport.country, 64
+      = flag_image @airport.country
       %span.code= @airport.iata_code
 %div.row
   %div.col-sm-6

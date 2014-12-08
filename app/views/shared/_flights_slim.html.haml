@@ -5,7 +5,7 @@
         - if @batch_editing
           %div.batch_edit_mark_container
             %input.batch_edit_mark{type: "checkbox", name: "flight[update]", value: f.id}
-        %div.airline_logo= airline_logo f.airline, :medium
+        %div.airline_logo= airline_logo f.airline
         %div.flight_code_and_date
           %div.flight_code #{f.airline_code} #{f.flight_number}
           %div.depart_date= l f.depart_date, format: :medium

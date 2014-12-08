@@ -63,7 +63,7 @@ $ ->
         infoWindow = new google.maps.InfoWindow
           content: "
             <div style='font-size: 1.3em'>
-              <img src='/images/flags/24/#{airport.country.toLowerCase()}.png' style='display: inline-block; vertical-align: middle' />
+              <img src='/images/flags/48/#{airport.country.toLowerCase()}.png' style='display: inline-block; vertical-align: middle; width: 24px' />
               <span style='vertical-align: middle'><strong>#{airport.iata_code}</strong> - #{airport.name}</span>
             </div>
             <div><strong>#{flights}</strong> #{flightWord}</div>"

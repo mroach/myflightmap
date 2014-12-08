@@ -24,7 +24,7 @@
         %div.near
           %label= t('.near')
           %span
-            = flag_image @flights.first.arrive_airport_info.country, 24
+            = flag_image @flights.first.arrive_airport_info.country
             = @flights.first.arrive_airport_info.to_s("%{description}")
       - if @flights.any?
         %div.map-link
@@ -42,7 +42,7 @@
     / Recent trips
     %div.col-xs-12.col-sm-4
       %h3= t('.recent_trips')
-      %div.list-group
+      %div.list-group.trips
         - @trips.each do |t|
           = link_to trip_path(t), class: 'list-group-item' do
             %span.badge= t.flights.length
@@ -51,10 +51,10 @@
     / Recent flights
     %div.col-xs-12.col-sm-4
       %h3= t('.recent_flights')
-      %div.list-group
+      %div.list-group.flights
         - @flights.each do |f|
           = link_to flight_path(f), class: 'list-group-item' do
-            = airline_logo f.airline, :medium
+            = airline_logo f.airline
             #{f.depart_airport} &#x2708; #{f.arrive_airport}  (#{l f.depart_date, format: :short})
       = link_to t('words.view_all'), flights_path
 

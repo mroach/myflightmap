@@ -6,7 +6,7 @@
     %div.flight{:'data-click-url' => flight_path(f)}
       %div.from_to #{f.depart_airport} &#x2708; #{f.arrive_airport}
       %div.row1
-        %div.airline_logo= airline_logo f.airline, :medium
+        %div.airline_logo= airline_logo f.airline
         %div.flight_code_and_date
           %div.flight_code #{f.airline_code} #{f.flight_number}
           %div.depart_date= l f.depart_date, format: :medium

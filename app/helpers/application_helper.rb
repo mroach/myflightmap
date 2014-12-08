@@ -1,26 +1,34 @@
 module ApplicationHelper
-  def airline_logo(airline, size = :medium)
+  def airline_logo(airline, size = :original)
     if airline.nil?
-      image_tag image_path "airlines/logos/#{size}/missing.png", alt: "No Airline"
+      image_tag image_path "airlines/logos/#{size}/missing.png",
+        alt: "No Airline",
+        class: 'airline-logo'
     else
-      image_tag airline.logo.url(size), alt: airline.name, title: airline.name
+      image_tag airline.logo.url(size),
+        alt: airline.name,
+        title: airline.name,
+        class: 'airline-logo'
     end
   end
 
-  def flag_image(country, size = 32)
+  def flag_image(country, size = 64)
     country = country.downcase # can't use downcase! when the string is frozen
     country = "gb" if country == "uk"
     c = Country.new(country.upcase)
     image_tag "flags/#{size}/#{country.downcase}.png",
       alt: c ? c.name : country.upcase,
-      title: c ? c.name : country.upcase
+      title: c ? c.name : country.upcase,
+      class: 'flag'
   end
 
-  def alliance_logo(alliance, size = "icon")
+  def alliance_logo(alliance, size = :large)
     return nil if alliance.nil?
     name = (Airline::ALLIANCES[alliance.to_sym] rescue alliance.titleize)
     image_tag "alliances/#{size}/#{alliance.downcase}.png",
-      alt: name, title: name
+      alt: name,
+      title: name,
+      class: 'alliance-logo'
   end
 
   # Eventually maybe support locale formatting

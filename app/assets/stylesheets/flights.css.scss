@@ -20,6 +20,7 @@
 
   .airline_logo, .flight_code_and_date, .batch_edit_mark_container { display: inline-block; vertical-align: middle }
   .airline_logo { margin-right: 6px }
+  img.airline-logo { height: 38px }
   .flight_code, .from_to { font-weight: bold }
 
   .duplicate { color: #888; }
@@ -59,6 +60,7 @@
   .arrive { padding-left: 0 !important }
 
   .airline_logo { text-align: center }
+  img.airline-logo { height: 48px }
   .airline_name { font-size: 1.2em; }
   .flight-icon { text-align: center; font-size: 1.7em; }
   .flight_code { line-height: 1 }
@@ -97,6 +99,7 @@
 
     .flight_code { font-size: 1.3em; }
     .airline_logo { display: inline-block; margin-right: .8em; }
+    img.airline-logo { width: 48px }
     .flight_code_and_date { display: inline-block }
     .depart_date { font-size: 1.1em; font-weight: bold }
     .departure, .arrival {
@@ -140,6 +143,7 @@
     .from_to { background-color: #bbb; text-align: center; font-weight: bold; font-size: 1.1em }
 
     .airline_logo { display: inline-block; margin: 0 5px; vertical-align: middle; }
+    img.airline-logo { height: 38px }
     .flight_code { font-weight: bold }
     .flight_code_and_date { display: inline-block; vertical-align: middle; line-height: 1.2 }
 

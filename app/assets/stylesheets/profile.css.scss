@@ -1,5 +1,9 @@
 .profile {
   h3 { margin-top: 0 }
+
+  .flights {
+    img.airline-logo { height: 28px }
+  }
 }
 .profile-header {
   margin-bottom: 15px;
@@ -22,7 +26,7 @@
     font-size: 1.3em;
     & > * { vertical-align: middle }
   }
-
+  img.flag { height: 32px }
   .map-link { margin-top: 8px }
 }
 
@@ -52,6 +56,8 @@
     }
     a { font-weight: bold };
   }
+
+  img.flag { height: 26px }
 }
 
 .users {
