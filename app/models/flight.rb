@@ -190,6 +190,10 @@ class Flight < ActiveRecord::Base
     !find_duplicate.nil?
   end
 
+  def is_duplicate?
+    @is_duplicate
+  end
+
   def self.detect_duplicates(flights)
     flights.each { |f| f.is_duplicate = f.has_duplicate? }
   end
