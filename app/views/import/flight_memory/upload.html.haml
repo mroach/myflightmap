@@ -6,36 +6,10 @@
   %p.alert.alert-danger
     #{@duplicates_skipped} duplicate #{"flight".pluralize(@duplicates_skipped)} detected and not imported.
 
-= link_to "Import another Flight Memory export", import_flight_memory_root_path
-= link_to "View all of my flights", flights_path
+%div.btn-group
+  = link_to "Import another Flight Memory export", import_flight_memory_root_path, class: 'btn btn-success'
+  = link_to "View all of my flights", flights_path, class: 'btn btn-primary'
 
-%table.flight-board
-  %thead
-    %tr
-      %th Date
-      %th Time
-      %th From
-      %th To
-      %th Flight
-      %th Airline
-      %th Aircraft
-      %th Distance
-      %th Duration
-  %tbody
-    - @flights.each do |f|
-      %tr{class: ["flight", f.is_duplicate ? 'duplicate' : '']}
-        %td.depart_date= f.depart_date.strftime('%d %b %Y')
-        %td
-          - if !f.depart_time.nil?
-            = f.depart_time.strftime('%H:%M')
-            - if !f.arrive_time.nil?
-              =" - #{f.arrive_time.strftime('%H:%M')} #{f.arrive_time_offset}"
-        %td.depart_airport= f.depart_airport
-        %td.arrive_airport= f.arrive_airport
-        %td.flight_code
-          %span.airline_code= f.airline_code
-          %span.flight_number= f.flight_number
-        %td.airline_name= f.airline_name
-        %td.aircraft_description= f.aircraft_description
-        %td.distance= f.distance
-        %td.duration= f.duration_formatted
+<br />
+
+= render partial: "shared/flights_slim", locals: { flights: @flights }

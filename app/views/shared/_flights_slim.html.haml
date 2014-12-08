@@ -1,6 +1,6 @@
 %div.container.flight-board
   - flights.each do |f|
-    %div.row{:'data-click-url' => flight_path(f)}
+    %div.row{:'data-click-url' => (flight_path(f) rescue nil)}
       %div.col-md-2.col-sm-3.col-xs-6
         - if @batch_editing
           %div.batch_edit_mark_container
