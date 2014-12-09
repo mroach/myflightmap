@@ -6,6 +6,7 @@ namespace :data do
       :groom_flight_code,
       :standardise_airline_names,
       :set_missing_flight_airline,
+      :set_missing_airline_name,
       :refresh_flight_utc_times,
       :refresh_trip_dates,
       :prepend_airline_code
@@ -26,13 +27,27 @@ namespace :data do
       names = Flight.where("airline_id IS NULL AND airline_name IS NOT NULL AND airline_name != ''")
                     .pluck(:airline_name).sort.uniq
       names.each do |name|
-        a = Airline.find_by name: name
+        a = Airline.where("LOWER(name) = ?", name.downcase).first
         if a.nil?
           puts "Couldn't find an airline record for '#{name}'"
         else
           puts "Setting airline to '#{a.iata_code}' for '#{name}' records."
-          Flight.where("airline_id IS NULL").where(airline_name: name).update_all(airline_id: a.id)
+          Flight.where("airline_id IS NULL AND LOWER(airline_name) = ?", name.downcase).each do |f|
+            f.airline = a
+            f.audit_comment = "Updated by data:cleanup:set_missing_flight_airline"
+            f.save!
+          end
         end
+      end
+    end
+
+    desc "Copy airline name into Flight.airline_name"
+    task :set_missing_airline_name => :environment do
+      Flight.where("airline_name IS NULL AND airline_id IS NOT NULL").each do |f|
+        puts "Setting airline name to #{f.airline.name}"
+        f.airline_name = f.airline.name
+        f.audit_comment = "Updated by data:cleanup:set_missing_airline_name"
+        f.save!
       end
     end
 
@@ -54,10 +69,21 @@ namespace :data do
         "SAS Scandinavian Airlines" => "Scandinavian Airlines System",
         "SWISS" => "Swiss International Airlines",
         "Swiss International Airlines" => "Swiss International Air Lines",
-        "Thai Airways" => "Thai Airways International"
+        "Thai Airways" => "Thai Airways International",
+        "United" => "United Airlines",
+        "Qantas Airways" => "Qantas",
+        "Jetstar" => "Jetstar Airways",
+        "Cathay" => "Cathay Pacific",
+        "Skyeurope airlines" => "SkyEurope",
+        "Ryan Air" => "Ryanair",
+        "Virgin Blue" => "Virgin Australia"
       }
       fixes.each do |wrong,right|
-        Flight.where(airline_name: wrong).update_all(airline_name: right)
+        Flight.where("LOWER(airline_name) = ?", wrong.downcase).each do |f|
+          f.airline_name = right
+          f.audit_comment = "Updated by data:cleanup:standardise_airline_names"
+          f.save!
+        end
       end
     end
 
@@ -71,6 +97,7 @@ namespace :data do
           new_fc = f.flight_code.upcase.sub(re, '')
           puts "Fixing airline code #{f.flight_code} to #{new_fc}"
           f.flight_code = new_fc
+          f.audit_comment = "Updated by data:cleanup:groom_flight_code"
           f.save!
         end
       end
@@ -82,6 +109,7 @@ namespace :data do
       flights.each do |f|
         unless f.flight_code_has_airline_code?
           f.flight_code = "#{f.airline.iata_code}#{f.flight_code}"
+          f.audit_comment = "Updated by data:cleanup:prepend_airline_code"
           f.save!
           puts "#{f.depart_airport} => #{f.arrive_airport} FN: #{f.flight_code}"
         end
@@ -95,7 +123,12 @@ namespace :data do
         :oneworld => %w(AB CX JL MH RJ AA AY LA QF S7 BA IB JJ QR UL),
         :skyteam => %w(SU AR AF AM UX CI MU CZ OK DL GA KQ KL KE ME SV RO VN MF)
       }
-      alliances.each { |k,v| Airline.where("iata_code IN (?) AND alliance <> ?", v, k).update_all(alliance: k) }
+      alliances.each do |k,v|
+        Airline.where("iata_code IN (?) AND alliance <> ?", v, k).each do |a|
+          a.alliance = k
+          a.audit_comment = "Updated by data:cleanup:set_airline_alliances"
+        end
+      end
     end
 
     desc "Refresh trip begin/end dates"
@@ -116,13 +149,18 @@ namespace :data do
           e.arrive_time_utc = arrive_utc
         end
 
+        e.audit_comment = "Updated by data:cleanup:refresh_flight_utc_times"
         e.save!
       end
     end
 
     desc "Regenerate flight slugs"
     task :regenerate_flight_slugs => :environment do
-      Flight.all.each { |e| e.slug = nil; e.save! }
+      Flight.all.each do |e|
+        e.slug = nil
+        e.audit_comment = "Updated by data:cleanup:regenerate_flight_slugs"
+        e.save!
+      end
     end
   end
 end
