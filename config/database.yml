@@ -1,6 +1,10 @@
 development:
-  adapter: sqlite3
-  database: db/development.sqlite3
+  adapter: postgresql
+  encoding: unicode
+  database: myflightmap
+  host: localhost
+  username: myflightmap
+  password: upintheair
   pool: 5
   timeout: 5000
 
