@@ -28,7 +28,7 @@ $ ->
           geodesic: true
           strokeColor: '#A73700'
           strokeOpacity: 1.0
-          strokeWeight: 1
+          strokeWeight: 1.2
 
         flightPath.setMap(map)
 
