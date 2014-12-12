@@ -169,6 +169,11 @@
 }
 
 @media (max-width: 767px) {
+  .tiny-flights .flight {
+    width: 140px;
+    margin-left: 1px;
+    margin-right: 1px;
+  }
   .flight-list {
     .flight {
       .airline_logo { max-width: 24px; }
