@@ -43,7 +43,8 @@
     %div.row.details
       %div.col-xs-4
         %label Class
-        %div= @flight.seat_class
+        %div
+          %div.seat_class{class: @flight.seat_class.downcase.sub(/\W/, '')}= @flight.seat_class
       %div.col-xs-4
         %label Aircraft
         %div= @flight.aircraft_type

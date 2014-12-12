@@ -73,6 +73,12 @@
     margin-top: 1em;
     label { font-weight: bold; text-transform: uppercase; line-height: 1; }
   }
+
+  .seat_class {
+    border-radius: 3px;
+    padding: .1em .2em;
+    display: inline-block;
+  }
 }
 
 .flight-map {
@@ -84,6 +90,17 @@
 
 .arrival_offset { vertical-align: super; font-size: .8em; color: blue }
 .time_change { margin-left: .5em; color: #900; }
+
+.seat_class {
+  background-color: #222;
+  color: white;
+  text-shadow: 0 1px #444;
+  &.economy     { background-color: #247932; }
+  &.economyplus { background-color: #0b3897; }
+  &.business    { background-color: #A2A18A; }
+  &.first       { background-color: #c48b26; }
+  &.suite       { background-color: #D02746; }
+}
 
 .flight-list {
   .flight {
@@ -117,12 +134,6 @@
       font-weight: lighter;
       color: white;
       display: inline-block;
-
-      &.economy     { background-color: #247932; }
-      &.economyplus { background-color: #0b3897; }
-      &.business    { background-color: #c48b26; }
-      &.first       { background-color: #420906; }
-      &.suites      { background-color: #420906; }
     }
     .times { font-weight: bold; font-size: 1.1em; }
     .duration { margin-left: .5em; opacity: .9; }
@@ -140,7 +151,7 @@
     margin: 0 4px 10px 0;
 
     /* title bar effectively */
-    .from_to { background-color: #bbb; text-align: center; font-weight: bold; font-size: 1.1em }
+    .from_to { text-align: center; font-size: 1.1em }
 
     .airline_logo { display: inline-block; margin: 0 5px; vertical-align: middle; }
     img.airline-logo { height: 38px }
