@@ -76,7 +76,8 @@ namespace :data do
         "Cathay" => "Cathay Pacific",
         "Skyeurope airlines" => "SkyEurope",
         "Ryan Air" => "Ryanair",
-        "Virgin Blue" => "Virgin Australia"
+        "Virgin Blue" => "Virgin Australia",
+        "Norwegian" => "Norwegian Air Shuttle"
       }
       fixes.each do |wrong,right|
         Flight.where("LOWER(airline_name) = ?", wrong.downcase).each do |f|
