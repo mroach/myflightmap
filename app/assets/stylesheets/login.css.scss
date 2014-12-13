@@ -1,11 +1,10 @@
-.btn.btn-provider-facebook {
+.btn.social {
   color: white;
-  background-color: rgb(58,77,147);
-}
+  margin-right: 4px;
+  margin-bottom: 4px;
 
-.btn.btn-provider-google {
-  color: white;
-  background-color: #CC3820;
+  &.facebook { background-color: rgb(58,77,147); }
+  &.google { background-color: #CC3820; }
 }
 
 

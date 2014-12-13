@@ -23,9 +23,7 @@
         - resource_class.omniauth_providers.each do |provider|
           - unless @user.oauth_provider_connected?(provider)
             %div.panel-body
-              = link_to t('actions.connect_with', provider: provider.to_s.titleize),
-                omniauth_authorize_path(resource_name, provider),
-                class: "btn btn-provider-#{provider}"
+              = social_login_button(provider, 'actions.connect_with')
 
       - if @user.password_changeable?
         %div.panel-body

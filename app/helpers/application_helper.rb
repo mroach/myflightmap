@@ -31,6 +31,12 @@ module ApplicationHelper
       class: 'alliance-logo'
   end
 
+  def social_login_button(provider, template)
+    link_to t(template, provider: provider.to_s.titleize),
+      omniauth_authorize_path(resource_name, provider),
+      class: "btn social #{provider}"
+  end
+
   # Eventually maybe support locale formatting
   def format_time(time)
     return nil if time.nil?
