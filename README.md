@@ -58,22 +58,7 @@ Use bundler to read the `Gemfile.lock` to install all necessary gems at the corr
 bundle install
 ```
 
-### Step 5. Install Bower
-
-To fetch some external resources like stylesheets and scripts we're using Bower.
-Install Bower with npm:
-
-```
-npm install -g bower
-```
-
-Then you can run this to install dependencies:
-
-```
-bower install
-```
-
-### Step 6. Running
+### Step 5. Running
 
 From inside the `myflightmap` directory:
 
