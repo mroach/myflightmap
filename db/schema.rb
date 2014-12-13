@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141206031539) do
+ActiveRecord::Schema.define(version: 20141213090527) do
 
   create_table "airlines", force: true do |t|
     t.string   "iata_code"
@@ -67,6 +67,17 @@ ActiveRecord::Schema.define(version: 20141206031539) do
   add_index "audits", ["created_at"], name: "index_audits_on_created_at"
   add_index "audits", ["request_uuid"], name: "index_audits_on_request_uuid"
   add_index "audits", ["user_id", "user_type"], name: "user_index"
+
+  create_table "callback_logs", force: true do |t|
+    t.string   "provider",    null: false
+    t.string   "url"
+    t.text     "data"
+    t.string   "target_type"
+    t.string   "target_id"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "flights", force: true do |t|
     t.integer  "user_id"

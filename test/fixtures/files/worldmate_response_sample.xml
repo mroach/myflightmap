@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns2:worldmate-parsing-result xmlns:ns2="http://www.worldmate.com/schemas/worldmate-api-v1.xsd" request-id="99828633" received="2014-12-13T09:11:28.000Z">
+  <status>SUCCESS</status>
+  <error-msg>An itinerary confirmation e-mail was parsed successfully</error-msg>
+  <headers>
+    <header value="&lt;mroach@myflightmap.com&gt;" name="Return-Path" />
+    <header value="v=1; a=rsa-sha256; c=relaxed/relaxed;         d=gmail.com; s=20120113;         h=from:content-type:subject:date:references:to:message-id          :mime-version;         bh=zDEne4zS4qrou5xrXdxknDIDwGw/O5SACmHQWN2Uo58=;         b=CqprGCJZUG2MgHkDGd7HWmD4nLTk19CnGotve8hCY2xGOEHHr3CvrzIRXPGrrjrvBt          cidJ/jUHKtTQXXvuHpJ7qm0933W3c1zNzMYsWUTH83Z9Hilgxyzen8dRd5mnmj+vZ/TX          AFYic/UXNmI8OwX7IL/a3xL6CwtJjNQWW1lHXz5gFImcK7OEaGXODSi2MOu2aSGxxuDd          uj8Q8bCValUKk2gNT0Ds1KmRtCDWEte80Nlgv4PyFvKZ9eynbUHvbSOIg57oWRoOCpYd          DU1pycnIEP1nVlSXjujAA0ifWKp6519qZLsUJ6STUDwYM08kE7N4QzDklW9cwWG4O3jA          y+jw==" name="DKIM-Signature" />
+    <header value="apidemo@tomcat-parsing-01.prod.worldmate.com" name="Delivered-To" />
+    <header value="&lt;NCSMCEXC15xRclk6yGU00825d8b@NCSMCEXC15.nam.coair.com&gt;" name="References" />
+    <header value="by 10.66.164.200 with SMTP id ys8mr5796421pab.130.1418461885581;         Sat, 13 Dec 2014 01:11:25 -0800 (PST)" name="X-Received" />
+    <header value="Apple Mail (2.1993)" name="X-Mailer" />
+    <header value="SpamAssassin 3.3.1 (2010-03-16) on  tomcat-parsing-01.prod.worldmate.com" name="X-Spam-Checker-Version" />
+    <header value="Michael Roach &lt;mroach@myflightmap.com&gt;" name="From" />
+    <header value="" name="X-Spam-Level" />
+    <header value="apidemo@worldmate.com" name="To" />
+    <header value="&lt;6710B94F-F984-427D-B813-F108585B7DA2@gmail.com&gt;" name="Message-Id" />
+    <header value="No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,  DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FROM,HTML_MESSAGE,RCVD_IN_DNSWL_LOW,  T_REMOTE_IMAGE,URIBL_BLOCKED autolearn=ham version=3.3.1" name="X-Spam-Status" />
+    <header value="1.0 (Mac OS X Mail 8.1 (1993))" name="Mime-Version" />
+    <header value="from [10.1.1.14] ([124.149.139.14])         by mx.google.com with ESMTPSA id we8sm3606561pbc.80.2014.12.13.01.11.20         for &lt;apidemo@worldmate.com&gt;         (version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);         Sat, 13 Dec 2014 01:11:24 -0800 (PST)" name="Received" />
+    <header value="multipart/alternative; boundary=&quot;Apple-Mail=_9CC63CF6-4B12-4DEC-8DCB-5C8B10881701&quot;" name="Content-Type" />
+    <header value="Sat, 13 Dec 2014 17:11:15 +0800" name="Date" />
+    <header value="My Awesome Trip!" name="Subject" />
+    <header value="apidemo@tomcat-parsing-01.prod.worldmate.com" name="X-Original-To" />
+  </headers>
+  <end-user-emails>
+    <user email="XXX000@trips.myflightmap.com" name="" />
+  </end-user-emails>
+  <reservation-details>
+    <booking-details>
+      <name>United Airlines</name>
+      <url>http://www.united.com</url>
+    </booking-details>
+    <total-price />
+  </reservation-details>
+  <items size="3">
+    <flight>
+      <notes>Price refers to all flights in itinerary</notes>
+      <booking-details>
+        <name>United Airlines</name>
+        <confirmation-number>CNKMVZ</confirmation-number>
+      </booking-details>
+      <provider-details>
+        <name>SAS</name>
+        <confirmation-number>CNKMVZ</confirmation-number>
+      </provider-details>
+      <total-price>
+        <total-cost>52.60</total-cost>
+        <currency-code>USD</currency-code>
+      </total-price>
+      <details number="553" airline-code="SK" />
+      <departure>
+        <latitude>55.629</latitude>
+        <longitude>12.639</longitude>
+        <airport-code>CPH</airport-code>
+        <name>Copenhagen Airport</name>
+        <terminal />
+        <gate />
+        <local-date-time>2014-01-28T18:10:00.000Z</local-date-time>
+        <utc-date-time>2014-01-28T17:10:00.000Z</utc-date-time>
+      </departure>
+      <arrival>
+        <latitude>52.3</latitude>
+        <longitude>4.76</longitude>
+        <airport-code>AMS</airport-code>
+        <name>Amsterdam-Schiphol Airport</name>
+        <terminal />
+        <gate />
+        <local-date-time>2014-01-28T19:35:00.000Z</local-date-time>
+        <utc-date-time>2014-01-28T18:35:00.000Z</utc-date-time>
+      </arrival>
+      <duration>0</duration>
+      <distance-in-miles>0</distance-in-miles>
+      <class-type />
+    </flight>
+    <flight>
+      <notes>Price refers to all flights in itinerary</notes>
+      <booking-details>
+        <name>United Airlines</name>
+        <confirmation-number>CNKMVZ</confirmation-number>
+      </booking-details>
+      <provider-details>
+        <name>EVA Air</name>
+        <confirmation-number>CNKMVZ</confirmation-number>
+      </provider-details>
+      <total-price>
+        <total-cost>52.60</total-cost>
+        <currency-code>USD</currency-code>
+      </total-price>
+      <details number="76" airline-code="BR" />
+      <departure>
+        <latitude>52.3</latitude>
+        <longitude>4.76</longitude>
+        <airport-code>AMS</airport-code>
+        <name>Amsterdam-Schiphol Airport</name>
+        <terminal />
+        <gate />
+        <local-date-time>2014-01-28T21:40:00.000Z</local-date-time>
+        <utc-date-time>2014-01-28T20:40:00.000Z</utc-date-time>
+      </departure>
+      <arrival>
+        <latitude>13.68</latitude>
+        <longitude>100.74</longitude>
+        <airport-code>BKK</airport-code>
+        <name>Suvarnabhumi Airport</name>
+        <terminal />
+        <gate />
+        <local-date-time>2014-01-29T14:30:00.000Z</local-date-time>
+        <utc-date-time>2014-01-29T07:30:00.000Z</utc-date-time>
+      </arrival>
+      <duration>0</duration>
+      <distance-in-miles>0</distance-in-miles>
+      <class-type />
+    </flight>
+    <flight>
+      <notes>Price refers to all flights in itinerary</notes>
+      <booking-details>
+        <name>United Airlines</name>
+        <confirmation-number>CNKMVZ</confirmation-number>
+      </booking-details>
+      <provider-details>
+        <name>Thai Airways</name>
+        <confirmation-number>CNKMVZ</confirmation-number>
+      </provider-details>
+      <total-price>
+        <total-cost>52.60</total-cost>
+        <currency-code>USD</currency-code>
+      </total-price>
+      <details number="564" airline-code="TG" />
+      <departure>
+        <latitude>13.68</latitude>
+        <longitude>100.74</longitude>
+        <airport-code>BKK</airport-code>
+        <name>Suvarnabhumi Airport</name>
+        <terminal />
+        <gate />
+        <local-date-time>2014-01-29T17:35:00.000Z</local-date-time>
+        <utc-date-time>2014-01-29T10:35:00.000Z</utc-date-time>
+      </departure>
+      <arrival>
+        <latitude>21.03</latitude>
+        <longitude>105.89</longitude>
+        <airport-code>HAN</airport-code>
+        <name>Noibai Airport</name>
+        <terminal />
+        <gate />
+        <local-date-time>2014-01-29T19:20:00.000Z</local-date-time>
+        <utc-date-time>2014-01-29T12:20:00.000Z</utc-date-time>
+      </arrival>
+      <duration>0</duration>
+      <distance-in-miles>0</distance-in-miles>
+      <class-type />
+    </flight>
+  </items>
+</ns2:worldmate-parsing-result>
