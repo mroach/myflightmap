@@ -70,6 +70,9 @@ gem "autoprefixer-rails"
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0'
 
+# Install bower packages
+gem "bower-rails", "~> 0.9.1"
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
