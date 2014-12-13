@@ -3,6 +3,7 @@ class Airline < ActiveRecord::Base
   audited
 
   ALLIANCES = { :staralliance => "Star Alliance", :oneworld => "oneworld", :skyteam => "Sky Team" }
+  IATA_CODE_REGEX = /\A (?: [A-Z]{2} | [A-Z]\d | \d[A-Z] ) \z/x
 
   has_attached_file :logo,
     :styles => { large: "96x96>", medium: "48x48>", small: "32x32>", icon: "16x16>" },

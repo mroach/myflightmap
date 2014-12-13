@@ -77,6 +77,29 @@ class Flight < ActiveRecord::Base
     value and write_attribute(:flight_code, value.sub(/\W/, '').upcase)
   end
 
+  # Allow setting the airline ID by IATA code. e.g. airline_id = 'SQ'
+  def airline_id=(value)
+    logger.debug "airline_id to be set to #{value}"
+    if value.is_a?(String) && value.match(Airline::IATA_CODE_REGEX)
+      if airline = Airline.find_by_iata_code(value)
+        write_attribute(:airline_id, airline.id)
+        write_attribute(:airline_name, airline.name)
+      end
+    else
+      write_attribute(:airline_id, value)
+    end
+  end
+
+  # When setting the airline name, try to match the airline_id
+  def airline_name=(value)
+    if !self.airline_id
+      if airline = Airline.find_by_name(value)
+        write_attribute(:airline_id, airline.id)
+      end
+    end
+    write_attribute(:airline_name, value)
+  end
+
   # Just the airline code from the flight number
   # ex) in "NH263", "NH" is the airline code
   def airline_code
