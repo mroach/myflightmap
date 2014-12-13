@@ -9,7 +9,6 @@
 
 %div.row.profile
   %div.col-xs-12.col-sm-4
-
     %div.profile-header
       %div.photo= image_tag @user.image(:large)
       %h1.user_name
@@ -32,6 +31,8 @@
             %i.fa.fa-map-marker
             Flight Map
 
+    %br
+
   - if @trips.none? && @flights.none && @show_controls
     %div.col-xs-12.col-sm-8
       %div.callout.callout-warning
@@ -41,20 +42,24 @@
   - else
     / Recent trips
     %div.col-xs-12.col-sm-4
-      %h3= t('.recent_trips')
-      %div.list-group.trips
-        - @trips.each do |t|
-          = link_to trip_path(t), class: 'list-group-item' do
-            %span.badge= t.flights.length
-            = t.name
-      = link_to t('words.view_all'), trips_path
+      %div.panel.panel-info
+        %div.panel-heading
+          %h3.panel-title= link_to t('.recent_trips'), trips_path
+        %div.list-group.trips
+          - @trips.each do |t|
+            = link_to trip_path(t), class: 'list-group-item' do
+              %span.badge= t.flights.length
+              = t.name
+        %div.panel-footer= link_to t('words.view_all'), trips_path
     / Recent flights
     %div.col-xs-12.col-sm-4
-      %h3= t('.recent_flights')
-      %div.list-group.flights
-        - @flights.each do |f|
-          = link_to flight_path(f), class: 'list-group-item' do
-            = airline_logo f.airline
-            #{f.depart_airport} &#x2708; #{f.arrive_airport}  (#{l f.depart_date, format: :short})
-      = link_to t('words.view_all'), flights_path
+      %div.panel.panel-info
+        %div.panel-heading
+          %h3.panel-title= link_to t('.recent_flights'), flights_path
+        %div.list-group.flights
+          - @flights.each do |f|
+            = link_to flight_path(f), class: 'list-group-item' do
+              = airline_logo f.airline
+              #{f.depart_airport} &#x2708; #{f.arrive_airport}  (#{l f.depart_date, format: :short})
+        %div.panel-footer= link_to t('words.view_all'), flights_path
 
