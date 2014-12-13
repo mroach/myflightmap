@@ -1,16 +1,23 @@
-%div.col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2
-  %div.callout.callout-info
-    %h4 For users of the old site
-    %p
-      If you were a user of the previous myflightmap.com, just do a
-      #{link_to t('action.forgot_password'), new_user_password_path} to get a new password set up.
-      Then if you like you can link your profile to Facebook and use that for future authentication.
+- content_for :title, t('actions.sign_in')
 
-%div.login
+%div.row
   %div.col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2
+    %div.callout.callout-info
+      %h4 For users of the old site
+      %p
+        If you were a user of the previous myflightmap.com, just do a
+        #{link_to "Forgot Password", new_user_password_path} to get a new password set up.
+        Then if you like you can link your profile to Facebook and use that for future authentication.
+
+%div.row.login
+  %div.col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2.col-xs-12
     %div.panel.panel-default
       %div.panel-heading
         %div.panel-title= t('actions.sign_in')
+      - if devise_mapping.omniauthable?
+        %div.panel-body.socials
+          - resource_class.omniauth_providers.each do |provider|
+            = social_login_button provider, 'actions.sign_in_with'
       %div.panel-body
         = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
           %div.form-group
@@ -31,11 +38,6 @@
 
           %div.form-group{style: "margin-top:10px"}
             = f.submit "Log in", class: "btn btn-success"
-            - if devise_mapping.omniauthable?
-              - resource_class.omniauth_providers.each do |provider|
-                = link_to t('actions.sign_in_with', provider: provider.to_s.titleize),
-                  omniauth_authorize_path(resource_name, provider),
-                  class: "btn btn-provider-#{provider}"
 
           %div.form-group
             - if devise_mapping.registerable? && controller_name != 'registrations'
