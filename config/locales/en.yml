@@ -53,6 +53,7 @@ en:
     connect_with: "Connect with %{provider}"
     my_profile: "My Profile"
     resend_confirmation_email: "Re-send confirmation email"
+    resend_unlock_email: "Re-send unlock emails"
     change_password: "Change Password"
     reset_password: "Reset Password"
   navigation_links:
