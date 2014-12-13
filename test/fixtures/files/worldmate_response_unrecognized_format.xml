@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns2:worldmate-parsing-result xmlns:ns2="http://www.worldmate.com/schemas/worldmate-api-v1.xsd" request-id="99830661" received="2014-12-13T10:37:37.000Z">
+  <status>UNRECOGNIZED_FORMAT</status>
+  <error-msg>This format could not be recognized by the service. Either the format is not supported or it contains additional information generally found in the standard confirmation emails sent by that provider</error-msg>
+  <headers>
+    <header value="&lt;mroach@myflightmap.com&gt;" name="Return-Path" />
+    <header value="v=1; a=rsa-sha256; c=relaxed/relaxed;         d=gmail.com; s=20120113;         h=from:content-type:subject:date:references:to:message-id          :mime-version;         bh=2kOBHuM4uoRvMb3V2YeRK9jSYAJM+0eAGvOCbj7RDLU=;         b=cD3N60R0UF6Yq4JWmKnJcxqBvLedLwUARv7JzVt6mGv0y6tmuFosXH70gFyY2T+uD8          26wE2QOn/BrfhZs0kNUXoOTNABkflxXgreg+sjhJaVwCaExtqYFSa/euD+GPPCSi1g4y          oSHgQHzz6DEZO3L212i0Jrj0rEFgOLYOPeBFp+YxbCB8ARYnBR1BqoxL23yBBJYPFvOe          KLSf0NU1FoZSYZ6TyV3AAQA4njdpQSykMsdQ8Va2ni7Uc41DftI3wvdsZhK4a0kjn6lw          5Oe3rfjiOkWL9pA+d5RZ6btrOZ6NUbCiqiStJTtM+6B2f61BODGPfqhZnNgUWEIbMyLk          QC+A==" name="DKIM-Signature" />
+    <header value="apidemo@tomcat-parsing-02.prod.worldmate.com" name="Delivered-To" />
+    <header value="&lt;51567401a66c_659911f7e20501ea@i-e4018197.mail&gt;" name="References" />
+    <header value="by 10.70.54.161 with SMTP id k1mr33926556pdp.110.1418467055536;         Sat, 13 Dec 2014 02:37:35 -0800 (PST)" name="X-Received" />
+    <header value="Apple Mail (2.1993)" name="X-Mailer" />
+    <header value="SpamAssassin 3.3.1 (2010-03-16) on  tomcat-parsing-02.prod.worldmate.com" name="X-Spam-Checker-Version" />
+    <header value="Michael Roach &lt;mroach@myflightmap.com&gt;" name="From" />
+    <header value="" name="X-Spam-Level" />
+    <header value="apidemo@worldmate.com" name="To" />
+    <header value="&lt;DF339BC2-0350-4AEC-8AD6-F671BC93BA82@gmail.com&gt;" name="Message-Id" />
+    <header value="No, score=-2.7 required=5.0 tests=BAYES_00,DKIM_SIGNED,  DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FROM,HTML_MESSAGE,RCVD_IN_DNSWL_LOW,  T_REMOTE_IMAGE,URIBL_BLOCKED autolearn=ham version=3.3.1" name="X-Spam-Status" />
+    <header value="1.0 (Mac OS X Mail 8.1 (1993))" name="Mime-Version" />
+    <header value="from [10.1.1.14] ([124.149.139.14])         by mx.google.com with ESMTPSA id nh4sm3870327pdb.37.2014.12.13.02.37.26         for &lt;apidemo@worldmate.com&gt;         (version=TLSv1 cipher=ECDHE-RSA-RC4-SHA bits=128/128);         Sat, 13 Dec 2014 02:37:33 -0800 (PST)" name="Received" />
+    <header value="multipart/alternative; boundary=&quot;Apple-Mail=_5C3CAA9F-7042-4985-A497-36155B9B5B36&quot;" name="Content-Type" />
+    <header value="Sat, 13 Dec 2014 18:37:04 +0800" name="Date" />
+    <header value="A pretty cool trip" name="Subject" />
+    <header value="apidemo@tomcat-parsing-02.prod.worldmate.com" name="X-Original-To" />
+  </headers>
+  <end-user-emails>
+    <user email="XXX000@trips.myflightmap.com" name="" />
+  </end-user-emails>
+</ns2:worldmate-parsing-result>

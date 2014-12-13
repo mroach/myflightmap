@@ -15,8 +15,15 @@ class Callbacks::WorldmateController < ActionController::Base
     )
 
     parser = Worldmate::Parser.new(xml_string)
+    log_entry.update_attribute(:target_id, parser.user.id)
 
-    log_entry.update_attributes({ target_id: parser.user.id, status: :parsed})
+    unless parser.success?
+      log_entry.update_attribute(:status, :failed)
+      render text: parser.status.to_s.upcase
+      return
+    end
+
+    log_entry.update_attribute(:status, :parsed)
 
     if parser.trip.flights.none?
       log_entry.update_attribute(:status, :ignored)
