@@ -23,6 +23,7 @@ require 'capistrano/rbenv'
 # require 'capistrano/chruby'
 require 'capistrano/rails/assets'
 require 'capistrano/rails/migrations'
+require 'capistrano/secrets_yml'
 
 require 'rollbar/capistrano3'
 

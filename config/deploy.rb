@@ -61,4 +61,5 @@ namespace :deploy do
 end
 
 after 'deploy:publishing', 'deploy:restart'
+after 'deploy:publishing', 'secrets_yml:setup'
 after 'deploy:finishing', 'deploy:cleanup'
