@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require select2
+//= require handlebars/handlebars
+//= require typeahead.js/dist/typeahead.bundle
 //= require pickadate/picker
 //= require pickadate/picker.date
 //= require pickadate/picker.time

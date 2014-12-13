@@ -30,14 +30,27 @@ $ ->
     airline_code = $flightCode.val().substr(0,2)
 
     # Lookup the airline by IATA code
+    # Ideally this would use the Bloodhound engine if I knew how
     $.ajax
       url: "/airlines/#{airline_code}.json"
       success: (data) ->
-        $('#flight_airline_id').val(data.id)
-        $('#flight_airline_name').val(data.name)
-      error: () ->
-        $('#flight_airline_id').val('0')
-        $('#flight_airline_name').val('')
+        $('#flight_airline_name').typeahead('val', data.name)
+
+  airlines = new Bloodhound
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name')
+    queryTokenizer: Bloodhound.tokenizers.whitespace
+    limit: 10
+    prefetch:
+      url: '/airlines.json'
+
+  airlines.initialize()
+
+  $('#flight_airline_name').typeahead null,
+    source: airlines.ttAdapter()
+    name: 'airlines'
+    displayKey: 'name'
+    templates:
+      suggestion: Handlebars.compile('<p><strong>{{name}}</strong> ({{iata_code}})</p>')
 
   # setup the drop-down for airports. uses AJAX to search
   $('#flight_depart_airport, #flight_arrive_airport').select2
