@@ -49,6 +49,7 @@ en:
     add_trip: "Create New Trip"
     edit_trip: "Edit Trip"
     sign_in_with: "Log in with %{provider}"
+    sign_up_with: "Sign up with %{provider}"
     connect_with: "Connect with %{provider}"
     my_profile: "My Profile"
   navigation_links:
