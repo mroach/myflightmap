@@ -7,7 +7,10 @@
   &.google { background-color: #CC3820; }
 }
 
-
-.signup .panel-body.socials {
+.panel-body.socials {
   border-bottom: solid 1px #eee;
+}
+
+.input-group-addon i.fa {
+  min-width: 12px;
 }
