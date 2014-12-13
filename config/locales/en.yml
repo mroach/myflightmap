@@ -52,6 +52,9 @@ en:
     sign_up_with: "Sign up with %{provider}"
     connect_with: "Connect with %{provider}"
     my_profile: "My Profile"
+    resend_confirmation_email: "Re-send confirmation email"
+    change_password: "Change Password"
+    reset_password: "Reset Password"
   navigation_links:
     my_flights: "My Flights"
     my_map: "My Map"
