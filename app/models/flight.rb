@@ -74,7 +74,7 @@ class Flight < ActiveRecord::Base
 
   # Remove non word chars from the flight code when setting
   def flight_code=(value)
-    value and write_attribute(:flight_code, value.sub(/\W/, ''))
+    value and write_attribute(:flight_code, value.sub(/\W/, '').upcase)
   end
 
   # Just the airline code from the flight number
