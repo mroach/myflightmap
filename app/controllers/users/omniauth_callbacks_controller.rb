@@ -1,10 +1,4 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  # You should configure your model like this:
-  # devise :omniauthable, omniauth_providers: [:twitter]
-
-  # You should also create an action method in this controller like this:
-  # def twitter
-  # end
 
   def omniauth_callback
     provider = __callee__
@@ -22,11 +16,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   alias_method :facebook, :omniauth_callback
   alias_method :google, :omniauth_callback
-  #alias_method :twitter, :omniauth_callback
-  #alias_method :linked_in, :omniauth_callback
-
-  # More info at:
-  # https://github.com/plataformatec/devise#omniauth
 
   # GET|POST /resource/auth/twitter
   # def passthru
