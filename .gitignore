@@ -26,6 +26,3 @@
 
 # Ignore Sublime Text workspace file
 *.sublime-workspace
-
-# Ignore Bower installs
-/vendor/assets/components

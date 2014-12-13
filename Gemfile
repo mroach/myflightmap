@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+source 'https://rails-assets.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.1'
@@ -70,8 +71,9 @@ gem "autoprefixer-rails"
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0'
 
-# Install bower packages
-gem "bower-rails", "~> 0.9.1"
+# Pseudo-gems for Bower packages
+gem 'rails-assets-handlebars'
+gem 'rails-assets-typeahead.js'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
