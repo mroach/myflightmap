@@ -168,12 +168,15 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 480px) {
   .tiny-flights .flight {
     width: 140px;
     margin-left: 1px;
     margin-right: 1px;
   }
+}
+
+@media (max-width: 767px) {
   .flight-list {
     .flight {
       .airline_logo { max-width: 24px; }
