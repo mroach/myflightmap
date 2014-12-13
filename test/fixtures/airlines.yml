@@ -1,13 +1,4 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  iata_code: MyString
-  icao_code: MyString
-  name: MyString
-  country: MyString
-
-two:
-  iata_code: MyString
-  icao_code: MyString
-  name: MyString
-  country: MyString
+sq:
+  id: 1
+  iata_code: SQ
+  name: Singapore Airlines

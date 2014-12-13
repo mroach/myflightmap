@@ -3,10 +3,14 @@ development:
   encoding: unicode
   database: myflightmap
   host: localhost
-  username: myflightmap
+  username: rails_myflightmap_user
   password: upintheair
   pool: 5
   timeout: 5000
+
+test:
+  adapter: sqlite3
+  database: db/test.sqlite3
 
 staging:
   adapter: postgresql
