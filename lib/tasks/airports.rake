@@ -99,7 +99,12 @@ namespace :airports do
 
       if airport.new_record?
         puts "Airport #{code} is new so we need to get the timezone for it"
-        values[:timezone] = TZUtils::Lookup.google(values[:latitude], values[:longitude])
+        tz = TZUtils::Lookup.try_all(values[:latitude], values[:longitude])
+        if tz.blank?
+          puts "Refusing to create an airport without a timezone. It will cause problems."
+          next
+        end
+        values[:timezone] = tz
         puts values.inspect
       else
         puts "Airport #{code} already exists. How nice."
