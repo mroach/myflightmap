@@ -1,5 +1,6 @@
 require 'nokogiri'
 require 'httparty'
+require 'tzutils'
 
 class Gcmap
   include Logging
@@ -34,10 +35,7 @@ class Gcmap
 
     # Use the Google Time Zone API to figure out what time zone the
     # airport is in based on its coordinates
-    query = { location: "#{lat},#{lon}", timestamp: "1331161200", key: Rails.application.secrets.google }
-    logger.debug "Finding timezone using Google Timezone API. Params: #{query}"
-    google_response = HTTParty.get("https://maps.googleapis.com/maps/api/timezone/json", query: query)
-    time_zone = google_response["timeZoneId"]
+    time_zone = TZUtils::Lookup.google(lat, lon)
 
     data = {
       iata_code: iata_code,
