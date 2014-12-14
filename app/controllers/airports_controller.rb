@@ -106,16 +106,7 @@
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_airport
-      iata_code = params[:id].to_s.upcase
-      @airport = Airport.find_by(iata_code: iata_code)
-      if @airport.nil?
-        @airport = Gcmap.new.get_airport(iata_code)
-        if @airport
-          @airport.audit_comment = "Created by GCMap"
-          @airport.save
-        end
-      end
-      raise ActiveRecord::RecordNotFound if @airport.nil?
+      @airport = Airport.find_by_iata_code!(params[:id].to_s.upcase)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
