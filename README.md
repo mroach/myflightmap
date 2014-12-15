@@ -1,6 +1,7 @@
 # myflightmap 2.0
 
 [![Coverage Status](https://img.shields.io/coveralls/mroach/myflightmap.svg)](https://coveralls.io/r/mroach/myflightmap)
+[![Build Status](https://travis-ci.org/mroach/myflightmap.svg?branch=master)](https://travis-ci.org/mroach/myflightmap)
 
 ## Getting it running locally
 
