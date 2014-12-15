@@ -109,6 +109,10 @@ group :development do
   gem 'quiet_assets'
 end
 
+group :test do
+  gem 'coveralls', require: false
+end
+
 # use PostgreSQL in staging and production
 gem 'pg', group: [:staging, :production]
 
