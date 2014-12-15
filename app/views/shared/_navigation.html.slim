@@ -1,0 +1,31 @@
+nav.navbar.navbar-inverse
+  div.container
+    div.navbar-header
+      button.navbar-toggle type="button", :'data-toggle' => "collapse", :'data-target' => ".navbar-collapse"
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      = link_to root_path, class: 'navbar-brand' do
+        div= image_tag "logo.png", alt: "My Flight Map", class: 'brand-logo'
+    div.collapse.navbar-collapse
+      ul.nav.navbar-nav
+        = render 'shared/navigation_links'
+      - if user_signed_in?
+        ul.nav.navbar-nav.navbar-right
+          li.profile
+            = link_to profile_path do
+              = image_tag current_user.image(:small), alt: current_user.display_name
+              span.name= current_user.display_name
+          li.dropdown
+            a.dropdown-toggle data-toggle="dropdown" href='#'
+              span.caret
+            ul.dropdown-menu role="menu"
+              li= icon_link t('actions.add_flight'), new_flight_path, 'plane'
+              li= icon_link t('actions.import_flights'), import_root_path, 'upload'
+              li.divider
+              li= icon_link t('actions.edit_account'), edit_user_registration_path, 'cog'
+              li= icon_link t('actions.sign_out'), destroy_user_session_path, 'sign-out', :'data-method' => :delete
+      - else
+        ul.nav.navbar-nav.navbar-right
+          li= link_to t('actions.sign_in'), new_user_session_path

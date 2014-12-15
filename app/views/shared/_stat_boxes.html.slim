@@ -1,0 +1,25 @@
+div.big-stats.flex
+  div.big-stat.flights
+    div.number= stats[:flights]
+    div.descriptor
+      div= t 'words.flights'
+  div.big-stat.airports
+    div.number= stats[:airports]
+    div.descriptor
+      div= t 'words.airports'
+  div.big-stat.countries
+    div.number= stats[:countries]
+    div.descriptor
+      div= t 'words.countries'
+  div.big-stat.airlines
+    div.number= stats[:airlines]
+    div.descriptor
+      div= t 'words.airlines'
+  div.big-stat.distance
+    div.number= format_distance stats[:distance]
+    div.descriptor
+      div= t 'words.distance'
+  div.big-stat.duration
+    div.number= format_duration stats[:duration]
+    div.descriptor
+      div= t 'words.duration'

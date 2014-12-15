@@ -1,0 +1,44 @@
+- content_for :title, "#{@user.display_name}'s Stats"
+
+javascript:
+  window.routes = #{@stats[:routes].to_json.html_safe};
+  window.airports = #{@stats[:airports].to_json.html_safe};
+  window.top_airports = #{@stats[:top_airports].to_json.html_safe};
+
+= render partial: "shared/profile_strip", object: @user, as: 'user'
+
+div.row.stats.horizontal
+  div.col-md-12
+    = render partial: "shared/stat_boxes", locals: { stats: @stats[:totals] }
+  div.col-md-12
+    div#map-canvas.routes-map
+
+div.row
+  div.col-xs-12.col-sm-6.col-md-4.col-lg-4
+    h3= t '.airports'
+    table.stats.airports
+      - @stats[:top_airports].take(10).each do |a|
+        tr
+          td= flag_image a[:airport].country
+          td.airport= a[:airport].iata_code
+          td.city= a[:airport].city
+          td.number= a[:flights]
+  div.col-xs-12.col-sm-6.col-md-4.col-lg-4
+    h3= t '.airlines'
+    table.stats.airlines
+      - @stats[:top_airlines].take(10).each do |a|
+        tr
+          td.airline_logo= airline_logo a[:airline]
+          td= alliance_logo(a[:airline].alliance, :medium) if a[:airline]
+          td.iata_code= a[:airline].iata_code if a[:airline]
+          td= a[:airline].name if a[:airline]
+          td.number= a[:flights]
+  div.col-xs-12.col-sm-6.col-md-4.col-lg-4
+    h3= t '.countries'
+    table.stats.countries
+      - @stats[:top_countries].take(10).each do |c|
+        tr
+          td= flag_image c[:country].alpha2
+          td= c[:country].name
+          td.number= c[:flights]
+

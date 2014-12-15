@@ -1,9 +1,0 @@
-%h1 Import from Flight Memory
-
-:markdown
-  Login to Flight Memory and click the **FLIGHTDATA** link. In your browser, do *File > Save Page As...* and choose *Webpage, HTML only*. Upload the file using this form and your data will be imported
-
-= simple_form_for(:import, url: import_flight_memory_upload_path, wrapper: :vertical_form) do |f|
-  = f.input :html, as: :file, label: 'HTML File'
-  %div.form-actions
-    = f.button :submit, 'Upload data and preview', class: 'btn btn-primary'

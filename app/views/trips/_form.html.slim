@@ -1,0 +1,17 @@
+div.container
+  div.col-md-6.col-md-offset-3.col-sm-8.col-sm-offset-2
+    div.panel.panel-default
+      div.panel-heading
+        div.panel-title= @trip.new_record? ? "New trip" : "Trip: #{@trip.name}"
+      div.panel-body
+        = form_for(@trip) do |f|
+          = error_messages(@trip)
+          div.form-group
+            div.input-group
+              = f.text_field :name, placeholder: "Name", class: "form-control", autofocus: true
+          div.form-group
+            div.input-group
+              = f.text_field :purpose, placeholder: "Purpose", class: "form-control", autofocus: true
+          div.form-group.btn-group style="margin-top:10px"
+            = f.submit class: "btn btn-success"
+            = link_to 'Cancel', @trip.new_record? ? trips_path : trip_path(@trip), class: 'btn btn-danger'

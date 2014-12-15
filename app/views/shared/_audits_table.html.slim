@@ -1,0 +1,26 @@
+table.table.table-striped.table-condensed.table-bordered.audited-changes
+  tr
+    th User
+    th Changed at
+    th Type
+    th Comments
+    th Changes
+  - audits.each do |a|
+    tr data-id=a.id
+      td #{(a.user and a.user.username)} @ #{a.remote_address}
+      td= l a.created_at, format: :long
+      td= a.action.humanize
+      td= a.comment
+      td
+        table.audited-change
+          - a.audited_changes.reject { |k,v| v.blank? }.each do |k,v|
+            tr
+              td.field= k
+              - if a.action == "update"
+                td.old-value
+                  span= v[0].blank? ? "<i>null</i>".html_safe : v[0]
+                td.new-value
+                  span= v[1].blank? ? "<i>null</i>".html_safe : v[1]
+              - else
+                td.created-value
+                  span= v

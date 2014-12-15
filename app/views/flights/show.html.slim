@@ -1,0 +1,64 @@
+- content_for :title, "#{@flight.depart_airport}-#{@flight.arrive_airport} (#{l @flight.depart_date, format: :medium})"
+
+= render partial: "shared/profile_strip", object: @user, as: 'user'
+
+div.row
+  div.col-xs-12.col-md-6.flight-detail
+    div.row.row1
+      div.col-xs-2
+        div.airline_logo= airline_logo @flight.airline
+      div.col-xs-8
+        div.airline_name
+          div.flight_code
+            span.airline_code= @flight.airline_code
+            span.flight_number= @flight.flight_number
+          span.airline_name= @flight.airline_name
+    div.row.row2
+      div.col-xs-5.depart
+        div.depart_airport= @flight.depart_airport
+        div.depart_city= @flight.depart_city
+        div.depart_time= format_time(@flight.depart_time)
+      div.col-xs-2.flight-icon &#x2708;
+      div.col-xs-5.arrive
+        div.arrive_airport= @flight.arrive_airport
+        div.arrive_city= @flight.arrive_city
+        div.arrive_time
+          = format_time(@flight.arrive_time)
+          = @flight.arrive_time_offset
+    div.row.details
+      div.col-xs-4
+        label Date
+        div= l @flight.depart_date, format: :short
+      div.col-xs-4
+        label Duration
+        div
+          = format_duration @flight.duration
+          - if @flight.time_change != 0
+            span.time_change title=time_change_desc(@flight)
+              i.fa.fa-clock-o
+              = time_change_desc @flight, "short"
+      div.col-xs-4
+        label Seat
+        div #{@flight.seat} (#{@flight.seat_location})
+    div.row.details
+      div.col-xs-4
+        label Class
+        div
+          div.seat_class class=@flight.seat_class.downcase.sub(/\W/, '') = @flight.seat_class
+      div.col-xs-4
+        label Aircraft
+        div= @flight.aircraft_type
+      div.col-xs-4
+        label Trip
+        div= @flight.trip.present? ? link_to(@flight.trip.name, trip_path(@flight.trip)) : '<em>None</em>'.html_safe
+
+  div.col-xs-12.col-md-6.flight-map
+    div= static_map @flight
+
+- if @show_controls
+  div.row.btn-group
+    = link_to 'Edit', edit_flight_path(@flight), class: 'btn btn-primary'
+    = link_to 'Back', flights_path, class: 'btn btn-success'
+    = link_to 'Destroy', flight_path(@flight), :confirm => 'Are you sure?', :method => :delete, class: 'btn btn-danger'
+
+= render partial: "shared/audits", object: @flight.audits, locals: { collapsed: true }

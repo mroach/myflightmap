@@ -1,0 +1,15 @@
+h1= "# @airports.length  Airports"
+
+table.airports.table.table-condensed
+  thead
+    tr
+      th Name
+      th Location
+  tbody
+    - @airports.each do |airport|
+      tr
+        td
+          = link_to  url_for airport do
+            span.code= airport.iata_code
+            span.name= airport.name
+        td= "# airport.city} #{airport.country "

@@ -1,0 +1,30 @@
+javascript:
+  window.routes = #{@stats[:routes].to_json.html_safe};
+  window.airports = #{@stats[:airports].to_json.html_safe};
+  window.top_airports = #{@stats[:top_airports].to_json.html_safe};
+
+div.row
+  div.col-xs-12.col-md-6
+    div.lead
+      | Your site for keeping track of your flights.
+      | Organise your flights into trips, see stats about your flying, share links
+      | with your friends and family rather than forwarding itineraries.
+    - if user_signed_in?
+      = link_to t('actions.my_profile'), profile_path(current_user), class: 'btn btn-success btn-lg'
+    - else
+      div.btn-group
+        = link_to t('actions.sign_in'), new_user_session_path, class: 'btn btn-success btn-medium'
+        = link_to t('actions.sign_up'), new_user_registration_path, class: 'btn btn-primary btn-medium'
+  div.col-xs-12.col-md-6
+    div.callout.callout-info
+      h4 Users of the old site:
+      p
+        | If you were a user of the previous myflightmap.com, just do a
+        | #{link_to t('action.forgot_password'), new_user_password_path} to get a new password set up.
+        | Then if you like you can link your profile to Facebook and use that for future authentication.
+
+div.row.stats.vertical
+  div.col-xs-12.col-md-4
+    = render partial: "shared/stat_boxes", locals: { stats: @stats[:totals] }
+  div.col-xs-12.col-md-8
+    div#map-canvas.routes-map

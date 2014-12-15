@@ -1,0 +1,27 @@
+- content_for :title, "Members"
+
+h1 Members
+
+div.users
+  - @users.each do |user|
+    div.row.user
+      div.col-xs-12.col-md-3
+        = link_to profile_path(user.username) do
+          = image_tag user.image(:square)
+          span.name= user.display_name
+      div.col-xs-12.col-md-2
+        div
+          label Since
+          span= l user.created_at.to_date, format: :medium
+        div
+          label Seen
+          span= l user.last_sign_in_at.to_date, format: :long if user.last_sign_in_at
+      div.col-xs-3.col-md-2
+        label Trips
+        div.trips= link_to user.trips.length, trips_path(user)
+      div.col-xs-3.col-md-2
+        label Flights
+        div.flights= link_to user.flights.length, flights_path(user)
+      div.col-xs-3.col-md-2
+        label Map
+        div.flights= link_to "Show", map_path(user)

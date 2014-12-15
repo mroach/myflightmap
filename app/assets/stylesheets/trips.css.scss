@@ -13,4 +13,7 @@
 
 .trip-flights { margin-top: 10px; padding-top: 10px; }
 
-.control-buttons { text-align: right }
+.control-buttons {
+  text-align: right;
+  .btn { margin-right: 3px }
+}

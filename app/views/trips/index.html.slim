@@ -1,0 +1,24 @@
+- content_for :title, "#{@user.display_name}'s Trips"
+
+= render partial: "shared/profile_strip", object: @user, as: 'user'
+
+- if @show_controls
+  div.callout.callout-info
+    h4 Creating new trips by email
+    p.bg-info
+      | You can automatically create trips or add to existing trips by forwarding
+      | flight confirmation emails to <strong>#{mail_to "#{@user.id_hash}@trips.myflightmap.com"}</strong>.
+      | <br />
+      | The subject of the email will be used as the trip's title or to match to an existing
+      | trip.
+  = link_to t('actions.add_trip'), new_trip_path, class: 'btn btn-success btn-lg'
+
+
+div.trip-list
+  - @trips.each do |trip|
+    - next if trip.flights.none? && !@show_controls
+    div.trip
+      h2.trip-name data-click-url=trip_path(trip)
+        = trip.name
+        div.dates #{format_date trip.begin_date} - #{format_date trip.end_date}
+      = render partial: "shared/flights_minibox", locals: { flights: trip.flights, show_times: false }
