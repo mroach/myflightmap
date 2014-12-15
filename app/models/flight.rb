@@ -92,10 +92,10 @@ class Flight < ActiveRecord::Base
 
   # When setting the airline name, try to match the airline_id
   def airline_name=(value)
-    if !self.airline_id
-      if airline = Airline.find_by_name(value)
-        write_attribute(:airline_id, airline.id)
-      end
+    if airline = Airline.find_by_name(value)
+      write_attribute(:airline_id, airline.id)
+    else
+      logger.warn "Couldn't locate an airline called '#{value}'"
     end
     write_attribute(:airline_name, value)
   end
