@@ -2,5 +2,6 @@ language: ruby
 rvm:
   - 2.1.5
 env:
-  - devise_secret_key=ABC123
-  - secret_key_base=649756ce7701ead2a915852cf9aaf6eea258a6ca503ee6d41ff6c261c276baa138c53f3b71eb0ceb3cecd2b115c4195e10ca431cd0435e841c5b5300dd77af0d
+  global:
+    - devise_secret_key=ABC123
+    - secret_key_base=649756ce7701ead2a915852cf9aaf6eea258a6ca503ee6d41ff6c261c276baa138c53f3b71eb0ceb3cecd2b115c4195e10ca431cd0435e841c5b5300dd77af0d
