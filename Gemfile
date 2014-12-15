@@ -87,6 +87,9 @@ gem 'friendly_id', '~> 5.0.0'
 # Generate unique, reversible IDs
 gem 'hashids'
 
+# Error reporting
+gem 'rollbar', '~> 1.2.6'
+
 group :development do
   gem 'capistrano', '~> 3.2.1'
   gem 'capistrano-bundler', '~> 1.1.2', require: false
@@ -118,9 +121,3 @@ gem 'pg', group: [:staging, :production]
 
 # Application performance monitoring
 gem 'newrelic_rpm', group: [:staging, :production]
-
-# Use byebug for debugging
-gem 'byebug', group: [:staging, :production]
-
-# Error reporting
-gem 'rollbar', '~> 1.2.6'
