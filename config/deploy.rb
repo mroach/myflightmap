@@ -1,7 +1,7 @@
 lock '3.2.1'
 
 # Load the secrets file. We need it for the Rollbar key
-secrets = YAML.load(File.read('config/secrets.yml'))[fetch(:rails_env, 'production').to_s]
+secrets = YAML.load(File.read('config/application.yml'))[fetch(:rails_env, 'production').to_s]
 
 set :application, 'myflightmap'
 set :repo_url, 'git@github.com:mroach/myflightmap.git'
@@ -31,11 +31,11 @@ set :scm, :git
 # Default value for :pty is false
 # set :pty, true
 
-set :linked_files, %w{config/secrets.yml}
+set :linked_files, %w{}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 # Default value for default_env is {}
-#set :default_env, { path: "~/.rbenv/shims:~/.rbenv/bin:$PATH" }
+set :default_env, { devise_secret_key: "herp", secret_key_base: "derp" }
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
@@ -60,6 +60,24 @@ namespace :deploy do
 
 end
 
+namespace :figaro do
+  desc "SCP transfer figaro configuration to the shared folder"
+  task :setup do
+    on roles(:app) do
+      upload! "config/application.yml", "#{shared_path}/config/application.yml", via: :scp
+    end
+  end
+
+  desc "Symlink application.yml to the release path"
+  task :symlink do
+    on roles(:app) do
+      execute "ln -sf #{shared_path}/config/application.yml #{current_path}/config/application.yml"
+    end
+  end
+end
+
 after 'deploy:publishing', 'deploy:restart'
-after 'deploy:publishing', 'secrets_yml:setup'
 after 'deploy:finishing', 'deploy:cleanup'
+
+after "deploy:started", "figaro:setup"
+after "deploy:symlink:release", "figaro:symlink"
