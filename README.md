@@ -1,5 +1,7 @@
 # myflightmap 2.0
 
+[![Coverage Status](https://img.shields.io/coveralls/mroach/myflightmap.svg)](https://coveralls.io/r/mroach/myflightmap)
+
 ## Getting it running locally
 
 ### Step 1. Installing rbenv and ruby-build
