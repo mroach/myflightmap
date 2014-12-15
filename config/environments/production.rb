@@ -71,8 +71,8 @@ Myflightmap::Application.configure do
   config.action_mailer.smtp_settings = {
     address: 'smtp.mailgun.org',
     port: 587,
-    user_name: Rails.application.secrets.mailgun_smtp_username,
-    password: Rails.application.secrets.mailgun_smtp_password,
+    user_name: ENV['mailgun_smtp_username'],
+    password: ENV['mailgun_smtp_password'],
     enable_starttls_auto: true
   }
 

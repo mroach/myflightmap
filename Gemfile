@@ -4,6 +4,9 @@ source 'https://rails-assets.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.1'
 
+# App configuration manager
+gem 'figaro'
+
 # Need >= 3.1 for bootstrap 3 support
 gem 'simple_form', '~> 3.1'
 

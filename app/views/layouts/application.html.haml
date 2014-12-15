@@ -8,7 +8,7 @@
     %meta{name: "description", content: content_for?(:description) ? yield(:description) : "Myflightmap"}
     = stylesheet_link_tag "application", media: "all"
     = javascript_include_tag "application"
-    = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{Rails.application.secrets.google}&amp;sensor=false"
+    = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['google']}&amp;sensor=false"
     = csrf_meta_tags
   %body
     %header
