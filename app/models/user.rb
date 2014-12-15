@@ -176,6 +176,6 @@ class User < ActiveRecord::Base
   end
 
   def self.hashids
-    Hashids.new(ENV['hashids_user_salt'], 6, 'ABCDFGHKJLMNPQRSTXYZ123456789')
+    Hashids.new(ENV['HASHIDS_USER_SALT'], 6, 'ABCDFGHKJLMNPQRSTXYZ123456789')
   end
 end

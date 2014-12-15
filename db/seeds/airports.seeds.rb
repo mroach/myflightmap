@@ -8,7 +8,7 @@ require 'logging'
 
 logger ||= Logger.new(STDOUT)
 
-airport_url = "https://airport.api.aero/airport?user_key=#{ENV['sita']}"
+airport_url = "https://airport.api.aero/airport?user_key=#{ENV['SITA']}"
 
 puts "Fetching airports from #{airport_url}"
 

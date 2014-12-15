@@ -6,7 +6,7 @@ module FlightsHelper
     url = "https://maps.googleapis.com/maps/api/staticmap"
     query = {
       size: "#{width}x#{height}",
-      key: ENV['google']
+      key: ENV['GOOGLE']
     }
 
     depart_latlon = "#{flight.depart_airport_info.latitude},#{flight.depart_airport_info.longitude}"

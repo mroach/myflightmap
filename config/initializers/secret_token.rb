@@ -1,1 +1,1 @@
-Myflightmap::Application.config.secret_key_base = ENV['secret_key_base']
+Myflightmap::Application.config.secret_key_base = ENV['SECRET_KEY_BASE']

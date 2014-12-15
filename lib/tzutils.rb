@@ -3,13 +3,13 @@ require 'httparty'
 module TZUtils
   class Lookup
     def self.google(lat, lon)
-      query = { location: "#{lat},#{lon}", timestamp: "1331161200", key: ENV['google'] }
+      query = { location: "#{lat},#{lon}", timestamp: "1331161200", key: ENV['GOOGLE'] }
       response = HTTParty.get("https://maps.googleapis.com/maps/api/timezone/json", query: query)
       response["timeZoneId"]
     end
 
     def self.timezonedb(lat, lon)
-      query = { lat: lat, lng: lon, format: :json, key: ENV['timezonedb'] }
+      query = { lat: lat, lng: lon, format: :json, key: ENV['TIMEZONEDB'] }
       response = HTTParty.get("http://api.timezonedb.com/", query: query)
       response['zoneName']
     end
