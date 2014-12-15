@@ -2,5 +2,4 @@ language: ruby
 rvm:
   - 2.1.5
 env:
-  global:
-    - devise_secret_key=ABC123
+  - devise_secret_key=ABC123
