@@ -4,7 +4,7 @@ class ProfilesController < ApplicationController
   before_action :reject_non_admin!, only: [:index]
 
   def index
-    @users = User.all.order(:created_at)
+    @users = User.order("COALESCE(last_sign_in_at, created_at) DESC")
   end
 
   def show
