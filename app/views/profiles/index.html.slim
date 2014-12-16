@@ -9,19 +9,19 @@ div.users
         = link_to profile_path(user.username) do
           = image_tag user.image(:square)
           span.name= user.display_name
-      div.col-xs-12.col-md-2
-        div
-          label Since
-          span= l user.created_at.to_date, format: :medium
-        div
-          label Seen
-          span= l user.last_sign_in_at.to_date, format: :long if user.last_sign_in_at
+          div.since
       div.col-xs-3.col-md-2
+        label Since
+        div.since= l user.created_at.to_date, format: :medium
+      div.col-xs-2.col-md-2
+        label Seen
+        div.seen= l user.last_sign_in_at.to_date, format: :medium if user.last_sign_in_at
+      div.col-xs-2.col-md-1
         label Trips
         div.trips= link_to user.trips.length, trips_path(user)
-      div.col-xs-3.col-md-2
+      div.col-xs-2.col-md-1
         label Flights
         div.flights= link_to user.flights.length, flights_path(user)
-      div.col-xs-3.col-md-2
+      div.col-xs-2.col-md-1
         label Map
         div.flights= link_to "Show", map_path(user)
