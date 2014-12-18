@@ -49,7 +49,7 @@ div.row.profile
           - @trips.each do |t|
             = link_to trip_path(t), class: 'list-group-item' do
               span.badge= t.flights.length
-              = t.name
+              span.emoji= t.name
         div.panel-footer= link_to t('words.view_all'), trips_path
     /! Recent flights
     div.col-xs-12.col-sm-4
