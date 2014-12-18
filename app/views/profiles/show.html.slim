@@ -45,21 +45,27 @@ div.row.profile
       div.panel.panel-info
         div.panel-heading
           h3.panel-title= link_to t('.recent_trips'), trips_path
-        div.list-group.trips
-          - @trips.each do |t|
-            = link_to trip_path(t), class: 'list-group-item' do
-              span.badge= t.flights.length
-              span.emoji= t.name
-        div.panel-footer= link_to t('words.view_all'), trips_path
+        - if @trips.none?
+          p No trips yet!
+        - else
+          div.list-group.trips
+            - @trips.each do |t|
+              = link_to trip_path(t), class: 'list-group-item' do
+                span.badge= t.flights.length
+                span.emoji= t.name
+          div.panel-footer= link_to t('words.view_all'), trips_path
     /! Recent flights
     div.col-xs-12.col-sm-4
       div.panel.panel-info
         div.panel-heading
           h3.panel-title= link_to t('.recent_flights'), flights_path
-        div.list-group.flights
-          - @flights.each do |f|
-            = link_to flight_path(f), class: 'list-group-item' do
-              = airline_logo f.airline
-              | #{f.depart_airport} &#x2708; #{f.arrive_airport}  (#{l f.depart_date, format: :short})
-        div.panel-footer= link_to t('words.view_all'), flights_path
+        - if @flights.none?
+          p No flights yet!
+        - else
+          div.list-group.flights
+            - @flights.each do |f|
+              = link_to flight_path(f), class: 'list-group-item' do
+                = airline_logo f.airline
+                | #{f.depart_airport} &#x2708; #{f.arrive_airport}  (#{l f.depart_date, format: :short})
+          div.panel-footer= link_to t('words.view_all'), flights_path
 
