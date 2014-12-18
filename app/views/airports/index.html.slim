@@ -1,4 +1,4 @@
-h1= "# @airports.length  Airports"
+h1= "#{@airports.length} Airports"
 
 table.airports.table.table-condensed
   thead
@@ -12,4 +12,4 @@ table.airports.table.table-condensed
           = link_to  url_for airport do
             span.code= airport.iata_code
             span.name= airport.name
-        td= "# airport.city} #{airport.country "
+        td= "#{airport.city} #{airport.country}"
