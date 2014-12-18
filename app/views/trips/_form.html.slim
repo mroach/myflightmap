@@ -11,7 +11,11 @@ div.container
               = f.text_field :name, placeholder: "Name", class: "form-control", autofocus: true
           div.form-group
             div.input-group
-              = f.text_field :purpose, placeholder: "Purpose", class: "form-control", autofocus: true
+              = f.text_field :purpose, placeholder: "Purpose", class: "form-control"
+          div.form-group
+            div.input-group
+              = f.check_box :is_public, class: "form-control"
+              label for="trip[is_public]" Publicly visible?
           div.form-group.btn-group style="margin-top:10px"
             = f.submit class: "btn btn-success"
             = link_to 'Cancel', @trip.new_record? ? trips_path : trip_path(@trip), class: 'btn btn-danger'
