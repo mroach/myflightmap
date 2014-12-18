@@ -1,0 +1,4 @@
+/* ensure the emoji size isn't crazy given the text it's near */
+img.emoji {
+  height: 1.1em;
+}
