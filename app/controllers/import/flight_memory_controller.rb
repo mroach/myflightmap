@@ -11,9 +11,7 @@ module Import
     end
 
     def upload
-      #@result = params[:import].inspect
       file = params[:import]["html"]
-      #html = file.read.encode('utf-8')
       html = File.open(file.tempfile, 'r:ISO-8859-1') { |f| f.read }.encode('utf-8')
 
       parser = Importers::FlightMemory.new
