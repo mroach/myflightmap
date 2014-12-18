@@ -9,4 +9,4 @@ blockquote
 = simple_form_for(:import, url: import_flight_memory_upload_path, wrapper: :vertical_form) do |f|
   = f.input :html, as: :file, label: 'HTML File'
   div.form-actions
-    = f.button :submit, 'Upload data and preview', class: 'btn btn-primary'
+    = f.button :submit, 'Import data', class: 'btn btn-primary'
