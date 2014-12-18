@@ -10,7 +10,7 @@ javascript:
 div.row.trip-heading
   div.col-xs-12.col-md-8
     h1.trip-name
-      = @trip.name
+      span.emoji = @trip.name
       small #{format_date @trip.begin_date} - #{format_date @trip.end_date}
   - if @show_controls
     div.col-xs-12.col-md-4.control-buttons

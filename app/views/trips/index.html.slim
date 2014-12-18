@@ -19,6 +19,6 @@ div.trip-list
     - next if trip.flights.none? && !@show_controls
     div.trip
       h2.trip-name data-click-url=trip_path(trip)
-        = trip.name
+        span.emoji = trip.name
         div.dates #{format_date trip.begin_date} - #{format_date trip.end_date}
       = render partial: "shared/flights_minibox", locals: { flights: trip.flights, show_times: false }
