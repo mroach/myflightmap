@@ -1,2 +1,0 @@
-module AirlinesHelper
-end
