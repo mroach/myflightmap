@@ -4,19 +4,13 @@ class FlightsController < ApplicationController
   before_action :set_user
   before_action :set_flight, only: [:show, :edit, :update, :destroy]
   before_action :load_helper_data, only: [:new, :edit]
-  before_action :authenticate!, except: [:index, :show]
   skip_before_filter :authenticate_user!, only: [:index, :show]
 
   # GET /flights
   # GET /flights.json
   def index
-    if current_user.nil?
-      @flights = Flight.belonging_to(@user.id).visible.reverse
-      @show_controls = false
-    else
-      @flights = Flight.belonging_to(@user.id).visible_to(current_user.id).reverse
-      @show_controls = @user.id == current_user.id
-    end
+    @flights = policy_scope(Flight).belonging_to(@user.id).reverse
+    @show_controls = current_user.present? && @user.id == current_user.id
 
     @list_style = params[:style] || "large"
     @batch_editing = !params[:batch_editing].nil?
@@ -30,15 +24,18 @@ class FlightsController < ApplicationController
   # GET /flights/1.json
   def show
     @show_controls = user_signed_in? && @user.id == current_user.id
+    authorize @flight
   end
 
   # GET /flights/new
   def new
     @flight = Flight.new(flight_params)
+    authorize @flight, :new?
   end
 
   # GET /flights/1/edit
   def edit
+    authorize @flight, :edit?
   end
 
   # POST /flights
@@ -47,6 +44,7 @@ class FlightsController < ApplicationController
     # if necessary create a new trip
     @flight = Flight.new(flight_params)
     @flight.user_id = current_user.id
+    authorize @flight, :create?
 
     respond_to do |format|
       if @flight.save
@@ -62,6 +60,7 @@ class FlightsController < ApplicationController
   # PATCH/PUT /flights/1
   # PATCH/PUT /flights/1.json
   def update
+    authorize @flight, :update?
     respond_to do |format|
       if @flight.update(flight_params)
         format.html { redirect_to @flight, notice: 'Flight was successfully updated.' }
@@ -75,6 +74,8 @@ class FlightsController < ApplicationController
 
   # PATCH /flights/batch_update
   def batch_update
+    authorize @flight, :update?
+
     # Get the name of the field to update and the list of records to update
     field_to_update = params[:field_to_update].to_sym
     records_to_update = params[:records_to_update].split(/,/)
@@ -95,6 +96,8 @@ class FlightsController < ApplicationController
   # DELETE /flights/1
   # DELETE /flights/1.json
   def destroy
+    authorize @flight, :destroy?
+
     @flight.destroy
     respond_to do |format|
       format.html { redirect_to flights_url }
@@ -103,13 +106,6 @@ class FlightsController < ApplicationController
   end
 
   private
-    def authenticate!
-      not_found unless user_signed_in? && (
-          @flight.nil? ||
-          (current_user.admin? || current_user == @flight.user)
-        )
-    end
-
     def set_user
       @user = User.find_by_username!(params[:username])
     end

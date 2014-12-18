@@ -1,44 +1,31 @@
 class TripsController < ApplicationController
   before_action :set_user
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate!, except: [:index, :show]
   skip_before_filter :authenticate_user!, only: [:index, :show]
 
   # GET /trips
   # GET /trips.json
   def index
-    if current_user.present?
-      @trips = Trip.belonging_to(@user.id).visible_to(current_user.id).reverse
-      @show_controls = @user.id == current_user.id
-    else
-      @trips = Trip.belonging_to(@user.id).visible.reverse
-      @show_controls = false
-    end
+    @trips = policy_scope(Trip).belonging_to(@user.id).reverse
+    @show_controls = current_user.present? && @user.id == current_user.id
   end
 
   # GET /trips/1
   # GET /trips/1.json
   def show
-    if !@trip.is_visible_to?((current_user.id rescue -1))
-      not_found
-    end
-
-    if current_user.present?
-      flights = @trip.flights.visible_to(current_user)
-    else
-      flights = @trip.flights.visible
-    end
-
-    @stats = FlightsHelper.generate_statistics(flights)
+    authorize @trip
+    @stats = FlightsHelper.generate_statistics(@trip.flights)
   end
 
   # GET /trips/new
   def new
     @trip = Trip.new
+    authorize @trip, :new?
   end
 
   # GET /trips/1/edit
   def edit
+    authorize @trip, :edit?
   end
 
   # POST /trips
@@ -46,6 +33,8 @@ class TripsController < ApplicationController
   def create
     @trip = Trip.new(trip_params)
     @trip.user_id = current_user.id
+
+    authorize @trip, :create?
 
     respond_to do |format|
       if @trip.save
@@ -61,6 +50,7 @@ class TripsController < ApplicationController
   # PATCH/PUT /trips/1
   # PATCH/PUT /trips/1.json
   def update
+    authorize @trip, :update?
     respond_to do |format|
       if @trip.update(trip_params)
         format.html { redirect_to @trip, notice: 'Trip was successfully updated.' }
@@ -75,6 +65,7 @@ class TripsController < ApplicationController
   # DELETE /trips/1
   # DELETE /trips/1.json
   def destroy
+    authorize @trip, :destroy?
     @trip.destroy
     respond_to do |format|
       format.html { redirect_to trips_url }
@@ -83,13 +74,6 @@ class TripsController < ApplicationController
   end
 
   private
-    def authenticate!
-      not_found unless user_signed_in? && (
-          @trip.nil? ||
-          (current_user.admin? || current_user == @trip.user)
-        )
-    end
-
     def set_user
       @user = User.find_by_username!(params[:username])
     end

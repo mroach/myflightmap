@@ -13,21 +13,8 @@ class Trip < ActiveRecord::Base
 
   formattable "%{name}: %{begin_date} - %{end_date}"
 
-  # See if the flight is visible to the current user
-  def is_visible_to?(user_id)
-    self.user_id == user_id || self.is_public?
-  end
-
   def self.belonging_to(user_id)
     where("user_id = ?", user_id)
-  end
-
-  def self.visible_to(user_id)
-    where("user_id = ? OR is_public = ?", user_id, true)
-  end
-
-  def self.visible
-    where(is_public: true)
   end
 
   def self.recent

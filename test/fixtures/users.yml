@@ -1,4 +1,15 @@
-mroach:
-  id: 123
+one:
+  id: 1
   id_hash: XXX000
   email: mroach@myflightmap.com
+  admin: true
+  confirmed_at: "2000-01-01 00:00"
+  username: mroach
+
+two:
+  id: 2
+  id_hash: YYY111
+  email: joe@hotmail.com
+  admin: false
+  confirmed_at: "2000-01-01 00:00"
+  username: joe

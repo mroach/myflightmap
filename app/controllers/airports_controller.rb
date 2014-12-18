@@ -2,33 +2,36 @@
  require 'geo'
 
  class AirportsController < ApplicationController
-  before_action :set_airport, only: [:show, :edit, :update, :destroy]
-  before_action :reject_non_admin!, except: [:show, :search]
+  before_action :set_airport, only: [:show, :edit, :update, :destroy, :update_from_external]
 
   # GET /airports
   # GET /airports.json
   def index
-    @airports = Airport.all
+    @airports = policy_scope(Airport).order(:iata_code)
   end
 
   # GET /airports/1
   # GET /airports/1.json
   def show
+    authorize @airport
   end
 
   # GET /airports/new
   def new
     @airport = Airport.new
+    authorize @airport, :new?
   end
 
   # GET /airports/1/edit
   def edit
+    authorize @airport, :edit?
     @timezones = TZInfo::Timezone.all_identifiers
   end
 
   # POST /airports
   # POST /airports.json
   def create
+    authorize @airport, :create?
     @airport = Airport.new(airport_params)
 
     respond_to do |format|
@@ -45,6 +48,7 @@
   # PATCH/PUT /airports/1
   # PATCH/PUT /airports/1.json
   def update
+    authorize @airport, :update?
     respond_to do |format|
       if @airport.update(airport_params)
         format.html { redirect_to @airport, notice: 'Airport was successfully updated.' }
@@ -59,6 +63,7 @@
   # DELETE /airports/1
   # DELETE /airports/1.json
   def destroy
+    authorize @airport, :destroy?
     @airport.destroy
     respond_to do |format|
       format.html { redirect_to airports_url }
@@ -68,6 +73,7 @@
 
   # GET /airports/search?q=SEARCHTERM
   def search
+    authorize :airport, :search?
     results = []
     results += Airport.where("iata_code LIKE ?", params[:q].upcase)
     results += Airport.where("LOWER(description) LIKE ?", "%#{params[:q].downcase}%")
@@ -77,13 +83,12 @@
   # Update an airport's basic info from GCMap
   # Refresh name, city, country, description, timezone
   def update_from_external
-    render status: 404 unless current_user.admin?
+    authorize @airport, :update_from_external?
 
     iata_code = params[:id].to_s.upcase
 
     # Load new data and existing airport
     @new_data = Gcmap.new.get_airport(iata_code)
-    @airport = Airport.find_by(iata_code: iata_code)
     fields_to_update = %w(name city country description timezone)
 
     # Only permit updating certain fields and fields that changed value

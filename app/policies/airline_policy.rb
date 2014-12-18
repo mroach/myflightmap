@@ -1,0 +1,2 @@
+class AirlinePolicy < AdminEditorsPolicy
+end

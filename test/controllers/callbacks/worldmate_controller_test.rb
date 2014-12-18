@@ -57,7 +57,7 @@ class Callbacks::WorldmateControllerTest < ActionController::TestCase
     end
     assert_response :success
     assert_response_equals 'UNRECOGNIZED_FORMAT'
-    assert_equal '123', CallbackLog.all.first.target_id
+    assert_equal '1', CallbackLog.all.first.target_id
   end
 
   private

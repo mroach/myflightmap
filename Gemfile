@@ -25,6 +25,12 @@ gem "select2-rails"
 # Date picker
 gem "pickadate-rails"
 
+# Advanced querying with ActiveRecord
+gem "arel"
+
+# Model security
+gem "pundit"
+
 # Use devise for the auth and registration framework
 gem 'devise'
 

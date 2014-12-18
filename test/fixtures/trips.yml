@@ -1,0 +1,13 @@
+trip_one:
+  id: 1
+  user_id: 1
+  name: "Trip One"
+  is_public: true
+  slug: "trip-one"
+
+clandestine:
+  id: 2
+  user_id: 1
+  name: "Secret trip"
+  is_public: false
+  slug: "trip-two"

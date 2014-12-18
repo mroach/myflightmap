@@ -5,14 +5,11 @@ class MapController < ApplicationController
 
   def show
     @user = User.find_by_username(params[:username])
-
-    if current_user.present?
-      flights = Flight.belonging_to(@user.id).visible_to(current_user.id)
-    else
-      flights = Flight.belonging_to(@user.id).visible
-    end
+    flights = policy_scope(Flight).belonging_to(@user.id)
 
     @stats = FlightsHelper.generate_statistics(flights)
+
+    authorize :map, :show?
   end
 
   private
