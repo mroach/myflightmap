@@ -1,10 +1,11 @@
 - collapsed = false if local_assigns[:collapsed].nil?
 - if current_user && current_user.admin?
-  - if collapsed
-    div.audits-container
-      div.show-audits-button-container
-        button.btn.btn-default type="button" data-toggle="collapse" data-target="#audits" Show Changelog
-      div#audits.collapse
-        = render partial: "shared/audits_table", object: audits, as: 'audits'
-  - else
-    = render partial: "shared/audits_table", object: audits, as: 'audits'
+  div.row
+    - if collapsed
+      div.audits-container
+        div.show-audits-button-container
+          button.btn.btn-primary type="button" data-toggle="collapse" data-target="#audits" Show Changelog
+        div#audits.collapse
+          = render partial: "shared/audits_table", object: audits, as: 'audits'
+    - else
+      = render partial: "shared/audits_table", object: audits, as: 'audits'
