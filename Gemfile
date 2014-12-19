@@ -45,7 +45,7 @@ gem 'omniauth-google-oauth2'
 gem 'bcrypt-ruby', '~> 3.1.2'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
+gem 'jbuilder', '~> 2.0'
 
 # Needed to figure out the time at the airport
 gem 'tzinfo'
@@ -100,7 +100,7 @@ gem 'friendly_id', '~> 5.0.0'
 gem 'hashids'
 
 # Error reporting
-gem 'rollbar', '~> 1.2.6'
+gem 'rollbar', '~> 1.3'
 
 group :development do
   gem 'capistrano', '~> 3.2.1'
