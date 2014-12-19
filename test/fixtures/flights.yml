@@ -1,0 +1,11 @@
+one:
+  depart_airport: CPH
+  arrive_airport: SIN
+  flight_code: SQ00
+  depart_date: '2014-01-01'
+  depart_time: '18:00'
+  arrive_date: '2014-01-02'
+  arrive_time: '12:00'
+  airline_name: 'Singapore Airlines'
+  airline_id: 1
+  user_id: 1
