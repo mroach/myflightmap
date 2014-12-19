@@ -130,10 +130,4 @@ class FlightsController < ApplicationController
       end
       params.require(:flight).permit(:trip_id, :flight_code, :depart_airport, :depart_date, :depart_time, :arrive_airport, :arrive_date, :arrive_time, :distance, :duration, :airline_id, :airline_name, :aircraft_name, :aircraft_type, :aircraft_registration, :flight_role, :purpose, :seat, :seat_class, :seat_location, :is_public)
     end
-
-    def parse_time_with_zone(str, zone_id)
-      tz = TZInfo::Timezone.get(zone_id)
-      t = Time.parse(str)
-      tz.local_to_utc(t)
-    end
 end
