@@ -41,7 +41,11 @@ en:
       recent_flights: "Recent Flights"
   actions:
     import_flights: "Import Flights"
+    batch_update: "Batch Update"
+    edit: "Edit"
+    delete: "Delete"
     add_flight: "Add Flight"
+    add_flight_to_trip: "Add a flight to this trip"
     sign_in: "Log In"
     sign_out: "Sign Out"
     sign_up: "Sign Up"
@@ -61,8 +65,8 @@ en:
     my_map: "My Map"
     my_trips: "My Trips"
   words:
-    no: 'No'
-    yes: 'Yes'
+    "no": 'No'
+    "yes": 'Yes'
     update: 'Update'
     trips: "Trips"
     map: "Map"
@@ -73,6 +77,7 @@ en:
     distance: "Distance"
     duration: "Duration"
     view_all: "View All"
+    "on": "on"
   messages:
     private_flight: "This flight is private. Only you can see it."
     private_trip: "This trip is private. Only you can see it."

@@ -1,13 +1,17 @@
 = render partial: "shared/profile_strip", object: @user, as: 'user'
 
 - if @show_controls
-  div.btn-group
-    = link_to t('actions.add_flight'), new_flight_path, class: 'btn btn-success'
-    = link_to t('actions.import_flights'), import_root_path, class: 'btn btn-default'
-    - if @batch_editing
-      = link_to t('actions.cancel'), flights_path, class: 'btn btn-danger'
-    - else
-      = link_to t('actions.batch_update'), flights_path(style: 'slim', batch_editing: 1), class: 'btn btn-danger'
+  div.row.controls
+    div.btn-group
+      = link_to new_flight_path, class: 'btn btn-success' do
+        i.fa.fa-plus title=t('actions.add_flight')
+      = link_to import_root_path, class: 'btn btn-default' do
+        i.fa.fa-upload title=t('actions.import_flights')
+      - if @batch_editing
+        = link_to t('actions.cancel'), flights_path, class: 'btn btn-danger'
+      - else
+        = link_to flights_path(style: 'slim', batch_editing: 1), class: 'btn btn-danger' do
+          i.fa.fa-edit title=t('actions.batch_update')
 
 - if @batch_editing
   javascript:

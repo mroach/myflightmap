@@ -26,6 +26,16 @@ ul.form-errors {
 
 p { padding: 15px; margin-top: .5em; }
 
+.controls {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  background-color: #efefef;
+  border: solid 1px #ddd;
+  border-bottom-width: 2px;
+  padding: 5px;
+  border-radius: 4px;
+}
+
 /* Side notes for calling out things
 -------------------------------------------------- */
 .callout {

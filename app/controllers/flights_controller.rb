@@ -23,7 +23,6 @@ class FlightsController < ApplicationController
   # GET /flights/1
   # GET /flights/1.json
   def show
-    @show_controls = user_signed_in? && @user.id == current_user.id
     authorize @flight
   end
 

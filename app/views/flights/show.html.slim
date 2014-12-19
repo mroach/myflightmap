@@ -2,6 +2,15 @@
 
 = render partial: "shared/profile_strip", object: @user, as: 'user'
 
+- if policy(@flight).edit?
+  div.row.controls
+    div.btn-group
+      = link_to edit_flight_path(@flight), class: 'btn btn-primary' do
+        i.fa.fa-edit title=t('actions.edit')
+      = link_to flight_path(@flight), :confirm => 'Are you sure?', :method => :delete, class: 'btn btn-danger' do
+        i.fa.fa-remove title=t('actions.delete')
+
+
 div.row
   div.col-xs-12.col-md-6.flight-detail
     div.row.row1
@@ -55,12 +64,6 @@ div.row
         div= @flight.trip.present? ? link_to(@flight.trip.name, trip_path(@flight.trip)) : '<em>None</em>'.html_safe
 
   div.col-xs-12.col-md-6.flight-map
-
-- if @show_controls
-  div.row.btn-group
-    = link_to 'Edit', edit_flight_path(@flight), class: 'btn btn-primary'
-    = link_to 'Back', flights_path, class: 'btn btn-success'
-    = link_to 'Destroy', flight_path(@flight), :confirm => 'Are you sure?', :method => :delete, class: 'btn btn-danger'
     div= @flight.static_map_image_tag
 
 = render partial: "shared/audits", object: @flight.audits, locals: { collapsed: true }

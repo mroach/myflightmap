@@ -10,7 +10,6 @@ class ProfilesController < ApplicationController
     @user = User.find_by_username!(params[:username])
     @trips = policy_scope(Trip).belonging_to(@user.id).recent.limit(5)
     @flights = policy_scope(Flight).belonging_to(@user).recent.completed.limit(5)
-    @show_controls = user_signed_in? && @user.id == current_user.id
     authorize @user
   end
 end

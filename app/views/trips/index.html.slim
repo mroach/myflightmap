@@ -3,6 +3,10 @@
 = render partial: "shared/profile_strip", object: @user, as: 'user'
 
 - if @show_controls
+  div.row.controls
+    div.btn-group
+      = link_to new_trip_path, class: 'btn btn-success' do
+        i.fa.fa-plus title=t('actions.add_trip')
   div.callout.callout-info
     h4 Creating new trips by email
     p.bg-info

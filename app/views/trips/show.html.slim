@@ -7,6 +7,16 @@ javascript:
 
 = render partial: "shared/profile_strip", object: @user, as: 'user'
 
+- if policy(@trip).edit?
+  div.row.controls
+    div.btn-group
+      = link_to new_flight_path('flight[trip_id]' => @trip.id), class: 'btn btn-success' do
+        span title=t('actions.add_flight_to_trip')
+          i.fa.fa-plane>
+          i.fa.fa-plus
+      = link_to edit_trip_path(@trip), class: 'btn btn-primary' do
+        i.fa.fa-edit title=t('actions.edit_trip')
+
 div.row.trip-heading
   div.col-xs-12.col-md-8
     h1.trip-name
@@ -14,10 +24,6 @@ div.row.trip-heading
         i.fa.fa-lock> title=t('messages.private_trip')
       span.emoji = @trip.name
       small #{format_date @trip.begin_date} - #{format_date @trip.end_date}
-  - if @show_controls
-    div.col-xs-12.col-md-4.control-buttons
-      = link_to t('actions.add_flight'), new_flight_path('flight[trip_id]' => @trip.id), class: 'btn btn-success'
-      = link_to t('actions.edit_trip'), edit_trip_path(@trip), class: 'btn btn-primary'
 
 - if @trip.flights.none?
   div.callout.callout-warning

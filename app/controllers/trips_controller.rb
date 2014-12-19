@@ -81,7 +81,6 @@ class TripsController < ApplicationController
 
     def set_trip
       @trip = @user.trips.friendly.find(params[:id])
-      @show_controls = current_user.present? && @trip.user_id == current_user.id
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
