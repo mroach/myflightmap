@@ -23,5 +23,5 @@ div.trip-list
         - if trip.private?
           i.fa.fa-lock> title=t('messages.private_trip')
         span.emoji = trip.name
-        div.dates #{format_date trip.begin_date} - #{format_date trip.end_date}
-      = render partial: "shared/flights_minibox", locals: { flights: trip.flights, show_times: false }
+        small #{format_date trip.begin_date} - #{format_date trip.end_date}
+      = render partial: "shared/flights_minibox", locals: { flights: policy_scope(trip.flights).decorate, show_times: false }
