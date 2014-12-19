@@ -31,6 +31,9 @@ gem "arel"
 # Model security
 gem "pundit"
 
+# Decorators
+gem "draper"
+
 # Use devise for the auth and registration framework
 gem 'devise'
 

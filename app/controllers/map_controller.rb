@@ -7,7 +7,7 @@ class MapController < ApplicationController
     @user = User.find_by_username(params[:username])
     flights = policy_scope(Flight).belonging_to(@user.id)
 
-    @stats = FlightsHelper.generate_statistics(flights)
+    @stats = Stats.from_flights(flights)
 
     authorize :map, :show?
   end

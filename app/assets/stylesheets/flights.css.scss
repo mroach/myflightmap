@@ -69,16 +69,20 @@
   .depart_city, .arrive_city { text-transform: uppercase; padding: 0; line-height: 1 }
   .depart_time, .arrive_time { font-size: 1.2em; font-weight: bold }
 
+  .private-icon {
+    text-align: right;
+  }
+
   .details {
     margin-top: 1em;
     label { font-weight: bold; text-transform: uppercase; line-height: 1; }
   }
+}
 
-  .seat_class {
-    border-radius: 3px;
-    padding: .1em .2em;
-    display: inline-block;
-  }
+span.seat_class {
+  border-radius: 3px;
+  padding: .1em .2em;
+  display: inline-block;
 }
 
 .flight-map {

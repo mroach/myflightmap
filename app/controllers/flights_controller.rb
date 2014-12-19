@@ -9,7 +9,7 @@ class FlightsController < ApplicationController
   # GET /flights
   # GET /flights.json
   def index
-    @flights = policy_scope(Flight).belonging_to(@user.id).reverse
+    @flights = policy_scope(Flight).belonging_to(@user.id).decorate.reverse
     @show_controls = current_user.present? && @user.id == current_user.id
 
     @list_style = params[:style] || "large"
@@ -111,7 +111,7 @@ class FlightsController < ApplicationController
     end
 
     def set_flight
-      @flight = @user.flights.friendly.find(params[:id])
+      @flight = @user.flights.friendly.find(params[:id]).decorate
     end
 
     def load_helper_data

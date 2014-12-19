@@ -17,7 +17,7 @@
 div.trip-list
   - @trips.each do |trip|
     - next if trip.flights.none? && !@show_controls
-    div.trip
+    div.trip class=trip.css_classes
       h2.trip-name data-click-url=trip_path(trip)
         span.emoji = trip.name
         div.dates #{format_date trip.begin_date} - #{format_date trip.end_date}

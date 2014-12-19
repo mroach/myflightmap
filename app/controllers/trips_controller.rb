@@ -6,7 +6,7 @@ class TripsController < ApplicationController
   # GET /trips
   # GET /trips.json
   def index
-    @trips = policy_scope(Trip).belonging_to(@user.id).reverse
+    @trips = policy_scope(Trip).belonging_to(@user.id).decorate.reverse
     @show_controls = current_user.present? && @user.id == current_user.id
   end
 
@@ -14,7 +14,8 @@ class TripsController < ApplicationController
   # GET /trips/1.json
   def show
     authorize @trip
-    @stats = FlightsHelper.generate_statistics(@trip.flights)
+    @flights = policy_scope(@trip.flights).decorate
+    @stats = Stats.from_flights(@trip.flights)
   end
 
   # GET /trips/new

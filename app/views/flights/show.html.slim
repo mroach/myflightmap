@@ -34,17 +34,16 @@ div.row
         div
           = format_duration @flight.duration
           - if @flight.time_change != 0
-            span.time_change title=time_change_desc(@flight)
+            span.time_change title=@flight.time_change_desc
               i.fa.fa-clock-o
-              = time_change_desc @flight, "short"
+              = @flight.time_change_desc(:short)
       div.col-xs-4
         label Seat
-        div #{@flight.seat} (#{@flight.seat_location})
+        div = @flight.seat_description
     div.row.details
       div.col-xs-4
         label Class
-        div
-          div.seat_class class=@flight.seat_class.downcase.sub(/\W/, '') = @flight.seat_class
+        div = @flight.seat_class_label
       div.col-xs-4
         label Aircraft
         div= @flight.aircraft_type
@@ -53,12 +52,12 @@ div.row
         div= @flight.trip.present? ? link_to(@flight.trip.name, trip_path(@flight.trip)) : '<em>None</em>'.html_safe
 
   div.col-xs-12.col-md-6.flight-map
-    div= static_map @flight
 
 - if @show_controls
   div.row.btn-group
     = link_to 'Edit', edit_flight_path(@flight), class: 'btn btn-primary'
     = link_to 'Back', flights_path, class: 'btn btn-success'
     = link_to 'Destroy', flight_path(@flight), :confirm => 'Are you sure?', :method => :delete, class: 'btn btn-danger'
+    div= @flight.static_map_image_tag
 
 = render partial: "shared/audits", object: @flight.audits, locals: { collapsed: true }

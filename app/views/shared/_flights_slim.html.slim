@@ -1,6 +1,6 @@
 div.container.flight-board
   - flights.each do |f|
-    div.row data-click-url=(flight_path(f) rescue nil)
+    div.flight.row data-click-url=(flight_path(f) rescue nil) class=f.css_classes
       div.col-md-2.col-sm-3.col-xs-6
         - if @batch_editing
           div.batch_edit_mark_container
@@ -21,4 +21,5 @@ div.container.flight-board
         div.airline= f.airline_name
         div.aircraft= f.aircraft_type
       div.col-md-2.col-sm-2.col-xs-6
-        div.seat_info #{f.seat} #{f.seat_class}
+        div.seat_info
+          = f.seat_class_label

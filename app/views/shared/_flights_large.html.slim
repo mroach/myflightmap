@@ -19,9 +19,9 @@ div.flight-list
             span.arrival_offset= f.arrive_time_offset
           span.duration= format_duration f.duration
           - if f.time_change != 0
-            span.time_change title=time_change_desc(f)
+            span.time_change title=f.time_change_desc
               i.fa.fa-clock-o
-              = time_change_desc f, "short"
+              = f.time_change_desc(:short)
         div.airline_and_aircraft.dot-separated
           - unless f.airline_name.blank?
             span= f.airline_name
@@ -30,5 +30,5 @@ div.flight-list
           - unless f.distance.nil?
             span= format_distance f.distance
       div.col3
-        span.seat_class class=((f.seat_class || "").downcase.underscore) = f.seat_class
-        div.seat #{f.seat} #{f.seat_location}
+        = f.seat_class_label
+        div.seat = f.seat_description

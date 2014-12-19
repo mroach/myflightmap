@@ -4,7 +4,7 @@
 div.tiny-flights
   - flights.each do |f|
     div.flight data-click-url=flight_path(f)
-      div.from_to.seat_class class=(f.seat_class.downcase.sub(/\W/,'') rescue nil) #{f.depart_airport} &#x2708; #{f.arrive_airport}
+      div.from_to.seat_class class=f.seat_class_css_class #{f.depart_airport} &#x2708; #{f.arrive_airport}
       div.row1
         div.airline_logo= airline_logo f.airline
         div.flight_code_and_date
@@ -19,8 +19,7 @@ div.tiny-flights
           div.duration
             = format_duration f.duration
             - if f.time_change != 0
-              span.time_change title=time_change_desc(f)
+              span.time_change title=f.time_change_desc
                 i.fa.fa-clock-o
-                = time_change_desc f, "short"
-        div.misc_description.truncate
-          | #{f.seat_class} on #{f.airline_name}
+                = f.time_change_desc(:short)
+        div.misc_description.truncate = f.class_on_airline
