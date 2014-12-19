@@ -1,8 +1,5 @@
 h1
-  = @flight.depart_airport
-  | &#x2708;
-  = @flight.arrive_airport
-  | &mdash;
-  = l @flight.depart_date, format: :long
+  | #{@flight.depart_airport} &#x2708; #{@flight.arrive_airport}
+  small= l @flight.depart_date, format: :long
 
 = render 'form'
