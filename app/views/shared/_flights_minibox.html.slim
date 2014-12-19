@@ -3,8 +3,11 @@
 
 div.tiny-flights
   - flights.each do |f|
-    div.flight data-click-url=flight_path(f)
-      div.from_to.seat_class class=f.seat_class_css_class #{f.depart_airport} &#x2708; #{f.arrive_airport}
+    div.flight data-click-url=flight_path(f) class=f.css_classes
+      div.from_to.seat_class class=f.seat_class_css_class
+        - if f.private?
+          i.fa.fa-lock> title=t('messages.private_flight')
+        | #{f.depart_airport} &#x2708; #{f.arrive_airport}
       div.row1
         div.airline_logo= airline_logo f.airline
         div.flight_code_and_date

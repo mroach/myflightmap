@@ -10,7 +10,10 @@ div.container.flight-board
           div.flight_code #{f.airline_code} #{f.flight_number}
           div.depart_date= l f.depart_date, format: :medium
       div.col-md-2.col-sm-2.col-xs-6
-        div.from_to #{f.depart_airport} &#x2708; #{f.arrive_airport}
+        div.from_to
+          | #{f.depart_airport} &#x2708; #{f.arrive_airport}
+          - if f.private?
+            i.fa.fa-lock< title=t('messages.private_flight')
         div.times
           | #{format_time(f.depart_time)} - #{format_time(f.arrive_time)}
           span.arrival_offset= f.arrive_time_offset

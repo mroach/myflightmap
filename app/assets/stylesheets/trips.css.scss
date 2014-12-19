@@ -1,5 +1,8 @@
 .trip-list {
-  .trip_flights { margin-top: 10px }
+  .trip {
+    padding: 5px 2px;
+    h2 { margin-top: 5px }
+  }
 }
 
 .trip-heading {
@@ -16,4 +19,9 @@
 .control-buttons {
   text-align: right;
   .btn { margin-right: 3px }
+}
+
+
+.trip.private {
+  background-color: #fff9ea;
 }

@@ -10,6 +10,8 @@ javascript:
 div.row.trip-heading
   div.col-xs-12.col-md-8
     h1.trip-name
+      - if @trip.private?
+        i.fa.fa-lock> title=t('messages.private_trip')
       span.emoji = @trip.name
       small #{format_date @trip.begin_date} - #{format_date @trip.end_date}
   - if @show_controls

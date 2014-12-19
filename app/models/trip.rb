@@ -29,6 +29,10 @@ class Trip < ActiveRecord::Base
     where("begin_date > ?", Time.now.utc)
   end
 
+  def private?
+    !self.is_public?
+  end
+
   def refresh_dates!
     begin_date = flights.minimum(:depart_date)
     end_date = flights.maximum(:arrive_date)

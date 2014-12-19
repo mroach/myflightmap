@@ -13,6 +13,9 @@ div.row
             span.airline_code= @flight.airline_code
             span.flight_number= @flight.flight_number
           span.airline_name= @flight.airline_name
+      - if @flight.private?
+        div.col-xs-2.private-icon title=t('messages.private_flight')
+          i.fa.fa-3x.fa-lock
     div.row.row2
       div.col-xs-5.depart
         div.depart_airport= @flight.depart_airport

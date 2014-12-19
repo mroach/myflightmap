@@ -59,6 +59,10 @@ class Flight < ActiveRecord::Base
     where("depart_time_utc > ?", Time.now.utc)
   end
 
+  def private?
+    !self.is_public?
+  end
+
   # Remove non word chars from the flight code when setting
   def flight_code=(value)
     value and write_attribute(:flight_code, value.sub(/\W/, '').upcase)

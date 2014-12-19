@@ -73,3 +73,6 @@ en:
     distance: "Distance"
     duration: "Duration"
     view_all: "View All"
+  messages:
+    private_flight: "This flight is private. Only you can see it."
+    private_trip: "This trip is private. Only you can see it."

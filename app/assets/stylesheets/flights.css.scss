@@ -48,6 +48,10 @@
 .flight-buttons { padding: 8px 0 }
 .dot-separated > span:not(:last-child):after { content: " · " }
 
+.flight.private {
+  background-color: #fff9ea !important;
+}
+
 .flight-detail {
   max-width: 500px;
   margin-bottom: 20px;
@@ -112,6 +116,16 @@ span.seat_class {
     border-bottom: solid 1px #ccc;
     width: 600px;
 
+    .private-info {
+      margin-top: -.5em;
+      margin-bottom: .5em;
+      background-color: #900;
+      color: white;
+      font-size: 1.1em;
+      padding: .2em;
+      text-align: center;
+    }
+
     .col1, .col2, .col3 { display: inline-block; vertical-align: top }
     .col1 { width: 150px }
     .col2 { width: 350px }
@@ -151,6 +165,7 @@ span.seat_class {
     width: 150px;
     border: solid 1px #bbb;
     border-radius: 4x;
+    background-color: white;
     display: inline-block;
     margin: 0 4px 10px 0;
 
