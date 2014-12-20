@@ -15,7 +15,7 @@ div.row.stats.horizontal
 
 div.row
   div.col-xs-12.col-sm-6.col-md-4.col-lg-4
-    h3= t '.airports'
+    h3= t 'words.airports'
     table.stats.airports
       - @stats[:top_airports].take(10).each do |a|
         tr
@@ -24,7 +24,7 @@ div.row
           td.city= a[:airport].city
           td.number= a[:flights]
   div.col-xs-12.col-sm-6.col-md-4.col-lg-4
-    h3= t '.airlines'
+    h3= t 'words.airlines'
     table.stats.airlines
       - @stats[:top_airlines].take(10).each do |a|
         tr
@@ -34,7 +34,7 @@ div.row
           td= a[:airline].name if a[:airline]
           td.number= a[:flights]
   div.col-xs-12.col-sm-6.col-md-4.col-lg-4
-    h3= t '.countries'
+    h3= t 'words.countries'
     table.stats.countries
       - @stats[:top_countries].take(10).each do |c|
         tr

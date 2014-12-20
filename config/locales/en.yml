@@ -58,6 +58,7 @@ en:
     my_profile: "My Profile"
     resend_confirmation_email: "Re-send confirmation email"
     resend_unlock_email: "Re-send unlock emails"
+    forgot_password: "Forgot Password"
     change_password: "Change Password"
     reset_password: "Reset Password"
   navigation_links:
