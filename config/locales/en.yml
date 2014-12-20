@@ -44,6 +44,7 @@ en:
     batch_update: "Batch Update"
     edit: "Edit"
     delete: "Delete"
+    cancel: "Cancel"
     add_flight: "Add Flight"
     add_flight_to_trip: "Add a flight to this trip"
     sign_in: "Log In"
@@ -98,3 +99,10 @@ en:
         and difficulty or have suggestions we'd love to hear from you.
         If you're a designer and want to make this site pretty, we definitely
         want to hear from you. Send an email to [info@myflightmap.com](mailto:info@myflightmap.com).
+  trips:
+    form:
+      is_public:
+        label: Publicly visible?
+        help_text: >
+          Note: This will not automatically mark flights in this trip as private.
+          The trip itself won't be listed, but the individual flights will be unless you mark them as private too!

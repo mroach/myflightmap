@@ -7,15 +7,13 @@ div.container
         = form_for(@trip) do |f|
           = error_messages(@trip)
           div.form-group
-            div.input-group
-              = f.text_field :name, placeholder: "Name", class: "form-control", autofocus: true
+            = f.text_field :name, placeholder: "Name", class: "form-control", autofocus: true
           div.form-group
-            div.input-group
-              = f.text_field :purpose, placeholder: "Purpose", class: "form-control"
+            = f.text_field :purpose, placeholder: "Purpose", class: "form-control"
           div.form-group
-            div.input-group
-              label for="trip[is_public]" Publicly visible?
-              = f.check_box :is_public, class: "form-control"
+            label for="trip[is_public]" = t('.is_public.label')
+            = f.check_box :is_public, class: "form-control"
+            div.text-info =t('.is_public.help_text')
           div.form-group.btn-group style="margin-top:10px"
             = f.submit class: "btn btn-success"
-            = link_to 'Cancel', @trip.new_record? ? trips_path : trip_path(@trip), class: 'btn btn-danger'
+            = link_to t('actions.cancel'), @trip.new_record? ? trips_path : trip_path(@trip), class: 'btn btn-danger'
