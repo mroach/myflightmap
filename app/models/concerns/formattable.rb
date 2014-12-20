@@ -21,7 +21,11 @@ module Formattable
       super()
     else
       format_string ||= self.formattable_settings[:default_format]
-      format_string % self.attributes.symbolize_keys
+
+      # inject the attributes into the format string
+      # collapse repeating whitespace and strip leading and trailing whitespace
+      # this is likely to happen when values were nil
+      (format_string % self.attributes.symbolize_keys).sub(/[ ]{2,}/, ' ').strip
     end
   end
 
