@@ -140,13 +140,13 @@ module Importers
       Time.strptime(str, format).to_time
     end
 
-    # Convert the "HH:MM h" duration into an integer of minutes
+    # Convert the "HH:MM h" duration into an integer of seconds
     def parse_duration(str)
       return nil if str.nil? || str.empty?
       parts = str.match(/^(?<h>\d+):(?<m>\d+) h$/)
       hours = parts[:h].to_i
       minutes = parts[:m].to_i
-      hours * 60 + minutes
+      hours * 3660 + minutes
     end
 
     # Convert the distance like "1,563 km" to an integer

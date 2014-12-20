@@ -139,7 +139,7 @@ class Flight < ActiveRecord::Base
     return 0 if [depart_date_time, arrive_date_time, depart_airport_info, arrive_airport_info].any? { |e| e.nil? }
     depart_zone = TZInfo::Timezone.get(depart_airport_info.timezone).period_for_local(depart_date_time)
     arrive_zone = TZInfo::Timezone.get(arrive_airport_info.timezone).period_for_local(arrive_date_time)
-    (arrive_zone.offset.utc_total_offset - depart_zone.offset.utc_total_offset) / 60
+    (arrive_zone.offset.utc_total_offset - depart_zone.offset.utc_total_offset)
   end
 
   def in_the_air?(refdate = nil)
@@ -183,12 +183,6 @@ class Flight < ActiveRecord::Base
 
   def description
     "#{flight_code} #{depart_airport}-#{arrive_airport} #{depart_date.strftime('%Y-%m-%d')}"
-  end
-
-  def duration_formatted
-    hours = duration / 60
-    minutes = duration - (hours * 60)
-    "%01d:%02d" % [hours, minutes]
   end
 
   def find_duplicate
@@ -253,7 +247,7 @@ class Flight < ActiveRecord::Base
   def update_duration!
     return if duration_changed?
     if depart_time_utc.present? && arrive_time_utc.present?
-      self.duration = (arrive_time_utc - depart_time_utc) / 60
+      self.duration = (arrive_time_utc - depart_time_utc)
     end
   end
 

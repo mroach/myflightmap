@@ -62,8 +62,8 @@ module ApplicationHelper
     "#{s} km"
   end
 
-  def format_duration(minutes, style = "short")
-    change = Duration.new(:minutes => minutes)
+  def format_duration(seconds, style = :short)
+    change = Duration.new(:seconds => seconds)
     time_label = case
       when change.total < 3600 then 'minutes'
       when change.total % 3600 != 0 then'hours_minutes'

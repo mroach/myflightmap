@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141213090527) do
+ActiveRecord::Schema.define(version: 20141220011324) do
 
   create_table "airlines", force: true do |t|
     t.string   "iata_code"

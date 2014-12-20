@@ -81,7 +81,7 @@ namespace :import do
             arrive_date: val(row, :arrive_date),
             arrive_time: val(row, :arrive_time),
             distance: val(row, :distance),
-            duration: val(row, :duration).to_i / 60,
+            duration: val(row, :duration).to_i,
             seat: val(row, :seat),
             seat_class: class_map[val(row, :seat_class)],
             seat_location: (seat_location and seat_location.capitalize),
