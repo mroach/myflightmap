@@ -82,3 +82,19 @@ en:
   messages:
     private_flight: "This flight is private. Only you can see it."
     private_trip: "This trip is private. Only you can see it."
+  home:
+    index:
+      intro: >
+        Welcome to MyFlightMap, your site for keeping track of your flights and trips!
+        Organise your flights into trips, see stats about your flying, share links
+        with your friends and family rather than forwarding itineraries.
+
+
+        Automatically import trips by forwarding confirmation emails, import
+        your FlightMemory data, or create flights and trips by hand.
+
+
+        We love flying and stats, and are working to improve this app. If you encounter
+        and difficulty or have suggestions we'd love to hear from you.
+        If you're a designer and want to make this site pretty, we definitely
+        want to hear from you. Send an email to [info@myflightmap.com](mailto:info@myflightmap.com).

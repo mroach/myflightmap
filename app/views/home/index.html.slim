@@ -5,10 +5,7 @@ javascript:
 
 div.row
   div.col-xs-12.col-md-6
-    div.lead
-      | Your site for keeping track of your flights.
-      | Organise your flights into trips, see stats about your flying, share links
-      | with your friends and family rather than forwarding itineraries.
+    div.home.intro = markdown t('.intro')
     - if user_signed_in?
       = link_to t('actions.my_profile'), profile_path(current_user), class: 'btn btn-success btn-lg'
     - else
@@ -21,7 +18,7 @@ div.row
       p
         | If you were a user of the previous myflightmap.com, just do a
         |  #{link_to t('actions.forgot_password'), new_user_password_path} to get a new password set up.
-        | Then if you like you can link your profile to Facebook and use that for future authentication.
+        |  Then if you like you can link your profile to Facebook and use that for future authentication.
 
 div.row.stats.vertical
   div.col-xs-12.col-md-4

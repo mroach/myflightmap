@@ -1,4 +1,11 @@
 module ApplicationHelper
+
+  def markdown(text)
+    renderer = Redcarpet::Render::XHTML.new()
+    markdown = Redcarpet::Markdown.new(renderer)
+    markdown.render(text).html_safe
+  end
+
   def airline_logo(airline, size = :original)
     if airline.nil?
       image_tag image_path "airlines/logos/#{size}/missing.png",
