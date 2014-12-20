@@ -15,10 +15,13 @@ sv:
       - nov
       - dec
     formats:
+      short: "%y-%m-%d"
       medium: "%d %b %Y"
+      long: "%Y-%m-%d"
   time:
     formats:
-      long: "%d %b %y %H:%M"
+      medium: "%d %b %Y %H:%M"
+      long: "%d %B %Y %H:%M"
       system: "%Y-%m-%d %H:%M:%S"
   ruby_duration:
     second: "sekund"
