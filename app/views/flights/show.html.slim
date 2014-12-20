@@ -61,7 +61,7 @@ div.row
         div= @flight.aircraft_type
       div.col-xs-4
         label Trip
-        - if policy(@flight.trip).show?
+        - if @flight.trip && policy(@flight.trip).show?
           div.emoji= @flight.trip.present? ? link_to(@flight.trip.name, trip_path(@flight.trip)) : '<em>None</em>'.html_safe
 
   div.col-xs-12.col-md-6.flight-map
