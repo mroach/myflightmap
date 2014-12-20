@@ -24,7 +24,7 @@ ul.form-errors {
   li { list-style-type: none }
 }
 
-p { padding: 15px; margin-top: .5em; }
+p { padding-top: 5px; padding-bottom: 5px; margin-top: .5em; }
 
 .controls {
   margin-top: 10px;
@@ -47,6 +47,7 @@ p { padding: 15px; margin-top: .5em; }
   border-left-width: 5px;
   border-radius: 3px;
 
+  p { padding-right: 10px; padding-left: 10px }
   h4 { margin-top:0; margin-bottom: 5px }
   p:last-child { margin-bottom: 0 }
   code { border-radius: 3px }
