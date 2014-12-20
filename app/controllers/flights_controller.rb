@@ -45,9 +45,11 @@ class FlightsController < ApplicationController
     @flight.user_id = current_user.id
     authorize @flight, :create?
 
+    redirect_location = @flight.trip.present? ? @flight.trip : @flight
+
     respond_to do |format|
       if @flight.save
-        format.html { redirect_to @flight, notice: 'Flight was successfully created.' }
+        format.html { redirect_to redirect_location, notice: 'Flight was successfully created.' }
         format.json { render action: 'show', status: :created, location: flights_url }
       else
         format.html { render action: 'new' }
