@@ -3,7 +3,7 @@ javascript:
   window.airports = #{@stats[:airports].to_json.html_safe};
   window.top_airports = #{@stats[:top_airports].to_json.html_safe};
 
-div.row
+div.row.margin-below
   div.col-xs-12.col-md-6
     div.home.intro = markdown t('.intro')
     - if user_signed_in?
