@@ -1,4 +1,5 @@
 require 'geo'
+require 'duration_estimator'
 
 class Flight < ActiveRecord::Base
   extend FriendlyId
@@ -246,8 +247,27 @@ class Flight < ActiveRecord::Base
 
   def update_duration!
     return if duration_changed?
-    if depart_time_utc.present? && arrive_time_utc.present?
-      self.duration = (arrive_time_utc - depart_time_utc)
+
+    blank_time = Time.utc(2000, 1, 1, 0, 0, 0)
+
+    should_estimate_duration = depart_time.blank? ||
+      arrive_time.blank? ||
+      depart_time == blank_time ||
+      arrive_time == blank_time
+
+    if should_estimate_duration
+      can_estimate_duration = depart_airport_info.present? && arrive_airport_info.present?
+
+      if can_estimate_duration
+        self.duration = DurationEstimator.new.estimate(
+          depart_airport_info.coordinates, arrive_airport_info.coordinates)
+      else
+        logger.info "Can't estimate duration. Airport data is missing."
+      end
+    else
+      if depart_time_utc.present? && arrive_time_utc.present?
+        self.duration = (arrive_time_utc - depart_time_utc)
+      end
     end
   end
 

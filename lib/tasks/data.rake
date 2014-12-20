@@ -9,7 +9,9 @@ namespace :data do
       :set_missing_airline_name,
       :refresh_flight_utc_times,
       :refresh_trip_dates,
-      :prepend_airline_code
+      :prepend_airline_code,
+      :recalculate_flight_distances,
+      :estimate_flight_durations
     ]
 
     # desc "When flight numbers are missing the airline code, add it"
@@ -163,5 +165,65 @@ namespace :data do
         e.save!
       end
     end
+
+    desc "Re-calculate distance on flights"
+    task :recalculate_flight_distances => :environment do
+      Flight.where("depart_airport IS NOT NULL and arrive_airport IS NOT NULL").each do |f|
+
+        next if f.depart_airport_info.blank? || f.arrive_airport_info.blank?
+
+        distance = Geo.distance_between(
+          f.depart_airport_info.coordinates,
+          f.arrive_airport_info.coordinates
+        ).to_i
+
+        if distance != f.distance
+          puts "Updating #{f} distance. #{f.distance} => #{distance}"
+          f.distance = distance
+          f.audit_comment = "Re-calcualted distance"
+          f.save!
+        end
+      end
+    end
+
+    # Estimate the duration on flights when one of the following is true
+    # 1) Duration is blank
+    # 2) Duration is negative
+    # 3) Depart AND Arrive time are 2000-01-01 00:00 (essentially a blank)
+    # 4) Depart OR Arrive time are
+    desc "Estimate flight durations"
+    task :estimate_flight_durations => :environment do
+      blank_time = Time.utc(2000, 1, 1, 0, 0, 0)
+      Flight.where("
+        (depart_airport IS NOT NULL AND arrive_airport IS NOT NULL)
+        AND (
+          duration IS NULL
+          OR duration < 0
+          OR depart_time IS NULL
+          OR arrive_time IS NULL
+          OR (depart_time = ? AND arrive_time = ?)
+        )",
+        blank_time, blank_time).each do |f|
+
+        from = f.depart_airport_info
+        to = f.arrive_airport_info
+
+        next if from.blank? || to.blank?
+
+        duration = DurationEstimator.new.estimate(from.coordinates, to.coordinates)
+
+        # After correcting durations they will still appear in our query if
+        # the depart and arrive time are still null
+        if f.duration != duration
+          puts "Updating #{f.user}'s #{f} duration from #{f.duration} to #{duration}"
+
+          f.duration = duration
+          f.audit_comment = "Estimate duration"
+          f.save!
+        end
+
+      end
+    end
+
   end
 end
