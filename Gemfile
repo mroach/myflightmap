@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 source 'https://rails-assets.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.1'
+gem 'rails', '~> 4.2'
 
 # App configuration manager
 gem 'figaro'
@@ -103,6 +103,9 @@ gem 'hashids'
 gem 'rollbar', '~> 1.3'
 
 group :development do
+  # Ability to drop consoles on any page.
+  gem 'web-console', '~> 2.0'
+
   gem 'capistrano', '~> 3.2.1'
   gem 'capistrano-bundler', '~> 1.1.2', require: false
   gem 'capistrano-rails', '~> 1.1.1', require: false

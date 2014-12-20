@@ -7,9 +7,9 @@ Myflightmap::Application.routes.draw do
 
   # The import namespace uses non-standard routes. Set them up.
   namespace :import do
-    root to: :index
+    root action: :index
     namespace :flight_memory do
-      root to: :index
+      root action: :index
       post 'upload'
     end
   end
