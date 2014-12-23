@@ -6,7 +6,7 @@ module ApplicationHelper
     markdown.render(text).html_safe
   end
 
-  def airline_logo(airline, size = :original)
+  def airline_logo(airline, size = :large)
     if airline.nil?
       image_tag image_path "airlines/logos/#{size}/missing.png",
         alt: "No Airline",
