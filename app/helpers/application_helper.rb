@@ -30,7 +30,7 @@ module ApplicationHelper
   end
 
   def alliance_logo(alliance, size = :large)
-    return nil if alliance.nil?
+    return nil if alliance.blank?
     name = (Airline::ALLIANCES[alliance.to_sym] rescue alliance.titleize)
     image_tag "alliances/#{size}/#{alliance.downcase}.png",
       alt: name,
