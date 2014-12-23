@@ -21,6 +21,7 @@ class AirlinesController < ApplicationController
 
   # GET /airlines/1/edit
   def edit
+    authorize @airline, :edit?
   end
 
   # POST /airlines
