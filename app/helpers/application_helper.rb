@@ -20,12 +20,16 @@ module ApplicationHelper
   end
 
   def flag_image(country, size = 64)
-    country = country.downcase # can't use downcase! when the string is frozen
-    country = "gb" if country == "uk"
-    c = Country.new(country.upcase)
-    image_tag "flags/#{size}/#{country.downcase}.png",
-      alt: c ? c.name : country.upcase,
-      title: c ? c.name : country.upcase,
+    if country.is_a?(Country)
+      c = country
+    else
+      country = country.downcase # can't use downcase! when the string is frozen
+      country = "gb" if country == "uk"
+      c = Country.new(country.upcase)
+    end
+    image_tag "flags/#{size}/#{c.alpha2.downcase}.png",
+      alt: c.name,
+      title: c.name,
       class: 'flag'
   end
 
