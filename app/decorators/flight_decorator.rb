@@ -20,6 +20,10 @@ class FlightDecorator < Draper::Decorator
     desc.strip
   end
 
+  def time_remaining(refdate = Time.now.utc)
+    object.in_the_air?(refdate) ? (refdate - object.arrive_time_utc) : 0
+  end
+
   # Desired results depending on what's available:
   # Business on Lufthansa
   # Business

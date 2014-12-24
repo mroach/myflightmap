@@ -60,6 +60,10 @@ class Flight < ActiveRecord::Base
     where("depart_time_utc > ?", Time.now.utc)
   end
 
+  def self.in_the_air
+    where("depart_time_utc < ? AND arrive_time_utc > ?", Time.now.utc, Time.now.utc)
+  end
+
   def self.international
     where("international = ?", true)
   end
@@ -155,11 +159,9 @@ class Flight < ActiveRecord::Base
     (arrive_zone.offset.utc_total_offset - depart_zone.offset.utc_total_offset)
   end
 
-  def in_the_air?(refdate = nil)
+  def in_the_air?(refdate = Time.now.utc)
     # Require all the depart date/time fields and airports
-    return false if depart_time_utc.empty? || arrive_time_utc.empty?
-    # Use UTC now as a ref if one wasn't specified
-    refdate = Time.now.utc if refdate.nil?
+    return false if depart_time_utc.nil? || arrive_time_utc.nil?
     refdate >= depart_time_utc && refdate < arrive_time_utc
   end
 
