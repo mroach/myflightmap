@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 20141220011324) do
     t.datetime "depart_time_utc"
     t.datetime "arrive_time_utc"
     t.string   "slug"
+    t.boolean  "international",                     default: false, null: false
   end
 
   add_index "flights", ["airline_name"], name: "index_flights_on_airline_name"

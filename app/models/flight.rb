@@ -16,7 +16,7 @@ class Flight < ActiveRecord::Base
 
   validates_presence_of :user_id, :depart_date, :depart_airport, :arrive_airport
 
-  before_save :set_arrive_date!, :refresh_utc_times!, :update_duration!, :update_distance!
+  before_save :set_arrive_date!, :refresh_utc_times!, :update_duration!, :update_distance!, :update_international!
   after_save :update_related_trip!
 
   default_scope { order('depart_time_utc ASC') }
@@ -60,8 +60,20 @@ class Flight < ActiveRecord::Base
     where("depart_time_utc > ?", Time.now.utc)
   end
 
+  def self.international
+    where("international = ?", true)
+  end
+
+  def self.domestic
+    where("international = ?", false)
+  end
+
   def private?
     !self.is_public?
+  end
+
+  def domestic?
+    !international?
   end
 
   # Remove non word chars from the flight code when setting
@@ -278,6 +290,17 @@ class Flight < ActiveRecord::Base
         depart_airport_info.coordinates,
         arrive_airport_info.coordinates
       ).to_i
+    end
+  end
+
+  def update_international!
+    return if international_changed?
+
+    if depart_airport_info.present? && arrive_airport_info.present?
+      international = depart_airport_info.country != arrive_airport_info.country
+      if self.international != international
+        self.international = international
+      end
     end
   end
 

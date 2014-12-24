@@ -11,7 +11,8 @@ namespace :data do
       :refresh_trip_dates,
       :prepend_airline_code,
       :recalculate_flight_distances,
-      :estimate_flight_durations
+      :estimate_flight_durations,
+      :set_international_flag
     ]
 
     # desc "When flight numbers are missing the airline code, add it"
@@ -222,6 +223,18 @@ namespace :data do
           f.save!
         end
 
+      end
+    end
+
+    desc "Check to make sure all international flights have the international flag"
+    task :set_international_flag => :environment do
+      Flight.joins(:depart_airport_info, :arrive_airport_info)
+            .where("airports.country <> arrive_airport_infos_flights.country")
+            .where("international = ?", false).each do |f|
+        puts "Marking flight #{f} as international"
+        f.international = true
+        f.audit_comment = "Setting international flag"
+        f.save!
       end
     end
 
