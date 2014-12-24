@@ -19,6 +19,11 @@ div.row
             div.input-group
               span.input-group-addon
                 i.fa.fa-user
+              = f.text_field :name, placeholder: "Name", class: "form-control"
+          div.form-group
+            div.input-group
+              span.input-group-addon
+                i.fa.fa-user
               = f.text_field :username, placeholder: "Username/nickname", class: "form-control"
             span.help-block Changing your username will change the URLs linking to your data
 
