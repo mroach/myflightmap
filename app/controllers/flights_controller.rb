@@ -75,8 +75,6 @@ class FlightsController < ApplicationController
 
   # PATCH /flights/batch_update
   def batch_update
-    authorize @flight, :update?
-
     # Get the name of the field to update and the list of records to update
     field_to_update = params[:field_to_update].to_sym
     records_to_update = params[:records_to_update].split(/,/)
@@ -88,7 +86,11 @@ class FlightsController < ApplicationController
     # Use the flight_params strong parameters to allow any field
     # to be batch updated
     value = flight_params[field_to_update]
-    flights.each { |e| e.send("#{field_to_update}=", value); e.save! }
+    flights.each do |e|
+      authorize e, :update?
+      e.send("#{field_to_update}=", value)
+      e.save!
+    end
 
     redirect_to flights_path,
       notice: "Updated %s %s" % [records_to_update.length, "flights".pluralize(records_to_update.length)]
