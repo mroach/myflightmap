@@ -2,7 +2,16 @@ table.stats {
   img.flag { height: 24px }
 
   td { padding: .1em .2em }
-  td.number { text-align: right; min-width: 3em; }
+  td.number {
+    text-align: right;
+    min-width: 3em;
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    span {
+      background-color: #eee;
+      padding: 3px;
+      border-radius: 5px;
+    }
+  }
   &.airports {
     .airport { font-weight: bold }
   }
