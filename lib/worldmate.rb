@@ -37,7 +37,7 @@ module Worldmate
         t.audit_comment = "Created by Worldmate"
       end
 
-      @trip.flights = xml_doc.css('items flight').map do |f|
+      @trip.flights << xml_doc.css('items flight').map do |f|
         airline_code  = f.css("details").attribute('airline-code').text
         airline_name  = f.css("provider-details name").text
         flight_number = f.css("details").attribute('number').text
