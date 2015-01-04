@@ -14,8 +14,8 @@ nav.navbar.navbar-inverse
       - if user_signed_in?
         ul.nav.navbar-nav.navbar-right
           li.profile
-            = link_to profile_path do
               = image_tag current_user.image(:small), alt: current_user.display_name
+            = link_to profile_path(current_user) do
               span.name= current_user.display_name
           li.dropdown
             a.dropdown-toggle data-toggle="dropdown" href='#'
