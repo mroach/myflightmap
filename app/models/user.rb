@@ -1,5 +1,3 @@
-require 'digest/md5'
-
 class User < ActiveRecord::Base
   include Formattable
   audited except: [:current_sign_in_at, :last_sign_in_at, :current_sign_in_ip, :last_sign_in_ip]
@@ -83,42 +81,8 @@ class User < ActiveRecord::Base
     self.identities.none?
   end
 
-  # Return a URL for a user photo
-  # Should move to decorator
-  def image(size = :square)
-    image_url = read_attribute(:image)
-
-    # this isn't the right way to do this. the image should be copied to user.image
-    image_url.blank? and
-      identity_with_image = self.identities.where('image IS NOT NULL').first and
-        image_url = identity_with_image.image
-
-    # If they don't have an image URL, use gravatar
-    if image_url.blank?
-      image_url = gravatar_url(size)
-    else
-      # For Facebook, we can ask for a specific size
-      if image_url =~ /graph\.facebook\.com/
-        image_url = "#{image_url}?type=#{size}"
-      end
-
-      if image_url =~ /googleusercontent\.com/
-        sizes = { square: 50, small: 50, normal: 100, large: 200 }
-        image_url.sub!(/sz=\d+/, "sz=#{sizes[size]}")
-      end
-    end
-
-    image_url
-  end
-
   def display_name
     name || username
-  end
-
-  def gravatar_url(size = :normal)
-    hash = Digest::MD5.hexdigest(email.downcase)
-    sizes = { square: 50, small: 50, normal: 100, large: 200 }
-    "http://www.gravatar.com/avatar/#{hash}?s=#{sizes[size]}"
   end
 
   def last_flight

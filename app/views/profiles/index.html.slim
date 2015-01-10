@@ -7,7 +7,7 @@ div.users
     div.row.user
       div.col-xs-12.col-md-3
         = link_to profile_path(user.username) do
-          = image_tag user.image(:square)
+          = user.image_tag(:square)
           span.name= user.display_name
           div.since
       div.col-xs-3.col-md-2

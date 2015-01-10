@@ -1,7 +1,8 @@
+- user = user.decorate
 div.row.profile-strip
   div.image
     = link_to profile_path(user) do
-      = image_tag user.image(:small)
+      = user.image_tag(:small)
   div.name
     h3
       = link_to profile_path(user) do
