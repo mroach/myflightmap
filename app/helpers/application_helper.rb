@@ -8,7 +8,7 @@ module ApplicationHelper
 
   def airline_logo(airline, size = :large)
     if airline.nil?
-      image_tag image_path "airlines/logos/#{size}/missing.png",
+      image_tag image_path("airlines/logos/#{size}/missing.png"),
         alt: "No Airline",
         class: 'airline-logo'
     else
