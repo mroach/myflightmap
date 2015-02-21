@@ -40,6 +40,13 @@ p { padding-top: 5px; padding-bottom: 5px; margin-top: .5em; }
 
 .row.margin-below { margin-bottom: 1em }
 
+.list-group-item .badge {
+  background-color: #bbb;
+  color: black;
+  text-shadow: 0 1px 0 #fff;
+  font-size: 1.1em;
+  font-weight: normal;
+}
 /* Side notes for calling out things
 -------------------------------------------------- */
 .callout {
