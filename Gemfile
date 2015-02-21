@@ -4,6 +4,12 @@ source 'https://rails-assets.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2'
 
+# Application server
+gem 'puma'
+
+# Heroku support gem
+gem 'rails_12factor', group: :production
+
 # App configuration manager
 gem 'figaro'
 
