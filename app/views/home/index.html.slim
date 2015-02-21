@@ -13,6 +13,31 @@ div.row.margin-below
         = link_to t('actions.sign_in'), new_user_session_path, class: 'btn btn-success btn-medium'
         = link_to t('actions.sign_up'), new_user_registration_path, class: 'btn btn-primary btn-medium'
   div.col-xs-12.col-md-6
+    - if @in_the_air.any?
+      h4.users_in_the_air = t('.in_the_air', count: @in_the_air.length)
+      - @in_the_air.each do |f|
+        div.in_the_air.flight.home-mini data-click-url=flight_path(f, username: f.user.username)
+          div.row
+            div.col-xs-2
+              div.user-image = f.user.decorate.image_tag
+            div.col-xs-3.depart
+              div.depart_airport= f.depart_airport
+              div.depart_city= f.depart_city
+              div.depart_time= format_time(f.depart_time)
+            div.col-xs-1.flight-icon
+              | &#x2708;
+            div.col-xs-3.arrive
+              div.arrive_airport= f.arrive_airport
+              div.arrive_city= f.arrive_city
+              div.arrive_time
+                = format_time(f.arrive_time)
+                = f.arrive_time_offset
+            div.col-xs-2
+              div.airline_logo = airline_logo f.airline
+          div.row
+            div.col-xs-5.col-xs-offset-2.time-remaining
+              div data-time-remaining=f.time_remaining
+                | #{format_duration(f.time_remaining)} remaining
     div.callout.callout-info
       h4 Users of the old site:
       p

@@ -85,6 +85,9 @@ en:
     private_trip: "This trip is private. Only you can see it."
   home:
     index:
+      in_the_air:
+        one: "We have a user up in the air! Bon voyage!"
+        other: "We have %{count} users up in the air. Bon boyage!"
       intro: >
         Welcome to MyFlightMap, your site for keeping track of your flights and trips!
         Organise your flights into trips, see stats about your flying, share links

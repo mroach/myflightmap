@@ -4,6 +4,7 @@ class HomeController < ApplicationController
 
   def index
     @stats = Stats.from_flights(policy_scope(Flight))
+    @in_the_air = policy_scope(Flight).in_the_air.decorate
   end
 
   def about
