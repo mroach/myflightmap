@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-source 'https://rails-assets.org'
 
 ruby '2.1.5'
 
@@ -92,8 +91,10 @@ gem "autoprefixer-rails"
 gem 'coffee-rails', '~> 4.0'
 
 # Pseudo-gems for Bower packages
-gem 'rails-assets-handlebars'
-gem 'rails-assets-typeahead.js'
+source 'https://rails-assets.org' do
+  gem 'rails-assets-handlebars'
+  gem 'rails-assets-typeahead.js'
+end
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
