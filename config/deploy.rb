@@ -104,9 +104,3 @@ namespace :figaro do
     end
   end
 end
-
-after 'deploy:publishing', 'deploy:restart'
-after 'deploy:finishing', 'deploy:cleanup'
-
-after "deploy:started", "figaro:setup"
-after "deploy:symlink:release", "figaro:symlink"

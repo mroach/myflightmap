@@ -16,5 +16,7 @@ require 'rollbar/capistrano3'
 require 'capistrano/puma'
 require 'capistrano/puma/nginx'
 
+require 'capistrano/figaro_yml'
+
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
 Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }

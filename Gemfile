@@ -5,14 +5,14 @@ ruby '2.1.5'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2'
 
+# App configuration manager
+gem 'figaro'
+
 # Application server
 gem 'puma'
 
 # Heroku support gem
 gem 'rails_12factor', group: :production
-
-# App configuration manager
-gem 'figaro'
 
 # Need >= 3.1 for bootstrap 3 support
 gem 'simple_form', '~> 3.1'
@@ -120,6 +120,7 @@ group :development do
   gem 'capistrano-rails', '~> 1.1.1', require: false
   gem 'capistrano-rbenv', '~> 2.0', require: false
   gem 'capistrano3-puma',   require: false
+  gem 'capistrano-figaro-yml', '~> 1.0.2'
 
   gem 'sqlite3'
 
