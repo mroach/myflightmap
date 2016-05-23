@@ -109,7 +109,7 @@ gem 'friendly_id', '~> 5.0.0'
 gem 'hashids'
 
 # Error reporting
-gem 'rollbar', '~> 1.3'
+gem 'rollbar'
 
 group :development do
   # Ability to drop consoles on any page.
