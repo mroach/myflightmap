@@ -1,4 +1,4 @@
-lock '3.2.1'
+lock '3.5.0'
 
 # Load the secrets file. We need it for the Rollbar key
 secrets = YAML.load(File.read('config/application.yml'))[fetch(:rails_env, 'production').to_s]
@@ -10,7 +10,6 @@ set :scm, :git
 set :repo_url, 'git@github.com:mroach/myflightmap.git'
 set :keep_releases, 10
 
-set :format, :pretty
 set :log_level, :debug
 set :pty, true
 
