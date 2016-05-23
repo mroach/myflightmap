@@ -37,7 +37,7 @@ Myflightmap::Application.routes.draw do
   # Ex) /mroach/map, /mroach/trips, /mroach/flights
   # Explicity note which chars are allowed in usernames
   # The dot is important; by default it'd be rejected
-  scope ':username', constraints: { username: /[\w\_\.\-]+/ } do
+  scope ':username', constraints: { username: /[\p{L}\d\_\.\-]+/ } do
     root to: 'profiles#show', as: 'profile'
     get 'map', to: 'map#show', as: 'map'
 
