@@ -118,6 +118,7 @@ group :development do
   gem 'capistrano-rails',      require: false
   gem 'capistrano-rbenv',      require: false
   gem 'capistrano3-puma',      require: false
+  gem 'capistrano-foreman',    require: false
   gem 'capistrano-figaro-yml', require: false
 
   gem 'sqlite3'

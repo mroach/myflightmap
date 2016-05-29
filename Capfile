@@ -16,6 +16,8 @@ require 'rollbar/capistrano3'
 require 'capistrano/puma'
 require 'capistrano/puma/nginx'
 
+require 'capistrano/foreman'
+
 require 'capistrano/figaro_yml'
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
