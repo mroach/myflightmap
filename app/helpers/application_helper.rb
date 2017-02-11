@@ -44,7 +44,7 @@ module ApplicationHelper
 
   def social_login_button(provider, template)
     link_to t(template, provider: provider.to_s.titleize),
-      omniauth_authorize_path(resource_name, provider),
+      omniauth_authorize_path(:user, provider),
       class: "btn social #{provider}"
   end
 
