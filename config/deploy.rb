@@ -1,7 +1,7 @@
 lock '3.5.0'
 
 # Load the secrets file. We need it for the Rollbar key
-secrets = YAML.load(File.read('config/application.yml'))[fetch(:rails_env, 'production').to_s]
+secrets = YAML.load(File.read('config/application.yml'))
 
 set :application, 'myflightmap'
 set :deploy_to, '/home/deploy/apps/myflightmap'
@@ -19,7 +19,7 @@ set :rbenv_prefix,   "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rb
 set :rbenv_map_bins, %w{rake gem bundle ruby rails}
 set :rbenv_roles,    :all # default value
 
-set :rollbar_token, secrets['rollbar']
+set :rollbar_token, secrets.fetch('ROLLBAR')
 set :rollbar_env,   Proc.new { fetch :stage }
 set :rollbar_role,  Proc.new { :app }
 
