@@ -4,10 +4,10 @@ require 'countries'
 require 'csv'
 require 'logging'
 
-TEMP_FILE = "airlines.csv"
+TEMP_FILE = 'airlines.csv'
 TEMP_FILE_PATH = File.join(ENV['TMPDIR'], TEMP_FILE)
 
-DATA_URL = "https://sourceforge.net/p/openflights/code/HEAD/tree/openflights/data/airlines.dat?format=raw"
+DATA_URL = 'https://sourceforge.net/p/openflights/code/HEAD/tree/openflights/data/airlines.dat?format=raw'
 
 logger ||= Logger.new(STDOUT)
 
@@ -48,7 +48,7 @@ irregular_country_names = {
 
 airlines = []
 CSV.foreach(TEMP_FILE_PATH) do |row|
-  next if row[7] != "Y"  # Only include active airports
+  next if row[7] != 'Y'  # Only include active airports
   next if row[3].empty?  #
   next unless row[3].match('^[A-Z0-9]{2}$')
 
@@ -65,14 +65,14 @@ CSV.foreach(TEMP_FILE_PATH) do |row|
 
   if country.nil?
     logger.warn "Unknown country #{country_name} for '#{row[3]} #{row[1]}'"
-    country = "??"
+    country = '??'
   else
     country = country.alpha2
   end
 
   airlines.push({
                   iata_code: row[3],
-                  icao_code: row[4] == "\\N" ? nil : row[4],
+                  icao_code: row[4] == '\\N' ? nil : row[4],
                   name:      row[1],
                   country:   country
                 })
@@ -85,4 +85,4 @@ logger.info "Creating #{airlines.size} airlines"
 
 Airline.create(airlines)
 
-logger.info "Done"
+logger.info 'Done'

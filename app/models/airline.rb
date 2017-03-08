@@ -2,17 +2,17 @@ class Airline < ActiveRecord::Base
   include Formattable
   audited
 
-  ALLIANCES = { :staralliance => "Star Alliance", :oneworld => "oneworld", :skyteam => "Sky Team" }
+  ALLIANCES = { :staralliance => 'Star Alliance', :oneworld => 'oneworld', :skyteam => 'Sky Team' }
   IATA_CODE_REGEX = /\A (?: [A-Z]{2} | [A-Z]\d | \d[A-Z] ) \z/x
 
   has_attached_file :logo,
-                    :styles      => { large: "96x96>", medium: "48x48>", small: "32x32>", icon: "16x16>" },
-                    :default_url => "/images/:class/:attachment/:style/missing.png",
-                    :path        => ":rails_root/public/system/:class/:attachment/:style/:iata_code.png",
-                    :url         => "/system/:class/:attachment/:style/:iata_code.png"
-  validates_attachment_content_type :logo, :content_type => ["image/jpeg", "image/gif", "image/png"]
+                    :styles      => { large: '96x96>', medium: '48x48>', small: '32x32>', icon: '16x16>' },
+                    :default_url => '/images/:class/:attachment/:style/missing.png',
+                    :path        => ':rails_root/public/system/:class/:attachment/:style/:iata_code.png',
+                    :url         => '/system/:class/:attachment/:style/:iata_code.png'
+  validates_attachment_content_type :logo, :content_type => ['image/jpeg', 'image/gif', 'image/png']
 
-  formattable "%{iata_code}: %{name}"
+  formattable '%{iata_code}: %{name}'
 
   def to_param
     iata_code

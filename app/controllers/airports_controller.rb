@@ -75,8 +75,8 @@ class AirportsController < ApplicationController
   def search
     authorize :airport, :search?
     results = []
-    results += Airport.where("iata_code LIKE ?", params[:q].upcase)
-    results += Airport.where("LOWER(description) LIKE ?", "%#{params[:q].downcase}%")
+    results += Airport.where('iata_code LIKE ?', params[:q].upcase)
+    results += Airport.where('LOWER(description) LIKE ?', "%#{params[:q].downcase}%")
     render json: results
   end
 

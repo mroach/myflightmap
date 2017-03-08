@@ -45,7 +45,7 @@ module Geo
     args.each do |a|
       # note that Float::NAN != Float::NAN
       # still, this could probably be improved:
-      return false if (!a.is_a?(Numeric) or a.to_s == "NaN")
+      return false if (!a.is_a?(Numeric) or a.to_s == 'NaN')
     end
     true
   end

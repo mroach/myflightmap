@@ -23,29 +23,29 @@ class Flight < ActiveRecord::Base
 
   friendly_id :description, use: [:slugged, :scoped], scope: :user
 
-  formattable "%{flight_code} %{depart_airport}-%{arrive_airport} %{depart_date}"
+  formattable '%{flight_code} %{depart_airport}-%{arrive_airport} %{depart_date}'
 
   self.skip_time_zone_conversion_for_attributes = [:depart_time, :arrive_time]
 
   def self.seat_classes
-    ["Economy", "Economy Plus", "Business", "First", "Suite"]
+    ['Economy', 'Economy Plus', 'Business', 'First', 'Suite']
   end
 
   # TODO: Move to i18n file so these can be localised
   def self.seat_locations
-    ["Window", "Middle", "Aisle", "Suite", "Other"]
+    ['Window', 'Middle', 'Aisle', 'Suite', 'Other']
   end
 
   def self.flight_roles
-    ["Passenger", "Crew"]
+    ['Passenger', 'Crew']
   end
 
   def self.flight_purposes
-    ["Pleasure", "Business", "Crew"]
+    ['Pleasure', 'Business', 'Crew']
   end
 
   def self.belonging_to(user_id)
-    where("user_id = ?", user_id)
+    where('user_id = ?', user_id)
   end
 
   def self.recent
@@ -53,23 +53,23 @@ class Flight < ActiveRecord::Base
   end
 
   def self.completed
-    where("arrive_time_utc < ?", Time.now.utc)
+    where('arrive_time_utc < ?', Time.now.utc)
   end
 
   def self.future
-    where("depart_time_utc > ?", Time.now.utc)
+    where('depart_time_utc > ?', Time.now.utc)
   end
 
   def self.in_the_air
-    where("depart_time_utc < ? AND arrive_time_utc > ?", Time.now.utc, Time.now.utc)
+    where('depart_time_utc < ? AND arrive_time_utc > ?', Time.now.utc, Time.now.utc)
   end
 
   def self.international
-    where("international = ?", true)
+    where('international = ?', true)
   end
 
   def self.domestic
-    where("international = ?", false)
+    where('international = ?', false)
   end
 
   def private?
@@ -178,7 +178,7 @@ class Flight < ActiveRecord::Base
     case
     when offset < 0 then "-#{offset}"
     when offset > 0 then "+#{offset}"
-      else ""
+      else ''
     end
   end
 

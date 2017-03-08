@@ -3,7 +3,7 @@ class ProfilesController < ApplicationController
 
   def index
     authorize :user, :index?
-    @users = policy_scope(User).order("COALESCE(last_sign_in_at, created_at) DESC").decorate
+    @users = policy_scope(User).order('COALESCE(last_sign_in_at, created_at) DESC').decorate
   end
 
   def show

@@ -67,12 +67,12 @@ namespace :puma do
 end
 
 namespace :deploy do
-  desc "Make sure local git is in sync with remote."
+  desc 'Make sure local git is in sync with remote.'
   task :check_revision do
     on roles(:app) do
       unless `git rev-parse HEAD` == `git rev-parse origin/master`
-        puts "WARNING: HEAD is not the same as origin/master"
-        puts "Run `git push` to sync changes."
+        puts 'WARNING: HEAD is not the same as origin/master'
+        puts 'Run `git push` to sync changes.'
         exit
       end
     end
@@ -101,14 +101,14 @@ namespace :deploy do
 end
 
 namespace :figaro do
-  desc "SCP transfer figaro configuration to the shared folder"
+  desc 'SCP transfer figaro configuration to the shared folder'
   task :setup do
     on roles(:app) do
-      upload! "config/application.yml", "#{shared_path}/config/application.yml", via: :scp
+      upload! 'config/application.yml', "#{shared_path}/config/application.yml", via: :scp
     end
   end
 
-  desc "Symlink application.yml to the release path"
+  desc 'Symlink application.yml to the release path'
   task :symlink do
     on roles(:app) do
       execute "ln -sf #{shared_path}/config/application.yml #{current_path}/config/application.yml"

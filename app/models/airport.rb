@@ -2,7 +2,7 @@ class Airport < ActiveRecord::Base
   include Formattable
   audited
 
-  formattable "%{iata_code} %{name}"
+  formattable '%{iata_code} %{name}'
 
   def current_time
     tz = TZInfo::Timezone.get(timezone)

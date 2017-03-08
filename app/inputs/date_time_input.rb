@@ -7,7 +7,7 @@ class DateTimeInput < SimpleForm::Inputs::StringInput
       input_html_options[:type] = :text if input_html_options[:type] == :time
     end
 
-    formats = { date: "%Y-%m-%d", time: "%H:%M" }
+    formats = { date: '%Y-%m-%d', time: '%H:%M' }
 
     raw_value = object.send("#{attribute_name}")
     html_value = raw_value.strftime(formats[input_type]) unless raw_value.nil?

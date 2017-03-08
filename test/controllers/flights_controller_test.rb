@@ -7,22 +7,22 @@ class FlightsControllerTest < ActionController::TestCase
     @flight = flights(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get :index, username: 'mroach'
     assert_response :success
     assert_not_nil assigns(:flights)
   end
 
-  test "should get new" do
-    @request.env["devise.mapping"] = Devise.mappings[:user]
+  test 'should get new' do
+    @request.env['devise.mapping'] = Devise.mappings[:user]
     sign_in users(:one)
 
     get :new, { username: users(:one).username }
     assert_response :success
   end
 
-  test "should create flight" do
-    @request.env["devise.mapping"] = Devise.mappings[:user]
+  test 'should create flight' do
+    @request.env['devise.mapping'] = Devise.mappings[:user]
     sign_in users(:one)
 
     assert_difference('Flight.count') do
@@ -50,21 +50,21 @@ class FlightsControllerTest < ActionController::TestCase
     assert_redirected_to flight_path(assigns(:flight))
   end
 
-  test "should show flight" do
+  test 'should show flight' do
     get :show, username: users(:one).username, id: @flight
     assert_response :success
   end
 
-  test "should get edit" do
-    @request.env["devise.mapping"] = Devise.mappings[:user]
+  test 'should get edit' do
+    @request.env['devise.mapping'] = Devise.mappings[:user]
     sign_in users(:one)
 
     get :edit, username: users(:one).username, id: @flight
     assert_response :success
   end
 
-  test "should update flight" do
-    @request.env["devise.mapping"] = Devise.mappings[:user]
+  test 'should update flight' do
+    @request.env['devise.mapping'] = Devise.mappings[:user]
     sign_in users(:one)
 
     patch :update, username: users(:one).username, id: @flight, flight: {
@@ -89,8 +89,8 @@ class FlightsControllerTest < ActionController::TestCase
     assert_redirected_to flight_path(assigns(:flight))
   end
 
-  test "should destroy flight" do
-    @request.env["devise.mapping"] = Devise.mappings[:user]
+  test 'should destroy flight' do
+    @request.env['devise.mapping'] = Devise.mappings[:user]
     sign_in users(:one)
 
     assert_difference('Flight.count', -1) do

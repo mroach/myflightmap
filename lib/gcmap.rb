@@ -23,12 +23,12 @@ class Gcmap
       return nil
     end
 
-    logger.debug "Parsing GCMap result"
+    logger.debug 'Parsing GCMap result'
     html = Nokogiri::HTML(gcmap_result)
-    latlon = html.css('meta[name="geo.position"]').first["content"].split(/;/)
+    latlon = html.css('meta[name="geo.position"]').first['content'].split(/;/)
     lat = latlon[0]
     lon = latlon[1]
-    country = html.css('meta[name="geo.region"]').first["content"][0..1]
+    country = html.css('meta[name="geo.region"]').first['content'][0..1]
     city = html.css('span.locality').first.text
     name = html.css('td.fn.org').first.text
     description = name.sub(/\s*airport\s*/i, '')

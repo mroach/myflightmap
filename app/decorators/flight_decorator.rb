@@ -3,7 +3,7 @@ class FlightDecorator < Draper::Decorator
 
   def title
     title = object.description
-    title << " - Private" if object.private?
+    title << ' - Private' if object.private?
   end
 
   def css_classes
@@ -11,12 +11,12 @@ class FlightDecorator < Draper::Decorator
   end
 
   def private_css_class
-    "private" if object.private?
+    'private' if object.private?
   end
 
   def seat_description
     desc = "#{object.seat}"
-    desc << " (%s)" % object.seat_location unless object.seat_location.blank?
+    desc << ' (%s)' % object.seat_location unless object.seat_location.blank?
     desc.strip
   end
 
@@ -33,7 +33,7 @@ class FlightDecorator < Draper::Decorator
     parts << object.seat_class
     parts.reject!(&:blank?)
     unless object.airline_name.blank?
-      parts << " " << h.t('words.on') unless parts.empty?
+      parts << ' ' << h.t('words.on') unless parts.empty?
       parts << object.airline_name
     end
     parts.join(' ').strip
@@ -73,7 +73,7 @@ class FlightDecorator < Draper::Decorator
     case
     when offset < 0 then "-#{offset}"
     when offset > 0 then "+#{offset}"
-      else ""
+      else ''
     end
   end
 
@@ -99,7 +99,7 @@ class FlightDecorator < Draper::Decorator
   def static_map_image_tag(width: 500, height: 300)
     return if object.depart_airport_info.nil? || object.arrive_airport_info.nil?
 
-    url = "https://maps.googleapis.com/maps/api/staticmap"
+    url = 'https://maps.googleapis.com/maps/api/staticmap'
     query = {
       size: "#{width}x#{height}",
       key:  ENV['GOOGLE']
@@ -112,8 +112,8 @@ class FlightDecorator < Draper::Decorator
     query[:path] = "color:0x0000ff|weight:5|#{paths}"
 
     markers = [
-      { icon: "http://myflightmap.com/images/departing.png", point: depart_latlon },
-      { icon: "http://myflightmap.com/images/arriving.png", point: arrive_latlon },
+      { icon: 'http://myflightmap.com/images/departing.png', point: depart_latlon },
+      { icon: 'http://myflightmap.com/images/arriving.png', point: arrive_latlon },
     ].map do |m|
       "markers=size:mid|icon:#{m[:icon]}|shadow:true|#{m[:point]}"
     end
@@ -123,7 +123,7 @@ class FlightDecorator < Draper::Decorator
 
   def seat_class_label
     return nil if object.seat_class.blank?
-    h.content_tag(:span, class: ["seat_class", seat_class_css_class].join(' ')) do
+    h.content_tag(:span, class: ['seat_class', seat_class_css_class].join(' ')) do
       object.seat_class
     end
   end

@@ -5,7 +5,7 @@ require File.expand_path('../config/application', __FILE__)
 
 Myflightmap::Application.load_tasks
 
-desc "Restart server"
+desc 'Restart server'
 task :restart do
-  touch "tmp/restart.txt"
+  touch 'tmp/restart.txt'
 end

@@ -10,14 +10,14 @@ module Import
     end
 
     def upload
-      file = params[:import]["html"]
+      file = params[:import]['html']
       html = File.open(file.tempfile, 'r:ISO-8859-1', &:read).encode('utf-8')
 
       parser = Importers::FlightMemory.new
       @flights = parser.scrape_html(html)
 
       if @flights.nil? || @flights.empty?
-        flash[:error] = "Failed to import"
+        flash[:error] = 'Failed to import'
         redirect_to action: :index
       end
 

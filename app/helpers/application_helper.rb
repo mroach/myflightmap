@@ -8,7 +8,7 @@ module ApplicationHelper
   def airline_logo(airline, size = :large)
     if airline.nil?
       image_tag image_path("airlines/logos/#{size}/missing.png"),
-                alt:   "No Airline",
+                alt:   'No Airline',
                 class: 'airline-logo'
     else
       image_tag airline.logo.url(size),
@@ -23,7 +23,7 @@ module ApplicationHelper
       c = country
     else
       country = country.downcase # can't use downcase! when the string is frozen
-      country = "gb" if country == "uk"
+      country = 'gb' if country == 'uk'
       c = Country.new(country.upcase)
     end
     image_tag "flags/#{size}/#{c.alpha2.downcase}.png",
@@ -85,13 +85,13 @@ module ApplicationHelper
 
   def icon_link(link_text, link_path, icon_name, link_options = {})
     content_tag(:a, link_options.merge({ href: link_path })) do
-      content_tag(:i, "", class: "fa fa-#{icon_name}") + " " + content_tag(:span, link_text)
+      content_tag(:i, '', class: "fa fa-#{icon_name}") + ' ' + content_tag(:span, link_text)
     end
   end
 
   def auto_active_nav_link(link_text, link_path, link_options = {})
     classes = []
-    classes.push "active" if link_path == request.fullpath
+    classes.push 'active' if link_path == request.fullpath
     content_tag(:li, class: classes.join(' ')) do
       link_to(link_text, link_path, link_options)
     end

@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
 
   validates :email, uniqueness: true, presence: true
 
-  formattable "%{username}"
+  formattable '%{username}'
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
     # Get the identity and the user if they exist

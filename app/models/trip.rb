@@ -11,10 +11,10 @@ class Trip < ActiveRecord::Base
 
   friendly_id :name, use: [:slugged, :scoped], scope: :user
 
-  formattable "%{name}: %{begin_date} - %{end_date}"
+  formattable '%{name}: %{begin_date} - %{end_date}'
 
   def self.belonging_to(user_id)
-    where("user_id = ?", user_id)
+    where('user_id = ?', user_id)
   end
 
   def self.recent
@@ -22,11 +22,11 @@ class Trip < ActiveRecord::Base
   end
 
   def self.completed
-    where("end_dateb < ?", Time.now.utc)
+    where('end_dateb < ?', Time.now.utc)
   end
 
   def self.future
-    where("begin_date > ?", Time.now.utc)
+    where('begin_date > ?', Time.now.utc)
   end
 
   def private?

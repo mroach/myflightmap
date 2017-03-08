@@ -19,15 +19,15 @@ http.use_ssl = true
 # http.set_debug_output $stdout
 
 request = Net::HTTP::Get.new(uri.request_uri)
-request.add_field("Accept", "application/json")
+request.add_field('Accept', 'application/json')
 
 response = http.request(request)
 
-response_data = JSON.parse(response.read_body)["airports"]
+response_data = JSON.parse(response.read_body)['airports']
 
 # Remove airports without names
 response_data.delete_if do |e|
-  if e["name"].nil?
+  if e['name'].nil?
     logger.warn "Skipping nameless airport: #{e}"
     next true
   end
@@ -36,7 +36,7 @@ end
 
 # Remove railway stations
 response_data.delete_if do |e|
-  if e["name"].match(/\bRailway\b/i)
+  if e['name'].match(/\bRailway\b/i)
     logger.warn "Skipping railway station: #{e}"
     next true
   end
@@ -60,7 +60,7 @@ irregular_country_names = {
 
 airports = response_data.map do |a|
   # Convert country names into objects. Irregular airports first.
-  country_name = a["country"]
+  country_name = a['country']
 
   if irregular_country_names.has_key?(country_name)
     country = Country[irregular_country_names[country_name]]
@@ -71,15 +71,15 @@ airports = response_data.map do |a|
   logger.warn "Airport #{a['code']} has unknown country '#{country_name}'" if country.nil?
 
   {
-    iata_code:   a["code"],
+    iata_code:   a['code'],
     icao_code:   nil,
-    name:        a["name"],
-    city:        a["city"],
+    name:        a['name'],
+    city:        a['city'],
     country:     country.alpha2,
-    latitude:    a["lat"],
-    longitude:   a["lng"],
-    timezone:    a["timezone"],
-    description: a["name"]
+    latitude:    a['lat'],
+    longitude:   a['lng'],
+    timezone:    a['timezone'],
+    description: a['name']
   }
 end.sort_by { |a| a[:iata_code] }
 
@@ -87,4 +87,4 @@ logger.info "Creating #{airports.size} airports"
 
 Airport.create(airports)
 
-logger.info "Done"
+logger.info 'Done'

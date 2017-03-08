@@ -8,7 +8,7 @@ module Admin
     # Ex) /audits/flight/845.json
     #     /audits/trip/71.json
     def index
-      @audits = Audit.where("auditable_id = ? AND LOWER(auditable_type) = LOWER(?)", params[:id], params[:type])
+      @audits = Audit.where('auditable_id = ? AND LOWER(auditable_type) = LOWER(?)', params[:id], params[:type])
     end
 
     private

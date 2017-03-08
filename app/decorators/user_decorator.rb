@@ -4,7 +4,7 @@ class UserDecorator < Draper::Decorator
   delegate_all
 
   def image_tag(size = :square)
-    h.image_tag image(size), alt: object.display_name, class: "user-image"
+    h.image_tag image(size), alt: object.display_name, class: 'user-image'
   end
 
   # Return a URL for a user photo

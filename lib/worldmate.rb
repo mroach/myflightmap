@@ -20,7 +20,7 @@ module Worldmate
       @user = User.find_by_id_hash(user_id_hash)
 
       unless success?
-        logger.info "Worldmate failed to parse the itinerary"
+        logger.info 'Worldmate failed to parse the itinerary'
         return
       end
 
@@ -33,17 +33,17 @@ module Worldmate
       end
 
       @trip = Trip.find_or_initialize_by(user_id: user.id, name: subject) do |t|
-        t.audit_comment = "Created by Worldmate"
+        t.audit_comment = 'Created by Worldmate'
       end
 
       @trip.flights << xml_doc.css('items flight').map do |f|
-        airline_code  = f.css("details").attribute('airline-code').text
-        airline_name  = f.css("provider-details name").text
-        flight_number = f.css("details").attribute('number').text
+        airline_code  = f.css('details').attribute('airline-code').text
+        airline_name  = f.css('provider-details name').text
+        flight_number = f.css('details').attribute('number').text
 
-        depart      = f.css("departure airport-code").text
+        depart      = f.css('departure airport-code').text
         depart_date = DateTime.iso8601(f.css('departure local-date-time').text)
-        arrive      = f.css("arrival airport-code").text
+        arrive      = f.css('arrival airport-code').text
         arrive_date = DateTime.iso8601(f.css('arrival local-date-time').text)
         airline     = Airline.find_by_iata_code(airline_code)
 
@@ -59,7 +59,7 @@ module Worldmate
           depart_time:    depart_date,
           arrive_date:    arrive_date,
           arrive_time:    arrive_date
-        ) { |f| f.audit_comment = "Created by Worldmate" }
+        ) { |f| f.audit_comment = 'Created by Worldmate' }
       end
     end
   end

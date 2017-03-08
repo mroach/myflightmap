@@ -36,7 +36,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       sign_in @user, :bypass => true
       redirect_to profile_path(@user)
     else
-      render "edit"
+      render 'edit'
     end
   end
 

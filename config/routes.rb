@@ -27,9 +27,9 @@ Myflightmap::Application.routes.draw do
   resources :airports, constraints: { id: /[A-Z]{3}/ }
 
   devise_for :users, controllers: {
-    sessions:           "users/sessions",
-    registrations:      "users/registrations",
-    omniauth_callbacks: "users/omniauth_callbacks"
+    sessions:           'users/sessions',
+    registrations:      'users/registrations',
+    omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
   # Routes that are prefixed with the username

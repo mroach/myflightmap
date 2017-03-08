@@ -6,6 +6,6 @@ class TripDecorator < Draper::Decorator
   end
 
   def private_css_class
-    "private" if object.private?
+    'private' if object.private?
   end
 end

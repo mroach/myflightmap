@@ -25,19 +25,19 @@ gem 'country_select'
 gem 'slim'
 
 # Dropdown replacement with AJAX support
-gem "select2-rails"
+gem 'select2-rails'
 
 # Date picker
-gem "pickadate-rails"
+gem 'pickadate-rails'
 
 # Advanced querying with ActiveRecord
-gem "arel"
+gem 'arel'
 
 # Model security
-gem "pundit"
+gem 'pundit'
 
 # Decorators
-gem "draper"
+gem 'draper'
 
 # Use devise for the auth and registration framework
 gem 'devise'
@@ -68,7 +68,7 @@ gem 'httparty'
 gem 'paperclip'
 
 # Nice lib for dealing with durations of time and formatting them
-gem "ruby-duration"
+gem 'ruby-duration'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -83,7 +83,7 @@ gem 'font-awesome-rails', '~> 4.2'
 gem 'uglifier', '>= 1.3.0'
 
 # Automatically add CSS prefixes when necessary
-gem "autoprefixer-rails"
+gem 'autoprefixer-rails'
 
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0'
@@ -98,7 +98,7 @@ end
 gem 'jquery-rails'
 
 # Change tracking for ActiveRecord models
-gem "audited-activerecord", "~> 4.0"
+gem 'audited-activerecord', '~> 4.0'
 
 # Easily slugged URLs
 gem 'friendly_id', '~> 5.0.0'

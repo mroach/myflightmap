@@ -1,4 +1,4 @@
-require "time"
+require 'time'
 
 class FlightsController < ApplicationController
   before_action :set_user
@@ -12,7 +12,7 @@ class FlightsController < ApplicationController
     @flights = policy_scope(Flight).belonging_to(@user.id).decorate.reverse
     @show_controls = current_user.present? && @user.id == current_user.id
 
-    @list_style = params[:style] || "large"
+    @list_style = params[:style] || 'large'
     @batch_editing = !params[:batch_editing].nil?
 
     if @batch_editing
@@ -81,7 +81,7 @@ class FlightsController < ApplicationController
 
     # Restrict the updatable flights list to those owned by the current user
     # AND those selected by the checkboxes on the batch update form
-    flights = Flight.where("user_id = ? AND id IN (?)", current_user.id, records_to_update)
+    flights = Flight.where('user_id = ? AND id IN (?)', current_user.id, records_to_update)
 
     # Use the flight_params strong parameters to allow any field
     # to be batch updated
@@ -93,7 +93,7 @@ class FlightsController < ApplicationController
     end
 
     redirect_to flights_path,
-                notice: "Updated %s %s" % [records_to_update.length, "flights".pluralize(records_to_update.length)]
+                notice: 'Updated %s %s' % [records_to_update.length, 'flights'.pluralize(records_to_update.length)]
   end
 
   # DELETE /flights/1
@@ -119,13 +119,13 @@ class FlightsController < ApplicationController
   end
 
   def load_helper_data
-    @trips = Trip.where(user_id: current_user.id).select("id, name")
+    @trips = Trip.where(user_id: current_user.id).select('id, name')
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def flight_params
     return {} if !params || !params[:flight]
-    if params[:flight][:trip_id] and params[:flight][:trip_id][0..2] == "-1:"
+    if params[:flight][:trip_id] and params[:flight][:trip_id][0..2] == '-1:'
       logger.debug "Creating a new trip from #{params[:flight][:trip_id]}"
       trip_name = params[:flight][:trip_id][3..-1]
       trip = Trip.find_or_create_by(user_id: current_user.id, name: trip_name)

@@ -26,7 +26,7 @@ class Callbacks::WorldmateControllerTest < ActionController::TestCase
   end
 
   # The controller is responsible for creating the CallbackLog record. Just one.
-  test "should create callback_logs entry" do
+  test 'should create callback_logs entry' do
     assert_difference('CallbackLog.count', 1) do
       post :receive, @xml_samples[:success], 'CONTENT_TYPE' => 'text/xml'
     end
@@ -34,7 +34,7 @@ class Callbacks::WorldmateControllerTest < ActionController::TestCase
     assert_response_equals 'SUCCESS'
   end
 
-  test "should create trips and flights" do
+  test 'should create trips and flights' do
     # There will only ever be one trip created by an email import, but the number
     # of flights will depend on the email, so pull that from the value set in
     # the setup method
@@ -45,13 +45,13 @@ class Callbacks::WorldmateControllerTest < ActionController::TestCase
     assert_response_equals 'SUCCESS'
   end
 
-  test "should respond with failure status" do
+  test 'should respond with failure status' do
     post :receive, @xml_samples[:unrecognized_format], 'CONTENT_TYPE' => 'text/xml'
     assert_response :success
     assert_response_equals 'UNRECOGNIZED_FORMAT'
   end
 
-  test "should log failed attempt to parse and include user id" do
+  test 'should log failed attempt to parse and include user id' do
     assert_difference('CallbackLog.count', 1) do
       post :receive, @xml_samples[:unrecognized_format], 'CONTENT_TYPE' => 'text/xml'
     end
@@ -64,6 +64,6 @@ class Callbacks::WorldmateControllerTest < ActionController::TestCase
 
   def load_file(type)
     path = "#{Rails.root}/test/fixtures/files/worldmate_response_#{type}.xml"
-    File.open(path, "r", &:read)
+    File.open(path, 'r', &:read)
   end
 end
