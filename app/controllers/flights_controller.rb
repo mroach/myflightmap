@@ -125,7 +125,7 @@ class FlightsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def flight_params
     return {} if !params || !params[:flight]
-    if params[:flight][:trip_id] and params[:flight][:trip_id][0..2] == '-1:'
+    if params[:flight][:trip_id] && (params[:flight][:trip_id][0..2] == '-1:')
       logger.debug "Creating a new trip from #{params[:flight][:trip_id]}"
       trip_name = params[:flight][:trip_id][3..-1]
       trip = Trip.find_or_create_by(user_id: current_user.id, name: trip_name)

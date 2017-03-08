@@ -11,9 +11,9 @@ class UserDecorator < Draper::Decorator
   # Should move to decorator
   def image(size = :square)
     # this isn't the right way to do this. the image should be copied to user.image
-    object.image.blank? and
-      identity_with_image = self.identities.where('image IS NOT NULL').first and
-      object.image = identity_with_image.image
+    object.image.blank? &&
+      (identity_with_image = self.identities.where('image IS NOT NULL').first) &&
+      (object.image = identity_with_image.image)
 
     # If they don't have an image URL, use gravatar
     if object.image.blank?

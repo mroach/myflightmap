@@ -45,7 +45,7 @@ module Geo
     args.each do |a|
       # note that Float::NAN != Float::NAN
       # still, this could probably be improved:
-      return false if (!a.is_a?(Numeric) or a.to_s == 'NaN')
+      return false if (!a.is_a?(Numeric) || (a.to_s == 'NaN'))
     end
     true
   end
@@ -401,14 +401,14 @@ module Geo
     when Array
       if point.size == 2
         lat, lon = point
-        if !lat.nil? && lat.respond_to?(:to_f) and
+        if !lat.nil? && lat.respond_to?(:to_f) &&
            !lon.nil? && lon.respond_to?(:to_f)
         then
           return [lat.to_f, lon.to_f]
         end
       end
     when String
-      point = Geocoder.coordinates(point) and return point
+      (point = Geocoder.coordinates(point)) && (return point)
     else
       if point.respond_to?(:to_coordinates)
         if Array === array = point.to_coordinates

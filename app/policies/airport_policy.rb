@@ -1,6 +1,6 @@
 class AirportPolicy < AdminEditorsPolicy
   def update_from_external?
-    user and user.admin?
+    user && user.admin?
   end
 
   def search?

@@ -22,7 +22,7 @@ class TripPolicy < ApplicationPolicy
   end
 
   def update?
-    user and (user.admin? || record.user == user)
+    user && (user.admin? || record.user == user)
   end
 
   def destroy?

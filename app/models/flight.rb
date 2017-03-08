@@ -82,7 +82,7 @@ class Flight < ActiveRecord::Base
 
   # Remove non word chars from the flight code when setting
   def flight_code=(value)
-    value and write_attribute(:flight_code, value.sub(/\W/, '').upcase)
+    value && write_attribute(:flight_code, value.sub(/\W/, '').upcase)
   end
 
   # Allow setting the airline ID by IATA code. e.g. airline_id = 'SQ'
