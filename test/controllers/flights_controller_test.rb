@@ -17,7 +17,7 @@ class FlightsControllerTest < ActionController::TestCase
     @request.env['devise.mapping'] = Devise.mappings[:user]
     sign_in users(:one)
 
-    get :new, { username: users(:one).username }
+    get :new, username: users(:one).username
     assert_response :success
   end
 

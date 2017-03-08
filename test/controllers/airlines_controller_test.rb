@@ -12,7 +12,7 @@ class AirlinesControllerTest < ActionController::TestCase
     @request.env['devise.mapping'] = Devise.mappings[:user]
     sign_in users(:two)
 
-    get :index, { format: 'json' }
+    get :index, format: 'json'
     assert_response :success
   end
 
@@ -20,7 +20,7 @@ class AirlinesControllerTest < ActionController::TestCase
     @request.env['devise.mapping'] = Devise.mappings[:user]
     sign_in users(:two)
 
-    get :show, { id: 'SQ' }
+    get :show, id: 'SQ'
     assert_response :success
   end
 end

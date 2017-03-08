@@ -28,12 +28,12 @@ class ProfilesControllerTest < ActionController::TestCase
     @request.env['devise.mapping'] = Devise.mappings[:user]
     sign_in users(:two)
 
-    get :show, { username: 'mroach' }
+    get :show, username: 'mroach'
     assert_response :success
   end
 
   test 'non user: show show profile' do
-    get :show, { username: 'mroach' }
+    get :show, username: 'mroach'
     assert_response :success
   end
 end

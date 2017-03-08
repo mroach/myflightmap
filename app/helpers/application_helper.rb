@@ -84,7 +84,7 @@ module ApplicationHelper
   end
 
   def icon_link(link_text, link_path, icon_name, link_options = {})
-    content_tag(:a, link_options.merge({ href: link_path })) do
+    content_tag(:a, link_options.merge(href: link_path)) do
       content_tag(:i, '', class: "fa fa-#{icon_name}") + ' ' + content_tag(:span, link_text)
     end
   end
