@@ -11,8 +11,8 @@ class ApplicationController < ActionController::Base
   # Verify that controller actions are authorized.
   # But not on Devise controllers. Gotta give them a chance to login before
   # we go all Denis Nedry on them
-  after_filter :verify_authorized, except: :index, unless: :devise_controller?
-  after_filter :verify_policy_scoped, only: :index, unless: :devise_controller?
+  after_action :verify_authorized, except: :index, unless: :devise_controller?
+  after_action :verify_policy_scoped, only: :index, unless: :devise_controller?
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 

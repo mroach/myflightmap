@@ -1,5 +1,5 @@
 class Admin::AdminController < ApplicationController
-  before_filter :authorize_user!
+  before_action :authorize_user!
 
   def authorize_user!
     if !current_user.admin?

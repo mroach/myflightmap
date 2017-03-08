@@ -4,7 +4,7 @@ class FlightsController < ApplicationController
   before_action :set_user
   before_action :set_flight, only: [:show, :edit, :update, :destroy]
   before_action :load_helper_data, only: [:new, :edit]
-  skip_before_filter :authenticate_user!, only: [:index, :show]
+  skip_before_action :authenticate_user!, only: [:index, :show]
 
   # GET /flights
   # GET /flights.json
