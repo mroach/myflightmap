@@ -38,13 +38,13 @@ class Gcmap
     time_zone = TZUtils::Lookup.google(lat, lon)
 
     data = {
-      iata_code: iata_code,
-      name: name,
-      city: city,
-      country: country,
-      latitude: lat,
-      longitude: lon,
-      timezone: time_zone,
+      iata_code:   iata_code,
+      name:        name,
+      city:        city,
+      country:     country,
+      latitude:    lat,
+      longitude:   lon,
+      timezone:    time_zone,
       description: description
     }
 

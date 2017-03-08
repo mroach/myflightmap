@@ -69,10 +69,10 @@ Myflightmap::Application.configure do
 
   # Use local server but don't use SSL. The self-generated certificate will fail validation.
   config.action_mailer.smtp_settings = {
-    address: 'smtp.mailgun.org',
-    port: 587,
-    user_name: ENV['MAILGUN_SMTP_USERNAME'],
-    password: ENV['MAILGUN_SMTP_PASSWORD'],
+    address:              'smtp.mailgun.org',
+    port:                 587,
+    user_name:            ENV['MAILGUN_SMTP_USERNAME'],
+    password:             ENV['MAILGUN_SMTP_PASSWORD'],
     enable_starttls_auto: true
   }
 

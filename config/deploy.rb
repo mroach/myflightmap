@@ -35,15 +35,15 @@ set :puma_error_log,          "#{release_path}/log/puma.access.log"
 set :ssh_options,             { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
 set :puma_preload_app,        true
 set :puma_worker_timeout,     nil
-set :puma_init_active_record, true  # Change to false when not using ActiveRecord
+set :puma_init_active_record, true # Change to false when not using ActiveRecord
 
 set :foreman_use_sudo, false # Set to :rbenv for rbenv sudo, :rvm for rvmsudo or true for normal sudo
 set :foreman_roles, :all
 set :foreman_template, 'systemd'
 set :foreman_export_path, "#{shared_path}/init"
-set :foreman_options, ->{ {
-  app: fetch(:application),
-  log: File.join(shared_path, 'log'),
+set :foreman_options, -> { {
+  app:  fetch(:application),
+  log:  File.join(shared_path, 'log'),
   root: release_path,
   user: fetch(:user)
 } }

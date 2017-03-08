@@ -7,11 +7,11 @@ class Callbacks::WorldmateController < ActionController::Base
     logger.debug "Received Worldmate callback:\n#{xml_string}"
 
     log_entry = CallbackLog.create(
-      provider: :worldmate,
+      provider:    :worldmate,
       target_type: 'User',
-      status: :received,
-      url: request.original_url,
-      data: xml_string
+      status:      :received,
+      url:         request.original_url,
+      data:        xml_string
     )
 
     parser = Worldmate::Parser.new(xml_string)

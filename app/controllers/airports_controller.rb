@@ -1,7 +1,7 @@
- require 'gcmap'
- require 'geo'
+require 'gcmap'
+require 'geo'
 
- class AirportsController < ApplicationController
+class AirportsController < ApplicationController
   before_action :set_airport, only: [:show, :edit, :update, :destroy, :update_from_external]
 
   # GET /airports
@@ -109,13 +109,14 @@
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_airport
-      @airport = Airport.find_by_iata_code!(params[:id].to_s.upcase)
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def airport_params
-      params.require(:airport).permit(:iata_code, :icao_code, :name, :city, :country, :latitude, :longitude, :timezone, :description)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_airport
+    @airport = Airport.find_by_iata_code!(params[:id].to_s.upcase)
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def airport_params
+    params.require(:airport).permit(:iata_code, :icao_code, :name, :city, :country, :latitude, :longitude, :timezone, :description)
+  end
 end

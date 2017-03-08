@@ -61,36 +61,36 @@ module Importers
       end
 
       data = {
-        depart_date: depart_date,
-        depart_time: parse_time(times[1]),
+        depart_date:           depart_date,
+        depart_time:           parse_time(times[1]),
 
         # TODO: Parse arrive time for +1, +2, etc
         #       and update arrive_date accordingly
-        arrive_date: arrive_date,
-        arrive_time: parse_time(arrive_time),
+        arrive_date:           arrive_date,
+        arrive_time:           parse_time(arrive_time),
 
-        depart_airport: cells[2].text,
-        arrive_airport: cells[4].text,
+        depart_airport:        cells[2].text,
+        arrive_airport:        cells[4].text,
 
-        distance: parse_distance(lengths[0]).to_s,
-        duration: parse_duration(lengths[1]).to_s,
+        distance:              parse_distance(lengths[0]).to_s,
+        duration:              parse_duration(lengths[1]).to_s,
 
-        airline_name: route[0],
-        flight_code: route[1],
+        airline_name:          route[0],
+        flight_code:           route[1],
 
-        aircraft_type: aircraft_misc[0],
+        aircraft_type:         aircraft_misc[0],
         aircraft_registration: aircraft_misc[1],
-        aircraft_name: aircraft_misc[2],
+        aircraft_name:         aircraft_misc[2],
 
-        seat: seat[0],
-        seat_class: misc[0],
-        seat_location: seat[1],
+        seat:                  seat[0],
+        seat_class:            misc[0],
+        seat_location:         seat[1],
 
-        flight_role: misc[1],
-        purpose: misc[2]
+        flight_role:           misc[1],
+        purpose:               misc[2]
       }
 
-      data.each { |k,v| data[k] = scrub_value(v) }
+      data.each { |k, v| data[k] = scrub_value(v) }
 
       logger.debug "Parsed flight: #{data}"
 
@@ -108,7 +108,7 @@ module Importers
         return str.strftime('%H:%M')
       end
 
-      #str.gsub!(/\u00A0/, ' ')
+      # str.gsub!(/\u00A0/, ' ')
       str.strip!
       str.empty? ? nil : str
     end
@@ -154,7 +154,7 @@ module Importers
     def parse_distance(str)
       return nil if str.nil? || str.empty?
       parts = str.match(/^(?<num>[\d,]+) (?<unit>mi|km)$/)
-      num = parts[:num].sub(/,/,'').to_i
+      num = parts[:num].sub(/,/, '').to_i
       if parts[:unit] == 'mi'
         num *= 1.60934
       end

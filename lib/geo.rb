@@ -83,7 +83,6 @@ module Geo
   # * <tt>:units</tt> - <tt>:mi</tt> or <tt>:km</tt>
   #
   def distance_between(point1, point2, options = {})
-
     # set default options
     options[:units] ||= CONFIG[:units]
 
@@ -100,8 +99,8 @@ module Geo
     dlon = point2[1] - point1[1]
 
     a = (Math.sin(dlat / 2))**2 + Math.cos(point1[0]) *
-        (Math.sin(dlon / 2))**2 * Math.cos(point2[0])
-    c = 2 * Math.atan2( Math.sqrt(a), Math.sqrt(1-a))
+                                  (Math.sin(dlon / 2))**2 * Math.cos(point2[0])
+    c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
     c * earth_radius(options[:units])
   end
 
@@ -120,7 +119,6 @@ module Geo
   # Based on: http://www.movable-type.co.uk/scripts/latlong.html
   #
   def bearing_between(point1, point2, options = {})
-
     # set default options
     options[:method] ||= CONFIG[:distances]
     options[:method] = :linear unless options[:method] == :spherical
@@ -148,7 +146,7 @@ module Geo
           Math.sin(point1[0]) * Math.cos(point2[0]) * Math.cos(dlon)
     end
 
-    bearing = Math.atan2(x,y)
+    bearing = Math.atan2(x, y)
     # Answer is in radians counterclockwise from due east.
     # Convert to degrees clockwise from due north:
     (90 - to_degrees(bearing) + 360) % 360
@@ -169,9 +167,8 @@ module Geo
   # the procedure documented at http://www.geomidpoint.com/calculation.html.
   #
   def geographic_center(points)
-
     # convert objects to [lat,lon] arrays and convert degrees to radians
-    coords = points.map{ |p| to_radians(extract_coordinates(p)) }
+    coords = points.map { |p| to_radians(extract_coordinates(p)) }
 
     # convert to Cartesian coordinates
     x = []; y = []; z = []
@@ -182,8 +179,8 @@ module Geo
     end
 
     # compute average coordinate values
-    xa, ya, za = [x,y,z].map do |c|
-      c.inject(0){ |tot,i| tot += i } / c.size.to_f
+    xa, ya, za = [x, y, z].map do |c|
+      c.inject(0) { |tot, i| tot += i } / c.size.to_f
     end
 
     # convert back to latitude/longitude
@@ -211,7 +208,7 @@ module Geo
   # * <tt>:units</tt> - <tt>:mi</tt> or <tt>:km</tt>.
   #
   def bounding_box(point, radius, options = {})
-    lat,lon = extract_coordinates(point)
+    lat, lon = extract_coordinates(point)
     radius  = radius.to_f
     units   = options[:units] || CONFIG[:units]
     [
@@ -239,7 +236,6 @@ module Geo
   # * <tt>:units</tt> - <tt>:mi</tt> or <tt>:km</tt>
   #   Use Geocoder.configure(:units => ...) to configure default units.
   def random_point_near(center, radius, options = {})
-
     # set default options
     options[:units] ||= CONFIG[:units]
 
@@ -285,11 +281,11 @@ module Geo
     heading = to_radians(heading)
     distance = distance.to_f
 
-    end_lat = Math.asin(Math.sin(lat)*Math.cos(distance/radius) +
-                  Math.cos(lat)*Math.sin(distance/radius)*Math.cos(heading))
+    end_lat = Math.asin(Math.sin(lat) * Math.cos(distance / radius) +
+                  Math.cos(lat) * Math.sin(distance / radius) * Math.cos(heading))
 
-    end_lon = lon+Math.atan2(Math.sin(heading)*Math.sin(distance/radius)*Math.cos(lat),
-                  Math.cos(distance/radius)-Math.sin(lat)*Math.sin(end_lat))
+    end_lon = lon + Math.atan2(Math.sin(heading) * Math.sin(distance / radius) * Math.cos(lat),
+                               Math.cos(distance / radius) - Math.sin(lat) * Math.sin(end_lat))
 
     to_degrees [end_lat, end_lon]
   end
@@ -304,7 +300,7 @@ module Geo
     if args.size == 1
       args.first * (Math::PI / 180)
     else
-      args.map{ |i| to_radians(i) }
+      args.map { |i| to_radians(i) }
     end
   end
 
@@ -318,7 +314,7 @@ module Geo
     if args.size == 1
       (args.first * 180.0) / Math::PI
     else
-      args.map{ |i| to_degrees(i) }
+      args.map { |i| to_degrees(i) }
     end
   end
 
@@ -360,9 +356,9 @@ module Geo
   def earth_radius(units = nil)
     units ||= CONFIG[:units]
     case units
-      when :km; EARTH_RADIUS
-      when :mi; to_miles(EARTH_RADIUS)
-      when :nm; to_nautical_miles(EARTH_RADIUS)
+    when :km; EARTH_RADIUS
+    when :mi; to_miles(EARTH_RADIUS)
+    when :nm; to_nautical_miles(EARTH_RADIUS)
     end
   end
 
@@ -379,8 +375,6 @@ module Geo
   def km_in_nm
     KM_IN_NM
   end
-
-
 
   ##
   # Conversion factor: mi to km.
@@ -408,9 +402,9 @@ module Geo
       if point.size == 2
         lat, lon = point
         if !lat.nil? && lat.respond_to?(:to_f) and
-          !lon.nil? && lon.respond_to?(:to_f)
+           !lon.nil? && lon.respond_to?(:to_f)
         then
-          return [ lat.to_f, lon.to_f ]
+          return [lat.to_f, lon.to_f]
         end
       end
     when String
@@ -422,6 +416,6 @@ module Geo
         end
       end
     end
-    [ NAN, NAN ]
+    [NAN, NAN]
   end
 end

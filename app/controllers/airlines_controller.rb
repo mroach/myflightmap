@@ -68,13 +68,14 @@ class AirlinesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_airline
-      @airline = Airline.find_by_iata_code!(params[:id].to_s.upcase)
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def airline_params
-      params.require(:airline).permit(:iata_code, :icao_code, :name, :country, :logo, :alliance)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_airline
+    @airline = Airline.find_by_iata_code!(params[:id].to_s.upcase)
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def airline_params
+    params.require(:airline).permit(:iata_code, :icao_code, :name, :country, :logo, :alliance)
+  end
 end

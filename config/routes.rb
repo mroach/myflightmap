@@ -1,5 +1,4 @@
 Myflightmap::Application.routes.draw do
-
   # Indicate what action responds to "/" requests
   root 'home#index'
 
@@ -20,7 +19,7 @@ Myflightmap::Application.routes.draw do
 
   get 'airports/search', to: 'airports#search'
   get 'airports/:id/update_from_external', to: 'airports#update_from_external',
-    as: 'update_airport_from_external'
+                                           as: 'update_airport_from_external'
 
   get 'members', to: 'profiles#index'
 
@@ -28,8 +27,8 @@ Myflightmap::Application.routes.draw do
   resources :airports, constraints: { id: /[A-Z]{3}/ }
 
   devise_for :users, controllers: {
-    sessions: "users/sessions",
-    registrations: "users/registrations",
+    sessions:           "users/sessions",
+    registrations:      "users/registrations",
     omniauth_callbacks: "users/omniauth_callbacks"
   }
 
@@ -41,7 +40,7 @@ Myflightmap::Application.routes.draw do
     root to: 'profiles#show', as: 'profile'
     get 'map', to: 'map#show', as: 'map'
 
-    #get 'flights(-:style)', to: 'flights#index', as: 'user_flights'
+    # get 'flights(-:style)', to: 'flights#index', as: 'user_flights'
     patch 'flights/batch_update', to: 'flights#batch_update', as: 'flight_batch_update'
 
     resources :flights
@@ -51,5 +50,4 @@ Myflightmap::Application.routes.draw do
   namespace :admin do
     get 'audits/:type/:id', to: 'audits#index', as: 'audits'
   end
-
 end

@@ -16,7 +16,7 @@ uri = URI.parse(airport_url)
 
 http = Net::HTTP.new(uri.host, uri.port)
 http.use_ssl = true
-#http.set_debug_output $stdout
+# http.set_debug_output $stdout
 
 request = Net::HTTP::Get.new(uri.request_uri)
 request.add_field("Accept", "application/json")
@@ -46,20 +46,19 @@ end
 # Countries are return by name rather than ISO code.
 # Some names don't match ISO 3166
 irregular_country_names = {
-  'Burma' => 'MM',
+  'Burma'               => 'MM',
   'Congo (Brazzaville)' => 'CG',
-  'Congo (Kinshasa)' => 'CD',
-  'Cote d\'Ivoire' => 'CI',
-  'Korea' => 'KR',
-  'South Korea' => 'KR',
-  'North Korea' => 'KP',
-  'Macau' => 'MO',
-  'Reunion' => 'RE',
-  'Virgin Islands' => 'VI'
+  'Congo (Kinshasa)'    => 'CD',
+  'Cote d\'Ivoire'      => 'CI',
+  'Korea'               => 'KR',
+  'South Korea'         => 'KR',
+  'North Korea'         => 'KP',
+  'Macau'               => 'MO',
+  'Reunion'             => 'RE',
+  'Virgin Islands'      => 'VI'
 }
 
 airports = response_data.map do |a|
-
   # Convert country names into objects. Irregular airports first.
   country_name = a["country"]
 
@@ -72,14 +71,14 @@ airports = response_data.map do |a|
   logger.warn "Airport #{a['code']} has unknown country '#{country_name}'" if country.nil?
 
   {
-    iata_code: a["code"],
-    icao_code: nil,
-    name: a["name"],
-    city: a["city"],
-    country: country.alpha2,
-    latitude: a["lat"],
-    longitude: a["lng"],
-    timezone: a["timezone"],
+    iata_code:   a["code"],
+    icao_code:   nil,
+    name:        a["name"],
+    city:        a["city"],
+    country:     country.alpha2,
+    latitude:    a["lat"],
+    longitude:   a["lng"],
+    timezone:    a["timezone"],
     description: a["name"]
   }
 end.sort_by { |a| a[:iata_code] }

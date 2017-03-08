@@ -20,17 +20,17 @@ else
 end
 
 irregular_country_names = {
-  'Burma' => 'MM',
-  'Canadian Territories' => 'CA',
-  'Congo (Kinshasa)' => 'CD',
+  'Burma'                                  => 'MM',
+  'Canadian Territories'                   => 'CA',
+  'Congo (Kinshasa)'                       => 'CD',
   'Democratic People\'s Republic of Korea' => 'KP',
-  'Hong Kong SAR of China' => 'HK',
-  'Ivory Coast' => 'CI',
-  'Lao Peoples Democratic Republic' => 'LA',
-  'Republic of Korea' => 'KR',
-  'Republic of the Congo' => 'CG',
-  'Reunion' => 'RE',
-  'South Korea' => 'KR'
+  'Hong Kong SAR of China'                 => 'HK',
+  'Ivory Coast'                            => 'CI',
+  'Lao Peoples Democratic Republic'        => 'LA',
+  'Republic of Korea'                      => 'KR',
+  'Republic of the Congo'                  => 'CG',
+  'Reunion'                                => 'RE',
+  'South Korea'                            => 'KR'
 }
 
 # Columns
@@ -71,11 +71,11 @@ CSV.foreach(TEMP_FILE_PATH) do |row|
   end
 
   airlines.push({
-    iata_code: row[3],
-    icao_code: row[4] == "\\N" ? nil : row[4],
-    name: row[1],
-    country: country
-  })
+                  iata_code: row[3],
+                  icao_code: row[4] == "\\N" ? nil : row[4],
+                  name:      row[1],
+                  country:   country
+                })
 end
 
 airlines.sort_by! { |a| a[:iata_code] }

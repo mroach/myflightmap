@@ -1,5 +1,4 @@
 class MapController < ApplicationController
-
   before_action :set_user
   skip_before_filter :authenticate_user!, only: [:show]
 

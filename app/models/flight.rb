@@ -176,8 +176,8 @@ class Flight < ActiveRecord::Base
   def arrive_time_offset
     offset = (arrive_date - depart_date).to_i
     case
-      when offset < 0 then "-#{offset}"
-      when offset > 0 then "+#{offset}"
+    when offset < 0 then "-#{offset}"
+    when offset > 0 then "+#{offset}"
       else ""
     end
   end
@@ -202,10 +202,10 @@ class Flight < ActiveRecord::Base
 
   def find_duplicate
     Flight.find_by(
-      user_id: user_id,
-      depart_date: depart_date,
+      user_id:        user_id,
+      depart_date:    depart_date,
       depart_airport: depart_airport,
-      flight_code: flight_code
+      flight_code:    flight_code
     )
   end
 
@@ -265,9 +265,9 @@ class Flight < ActiveRecord::Base
     blank_time = Time.utc(2000, 1, 1, 0, 0, 0)
 
     should_estimate_duration = depart_time.blank? ||
-      arrive_time.blank? ||
-      depart_time == blank_time ||
-      arrive_time == blank_time
+                               arrive_time.blank? ||
+                               depart_time == blank_time ||
+                               arrive_time == blank_time
 
     if should_estimate_duration
       can_estimate_duration = depart_airport_info.present? && arrive_airport_info.present?
@@ -313,5 +313,4 @@ class Flight < ActiveRecord::Base
       logger.error "Unable to convert '#{time}' in zone '#{timezone}'"
     end
   end
-
 end

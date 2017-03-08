@@ -13,7 +13,7 @@ class UserDecorator < Draper::Decorator
     # this isn't the right way to do this. the image should be copied to user.image
     object.image.blank? and
       identity_with_image = self.identities.where('image IS NOT NULL').first and
-        object.image = identity_with_image.image
+      object.image = identity_with_image.image
 
     # If they don't have an image URL, use gravatar
     if object.image.blank?
@@ -38,5 +38,4 @@ class UserDecorator < Draper::Decorator
     sizes = { square: 50, small: 50, normal: 100, large: 200 }
     "http://www.gravatar.com/avatar/#{hash}?s=#{sizes[size]}"
   end
-
 end

@@ -61,9 +61,9 @@ class FlightDecorator < Draper::Decorator
     end
 
     I18n.t(object.time_change > 0 ? 'time_ahead' : 'time_behind',
-      origin: object.depart_city,
-      destination: object.arrive_city,
-      time: formatted)
+           origin:      object.depart_city,
+           destination: object.arrive_city,
+           time:        formatted)
   end
 
   # Represents days forward or back for the arrival date
@@ -71,8 +71,8 @@ class FlightDecorator < Draper::Decorator
   def arrive_time_offset
     offset = (object.arrive_date - object.depart_date).to_i
     case
-      when offset < 0 then "-#{offset}"
-      when offset > 0 then "+#{offset}"
+    when offset < 0 then "-#{offset}"
+    when offset > 0 then "+#{offset}"
       else ""
     end
   end
@@ -102,7 +102,7 @@ class FlightDecorator < Draper::Decorator
     url = "https://maps.googleapis.com/maps/api/staticmap"
     query = {
       size: "#{width}x#{height}",
-      key: ENV['GOOGLE']
+      key:  ENV['GOOGLE']
     }
 
     depart_latlon = "#{object.depart_airport_info.latitude},#{object.depart_airport_info.longitude}"

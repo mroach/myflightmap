@@ -27,7 +27,6 @@ module Worldmate
       subject = xml_doc.css('header[name="Subject"]').attribute('value').text
       recipient = xml_doc.css('end-user-emails user').attribute('email').text
 
-
       if @user.nil?
         logger.warn "No user found with ID hash #{user_id_hash}"
         return
@@ -49,21 +48,19 @@ module Worldmate
         airline     = Airline.find_by_iata_code(airline_code)
 
         Flight.find_or_initialize_by(
-          user: @user,
-          trip: @trip,
-          flight_code: "#{airline_code}#{flight_number}",
-          airline: airline,
-          airline_name: airline.present? ? airline.name : airline_name,
+          user:           @user,
+          trip:           @trip,
+          flight_code:    "#{airline_code}#{flight_number}",
+          airline:        airline,
+          airline_name:   airline.present? ? airline.name : airline_name,
           depart_airport: depart,
           arrive_airport: arrive,
-          depart_date: depart_date,
-          depart_time: depart_date,
-          arrive_date: arrive_date,
-          arrive_time: arrive_date
+          depart_date:    depart_date,
+          depart_time:    depart_date,
+          arrive_date:    arrive_date,
+          arrive_time:    arrive_date
         ) { |f| f.audit_comment = "Created by Worldmate" }
       end
-
     end
   end
-
 end

@@ -1,7 +1,6 @@
 require 'geo'
 
 class DurationEstimator
-
   attr_accessor :speed, :overhead
 
   def initialize(params = {})

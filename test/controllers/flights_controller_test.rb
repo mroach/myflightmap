@@ -27,23 +27,23 @@ class FlightsControllerTest < ActionController::TestCase
 
     assert_difference('Flight.count') do
       post :create, username: users(:one).username, flight: {
-        aircraft_name: @flight.aircraft_name,
-        airline_name: @flight.airline_name,
-        airline_id: @flight.airline_id,
+        aircraft_name:  @flight.aircraft_name,
+        airline_name:   @flight.airline_name,
+        airline_id:     @flight.airline_id,
         arrive_airport: @flight.arrive_airport,
-        arrive_date: @flight.arrive_date,
-        arrive_time: @flight.arrive_time,
+        arrive_date:    @flight.arrive_date,
+        arrive_time:    @flight.arrive_time,
         depart_airport: @flight.depart_airport,
-        depart_date: @flight.depart_date,
-        depart_time: @flight.depart_time,
-        distance: @flight.distance,
-        duration: @flight.duration,
-        flight_code: @flight.flight_code,
-        seat: @flight.seat,
-        seat_class: @flight.seat_class,
-        seat_location: @flight.seat_location,
-        trip_id: @flight.trip_id,
-        user_id: @flight.user_id
+        depart_date:    @flight.depart_date,
+        depart_time:    @flight.depart_time,
+        distance:       @flight.distance,
+        duration:       @flight.duration,
+        flight_code:    @flight.flight_code,
+        seat:           @flight.seat,
+        seat_class:     @flight.seat_class,
+        seat_location:  @flight.seat_location,
+        trip_id:        @flight.trip_id,
+        user_id:        @flight.user_id
       }
     end
 
@@ -68,23 +68,23 @@ class FlightsControllerTest < ActionController::TestCase
     sign_in users(:one)
 
     patch :update, username: users(:one).username, id: @flight, flight: {
-      aircraft_name: @flight.aircraft_name,
-      airline_name: @flight.airline_name,
-      airline_id: @flight.airline_id,
+      aircraft_name:  @flight.aircraft_name,
+      airline_name:   @flight.airline_name,
+      airline_id:     @flight.airline_id,
       arrive_airport: @flight.arrive_airport,
-      arrive_date: @flight.arrive_date,
-      arrive_time: @flight.arrive_time,
+      arrive_date:    @flight.arrive_date,
+      arrive_time:    @flight.arrive_time,
       depart_airport: @flight.depart_airport,
-      depart_date: @flight.depart_date,
-      depart_time: @flight.depart_time,
-      distance: @flight.distance,
-      duration: @flight.duration,
-      flight_code: @flight.flight_code,
-      seat: @flight.seat,
-      seat_class: @flight.seat_class,
-      seat_location: @flight.seat_location,
-      trip_id: @flight.trip_id,
-      user_id: @flight.user_id
+      depart_date:    @flight.depart_date,
+      depart_time:    @flight.depart_time,
+      distance:       @flight.distance,
+      duration:       @flight.duration,
+      flight_code:    @flight.flight_code,
+      seat:           @flight.seat,
+      seat_class:     @flight.seat_class,
+      seat_location:  @flight.seat_location,
+      trip_id:        @flight.trip_id,
+      user_id:        @flight.user_id
     }
     assert_redirected_to flight_path(assigns(:flight))
   end

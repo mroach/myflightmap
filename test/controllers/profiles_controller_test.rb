@@ -36,5 +36,4 @@ class ProfilesControllerTest < ActionController::TestCase
     get :show, { username: 'mroach' }
     assert_response :success
   end
-
 end

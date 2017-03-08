@@ -75,16 +75,17 @@ class TripsController < ApplicationController
   end
 
   private
-    def set_user
-      @user = User.find_by_username!(params[:username])
-    end
 
-    def set_trip
-      @trip = @user.trips.friendly.find(params[:id])
-    end
+  def set_user
+    @user = User.find_by_username!(params[:username])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def trip_params
-      params.require(:trip).permit(:user_id, :name, :purpose, :is_public)
-    end
+  def set_trip
+    @trip = @user.trips.friendly.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def trip_params
+    params.require(:trip).permit(:user_id, :name, :purpose, :is_public)
+  end
 end

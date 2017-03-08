@@ -1,3 +1,3 @@
 server 'ubuntu.vm',
-  user: 'deploy',
-  roles: :all
+       user:  'deploy',
+       roles: :all

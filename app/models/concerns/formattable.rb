@@ -28,5 +28,4 @@ module Formattable
       (format_string % self.attributes.symbolize_keys).sub(/[ ]{2,}/, ' ').strip
     end
   end
-
 end

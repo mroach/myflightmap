@@ -93,7 +93,7 @@ class FlightsController < ApplicationController
     end
 
     redirect_to flights_path,
-      notice: "Updated %s %s" % [records_to_update.length, "flights".pluralize(records_to_update.length)]
+                notice: "Updated %s %s" % [records_to_update.length, "flights".pluralize(records_to_update.length)]
   end
 
   # DELETE /flights/1
@@ -109,28 +109,29 @@ class FlightsController < ApplicationController
   end
 
   private
-    def set_user
-      @user = User.find_by_username!(params[:username])
-    end
 
-    def set_flight
-      @flight = @user.flights.friendly.find(params[:id]).decorate
-    end
+  def set_user
+    @user = User.find_by_username!(params[:username])
+  end
 
-    def load_helper_data
-      @trips = Trip.where(user_id: current_user.id).select("id, name")
-    end
+  def set_flight
+    @flight = @user.flights.friendly.find(params[:id]).decorate
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def flight_params
-      return {} if !params || !params[:flight]
-      if params[:flight][:trip_id] and params[:flight][:trip_id][0..2] == "-1:"
-        logger.debug "Creating a new trip from #{params[:flight][:trip_id]}"
-        trip_name = params[:flight][:trip_id][3..-1]
-        trip = Trip.find_or_create_by(user_id: current_user.id, name: trip_name)
-        params[:flight][:trip_id] = trip.id
-        logger.debug "Found or created trip #{trip.id}"
-      end
-      params.require(:flight).permit(:trip_id, :flight_code, :depart_airport, :depart_date, :depart_time, :arrive_airport, :arrive_date, :arrive_time, :distance, :duration, :airline_id, :airline_name, :aircraft_name, :aircraft_type, :aircraft_registration, :flight_role, :purpose, :seat, :seat_class, :seat_location, :is_public)
+  def load_helper_data
+    @trips = Trip.where(user_id: current_user.id).select("id, name")
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def flight_params
+    return {} if !params || !params[:flight]
+    if params[:flight][:trip_id] and params[:flight][:trip_id][0..2] == "-1:"
+      logger.debug "Creating a new trip from #{params[:flight][:trip_id]}"
+      trip_name = params[:flight][:trip_id][3..-1]
+      trip = Trip.find_or_create_by(user_id: current_user.id, name: trip_name)
+      params[:flight][:trip_id] = trip.id
+      logger.debug "Found or created trip #{trip.id}"
     end
+    params.require(:flight).permit(:trip_id, :flight_code, :depart_airport, :depart_date, :depart_time, :arrive_airport, :arrive_date, :arrive_time, :distance, :duration, :airline_id, :airline_name, :aircraft_name, :aircraft_type, :aircraft_registration, :flight_role, :purpose, :seat, :seat_class, :seat_location, :is_public)
+  end
 end

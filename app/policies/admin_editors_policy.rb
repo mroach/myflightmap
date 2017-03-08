@@ -1,7 +1,6 @@
 # This policy is meant to be inherited and indicates that the models are
 # fine to list and show but only admins can create, edit, and destroy
 class AdminEditorsPolicy < ApplicationPolicy
-
   def index?
     true
   end
@@ -21,5 +20,4 @@ class AdminEditorsPolicy < ApplicationPolicy
   def edit?
     user and user.admin?
   end
-
 end
