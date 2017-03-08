@@ -36,7 +36,7 @@ end
 
 # Remove railway stations
 response_data.delete_if do |e|
-  if e['name'].match(/\bRailway\b/i)
+  if e['name'] =~ /\bRailway\b/i
     logger.warn "Skipping railway station: #{e}"
     next true
   end

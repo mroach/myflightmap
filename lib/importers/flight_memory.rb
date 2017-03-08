@@ -116,8 +116,8 @@ module Importers
     # Convert the MM-DD-YYYY or DD.MM.YYYY date to a Date object
     def parse_date(str)
       return nil if str.nil? || str.empty?
-      return "#{str}-01-01" if str.match(/^\d{4}/)
-      format = str.match(/^\d{2}\./) ? '%d.%m.%Y' : '%m-%d-%Y'
+      return "#{str}-01-01" if str =~ /^\d{4}/
+      format = str =~ /^\d{2}\./ ? '%d.%m.%Y' : '%m-%d-%Y'
       begin
         return Date.strptime(str, format).to_date
       rescue
@@ -134,9 +134,9 @@ module Importers
 
       # make sure it looks like a time
       # i've seen arrive time cells just be "+1" and nothing else
-      return nil unless str.match(/^\d+:\d+/)
+      return nil unless str =~ /^\d+:\d+/
 
-      format = str.match(/[ap]m$/) ? '%I:%M %P' : '%H:%M'
+      format = str =~ /[ap]m$/ ? '%I:%M %P' : '%H:%M'
       Time.strptime(str, format).to_time
     end
 

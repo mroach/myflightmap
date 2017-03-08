@@ -115,11 +115,11 @@ group :development do
 
   gem 'capistrano',            require: false
   gem 'capistrano-bundler',    require: false
+  gem 'capistrano-figaro-yml', require: false
+  gem 'capistrano-foreman',    require: false
   gem 'capistrano-rails',      require: false
   gem 'capistrano-rbenv',      require: false
   gem 'capistrano3-puma',      require: false
-  gem 'capistrano-foreman',    require: false
-  gem 'capistrano-figaro-yml', require: false
 
   # Automatically run tests when files change
   gem 'guard-brakeman', require: false

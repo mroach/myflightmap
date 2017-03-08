@@ -55,7 +55,7 @@ CSV.foreach(TEMP_FILE_PATH) do |row|
   country_name = row[6]
 
   # skip cargo airlines. SQ specifically messed us up
-  next if row[1].match(/\bCargo\b/i)
+  next if row[1] =~ /\bCargo\b/i
 
   if irregular_country_names.has_key?(country_name)
     country = Country[irregular_country_names[country_name]]
