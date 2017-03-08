@@ -9,7 +9,7 @@ module Importers
 
     def scrape_html(str)
       # convert non-breaking spaces to normal spaces
-      str.gsub!(/\u00A0/, ' ')
+      str.tr!(' ', ' ')
       str.gsub!(/&nbsp;?/, ' ')
 
       # parse the string as an HTML document
