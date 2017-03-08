@@ -153,7 +153,7 @@ class Flight < ActiveRecord::Base
   # Eg) LHR-SIN: 420 (7 hours ahead)
   #     BKK-RGN: -30 (30 mintes behind)
   def time_change
-    return 0 if [depart_date_time, arrive_date_time, depart_airport_info, arrive_airport_info].any? { |e| e.nil? }
+    return 0 if [depart_date_time, arrive_date_time, depart_airport_info, arrive_airport_info].any?(&:nil?)
     depart_zone = TZInfo::Timezone.get(depart_airport_info.timezone).period_for_local(depart_date_time)
     arrive_zone = TZInfo::Timezone.get(arrive_airport_info.timezone).period_for_local(arrive_date_time)
     (arrive_zone.offset.utc_total_offset - depart_zone.offset.utc_total_offset)

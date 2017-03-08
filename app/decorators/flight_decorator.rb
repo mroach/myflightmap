@@ -31,7 +31,7 @@ class FlightDecorator < Draper::Decorator
   def class_on_airline
     parts = []
     parts << object.seat_class
-    parts.reject! { |p| p.blank? }
+    parts.reject!(&:blank?)
     unless object.airline_name.blank?
       parts << " " << h.t('words.on') unless parts.empty?
       parts << object.airline_name

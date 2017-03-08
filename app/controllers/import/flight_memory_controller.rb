@@ -11,7 +11,7 @@ module Import
 
     def upload
       file = params[:import]["html"]
-      html = File.open(file.tempfile, 'r:ISO-8859-1') { |f| f.read }.encode('utf-8')
+      html = File.open(file.tempfile, 'r:ISO-8859-1', &:read).encode('utf-8')
 
       parser = Importers::FlightMemory.new
       @flights = parser.scrape_html(html)
@@ -26,10 +26,10 @@ module Import
       # See if the import contains flights that already exist in the database for this user
       # Searching on: depart date, depart airport, flight code
       Flight.detect_duplicates(@flights)
-      @flights.select { |f| !f.is_duplicate? }.each { |f| f.save }
+      @flights.select { |f| !f.is_duplicate? }.each(&:save)
 
       @flights_created = @flights.select { |f| !f.new_record? }.length
-      @duplicates_skipped = @flights.select { |f| f.is_duplicate? }.length
+      @duplicates_skipped = @flights.select(&:is_duplicate?).length
     end
   end
 end

@@ -15,14 +15,14 @@ class Stats
     countries = flights.reject { |e| e.depart_airport_info.nil? || e.arrive_airport_info.nil? }
                        .map { |f| [f.depart_airport_info, f.arrive_airport_info] }
                        .flatten
-                       .map { |a| a.country }
+                       .map(&:country)
 
     airports = flights
                .reject { |e| e.depart_airport_info.nil? || e.arrive_airport_info.nil? }
                .map { |f| [f.depart_airport_info, f.arrive_airport_info] }
                .flatten
 
-    airlines = flights.map { |e| e.airline }
+    airlines = flights.map(&:airline)
 
     top_airports = airports
                    .group_by { |f| f }

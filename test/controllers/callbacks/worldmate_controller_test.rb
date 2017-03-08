@@ -64,6 +64,6 @@ class Callbacks::WorldmateControllerTest < ActionController::TestCase
 
   def load_file(type)
     path = "#{Rails.root}/test/fixtures/files/worldmate_response_#{type}.xml"
-    File.open(path, "r") { |f| f.read }
+    File.open(path, "r", &:read)
   end
 end
