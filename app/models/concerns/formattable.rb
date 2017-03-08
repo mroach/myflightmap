@@ -2,7 +2,7 @@ module Formattable
   extend ActiveSupport::Concern
 
   DEFAULTS = {
-    :default_format => 'NO FORMAT?'
+    default_format: 'NO FORMAT?'
   }
 
   included do

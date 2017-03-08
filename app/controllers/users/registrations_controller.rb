@@ -33,7 +33,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if successfully_updated
       set_flash_message :notice, :updated
       # Sign in the user bypassing validation in case their password changed
-      sign_in @user, :bypass => true
+      sign_in @user, bypass: true
       redirect_to profile_path(@user)
     else
       render 'edit'

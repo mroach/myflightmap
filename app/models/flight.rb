@@ -8,9 +8,9 @@ class Flight < ActiveRecord::Base
 
   attr_accessor :is_duplicate
 
-  belongs_to :depart_airport_info, :class_name => 'Airport', :foreign_key => 'depart_airport', :primary_key => 'iata_code'
-  belongs_to :arrive_airport_info, :class_name => 'Airport', :foreign_key => 'arrive_airport', :primary_key => 'iata_code'
-  belongs_to :trip, :class_name => 'Trip', :foreign_key => 'trip_id', :primary_key => 'id'
+  belongs_to :depart_airport_info, class_name: 'Airport', foreign_key: 'depart_airport', primary_key: 'iata_code'
+  belongs_to :arrive_airport_info, class_name: 'Airport', foreign_key: 'arrive_airport', primary_key: 'iata_code'
+  belongs_to :trip, class_name: 'Trip', foreign_key: 'trip_id', primary_key: 'id'
   belongs_to :airline
   belongs_to :user
 
