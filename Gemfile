@@ -121,6 +121,16 @@ group :development do
   gem 'capistrano-foreman',    require: false
   gem 'capistrano-figaro-yml', require: false
 
+  # Automatically run tests when files change
+  gem 'guard-brakeman', require: false
+  gem 'guard-bundler', require: false
+  gem 'guard-pow', require: false
+  gem 'guard-rspec', require: false
+  gem 'guard-rubocop', require: false
+
+  # Enforce Ruby coding style
+  gem 'rubocop', require: false
+
   gem 'sqlite3'
 
   # needed for CSV parsing
@@ -134,6 +144,9 @@ group :development do
 
   # Hush the asset pipeline logging
   gem 'quiet_assets'
+
+  # Notifications on macOS
+  gem 'terminal-notifier-guard'
 end
 
 group :test do
