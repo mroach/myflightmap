@@ -1,7 +1,7 @@
 class TripsController < ApplicationController
   before_action :set_user
-  before_action :set_trip, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  before_action :set_trip, only: %i(show edit update destroy)
+  skip_before_action :authenticate_user!, only: %i(index show)
 
   # GET /trips
   # GET /trips.json

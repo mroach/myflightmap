@@ -7,7 +7,7 @@ module Worldmate
     attr_reader :user, :trip, :flights, :status
 
     def success?
-      [:success, :partial_success].include?(@status)
+      %i(success partial_success).include?(@status)
     end
 
     def initialize(xml_string)

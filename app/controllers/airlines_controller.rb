@@ -1,5 +1,5 @@
 class AirlinesController < ApplicationController
-  before_action :set_airline, only: [:show, :edit, :update, :destroy]
+  before_action :set_airline, only: %i(show edit update destroy)
 
   # GET /airlines
   # GET /airlines.json

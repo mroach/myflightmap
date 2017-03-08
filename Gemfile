@@ -154,7 +154,7 @@ group :test do
 end
 
 # use PostgreSQL in staging and production
-gem 'pg', group: [:staging, :production]
+gem 'pg', group: %i(staging production)
 
 # Application performance monitoring
-gem 'newrelic_rpm', group: [:staging, :production]
+gem 'newrelic_rpm', group: %i(staging production)

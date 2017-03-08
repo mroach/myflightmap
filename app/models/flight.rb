@@ -21,11 +21,11 @@ class Flight < ActiveRecord::Base
 
   default_scope { order('depart_time_utc ASC') }
 
-  friendly_id :description, use: [:slugged, :scoped], scope: :user
+  friendly_id :description, use: %i(slugged scoped), scope: :user
 
   formattable '%{flight_code} %{depart_airport}-%{arrive_airport} %{depart_date}'
 
-  self.skip_time_zone_conversion_for_attributes = [:depart_time, :arrive_time]
+  self.skip_time_zone_conversion_for_attributes = %i(depart_time arrive_time)
 
   def self.seat_classes
     ['Economy', 'Economy Plus', 'Business', 'First', 'Suite']

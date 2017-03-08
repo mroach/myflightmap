@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   include Formattable
-  audited except: [:current_sign_in_at, :last_sign_in_at, :current_sign_in_ip, :last_sign_in_ip]
+  audited except: %i(current_sign_in_at last_sign_in_at current_sign_in_ip last_sign_in_ip)
 
   has_many :trips, dependent: :destroy
   has_many :flights, dependent: :destroy
@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, omniauth_providers: [:facebook, :google]
+         :omniauthable, omniauth_providers: %i(facebook google)
 
   validates :username,
             uniqueness: true,

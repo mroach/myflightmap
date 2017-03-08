@@ -2,9 +2,9 @@ require 'time'
 
 class FlightsController < ApplicationController
   before_action :set_user
-  before_action :set_flight, only: [:show, :edit, :update, :destroy]
-  before_action :load_helper_data, only: [:new, :edit]
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  before_action :set_flight, only: %i(show edit update destroy)
+  before_action :load_helper_data, only: %i(new edit)
+  skip_before_action :authenticate_user!, only: %i(index show)
 
   # GET /flights
   # GET /flights.json

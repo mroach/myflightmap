@@ -9,7 +9,7 @@ class Trip < ActiveRecord::Base
 
   default_scope { order('begin_date ASC') }
 
-  friendly_id :name, use: [:slugged, :scoped], scope: :user
+  friendly_id :name, use: %i(slugged scoped), scope: :user
 
   formattable '%{name}: %{begin_date} - %{end_date}'
 

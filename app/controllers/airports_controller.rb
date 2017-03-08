@@ -2,7 +2,7 @@ require 'gcmap'
 require 'geo'
 
 class AirportsController < ApplicationController
-  before_action :set_airport, only: [:show, :edit, :update, :destroy, :update_from_external]
+  before_action :set_airport, only: %i(show edit update destroy update_from_external)
 
   # GET /airports
   # GET /airports.json
