@@ -6,6 +6,7 @@ AllCops:
     - config.ru
     - lib/**/*.rake
   Exclude:
+    - bin/*
     - db/schema.rb
     - config.ru
     - lib/**/*.rake
