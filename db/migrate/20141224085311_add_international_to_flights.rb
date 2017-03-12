@@ -1,6 +1,9 @@
 class AddInternationalToFlights < ActiveRecord::Migration
   def up
-    add_column :flights, :international, :boolean, null: false, default: false
+    # for some reason this is an issue when setting up a new database
+    unless Flight.column_names.include? 'international'
+      add_column :flights, :international, :boolean, null: false, default: false
+    end
 
     Flight.joins(:depart_airport_info, :arrive_airport_info)
           .where('airports.country <> arrive_airport_infos_flights.country')
