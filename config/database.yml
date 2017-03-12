@@ -1,33 +1,21 @@
-development:
+default: &default
   adapter: postgresql
   encoding: unicode
-  database: myflightmap
   host: localhost
-  username: rails_myflightmap_user
-  password: upintheair
   pool: 5
-  timeout: 5000
+
+development:
+  <<: *default
+  database: myflightmap_development
 
 test:
-  adapter: sqlite3
-  database: db/test.sqlite3
-
-staging:
-  adapter: postgresql
-  encoding: unicode
-  database: myflightmap
-  host: ubuntu.vm
-  username: myflightmap_www
-  password: U7wHqvmmJE8AsV
-  pool: 5
-  timeout: 5000
+  <<: *default
+  database: myflightmap_test
 
 production:
-  adapter: postgresql
-  encoding: unicode
-  database: myflightmap
+  <<: *default
   host: localhost
+  encoding: utf8
+  database: myflightmap
   username: rails_myflightmap_user
   password: Ldp3j4nR
-  pool: 5
-  timeout: 5000

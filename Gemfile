@@ -3,6 +3,9 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2'
 
+# use PostgreSQL in staging and production
+gem 'pg'
+
 # App configuration manager
 gem 'figaro'
 
@@ -131,8 +134,6 @@ group :development do
   # Enforce Ruby coding style
   gem 'rubocop', require: false
 
-  gem 'sqlite3'
-
   # needed for CSV parsing
   gem 'stdlib'
 
@@ -153,8 +154,6 @@ group :test do
   gem 'coveralls', require: false
 end
 
-# use PostgreSQL in staging and production
-gem 'pg', group: %i(staging production)
 
 # Application performance monitoring
 gem 'newrelic_rpm', group: %i(staging production)
