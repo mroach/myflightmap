@@ -150,10 +150,39 @@ group :development do
   gem 'terminal-notifier-guard'
 end
 
-group :test do
-  gem 'coveralls', require: false
+group :development, :test do
+  # Spec testing
+  gem 'rspec-rails'
+
+  # Code coverage analysis
+  gem 'simplecov', require: false
+
+  # Acceptance testing
+  gem 'capybara'
+
+  # Generates fake test data
+  gem 'faker'
+
+  # Object factory
+  gem 'factory_girl_rails'
+
+  # Detect missing eager-loading or unnecessary eager-loading
+  gem 'bullet'
 end
 
+group :test do
+  # Matchers for RSpec
+  gem 'shoulda-matchers', require: false
+
+  # Cleans up the database after tests
+  gem 'database_cleaner'
+
+  # Driver for Capybara. Allows for image screenshots
+  gem 'poltergeist'
+
+  # Save screenshots of failed acceptance tests
+  gem 'capybara-screenshot'
+end
 
 # Application performance monitoring
 gem 'newrelic_rpm', group: %i(staging production)

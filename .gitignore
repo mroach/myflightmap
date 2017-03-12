@@ -32,3 +32,6 @@ coverage/
 
 # Shhhhh
 /config/secrets.yml
+
+# rspec history
+spec/examples.txt
