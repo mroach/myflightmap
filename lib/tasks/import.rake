@@ -85,7 +85,6 @@ namespace :import do
             seat: val(row, :seat),
             seat_class: class_map[val(row, :seat_class)],
             seat_location: (seat_location and seat_location.capitalize),
-            airline: airline,
             airline_name: val(row, :airline_name),
             #aircraft_name: val(row, :aircraft_name),
             aircraft_type: val(row, :aircraft_name),
