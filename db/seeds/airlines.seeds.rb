@@ -70,7 +70,7 @@ CSV.foreach(TEMP_FILE_PATH) do |row|
     country = country.alpha2
   end
 
-  airlines.push(                  iata_code: row[3],
+  airlines.push(iata_code: row[3],
                   icao_code: row[4] == '\\N' ? nil : row[4],
                   name:      row[1],
                   country:   country)

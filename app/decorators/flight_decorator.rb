@@ -113,7 +113,7 @@ class FlightDecorator < Draper::Decorator
 
     markers = [
       { icon: 'http://myflightmap.com/images/departing.png', point: depart_latlon },
-      { icon: 'http://myflightmap.com/images/arriving.png', point: arrive_latlon },
+      { icon: 'http://myflightmap.com/images/arriving.png', point: arrive_latlon }
     ].map do |m|
       "markers=size:mid|icon:#{m[:icon]}|shadow:true|#{m[:point]}"
     end
