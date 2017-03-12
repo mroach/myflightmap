@@ -11,9 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141220011324) do
+ActiveRecord::Schema.define(version: 20141231222810) do
 
-  create_table "airlines", force: true do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "airlines", force: :cascade do |t|
     t.string   "iata_code"
     t.string   "icao_code"
     t.string   "name"
@@ -27,9 +30,9 @@ ActiveRecord::Schema.define(version: 20141220011324) do
     t.string   "alliance"
   end
 
-  add_index "airlines", ["iata_code"], name: "index_airlines_on_iata_code", unique: true
+  add_index "airlines", ["iata_code"], name: "index_airlines_on_iata_code", unique: true, using: :btree
 
-  create_table "airports", force: true do |t|
+  create_table "airports", force: :cascade do |t|
     t.string   "iata_code"
     t.string   "icao_code"
     t.string   "name"
@@ -43,9 +46,9 @@ ActiveRecord::Schema.define(version: 20141220011324) do
     t.datetime "updated_at"
   end
 
-  add_index "airports", ["iata_code"], name: "index_airports_on_iata_code", unique: true
+  add_index "airports", ["iata_code"], name: "index_airports_on_iata_code", unique: true, using: :btree
 
-  create_table "audits", force: true do |t|
+  create_table "audits", force: :cascade do |t|
     t.integer  "auditable_id"
     t.string   "auditable_type"
     t.integer  "associated_id"
@@ -62,13 +65,13 @@ ActiveRecord::Schema.define(version: 20141220011324) do
     t.datetime "created_at"
   end
 
-  add_index "audits", ["associated_id", "associated_type"], name: "associated_index"
-  add_index "audits", ["auditable_id", "auditable_type"], name: "auditable_index"
-  add_index "audits", ["created_at"], name: "index_audits_on_created_at"
-  add_index "audits", ["request_uuid"], name: "index_audits_on_request_uuid"
-  add_index "audits", ["user_id", "user_type"], name: "user_index"
+  add_index "audits", ["associated_id", "associated_type"], name: "associated_index", using: :btree
+  add_index "audits", ["auditable_id", "auditable_type"], name: "auditable_index", using: :btree
+  add_index "audits", ["created_at"], name: "index_audits_on_created_at", using: :btree
+  add_index "audits", ["request_uuid"], name: "index_audits_on_request_uuid", using: :btree
+  add_index "audits", ["user_id", "user_type"], name: "user_index", using: :btree
 
-  create_table "callback_logs", force: true do |t|
+  create_table "callback_logs", force: :cascade do |t|
     t.string   "provider",    null: false
     t.string   "url"
     t.text     "data"
@@ -79,14 +82,14 @@ ActiveRecord::Schema.define(version: 20141220011324) do
     t.datetime "updated_at"
   end
 
-  create_table "flights", force: true do |t|
+  create_table "flights", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "trip_id"
     t.string   "flight_code"
-    t.string   "depart_airport",                       null: false
-    t.date     "depart_date",                          null: false
+    t.string   "depart_airport",                        null: false
+    t.date     "depart_date",                           null: false
     t.time     "depart_time"
-    t.string   "arrive_airport",                       null: false
+    t.string   "arrive_airport",                        null: false
     t.date     "arrive_date"
     t.time     "arrive_time"
     t.integer  "distance"
@@ -107,20 +110,21 @@ ActiveRecord::Schema.define(version: 20141220011324) do
     t.datetime "depart_time_utc"
     t.datetime "arrive_time_utc"
     t.string   "slug"
-    t.boolean  "international",                     default: false, null: false
+    t.boolean  "international",         default: false, null: false
   end
 
-  add_index "flights", ["airline_name"], name: "index_flights_on_airline_name"
-  add_index "flights", ["arrive_airport"], name: "index_flights_on_arrive_airport"
-  add_index "flights", ["arrive_time_utc"], name: "index_flights_on_arrive_date_utc_and_arrive_time_utc"
-  add_index "flights", ["arrive_time_utc"], name: "index_flights_on_arrive_time_utc"
-  add_index "flights", ["depart_airport"], name: "index_flights_on_depart_airport"
-  add_index "flights", ["depart_time_utc"], name: "index_flights_on_depart_time_utc"
-  add_index "flights", ["trip_id"], name: "index_flights_on_trip_id"
-  add_index "flights", ["user_id", "slug"], name: "index_flights_on_user_id_and_slug", unique: true
-  add_index "flights", ["user_id"], name: "index_flights_on_user_id"
+  add_index "flights", ["airline_name"], name: "index_flights_on_airline_name", using: :btree
+  add_index "flights", ["arrive_airport"], name: "index_flights_on_arrive_airport", using: :btree
+  add_index "flights", ["arrive_time_utc"], name: "index_flights_on_arrive_date_utc_and_arrive_time_utc", using: :btree
+  add_index "flights", ["arrive_time_utc"], name: "index_flights_on_arrive_time_utc", using: :btree
+  add_index "flights", ["depart_airport"], name: "index_flights_on_depart_airport", using: :btree
+  add_index "flights", ["depart_time_utc"], name: "index_flights_on_depart_time_utc", using: :btree
+  add_index "flights", ["international"], name: "index_flights_on_international", using: :btree
+  add_index "flights", ["trip_id"], name: "index_flights_on_trip_id", using: :btree
+  add_index "flights", ["user_id", "slug"], name: "index_flights_on_user_id_and_slug", unique: true, using: :btree
+  add_index "flights", ["user_id"], name: "index_flights_on_user_id", using: :btree
 
-  create_table "friendly_id_slugs", force: true do |t|
+  create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
     t.integer  "sluggable_id",              null: false
     t.string   "sluggable_type", limit: 50
@@ -128,12 +132,12 @@ ActiveRecord::Schema.define(version: 20141220011324) do
     t.datetime "created_at"
   end
 
-  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
-  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
-  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
-  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
-  create_table "identities", force: true do |t|
+  create_table "identities", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "provider"
     t.string   "uid"
@@ -142,9 +146,9 @@ ActiveRecord::Schema.define(version: 20141220011324) do
     t.string   "image"
   end
 
-  add_index "identities", ["user_id"], name: "index_identities_on_user_id"
+  add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
 
-  create_table "trips", force: true do |t|
+  create_table "trips", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "name"
     t.string   "purpose"
@@ -157,10 +161,10 @@ ActiveRecord::Schema.define(version: 20141220011324) do
     t.string   "slug"
   end
 
-  add_index "trips", ["user_id", "slug"], name: "index_trips_on_user_id_and_slug", unique: true
-  add_index "trips", ["user_id"], name: "index_trips_on_user_id"
+  add_index "trips", ["user_id", "slug"], name: "index_trips_on_user_id_and_slug", unique: true, using: :btree
+  add_index "trips", ["user_id"], name: "index_trips_on_user_id", using: :btree
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",    null: false
     t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
@@ -184,10 +188,10 @@ ActiveRecord::Schema.define(version: 20141220011324) do
     t.string   "unconfirmed_email"
   end
 
-  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["id_hash"], name: "index_users_on_id_hash"
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  add_index "users", ["username"], name: "index_users_on_username"
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["id_hash"], name: "index_users_on_id_hash", using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", using: :btree
 
 end
