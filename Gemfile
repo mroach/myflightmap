@@ -68,7 +68,7 @@ gem 'redcarpet'
 gem 'httparty'
 
 # Attaching files to records
-gem 'paperclip'
+gem 'paperclip', '~> 4.3.6'
 
 # Nice lib for dealing with durations of time and formatting them
 gem 'ruby-duration'
