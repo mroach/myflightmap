@@ -46,7 +46,7 @@ gem 'draper'
 gem 'devise'
 
 # Allow Facebook and Google auth in devise
-gem 'omniauth-facebook'
+gem 'omniauth-facebook', '~> 4.0.0'
 gem 'omniauth-google-oauth2'
 
 # Use ActiveModel has_secure_password
