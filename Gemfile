@@ -98,7 +98,7 @@ source 'https://rails-assets.org' do
 end
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 4.0.4'
 
 # Change tracking for ActiveRecord models
 gem 'audited-activerecord', '~> 4.0'
@@ -129,7 +129,7 @@ group :development do
   gem 'guard-rubocop', require: false
 
   # Enforce Ruby coding style
-  gem 'rubocop', require: false
+  gem 'rubocop', '~> 0.49.0', require: false
 
   # needed for CSV parsing
   gem 'stdlib'
