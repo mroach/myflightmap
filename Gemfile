@@ -113,9 +113,6 @@ gem 'hashids'
 gem 'rollbar'
 
 group :development do
-  # Ability to drop consoles on any page.
-  gem 'web-console', '~> 2.0'
-
   gem 'capistrano',            require: false
   gem 'capistrano-bundler',    require: false
   gem 'capistrano-figaro-yml', require: false
