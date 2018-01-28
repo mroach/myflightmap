@@ -9,7 +9,7 @@ class FlightsController < ApplicationController
   # GET /flights
   # GET /flights.json
   def index
-    @flights = policy_scope(Flight).belonging_to(@user.id).decorate.reverse
+    @flights = policy_scope(Flight).belonging_to(@user.id).includes(:airline, :depart_airport_info, :arrive_airport_info).decorate.reverse
     @show_controls = current_user.present? && @user.id == current_user.id
 
     @list_style = params[:style] || 'large'

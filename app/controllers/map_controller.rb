@@ -4,7 +4,7 @@ class MapController < ApplicationController
 
   def show
     @user = User.find_by_username(params[:username])
-    flights = policy_scope(Flight).belonging_to(@user.id)
+    flights = policy_scope(Flight).belonging_to(@user.id).includes(:airline, :depart_airport_info, :arrive_airport_info)
 
     @stats = Stats.from_flights(flights)
 

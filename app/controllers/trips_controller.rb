@@ -6,7 +6,7 @@ class TripsController < ApplicationController
   # GET /trips
   # GET /trips.json
   def index
-    @trips = policy_scope(Trip).belonging_to(@user.id).decorate.reverse
+    @trips = policy_scope(Trip).belonging_to(@user.id).includes(flights: [:airline, :depart_airport_info, :arrive_airport_info]).decorate.reverse
     @show_controls = current_user.present? && @user.id == current_user.id
   end
 
