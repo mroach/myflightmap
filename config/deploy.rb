@@ -83,6 +83,7 @@ namespace :deploy do
     on roles(:app) do
       before 'deploy:restart', 'puma:start'
       invoke 'deploy'
+      invoke 'puma:config'
       invoke 'puma:nginx_config'
     end
   end
