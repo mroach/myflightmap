@@ -113,17 +113,8 @@ gem 'hashids'
 gem 'rollbar'
 
 group :development do
-  gem 'capistrano',            require: false
-  gem 'capistrano-bundler',    require: false
-  gem 'capistrano-figaro-yml', require: false
-  gem 'capistrano-foreman',    require: false
-  gem 'capistrano-rails',      require: false
-  gem 'capistrano-rbenv',      require: false
-  gem 'capistrano3-puma',      require: false
-
   # Automatically run tests when files change
   gem 'guard-brakeman', require: false
-  gem 'guard-bundler', require: false
   gem 'guard-pow', require: false
   gem 'guard-rspec', require: false
   gem 'guard-rubocop', require: false

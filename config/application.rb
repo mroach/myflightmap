@@ -22,5 +22,12 @@ module Myflightmap
 
     # Make Bower-installed components available to the asset pipeline
     config.assets.paths << Rails.root.join('vendor', 'assets', 'components')
+
+    if ENV.fetch('RAILS_LOG_TARGET', '').casecmp("STDOUT")
+      stdout_logger           = ActiveSupport::Logger.new(STDOUT)
+      stdout_logger.formatter = config.log_formatter
+      # config.log_tags         = [:subdomain, :uuid]
+      config.logger           = ActiveSupport::TaggedLogging.new(stdout_logger)
+    end
   end
 end

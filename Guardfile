@@ -17,7 +17,6 @@
 
 # Note: The cmd option is now required due to the increasing number of ways
 #       rspec may be run, below are examples of the most common uses.
-#  * bundler: 'bundle exec rspec'
 #  * bundler binstubs: 'bin/rspec'
 #  * spring: 'bin/rspec' (This will use spring if running and you have
 #                          installed the spring binstubs per the docs)
@@ -100,32 +99,7 @@ group :red_green_refactor, halt_on_fail: true do
   end
 end
 
-guard :bundler do
-  require 'guard/bundler'
-  require 'guard/bundler/verify'
-  helper = Guard::Bundler::Verify.new
-
-  files = ['Gemfile']
-  files += Dir['*.gemspec'] if files.any? { |f| helper.uses_gemspec?(f) }
-
-  # Assume files are symlinked from somewhere
-  files.each { |file| watch(helper.real_path(file)) }
-end
-
 # For OS X, use terminal notifier
 if RUBY_PLATFORM.include?('darwin')
   notification :terminal_notifier, activate: 'com.googlecode.iTerm2'
-end
-
-guard 'pow' do
-  watch('.powrc')
-  watch('.powenv')
-  watch('.rvmrc')
-  watch('.ruby-version')
-  watch('Gemfile')
-  watch('Gemfile.lock')
-  watch('config/application.rb')
-  watch('config/environment.rb')
-  watch(%r{^config/environments/.*\.rb$})
-  watch(%r{^config/initializers/.*\.rb$})
 end

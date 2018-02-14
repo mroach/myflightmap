@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:9.6-alpine
+    environment:
+      POSTGRES_USER: myflightmap
+      POSTGRES_DB: myflightmap
+      POSTGRES_PASSWORD: asdqwe123
+    ports:
+      - 5432:5432
+    volumes:
+      - 'db:/var/lib/postgresql/data'
+
+  app:
+    depends_on:
+      - db
+    build: .
+    volumes:
+      - gems:/ruby_gems
+      - assets:/app/public/assets
+    env_file:
+      - .env
+
+  web:
+    build: ./docker/nginx
+    depends_on:
+      - app
+    volumes:
+      - assets:/app/public/assets
+
+volumes:
+  db:
+  gems:
+  assets:
+  certs:
+  certs-data:

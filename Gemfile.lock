@@ -38,8 +38,6 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.0)
       public_suffix (~> 2.0, >= 2.0.2)
-    airbrussh (1.0.2)
-      sshkit (>= 1.6.1, != 1.7.0)
     arel (6.0.4)
     ast (2.4.0)
     audited (4.0.0)
@@ -57,31 +55,6 @@ GEM
     bullet (5.5.0)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.10.0)
-    capistrano (3.5.0)
-      airbrussh (>= 1.0.0)
-      capistrano-harrow
-      i18n
-      rake (>= 10.0.0)
-      sshkit (>= 1.9.0)
-    capistrano-bundler (1.1.4)
-      capistrano (~> 3.1)
-      sshkit (~> 1.2)
-    capistrano-figaro-yml (1.0.2)
-      capistrano (~> 3.1)
-      sshkit (~> 1.2, >= 1.2.0)
-    capistrano-foreman (1.2.0)
-      capistrano (~> 3.1)
-      capistrano-bundler (~> 1.1)
-    capistrano-harrow (0.5.1)
-    capistrano-rails (1.1.6)
-      capistrano (~> 3.1)
-      capistrano-bundler (~> 1.1)
-    capistrano-rbenv (2.0.4)
-      capistrano (~> 3.1)
-      sshkit (~> 1.3)
-    capistrano3-puma (1.2.1)
-      capistrano (~> 3.0)
-      puma (>= 2.6)
     capybara (2.12.0)
       addressable
       mime-types (>= 1.16)
@@ -159,10 +132,6 @@ GEM
     guard-brakeman (0.8.3)
       brakeman (>= 2.1.1)
       guard (>= 2.0.0)
-    guard-bundler (2.1.0)
-      bundler (~> 1.0)
-      guard (~> 2.2)
-      guard-compat (~> 1.1)
     guard-compat (1.2.1)
     guard-pow (2.0.0)
       guard (~> 2.0)
@@ -215,9 +184,6 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.0.0)
     nenv (0.3.0)
-    net-scp (1.2.1)
-      net-ssh (>= 2.6.5)
-    net-ssh (3.1.1)
     newrelic_rpm (3.9.8.273)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
@@ -387,9 +353,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    sshkit (1.10.0)
-      net-scp (>= 1.1.2)
-      net-ssh (>= 2.8.0)
     stdlib (0.1.0)
     temple (0.7.3)
     terminal-notifier-guard (1.7.0)
@@ -421,13 +384,6 @@ DEPENDENCIES
   bcrypt (~> 3.1.2)
   bootstrap-sass (~> 3.3.0)
   bullet
-  capistrano
-  capistrano-bundler
-  capistrano-figaro-yml
-  capistrano-foreman
-  capistrano-rails
-  capistrano-rbenv
-  capistrano3-puma
   capybara
   capybara-screenshot
   coffee-rails (~> 4.0)
@@ -442,7 +398,6 @@ DEPENDENCIES
   font-awesome-rails (~> 4.2)
   friendly_id (~> 5.0.0)
   guard-brakeman
-  guard-bundler
   guard-pow
   guard-rspec
   guard-rubocop
