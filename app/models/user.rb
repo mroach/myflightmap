@@ -92,7 +92,7 @@ class User < ActiveRecord::Base
   # Take an OmniAuth::AuthHash::InfoHash and generate a username
   def self.generate_username(auth_info)
     # Preferably use the nick name on the account. @ name on GitHub or Twitter, FB nickname, etc.
-    username = auth_info.nickname
+    username = auth_info.short_name
 
     # if there's no nick name, use first_name.last_name
     if username.blank?

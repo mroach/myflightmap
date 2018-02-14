@@ -2,7 +2,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def omniauth_callback
     provider = __callee__
 
-    @user = User.find_for_oauth(request.env['omniauth.auth'], current_user)
+    auth = request.env['omniauth.auth']
+    Rails.logger.info "Got #{provider} oauth response: #{auth}"
+    @user = User.find_for_oauth(auth, current_user)
 
     if @user.persisted?
       sign_in_and_redirect @user, event: :authentication # this will throw if @user is not activated
