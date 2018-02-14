@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
   end
 
   def not_found
-    head 404, content_type: 'text/plan'
+    head 404, content_type: 'text/plain'
   end
 
   def configure_permitted_parameters
