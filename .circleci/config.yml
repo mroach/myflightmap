@@ -8,17 +8,18 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
-          name: Install docker-compose
+          name: Env prep
           command: |
+            mkdir -p /tmp/bin /tmp/caches
             apk add --no-cache curl
             curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
             chmod +x ~/docker-compose
-            mv ~/docker-compose /tmp/
+            mv ~/docker-compose /tmp/bin/
       - restore_cache:
           keys:
             - v1-{{ .Branch }}
           paths:
-            - /caches/app.tar
+            - /tmp/caches/app.tar
       - run:
           name: Load Docker image layer cache
           command: |
@@ -31,15 +32,15 @@ jobs:
           name: Save Docker image layer cache
           command: |
             mkdir -p caches
-            docker save -o /caches/app.tar app
+            docker save -o /tmp/caches/app.tar app
       - save_cache:
           key: v1-{{ .Branch }}-{{ epoch }}
           paths:
-            - /caches/app.tar
+            - /tmp/caches/app.tar
       - run:
           name: Run tests
           command: |
-            /tmp/docker-compose -f ./docker-compose.test.yml up
+            /tmp/bin/docker-compose -f docker-compose.test.yml up
       - deploy:
           name: Push Docker image
           command: |
