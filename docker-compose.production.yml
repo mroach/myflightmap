@@ -5,6 +5,7 @@ services:
     environment:
       RACK_ENV: production
       RAILS_ENV: production
+      AUTO_DBMIGRATE: 1
   web:
     ports:
       - 80:80
