@@ -13,7 +13,7 @@ jobs:
             apk add --no-cache curl
             curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
             chmod +x ~/docker-compose
-            sudo mv ~/docker-compose /usr/local/bin/docker-compose
+            mv ~/docker-compose /tmp/
       - restore_cache:
           keys:
             - v1-{{ .Branch }}
@@ -39,7 +39,7 @@ jobs:
       - run:
           name: Run tests
           command: |
-            docker-compose -f ./docker-compose.test.yml up
+            /tmp/docker-compose -f ./docker-compose.test.yml up
       - deploy:
           name: Push Docker image
           command: |
